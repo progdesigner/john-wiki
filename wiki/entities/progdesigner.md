@@ -20,5 +20,5 @@ updated: 2026-07-07
 - 히스토리 소실에 민감 — 여러 차례 대화 유지 요구.
 
 ## 관련
-- 프로젝트: [[lampas-harness]] / 에이전트: [[lampas]]
-- 세션: [[2026-07-06-lampas-harness-구축]]
+- 프로젝트: [[lampas-harness]] (하네스) · [[lampas-studio]] (이미지 생성 제품) / 에이전트: [[lampas]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]]
