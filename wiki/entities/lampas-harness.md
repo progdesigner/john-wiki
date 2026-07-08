@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, claude-agent-sdk, typescript]
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-07-09
 ---
 # lampas-harness
 
@@ -45,9 +45,20 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
 | `5cb33ae` | 대화별 작업 폴더 선택 + 폴더 밖 접근 차단 |
 | `155e641` | 대화 보관, 대기 큐 표시/취소, 대화별 폴더 잠금 |
 
+## 제안된 기능 — 장기기억 provider 연동 (2026-07-08, 미구현)
+
+`[[progdesigner]]`가 "과거 작업 이력을 기억 못 한다"는 문제를 제기해, `[[john-wiki]]`를
+**memory provider로 붙이는 설계**가 도출됨. 당시 어시스턴트에 파일 도구가 없어 **제안·스케치 단계**에 그침.
+
+- `MemoryProvider` 인터페이스 + `JohnWikiMemoryProvider`(rglob·토큰 스코어링·발췌)
+- `AI_CONTEXT.md` 자동 주입 + `search/read/list` tool 노출 + 안티할루시네이션 지침
+- **주의**: 제안 스케치는 Python/OpenAI-style. 이 하네스는 TS/Claude SDK라 재작성 필요.
+- → 상세·함정: [[wiki-memory-provider-integration]] · 배경: [[long-term-memory-architecture]] · 세션: [[2026-07-08-장기기억-provider-연동-설계]]
+
 ## 관련
-- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]]
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
+- 연동 대상 장기기억: [[john-wiki]] (제안).
 - `lampas-system` — 인접 저장소(이 세션과 별개, 미커밋 변경 2개 존재).
 
 ## 재확인된 함정 (2026-07-08 세션)
