@@ -8,6 +8,7 @@
 - [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] — Lampas 스튜디오 레퍼런스·Instagram 통합·배포 세션
 - [[2026-07-08-장기기억-provider-연동-설계]] — john-wiki를 harness 장기기억 provider로 붙이는 설계·제안 세션
 - [[2026-07-08-toktalk-에피소드-배경전환-플레이]] — TokTalk 에피소드 beat 플레이 배경 전환(선전환·sticky)·AI 로딩 버그 세션
+- [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] — 예약 메시지 스케줄러·로컬 LLM(qwen3.5-35b) 설치·사용 영역 페르소나·일본어 드리프트 세션
 - [[2026-07-09-일반-사용영역-페르소나-설정]] — "일반" 사용 영역 페르소나 설정(페이블5 지침 루머 계기), 기존 "페르소나 없음" 정의와 모순
 
 ## Entities
@@ -27,6 +28,8 @@
 - [[long-term-memory-architecture]] — LLM 장기기억: 저장≠조회, 3계층 저장 전략, 조회 연결 3방법
 - [[episode-beat-play-system]] — TokTalk 에피소드 beat 플레이·배경 전환(선전환·sticky·직접연결) 로직
 - [[system-prompt-mimicry-misconception]] — 공개 시스템 프롬프트 복제로 모델 흉내내기 통념의 한계 + 출처미상 지침 붙여넣기 보안 주의
+- [[harness-background-process-lifecycle]] — 에이전트가 턴 안에서 띄운 배경작업은 턴/세션 종료로 죽는다 (스케줄러·다운로드 관통 한계)
+- [[local-llm-on-apple-silicon]] — Apple Silicon 로컬 LLM: 모델크기·양자화·백엔드(Metal/MLX/CPU), Rapid-MLX vs llama.cpp vs Ollama
 
 ## Skills
 
@@ -39,3 +42,6 @@
 - [[deploy-sandbox-pnpm-shim]] — 샌드박스 배포 시 corepack pnpm shim으로 ./scripts 스크립트 실행
 - [[wiki-memory-provider-integration]] — markdown 위키를 LLM 검색형 장기기억 provider로 연동 (경로 가드 함정 포함)
 - [[loading-state-key-mismatch]] — 요청은 되는데 UI 무반응 = 로딩 상태 키 불일치 진단·수정
+- [[session-independent-scheduler]] — 능동 예약 메시지는 서버 내장 파일 영속 스케줄러로 (에이전트 타이머 금지, 도착시각 기준 정확도)
+- [[detach-long-job-nohup]] — 긴 배경 작업을 `nohup … & disown`으로 세션과 분리해 턴 넘어가도 생존
+- [[local-llm-rapidmlx-install]] — Rapid-MLX로 Apple Silicon에 로컬 LLM 설치·launchd 상주·하네스 모델 선택기 통합
