@@ -8,6 +8,7 @@
 - [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] — Lampas 스튜디오 레퍼런스·Instagram 통합·배포 세션
 - [[2026-07-08-장기기억-provider-연동-설계]] — john-wiki를 harness 장기기억 provider로 붙이는 설계·제안 세션
 - [[2026-07-08-toktalk-에피소드-배경전환-플레이]] — TokTalk 에피소드 beat 플레이 배경 전환(선전환·sticky)·AI 로딩 버그 세션
+- [[2026-07-09-일반-사용영역-페르소나-설정]] — "일반" 사용 영역 페르소나 설정(페이블5 지침 루머 계기), 기존 "페르소나 없음" 정의와 모순
 
 ## Entities
 
@@ -25,6 +26,7 @@
 - [[instagram-reference-integration]] — Instagram 레퍼런스 이미지 통합 (소스 3종·프록시·캐러셀·폐기된 오래된순)
 - [[long-term-memory-architecture]] — LLM 장기기억: 저장≠조회, 3계층 저장 전략, 조회 연결 3방법
 - [[episode-beat-play-system]] — TokTalk 에피소드 beat 플레이·배경 전환(선전환·sticky·직접연결) 로직
+- [[system-prompt-mimicry-misconception]] — 공개 시스템 프롬프트 복제로 모델 흉내내기 통념의 한계 + 출처미상 지침 붙여넣기 보안 주의
 
 ## Skills
 
