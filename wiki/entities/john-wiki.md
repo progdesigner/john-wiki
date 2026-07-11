@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, knowledge-base, long-term-memory]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-12
 ---
 # john-wiki
 
@@ -9,7 +9,7 @@ updated: 2026-07-09
 markdown 3계층 지식베이스(`raw/` 원본, `wiki/` LLM 작성 페이지, `index.md`/`log.md`).
 LLM이 작성·유지하고 사람은 소스를 공급·질문한다.
 
-- 로컬 경로: `/Users/progdesigner/john-wiki`
+- 로컬 경로: `/Users/progdesigner/Works/john-wiki`
 - 구조: `raw/conversations/`(원본, 읽기전용) · `wiki/{sessions,entities,topics,skills}/` · `index.md` · `log.md`
 - 규칙: 모든 페이지 markdown + YAML frontmatter(`tags`/`created`/`updated`), 페이지 참조는 `[[위키링크]]`, 파일명 kebab-case, 세션·대화는 `YYYY-MM-DD-` 접두사. (상세는 저장소 CLAUDE.md)
 
@@ -27,6 +27,8 @@ LLM이 작성·유지하고 사람은 소스를 공급·질문한다.
 - 2026-07-06·07-08 세션이 ingest되어 `[[lampas-harness]]`·`[[lampas-studio]]` 관련 페이지가 축적됨.
 - 2026-07-08 세션에서 "이 위키를 harness에 장기기억 provider로 붙이자"는 설계가 도출됨 → 이 위키의 존재 이유가 그 설계의 실현. → [[2026-07-08-장기기억-provider-연동-설계]]
 - **주의**: 2026-07-08 세션이 제안한 `AI_CONTEXT.md`는 아직 이 저장소에 없다(제안 상태). 이 위키는 대신 `CLAUDE.md`+`index.md`가 그 역할을 겸한다.
+- **연동 진행(2026-07-11 관찰)**: `[[lampas-harness]]` `src/config.ts`에 `wikiDir`(+`WIKI_DIR` env 오버라이드) 설정이 들어옴 → 배선이 코드 레벨에선 착수됨. 단 어시스턴트에 조회 tool은 아직 미노출. → [[2026-07-11-기억-요약-wiki-경로-확인]]
+- **⚠️ 경로 불일치**: `config.ts`의 `wikiDir` 기본값은 `~/Works/**llm-wiki**`(karpathy 원 패턴명)인데, 실제 저장소는 `~/Works/**john-wiki**`다. `WIKI_DIR` env로 새 경로를 지정하지 않으면 하네스는 없는 경로를 가리킨다.
 
 ## 관련
 - 소유자·사서 소스: [[progdesigner]]

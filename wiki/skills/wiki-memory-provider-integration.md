@@ -2,6 +2,7 @@
 name: wiki-memory-provider-integration
 description: markdown 위키/폴더를 LLM 어시스턴트의 검색 가능한 장기기억(memory provider)으로 붙이는 절차
 created: 2026-07-09
+updated: 2026-07-12
 tags: [long-term-memory, memory-provider, rag, tool-calling, context-injection]
 ---
 # 위키를 LLM 장기기억 provider로 연동
@@ -28,6 +29,7 @@ markdown 위키/폴더(예: [[john-wiki]])는 있는데 모델이 그걸 읽을 
 - **컨텍스트 예산** — `read_context()`·발췌 길이에 상한(`max_context_chars`, 발췌 max_chars)을 둬서 주입이 토큰을 잠식하지 않게.
 - **"저장됐는데 왜 기억 못 하지"는 조회 문제** — 저장 UI가 있어도 재주입/검색이 끊겨 있으면 무의미. 먼저 조회 경로가 연결됐는지 확인. → [[long-term-memory-architecture]]
 - **naive 토큰 카운트 스코어링의 한계** — 짧은 흔한 토큰이 스코어를 지배. 임베딩/BM25로 올릴 여지 있음(현재는 단순 count).
+- **"config에 경로만 넣으면 끝" 착각** — 2026-07-11 관찰([[2026-07-11-기억-요약-wiki-경로-확인]]): 하네스 `config.ts`에 `wikiDir`/`WIKI_DIR`만 추가된 상태에선 어시스턴트가 여전히 위키를 조회 못 한다. 5~7단계(tool 노출·주입·검증)까지 가야 실제 연결. 또 **경로 기본값이 실제 저장소명과 어긋나지 않게**(예: `llm-wiki` vs `john-wiki`) 확인할 것.
 
 ## 상태
 설계·제안 단계(2026-07-08). 실제 [[lampas-harness]]에는 아직 미구현. 이 위키 자체가 대안 구현

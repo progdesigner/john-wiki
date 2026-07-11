@@ -1,7 +1,7 @@
 ---
 tags: [topic, long-term-memory, memory-provider, context-injection, rag]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-12
 ---
 # 장기기억 아키텍처 (LLM long-term memory)
 
@@ -38,6 +38,14 @@ updated: 2026-07-09
 2. 검색 결과 기반으로만 답한다.
 3. 조회 실패·tool 부재 시 **접근 불가라고 명시**한다.
 4. **기억에 없는 작업 이력을 지어내지 않는다.**
+
+## 구현 진행 상태 (2026-07-11 관찰)
+
+2026-07-08 설계 이후의 상태 점검([[2026-07-11-기억-요약-wiki-경로-확인]]):
+
+- **방법 C(검색 tool 연결)는 아직 미완** — `[[lampas-harness]]` `src/config.ts`에 `wikiDir`+`WIKI_DIR` 설정이 들어와 배선은 착수됐으나, 어시스턴트에 `search/read/list` tool이 노출되지 않아 채팅에서 "기억 요약"·wiki 위치 질문에 여전히 답 못 함.
+- **경로 불일치 함정** — `wikiDir` 기본값 `~/Works/llm-wiki`가 실제 저장소 `~/Works/john-wiki`와 다름. `WIKI_DIR` env로 지정 안 하면 없는 경로를 가리킴.
+- 교훈: 조회 tool 연결은 "config에 경로 하나 추가"로 끝나지 않는다 — tool 노출·주입·검증(→ [[wiki-memory-provider-integration]] 5~7단계)까지 가야 어시스턴트가 실제로 조회한다.
 
 ## 이 위키(john-wiki)와의 관계
 
