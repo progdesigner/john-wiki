@@ -43,7 +43,8 @@ updated: 2026-07-12
 
 2026-07-08 설계 이후의 상태 점검([[2026-07-11-기억-요약-wiki-경로-확인]]):
 
-- **방법 C(검색 tool 연결)는 아직 미완** — `[[lampas-harness]]` `src/config.ts`에 `wikiDir`+`WIKI_DIR` 설정이 들어와 배선은 착수됐으나, 어시스턴트에 `search/read/list` tool이 노출되지 않아 채팅에서 "기억 요약"·wiki 위치 질문에 여전히 답 못 함.
+- **방법 C(검색 tool 연결)는 아직 미완** — `[[lampas-harness]]` `src/config.ts`에 `wikiDir`+`WIKI_DIR` 설정이 들어와 배선은 착수됐으나, 어시스턴트에 `search/read/list` tool이 노출되지 않아 채팅에서 "기억 요약"·wiki 위치 질문에 여전히 답 못 함. **같은 날 두 개의 독립 채팅에서 재확인됨**([[2026-07-11-기억-요약-wiki-경로-확인]] · [[2026-07-11-기억-저장내용-조회가능여부]]).
+- **노출된 파일 tool은 위키가 아닌 코드 저장소로 스코프됨** — 후자 채팅에서 어시스턴트는 대안으로 `search_files`/`list_directory`를 제시했으나 그 범위는 작업 폴더(`lampas-harness`)일 뿐, `[[john-wiki]]` 코퍼스가 아니다. 파일 tool이 있어도 위키 경로에 연결돼야 방법 C가 성립한다.
 - **경로 불일치 함정** — `wikiDir` 기본값 `~/Works/llm-wiki`가 실제 저장소 `~/Works/john-wiki`와 다름. `WIKI_DIR` env로 지정 안 하면 없는 경로를 가리킴.
 - 교훈: 조회 tool 연결은 "config에 경로 하나 추가"로 끝나지 않는다 — tool 노출·주입·검증(→ [[wiki-memory-provider-integration]] 5~7단계)까지 가야 어시스턴트가 실제로 조회한다.
 
