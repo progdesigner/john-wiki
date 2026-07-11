@@ -1,7 +1,7 @@
 ---
 tags: [topic, claude-agent-sdk, model, config]
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-07-12
 ---
 # 하네스 모델 선택
 
@@ -30,5 +30,16 @@ claude-opus-4-1-20250805, claude-opus-4-5-20251101, claude-sonnet-4-5-20250929
 - 최고 성능: `claude-opus-4-8` / 비용 절감: `claude-sonnet-5`.
 - 코드 고정이 필요하면 `.env`의 `HARNESS_MODEL`을 chat/runner 양쪽에서 읽게 배선.
 
+## 로컬→고급 모델 수동 에스컬레이션 (2026-07-11 관찰)
+로컬 LLM(`qwen3.5-35b-8bit`, [[local-llm-on-apple-silicon]])이 첫 시도를 하고, 결과가 부실하면
+사용자가 **"고급 모델로 다시 실행해줘"**로 상위 모델(Claude)에 재위임하는 패턴이 실사용에서 확인됨.
+- 사례: desktop 설치 스크립트를 로컬 모델이 실행 불가 상태로 생성(권한/Electron 바이너리/launchctl 순서
+  3중 오류) → 상위 모델이 재작성·검증. → [[2026-07-11-desktop-퀵채팅-설치-스크립트]]
+- **관찰**: launchd·Electron 같은 macOS 특화 devops 영역은 로컬 모델이 그럴듯하지만 실행 불가한 코드를 내는
+  경향. 도메인 지식 필요 작업은 상위 모델 권장.
+- **UX 신호**: 작은 모델이 git commit·복잡 작업 요청에 "상위 모델이 처리하는 것이 적절합니다"라며 위임하면,
+  사용자가 같은 요청을 2~4회 재전송하게 됨. 라우팅/에스컬레이션이 사용자에게 불투명.
+
 ## 관련
-- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]]
+- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]]
+- [[local-llm-on-apple-silicon]]

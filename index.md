@@ -13,6 +13,7 @@
 - [[2026-07-10-전대-동의-메일-작성]] — CWC 엘레망 광화문 사무실 일부 공간 계열사 전대(轉貸) 동의 요청 회신 메일 작성 (비즈니스 이메일 대행)
 - [[2026-07-11-기억-요약-wiki-경로-확인]] — 기억 요약 요청·wiki 경로/WIKI_DIR 확인. memory provider 미연결 재확인 + config.ts `wikiDir` 경로 불일치(llm-wiki vs john-wiki) 발견
 - [[2026-07-11-기억-저장내용-조회가능여부]] — "기억에 저장된 걸 찾을 수 있어?" 1왕복. memory provider 미연결 세 번째 재확인, 노출 tool은 위키 아닌 작업폴더(`search_files`/`list_directory`) 스코프
+- [[2026-07-11-desktop-퀵채팅-설치-스크립트]] — desktop 퀵 채팅(Electron) launchd 설치 스크립트, 로컬 모델 결과물 실행불가 → 고급 모델 재작성, git 도구·재시작 스크립트
 
 ## Entities
 

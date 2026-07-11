@@ -85,3 +85,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 토픽 갱신: [[long-term-memory-architecture]](구현 진행 상태 절 — 같은 날 두 채팅 재확인 + 파일 tool 위키 미스코프 관찰 추가)
 - index.md 갱신 (세션1 추가)
 - 특이사항: 신규 엔티티/토픽/스킬 없음. memory provider 미연결의 세 번째 독립 재확인 데이터포인트 — 기존 [[2026-07-11-기억-요약-wiki-경로-확인]]과 near-duplicate지만 별도 채팅이라 세션 페이지 신설, 새 디테일(`search_files`/`list_directory` tool·작업폴더 스코프)만 반영.
+
+## [2026-07-12] ingest | desktop 퀵 채팅 설치 스크립트 세션 (2026-07-11)
+- 소스: raw/conversations/2026-07-11-desktop-퀵채팅-설치-스크립트.md (원본 e5a3f591-...md 복사)
+- 세션: [[2026-07-11-desktop-퀵채팅-설치-스크립트]] (5개 스레드: 개발상태 점검·git commit 2회·desktop 설치 기능·restart 스크립트 차이)
+- 핵심: desktop 퀵 채팅(Electron) launchd 상주 기능 신설(Option+Space 소환). 로컬 모델(qwen)이 만든 install-desktop.sh가 실행 불가(root /Library/LaunchAgents sudo 없이 쓰기·Electron을 `node main.js`로 실행·launchctl bootout 도메인 누락/순서 뒤바뀜) → 사용자가 "고급 모델로 다시 실행"으로 에스컬레이션 → 상위 모델이 기존 launchd 패턴대로 재작성·설치 검증(exit 0, 200 응답).
+- 스킬 갱신: [[macos-launchd-daemon]] — GUI/Electron 앱 launchd 상주 함정 섹션 추가(Electron 바이너리·LimitLoadToSessionType Aqua·KeepAlive SuccessfulExit:false·kickstart 명시·상태출력 오표시), 사용자 vs root LaunchAgents·bootout 도메인 필수 함정 보강.
+- 엔티티 갱신: [[lampas-harness]] — 2026-07-11 추가 기능(desktop 클라이언트·git 도구·restart 스크립트 2종·Google 401)·커밋 이력(7694af0→6f3704f, 6f3704f→9132930) 추가.
+- 토픽 갱신: [[model-selection]] — 로컬→고급 모델 수동 에스컬레이션 패턴·불투명 라우팅 UX 관찰 추가.
+- index.md 갱신 (세션1 추가).
+- 특이사항: 스킬은 신설이 아닌 기존 [[macos-launchd-daemon]] 정제(GUI 앱 케이스 반복 사용으로 확장). Google Models 401 오류 미해결로 이월.

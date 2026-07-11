@@ -1,8 +1,9 @@
 ---
 name: macos-launchd-daemon
-description: macOS에서 서비스를 launchd 데몬으로 등록하고 명령어로 재시작할 수 있게 하는 절차
+description: macOS에서 서비스(백그라운드 데몬·GUI Electron 앱 포함)를 launchd로 등록하고 명령어로 재시작하는 절차
 created: 2026-07-07
-tags: [macos, launchd, daemon, devops]
+updated: 2026-07-12
+tags: [macos, launchd, daemon, devops, electron, gui]
 ---
 # macOS launchd 데몬화 + 제어 스크립트
 
@@ -31,5 +32,22 @@ macOS에서 pm2/tmux/nohup보다 정석(자동 시작·자동 재시작·부팅 
   1. 자동 로그인 켜기(간단, 권장) — LaunchAgent 그대로 동작.
   2. 로그인 없이 부팅만 해도 뜨게 → `/Library/LaunchDaemons/`의 **LaunchDaemon**으로 만들고 `sudo` 필요.
 - 라벨 변경 시(`com.*`→`io.*` 등) 기존 로드된 서비스를 `launchctl bootout` 후 새 라벨로 다시 bootstrap 해야 반영.
+- **`~/Library/LaunchAgents`(사용자) vs `/Library/LaunchAgents`(root 소유).** 사용자 서비스는 반드시
+  `~/Library/LaunchAgents`에 써라. root 소유 `/Library/LaunchAgents`에 sudo 없이 쓰면 **첫 줄부터 permission denied**.
+  (2026-07-11 로컬 모델이 여기로 써서 실패.)
+- **bootout에 도메인 필수** — `launchctl bootout <라벨>`이 아니라 `launchctl bootout gui/$(id -u)/<라벨>`.
+  도메인을 빼면 서비스를 못 찾는다.
 
-## 출처: [[2026-07-06-lampas-harness-구축]] ([[lampas-harness]])
+## GUI / Electron 앱을 launchd로 상주시킬 때 (2026-07-11 추가)
+백그라운드 데몬과 달리 **GUI 앱(Electron 등)은 추가 함정**이 있다:
+- **Electron은 전용 바이너리로 실행.** plist `ProgramArguments`에 `node main.js`를 넣으면 안 뜬다.
+  `node_modules/.bin/electron` 또는 `.app/Contents/MacOS/<앱>` 같은 Electron 바이너리를 지정.
+- **`LimitLoadToSessionType: Aqua`** — GUI 세션(Aqua)에서만 로드되게 지정. 없으면 GUI 컨텍스트 밖에서 문제.
+- **크래시 시에만 재기동**: `KeepAlive = {SuccessfulExit: false}`. 이러면 정상 종료(Cmd+Q)엔 다시 안 뜨고
+  크래시했을 때만 부활한다. GUI 앱은 사용자가 끄면 꺼진 채로 두는 게 맞으므로 `KeepAlive: true`(무조건 부활)는 부적절.
+- **desktop만 갱신되는 self-update는 서버 재시작 없이** `launchctl kickstart -k gui/$(id -u)/<라벨>`로
+  해당 앱만 재기동. "plist 다시 쓰면 launchd가 알아서 재시작한다"는 잘못된 전제 — kickstart를 명시적으로 호출해야 한다.
+- **상태 출력 스크립트 주의**: 재시작 스크립트가 GUI 앱 실행 여부를 `pgrep`으로 판별할 때 프로세스명/도메인이
+  틀리면 "항상 중지됨"으로 오표시된다(2026-07-11 `restart-lampas.sh` 버그로 원복).
+
+## 출처: [[2026-07-06-lampas-harness-구축]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] ([[lampas-harness]])

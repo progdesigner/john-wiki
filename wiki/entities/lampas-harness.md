@@ -51,7 +51,29 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
 - **구조적 한계 규명** — 에이전트가 턴 안에서 띄운 배경작업은 턴/세션 종료로 죽는다(스케줄러·다운로드 두 스레드 관통).
   → `[[harness-background-process-lifecycle]]`
 
-## 커밋 이력 (이 세션)
+## 추가 기능 (2026-07-11 세션)
+
+- **desktop 퀵 채팅(Electron) 클라이언트 + launchd 상주** — `apps/desktop/main.js`(Electron), 전역 단축키
+  **Option+Space**로 `apps/web/public/quick.html` 퀵 채팅 오버레이 소환. `scripts/install-desktop.sh`/
+  `uninstall-desktop.sh`로 `~/Library/LaunchAgents` 사용자 LaunchAgent 등록(`LimitLoadToSessionType: Aqua`,
+  `KeepAlive={SuccessfulExit: false}`, 로그 `logs/desktop.*.log`). `self-update.sh`는 desktop만 변경 시
+  `launchctl kickstart -k`로 앱만 재기동. → GUI 앱 함정은 [[macos-launchd-daemon]]에 반영. 세션:
+  [[2026-07-11-desktop-퀵채팅-설치-스크립트]]
+  - **로컬 모델 결과물이 실행 불가**여서 상위 모델이 재작성한 사례(권한/Electron 바이너리/launchctl 순서 3중 오류).
+    로컬→고급 모델 수동 에스컬레이션 → [[model-selection]] · [[local-llm-on-apple-silicon]].
+- **git 도구 in-agent 노출** — `src/fsTools.ts`에 git 관련 도구 추가, `src/webTools.ts` 신규(웹 도구 유틸).
+- **재시작 스크립트 2종** — `restart-lampas.sh`(수동 즉시: `pkill -f lampas` 후 daemon/server/scheduler 재시작),
+  `restart-when-idle.sh`(유휴 감지 후 `restart-lampas.sh` 호출 — 자동 메모리 정리용).
+- ⚠️ **Google Models 401** — 2026-07-08~11 사이 20회+. API 키/인증 문제 추정, 기본(Claude/Qwen) 동작엔 영향 없음(미해결).
+
+## 커밋 이력 (2026-07-11 세션)
+
+| 커밋 | 내용 |
+|------|------|
+| `7694af0`→`6f3704f` | fsTools에 git 도구 추가 + server.ts 문서 주석 |
+| `6f3704f`→`9132930` | desktop 설치 스크립트 외 8파일(511+/18-): install/uninstall-desktop.sh, install.sh·self-update.sh 갱신, main.js·quick.html·server.ts·webTools.ts |
+
+## 커밋 이력 (2026-07-06~07 세션)
 
 | 커밋 | 내용 |
 |------|------|
@@ -79,7 +101,7 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
 - → 세션: [[2026-07-11-기억-요약-wiki-경로-확인]]
 
 ## 관련
-- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]]
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
 - 연동 대상 장기기억: [[john-wiki]] (제안).
 - `lampas-system` — 인접 저장소(이 세션과 별개, 미커밋 변경 2개 존재).
