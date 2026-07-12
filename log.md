@@ -95,3 +95,11 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 토픽 갱신: [[model-selection]] — 로컬→고급 모델 수동 에스컬레이션 패턴·불투명 라우팅 UX 관찰 추가.
 - index.md 갱신 (세션1 추가).
 - 특이사항: 스킬은 신설이 아닌 기존 [[macos-launchd-daemon]] 정제(GUI 앱 케이스 반복 사용으로 확장). Google Models 401 오류 미해결로 이월.
+
+## [2026-07-12] ingest | "하네스가 뭐야" 질문 세션 (2026-07-12 quick)
+- 소스: raw/conversations/2026-07-12-하네스-뜻-질문.md (원본 quick-e5374693-...md 복사)
+- 세션: [[2026-07-12-하네스-뜻-질문]] (1왕복 초단타 quick 채팅)
+- 핵심: "하네스가 뭐야"에 일반 사전식 답변 4종(DevOps Harness/승마 착구/항공 안전장비/전기 배선)만 나오고 사용자 자신의 [[lampas-harness]] 맥락은 전혀 인식 못 함. → memory/컨텍스트 미주입 정황.
+- 토픽 갱신: [[long-term-memory-architecture]] — "구현 진행 상태" 절에 방법 B(AI_CONTEXT.md 주입)가 quick-chat 경로엔 아직 안 닿음(2026-07-12 관찰) 데이터포인트 추가, 절 제목 2026-07-11→2026-07-11~12로.
+- index.md 갱신 (세션1 추가).
+- 특이사항: 콘텐츠 가치 낮은 quick 1왕복. 신규 엔티티/스킬 없음, AI_CONTEXT.md 변경 없음(핵심 사실 불변). 값은 "회수 배선이 quick 채팅 경로까지 아직 안 닿았다"는 단일 관찰. 파일명 quick- 접두사는 [[2026-07-11-desktop-퀵채팅-설치-스크립트]]의 데스크톱 퀵 클라이언트 경로로 추정.
