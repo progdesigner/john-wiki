@@ -49,4 +49,3 @@ updated: 2026-07-09
 - 세션: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]]
 - 스킬: [[local-llm-rapidmlx-install]] · [[macos-launchd-daemon]]
 - 하네스 통합: [[model-selection]] (모델 선택기 "Local" 그룹) · [[lampas-harness]]
-</content>

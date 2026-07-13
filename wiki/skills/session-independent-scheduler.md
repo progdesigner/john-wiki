@@ -35,4 +35,3 @@ tags: [scheduler, lampas-harness, claude-agent-sdk, persistence, proactive]
   방식이 더 견고할 수 있음.
 
 ## 출처: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · 배경: [[harness-background-process-lifecycle]]
-</content>

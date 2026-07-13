@@ -15,6 +15,7 @@
 - [[2026-07-11-기억-저장내용-조회가능여부]] — "기억에 저장된 걸 찾을 수 있어?" 1왕복. memory provider 미연결 세 번째 재확인, 노출 tool은 위키 아닌 작업폴더(`search_files`/`list_directory`) 스코프
 - [[2026-07-11-desktop-퀵채팅-설치-스크립트]] — desktop 퀵 채팅(Electron) launchd 설치 스크립트, 로컬 모델 결과물 실행불가 → 고급 모델 재작성, git 도구·재시작 스크립트
 - [[2026-07-12-하네스-뜻-질문]] — "하네스가 뭐야" quick 채팅 1왕복. 일반 사전식 답변(lampas 맥락 인식 못함) → quick-chat 경로에 AI_CONTEXT.md/장기기억 미주입 정황
+- [[2026-07-13-람파스-누적운영기억-이관]] — 람파스 auto-memory 13개(운영 함정·피드백)를 위키로 이관. Google 401 근본원인(env-empty-shadow) 규명, MCP 브리지·naver-blog-mcp·rapid-mlx launchd 정리
 
 ## Entities
 
@@ -27,6 +28,8 @@
 - [[cwc-commerce]] — 씨더블유씨커머스 유한회사, 위키/제품군 배경 회사 "CWC" (대표 이용욱/John Lee, 엘레망 광화문 임차)
 - [[sylvan-korea]] — CWC 계열사, 공유오피스 계약 2026-09 종료 → 엘레망 광화문 일부 공간 공동 사용 검토
 - [[dongwon-building]] — 동원빌딩/동원리소스 서울지점, 엘레망 광화문 사무실 임대인·관리 주체
+- [[rapid-mlx]] — Apple Silicon 로컬 LLM 서버(vllm-mlx), 하네스 "Local" 프로바이더. launchd `io.lampas.rapidmlx` KeepAlive 상주
+- [[naver-blog-mcp]] — 네이버 블로그 자동 발행 MCP(Playwright). 본문 순수 텍스트만·SRT 쿠키 ~24h 만료
 
 ## Topics
 
@@ -39,6 +42,7 @@
 - [[harness-background-process-lifecycle]] — 에이전트가 턴 안에서 띄운 배경작업은 턴/세션 종료로 죽는다 (스케줄러·다운로드 관통 한계)
 - [[local-llm-on-apple-silicon]] — Apple Silicon 로컬 LLM: 모델크기·양자화·백엔드(Metal/MLX/CPU), Rapid-MLX vs llama.cpp vs Ollama
 - [[use-area-personas]] — 하네스 사용 영역별 전문가 페르소나(6영역) + "일반" 정책 비어있음→채움 변천
+- [[harness-mcp-bridge]] — 하네스가 `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출 (mcpBridge, cwd 우회·PATH·재시작 반영)
 
 ## Skills
 
@@ -55,3 +59,6 @@
 - [[detach-long-job-nohup]] — 긴 배경 작업을 `nohup … & disown`으로 세션과 분리해 턴 넘어가도 생존
 - [[local-llm-rapidmlx-install]] — Rapid-MLX로 Apple Silicon에 로컬 LLM 설치·launchd 상주·하네스 모델 선택기 통합
 - [[business-email-consent-first]] — 상대가 서류 요구만 반복할 때 원칙적 동의 여부를 먼저 확정 요청하는 정중한 회신 메일 작성
+- [[env-empty-var-shadows-dotenv]] — 새 API 키가 기능/목록에 안 뜰 때: 셸의 빈 env가 `.env` 값을 가리는지 진단·수정
+- [[self-hosted-agent-server-ops]] — 에이전트 턴을 호스팅하는 서버 재시작·종료·디버그 안전 규칙(stray-port·restart-kills-own-turn·pkill-prod)
+- [[naver-blog-mcp-posting]] — naver-blog-mcp 발행: 순수 텍스트 본문·SRT 세션 갱신(headed 캡차)·서버 버그 대응

@@ -1,7 +1,7 @@
 ---
 tags: [entity, agent, persona]
 created: 2026-07-07
-updated: 2026-07-07
+updated: 2026-07-13
 ---
 # 람파스 (Lampas)
 
@@ -12,6 +12,12 @@ updated: 2026-07-07
 - 기반: Claude Agent SDK (`@anthropic-ai/claude-agent-sdk`), 기본 모델 `claude-opus-4-8` → `[[model-selection]]`
 - 권한: `bypassPermissions`로 맥 전체 제어(작업 폴더 미선택 시). 폴더 선택 시 `default` 모드로 제한 → `[[work-folder-sandboxing]]`.
 
+## 이름 사용 규칙 (2026-07-07 확정)
+`[[progdesigner]]`가 정한 규칙: 이 프로젝트의 **에이전트·서비스명은 "하네스(Harness)"가 아니라 "람파스"**로
+부른다. UI 문구·새 기능의 **사용자 노출 텍스트에는 "람파스"**를 쓴다. 단 **내부 식별자**(env `HARNESS_TOKEN`,
+localStorage `harness_*` 키, 저장소명 `lampas-harness`)는 호환성 때문에 그대로 둔다.
+(즉 코드·저장소는 harness, 사람에게 보이는 이름만 람파스.)
+
 ## 관련
 - 프로젝트: [[lampas-harness]]
-- 세션: [[2026-07-06-lampas-harness-구축]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-13-람파스-누적운영기억-이관]]

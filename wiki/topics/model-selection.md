@@ -1,7 +1,7 @@
 ---
 tags: [topic, claude-agent-sdk, model, config]
 created: 2026-07-07
-updated: 2026-07-12
+updated: 2026-07-13
 ---
 # 하네스 모델 선택
 
@@ -40,6 +40,12 @@ claude-opus-4-1-20250805, claude-opus-4-5-20251101, claude-sonnet-4-5-20250929
 - **UX 신호**: 작은 모델이 git commit·복잡 작업 요청에 "상위 모델이 처리하는 것이 적절합니다"라며 위임하면,
   사용자가 같은 요청을 2~4회 재전송하게 됨. 라우팅/에스컬레이션이 사용자에게 불투명.
 
+## 프로바이더 모델이 목록에 하나도 안 뜰 때 (2026-07-13)
+`/api/models`가 특정 프로바이더(예 Google) 모델을 하나도 안 내려주면, **셸의 빈 env 변수가 `.env`의 진짜
+키를 가리는** 함정을 먼저 의심하라. `GOOGLE_API_KEY=`(빈 export) → dotenv가 `.env` 값을 안 넣음 →
+`googleModels()`가 `[]` 반환 → Google 그룹이 통째로 사라진다. 2026-07-08~11 미해결 "Google Models 401"의
+유력한 근본 원인. 진단·수정: [[env-empty-var-shadows-dotenv]].
+
 ## 관련
-- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]]
-- [[local-llm-on-apple-silicon]]
+- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]] / [[2026-07-13-람파스-누적운영기억-이관]]
+- [[local-llm-on-apple-silicon]] / [[env-empty-var-shadows-dotenv]]

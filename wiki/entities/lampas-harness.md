@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, claude-agent-sdk, typescript]
 created: 2026-07-07
-updated: 2026-07-12
+updated: 2026-07-13
 ---
 # lampas-harness
 
@@ -66,7 +66,10 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
 - **git 도구 in-agent 노출** — `src/fsTools.ts`에 git 관련 도구 추가, `src/webTools.ts` 신규(웹 도구 유틸).
 - **재시작 스크립트 2종** — `restart-lampas.sh`(수동 즉시: `pkill -f lampas` 후 daemon/server/scheduler 재시작),
   `restart-when-idle.sh`(유휴 감지 후 `restart-lampas.sh` 호출 — 자동 메모리 정리용).
-- ⚠️ **Google Models 401** — 2026-07-08~11 사이 20회+. API 키/인증 문제 추정, 기본(Claude/Qwen) 동작엔 영향 없음(미해결).
+- ⚠️→✅ **Google Models 401 / 미표시** — 2026-07-08~11 사이 20회+ 미해결로 이월됐던 항목. 2026-07-13
+  auto-memory 이관에서 **유력한 근본 원인 규명**: 셸에 `GOOGLE_API_KEY=`(빈 값 export)가 있어 dotenv가
+  `.env`의 진짜 키를 안 덮어씀 → `googleModels()`가 `[]` 반환. `src/config.ts`에서 빈 값 변수만 `.env`로
+  채우게 수정. (401 인증오류 증상과 빈-목록 증상이 완전히 같은지는 미단정 — 개연적 해소.) → [[env-empty-var-shadows-dotenv]]
 
 ## 커밋 이력 (2026-07-11 세션)
 
@@ -102,10 +105,28 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
 - **⚠️ 경로 불일치**: 기본값 `~/Works/llm-wiki`인데 실제 저장소는 `~/Works/john-wiki`. `WIKI_DIR` env 미설정 시 없는 경로를 가리킴. → 수정 필요.
 - → 세션: [[2026-07-11-기억-요약-wiki-경로-확인]]
 
+## 운영 사실 (2026-07-13 auto-memory 이관)
+
+- **외부 MCP 브리지** — `src/mcpBridge.ts`의 `externalMcpServers()`가 프로젝트 `.cursor/mcp.json`의 외부
+  MCP 서버(naver-blog, threads 등)를 Claude Agent SDK `mcpServers` 규격으로 변환해 `server.ts`의
+  `query()`에 스프레드. **Claude 세션(웹 채팅)에서도** `mcp__<서버>__<도구>`로 노출된다(과거 "MCP는
+  Cursor/claude.ai 전용" 오해 정정). → [[harness-mcp-bridge]]
+  - 실사용: [[naver-blog-mcp]] — 네이버 블로그 자동 발행(Playwright). 본문 순수 텍스트만·SRT 쿠키 ~24h
+    만료·서버 버그 3종. 발행 절차: [[naver-blog-mcp-posting]]
+- **스크립트 폴더 컨벤션** — 일회성 probe/test/조회는 `tools/`, 설치·운영(install/setup/restart/bootstrap/
+  self-update)은 `scripts/`. (2026-07-09 사용자 지시.) → [[progdesigner]]
+- **서버 라이프사이클 함정** — 이 하네스는 에이전트 턴을 자기 프로세스에서 spawn하므로, 서버(8787)를
+  재시작·종료·중복실행하면 진행 중 턴이 끊기거나 코드 반영이 안 되는 함정 3종(stray-port·restart-kills-own-turn·
+  pkill-hits-prod)이 있다. → [[self-hosted-agent-server-ops]]
+- **로컬 LLM 서버** — rapid-mlx가 launchd(`io.lampas.rapidmlx`, KeepAlive)로 상주. → [[rapid-mlx]]
+- **`.env` 로딩** — 셸의 빈 env 변수가 `.env` 진짜 값을 가리는 함정(dotenv override:false) 대응.
+  → [[env-empty-var-shadows-dotenv]]
+
 ## 관련
-- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]]
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
 - 연동 대상 장기기억: [[john-wiki]] (제안).
+- 상주 서비스·도구: [[rapid-mlx]] (로컬 LLM) · [[naver-blog-mcp]] (외부 MCP).
 - `lampas-system` — 인접 저장소(이 세션과 별개, 미커밋 변경 2개 존재).
 
 ## 재확인된 함정 (2026-07-08~09 세션)

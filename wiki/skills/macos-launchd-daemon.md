@@ -2,7 +2,7 @@
 name: macos-launchd-daemon
 description: macOS에서 서비스(백그라운드 데몬·GUI Electron 앱 포함)를 launchd로 등록하고 명령어로 재시작하는 절차
 created: 2026-07-07
-updated: 2026-07-12
+updated: 2026-07-13
 tags: [macos, launchd, daemon, devops, electron, gui]
 ---
 # macOS launchd 데몬화 + 제어 스크립트
@@ -37,6 +37,9 @@ macOS에서 pm2/tmux/nohup보다 정석(자동 시작·자동 재시작·부팅 
   (2026-07-11 로컬 모델이 여기로 써서 실패.)
 - **bootout에 도메인 필수** — `launchctl bootout <라벨>`이 아니라 `launchctl bootout gui/$(id -u)/<라벨>`.
   도메인을 빼면 서비스를 못 찾는다.
+- **bootout 직후 bootstrap하면 오류 5** — 재배포(plist 교체) 시 `bootout` 직후 곧바로 `bootstrap`하면
+  `Bootstrap failed: 5: Input/output error`가 난다. **몇 초 대기 후 재시도**. (2026-07-11 `[[rapid-mlx]]`
+  `--host` 인자 변경 재배포에서 겪음.)
 
 ## GUI / Electron 앱을 launchd로 상주시킬 때 (2026-07-11 추가)
 백그라운드 데몬과 달리 **GUI 앱(Electron 등)은 추가 함정**이 있다:
@@ -50,4 +53,4 @@ macOS에서 pm2/tmux/nohup보다 정석(자동 시작·자동 재시작·부팅 
 - **상태 출력 스크립트 주의**: 재시작 스크립트가 GUI 앱 실행 여부를 `pgrep`으로 판별할 때 프로세스명/도메인이
   틀리면 "항상 중지됨"으로 오표시된다(2026-07-11 `restart-lampas.sh` 버그로 원복).
 
-## 출처: [[2026-07-06-lampas-harness-구축]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] ([[lampas-harness]])
+## 출처: [[2026-07-06-lampas-harness-구축]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] ([[lampas-harness]])

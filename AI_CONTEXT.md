@@ -8,10 +8,10 @@ updated: 2026-07-13
 > 하네스가 매 대화 시작 시 이 파일을 시스템 프롬프트에 주입한다. 40줄 이내 유지 (규칙: CLAUDE.md).
 
 ## 사용자
-- [[progdesigner]] (John, bacchus.dev@gmail.com) — CWC([[cwc-commerce]]) 소속 개발자·디자이너. 한국어로 대화한다.
+- [[progdesigner]] (John, bacchus.dev@gmail.com) — CWC([[cwc-commerce]]) 소속 개발자·디자이너. **응답은 항상 한국어**(도구의 사람 읽는 필드까지). 기억은 비자명한 것만 저장, 임시 스크립트는 `tools/`·운영은 `scripts/`.
 
 ## 진행 중 프로젝트
-- [[lampas-harness]] — Claude Agent SDK 웹 하네스. 맥미니 launchd 데몬(웹 8787/API 3787), 원격 접속은 Tailscale 사설 VPN 권장. 기본 모델 claude-opus-4-8.
+- [[lampas-harness]] — Claude Agent SDK 웹 하네스. 맥미니 launchd 데몬(웹 8787/API 3787), 원격 접속은 Tailscale 사설 VPN 권장. 기본 모델 claude-opus-4-8. `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출([[harness-mcp-bridge]]) — 예 [[naver-blog-mcp]]. 로컬 LLM은 [[rapid-mlx]](launchd 상주).
 - [[john-wiki]] — 이 위키. 공통 장기 기억 저장소 (ingest/lint/야간 자동 ingest 잡이 유지).
 - [[toktalk]] — 에피소드 beat 플레이·배경 전환 시스템 개발 중.
 - [[lampas-studio]] — 스튜디오 레퍼런스·Instagram 통합.
@@ -20,6 +20,7 @@ updated: 2026-07-13
 - 원격 접속: 공개 노출 회피(하네스가 맥 전체 제어) — Tailscale 사설 VPN 권장, 공유기 포트포워딩 비권장. (근거: 2026-07-06 세션; 당시 실제 설치는 미진행 — 설치 여부·구체 방식은 재확인 필요.)
 - 장기 기억은 git markdown 위키(사람이 감사 가능) — SQLite 아님.
 - 로컬 LLM은 Rapid-MLX 상주 ([[local-llm-rapidmlx-install]]).
+- 사용자 대면 이름은 **"람파스"**로 표기 (내부 식별자 env `HARNESS_*`·저장소명 `lampas-harness`는 유지). → [[lampas]]
 - 2026-07-12: 위키 회수(recall) 연결 — AI_CONTEXT.md 상시 주입 + index.md 능동 조회 + 스킬 카탈로그 노출 + 야간 자동 ingest.
 
 ## 업무 맥락

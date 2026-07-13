@@ -112,3 +112,16 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - **신규 topic**: [[use-area-personas]] 생성 — "사용 영역 페르소나"가 10개 파일에서 언급되나 전용 페이지 부재였음. 6영역 프리셋·presets.json 저장·"일반" 정책 비어있음→채움 변천(2026-07-08 vs 07-09 모순 명시)을 통합. 인바운드 링크 4개 보강([[lampas-harness]]·[[system-prompt-mimicry-misconception]]·두 페르소나 세션), index.md Topics에 등록.
 - **AI_CONTEXT.md 재증류**: updated 2026-07-13, 26줄(<40 규칙 준수). 위 두 모순 반영 외 핵심 사실은 불변이라 구조 유지.
 - 결과: 깨진 링크 0·고아 0. 신규 엔티티/세션/스킬 없음.
+
+## [2026-07-13] ingest | 람파스 누적 운영 기억 이관 (source: memory-export-2026-07-13.md)
+- 소스: raw/conversations/2026-07-13-람파스-누적운영기억-이관.md (원본 memory-export-2026-07-13.md 복사) — lampas-harness auto-memory 13개 정제분
+- 세션: [[2026-07-13-람파스-누적운영기억-이관]] (13개 기억 → 위키 매핑표 포함)
+- 엔티티 신설: [[rapid-mlx]] (로컬 LLM 서버·launchd io.lampas.rapidmlx KeepAlive), [[naver-blog-mcp]] (Playwright 발행 MCP·순수 텍스트만·SRT ~24h)
+- 토픽 신설: [[harness-mcp-bridge]] (하네스가 .cursor/mcp.json 외부 MCP를 Claude 세션에 노출 — 오해 정정 + cwd/PATH/재시작 이식 함정)
+- 스킬 신설: [[env-empty-var-shadows-dotenv]] (빈 env가 .env 값 가림 진단), [[self-hosted-agent-server-ops]] (stray-port·restart-kills-own-turn·pkill-prod 3함정 통합), [[naver-blog-mcp-posting]] (본문 텍스트·SRT 갱신·서버 버그 3종)
+- 스킬 정제: [[detach-long-job-nohup]] (run_in_background도 세션 teardown에 죽음·"No completion record" 오인), [[local-llm-rapidmlx-install]] (launchd 관리 후 인자 변경은 plist 재배포·말미 stray </content> 태그 제거), [[macos-launchd-daemon]] (bootout 직후 bootstrap 오류 5 → 대기 후 재시도)
+- 엔티티 갱신: [[lampas-harness]] (Google 401 근본원인 규명=env-empty-shadow ⚠️→✅, MCP 브리지·naver-blog·rapid-mlx·스크립트 컨벤션·서버 함정 절 추가), [[progdesigner]] (확정 선호: 한국어·비자명만 저장·tools/scripts 분리·람파스 이름), [[lampas]] (이름 사용 규칙 절)
+- 토픽 갱신: [[model-selection]] (프로바이더 모델 미표시 = env-empty-shadow 진단 절)
+- AI_CONTEXT.md 갱신: 한국어·저장정책·스크립트 컨벤션(사용자 줄), 람파스 이름 결정, 하네스 MCP 브리지·rapid-mlx 링크. 27줄(<40 준수).
+- index.md 갱신 (세션1·엔티티2·토픽1·스킬3 추가).
+- 특이사항: 소스가 대화 트랜스크립트가 아닌 auto-memory 내보내기(정제된 기억 목록) — "비자명한 것만 저장" 정책의 산물. Google Models 401은 미해결 이월→개연적 해소로 상태 전환(401 인증증상과 빈-목록 증상 동일성은 미단정). 실제 코드 수정 여부는 소스 기술만으로 판단, 위키엔 소스가 말한 대로 기록.

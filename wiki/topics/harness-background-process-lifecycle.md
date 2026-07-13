@@ -42,4 +42,3 @@ updated: 2026-07-09
 - 세션: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]]
 - 스킬: [[session-independent-scheduler]] · [[detach-long-job-nohup]] · [[macos-launchd-daemon]]
 - 엔티티: [[lampas-harness]] · [[lampas]]
-</content>

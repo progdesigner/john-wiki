@@ -2,6 +2,7 @@
 name: detach-long-job-nohup
 description: 에이전트 세션보다 오래 걸리는 다운로드·빌드·장기 명령이 턴/세션 종료로 죽지 않게 분리 실행할 때
 created: 2026-07-09
+updated: 2026-07-13
 tags: [nohup, background, lampas-harness, download, shell]
 ---
 # 장기 실행 작업을 세션에서 분리 (nohup & disown)
@@ -31,6 +32,10 @@ tags: [nohup, background, lampas-harness, download, shell]
 4. 상주가 필요한 서비스라면 다운로드 후 **launchd 서비스로 승격** → [[macos-launchd-daemon]].
 
 ## 주의사항 / 함정
+- **`run_in_background`도 세션 teardown에 죽는다**: Bash 도구의 `run_in_background` 작업은 SDK CLI
+  프로세스의 자식이라, **대화 세션이 넘어갈 때(CLI teardown) 함께 종료**된다. task-notification이
+  **"No completion record"로만 남아 완료로 오인**하기 쉽다(rapid-mlx 37GB 다운로드가 두 번 8GB 부근에서
+  끊긴 원인, 2026-07-09). → 그래서 `&`도 `run_in_background`도 아닌 `nohup … & disown` 완전 분리가 필요.
 - **감시 루프 zsh glob 함정**: `while true; do du -sh …models--...; done`에서 경로에 미확장
   glob 문자가 있으면 zsh가 `no matches found`로 루프를 죽일 수 있다. 실제 다운로드와 무관하니
   경로를 따옴표로 감싸거나 `setopt no_nomatch`.
@@ -39,5 +44,4 @@ tags: [nohup, background, lampas-harness, download, shell]
 - SDK 인자 스캐너가 `https://…`·슬래시 경로를 막으면 명령을 스크립트 파일로 써서 실행
   → [[deploy-sandbox-pnpm-shim]].
 
-## 출처: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · 배경: [[harness-background-process-lifecycle]]
-</content>
+## 출처: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-13-람파스-누적운영기억-이관]] · 배경: [[harness-background-process-lifecycle]]
