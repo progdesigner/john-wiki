@@ -38,5 +38,5 @@ claude.ai 프로젝트 지침에 붙여넣고 아무 모델 + effort high로 두
 
 ## 관련
 - 세션: [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]]
-- 토픽: [[local-llm-on-apple-silicon]] (역량은 지침이 아닌 모델에서 나온다는 근거) · [[model-selection]]
+- 토픽: [[local-llm-on-apple-silicon]] (역량은 지침이 아닌 모델에서 나온다는 근거) · [[model-selection]] · [[use-area-personas]] (이 착상이 실제로 적용된 기능)
 - 엔티티: [[lampas-harness]] · [[progdesigner]]

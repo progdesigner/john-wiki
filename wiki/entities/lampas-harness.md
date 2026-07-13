@@ -11,7 +11,8 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
 - 저장소: `github.com:lampas-dev/lampas-harness` (`main` 브랜치)
 - 로컬 경로: `/Users/progdesigner/Works/lampas/lampas-harness`
 - 언어/런타임: TypeScript, `@anthropic-ai/claude-agent-sdk@0.3.201`
-- 실행: 맥미니, `0.0.0.0:8787` 바인딩, LAN `http://192.168.0.5:8787`
+- 실행: 맥미니, UI(웹) `8787` + API `3787` 두 포트, `0.0.0.0` 바인딩, LAN `http://192.168.0.5:8787`. (포트 확인: [[2026-07-11-desktop-퀵채팅-설치-스크립트]])
+- 원격 접속: 2026-07-06 세션 기준 **Tailscale 사설 VPN 권장**(자기 기기끼리 `100.x` 연결, 공유기 포트포워딩 불필요·비권장). 당시 실제 설치는 미진행. → [[2026-07-06-lampas-harness-구축]]
 - 인증: `HARNESS_TOKEN` (비-localhost 접속 시 필수), `ANTHROPIC_API_KEY` 직접 키(구독 로그인 아님). OpenAI 키도 보유.
 - 권한 모드: 기본 `bypassPermissions`(맥 전체 제어) — 그래서 공개 노출은 위험.
 
@@ -44,6 +45,7 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   → `[[local-llm-rapidmlx-install]]` · `[[model-selection]]`
 - **사용 영역 페르소나** — 6개 영역(비즈니스/브랜딩/마케팅/이미지/영상/일반) 전문가 페르소나 프롬프트.
   조회·수정 API + 설정(⚙) 편집 UI, 수정본은 `presets.json`에 저장(✏️ 표시·초기화). 기존 프롬프트 칩은 제거.
+  → 상세·정책 변천: [[use-area-personas]]
   - **변경(2026-07-09)**: "일반"은 처음엔 *페르소나 없음(=기본 람파스)*으로 정의됐으나, 이 세션에서
     사용자가 "일반"에도 페르소나를 설정하도록 지시해 *비어있음 → 채움*으로 바뀜. 계기는 "페이블5 숨은
     지시문" 프로모션 루머(취지만 참고, 원문은 복제 안 함). → [[2026-07-09-일반-사용영역-페르소나-설정]]

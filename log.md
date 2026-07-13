@@ -103,3 +103,12 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 토픽 갱신: [[long-term-memory-architecture]] — "구현 진행 상태" 절에 방법 B(AI_CONTEXT.md 주입)가 quick-chat 경로엔 아직 안 닿음(2026-07-12 관찰) 데이터포인트 추가, 절 제목 2026-07-11→2026-07-11~12로.
 - index.md 갱신 (세션1 추가).
 - 특이사항: 콘텐츠 가치 낮은 quick 1왕복. 신규 엔티티/스킬 없음, AI_CONTEXT.md 변경 없음(핵심 사실 불변). 값은 "회수 배선이 quick 채팅 경로까지 아직 안 닿았다"는 단일 관찰. 파일명 quick- 접두사는 [[2026-07-11-desktop-퀵채팅-설치-스크립트]]의 데스크톱 퀵 클라이언트 경로로 추정.
+
+## [2026-07-13] lint | 위키 전체 건강 점검
+- **구조 검증**: index.md ↔ 실제 파일 목록 일치 확인(세션11·엔티티9·스킬13). 링크 그래프 분석 결과 **고아 페이지 0·중복 basename 0**. `[[raw/...]]`는 실존 원본을 가리키는 경로형 링크(정상), `[[위키링크]]`는 john-wiki.md의 문법 예시 텍스트(정상) — 둘 다 깨진 링크 아님.
+- **모순 수정 1 — AI_CONTEXT.md 낡음**: [[john-wiki]] 페이지가 `AI_CONTEXT.md`를 "제안됨/아직 없음(제안 상태)"으로 기술했으나 실제로는 2026-07-12 생성됨(커밋 0c05aae, 상시 주입). 해당 두 문장을 "실현됨(방법 B 구현물)"으로 갱신.
+- **모순 수정 2 — AI_CONTEXT.md 근거 초과**: 확정된 결정 항목이 "원격 접속=Tailscale **Funnel**, 고정 IP·포트포워딩·**Cloudflare Tunnel 사용 안 함**"으로 단정했으나, 위키/raw의 유일 근거([[2026-07-06-lampas-harness-구축]])는 "Tailscale **또는** Cloudflare Tunnel, Tailscale 권장, **미설치**, 포트포워딩 비권장"뿐. "Funnel"·"고정 IP"·Cloudflare 하드 배제는 무근거 → "공개 노출 회피·Tailscale 사설 VPN 권장·미설치(재확인 필요)"로 완화. [[lampas-harness]] 엔티티에도 원격 접속 절 추가(근거 세션 명시).
+- **크로스레퍼런스 보강**: [[lampas-harness]] 실행 정보에 API 포트 `3787` 추가(근거: [[2026-07-11-desktop-퀵채팅-설치-스크립트]]) — 기존엔 웹 8787만 기재.
+- **신규 topic**: [[use-area-personas]] 생성 — "사용 영역 페르소나"가 10개 파일에서 언급되나 전용 페이지 부재였음. 6영역 프리셋·presets.json 저장·"일반" 정책 비어있음→채움 변천(2026-07-08 vs 07-09 모순 명시)을 통합. 인바운드 링크 4개 보강([[lampas-harness]]·[[system-prompt-mimicry-misconception]]·두 페르소나 세션), index.md Topics에 등록.
+- **AI_CONTEXT.md 재증류**: updated 2026-07-13, 26줄(<40 규칙 준수). 위 두 모순 반영 외 핵심 사실은 불변이라 구조 유지.
+- 결과: 깨진 링크 0·고아 0. 신규 엔티티/세션/스킬 없음.
