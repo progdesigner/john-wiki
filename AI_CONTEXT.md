@@ -12,7 +12,7 @@ updated: 2026-07-13
 
 ## 진행 중 프로젝트
 - [[lampas-harness]] — Claude Agent SDK 웹 하네스. 맥미니 launchd 데몬(웹 8787/API 3787), 원격 접속은 Tailscale 사설 VPN 권장. 기본 모델 claude-opus-4-8. `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출([[harness-mcp-bridge]]) — 예 [[naver-blog-mcp]]. 로컬 LLM은 [[rapid-mlx]](launchd 상주).
-- [[john-wiki]] — 이 위키. 공통 장기 기억 저장소 (ingest/lint/야간 자동 ingest 잡이 유지).
+- [[john-wiki]] — 이 위키. 공통 장기 기억 저장소. 저장 진입점 3개: 수동 🧠 버튼·보관 🗄 자동(2026-07-13~)·야간 자동 ingest. 능동 조회(검색 tool)는 미완.
 - [[toktalk]] — 에피소드 beat 플레이·배경 전환 시스템 개발 중.
 - [[lampas-studio]] — 스튜디오 레퍼런스·Instagram 통합.
 

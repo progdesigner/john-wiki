@@ -71,6 +71,19 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   `.env`의 진짜 키를 안 덮어씀 → `googleModels()`가 `[]` 반환. `src/config.ts`에서 빈 값 변수만 `.env`로
   채우게 수정. (401 인증오류 증상과 빈-목록 증상이 완전히 같은지는 미단정 — 개연적 해소.) → [[env-empty-var-shadows-dotenv]]
 
+## 추가 기능 (2026-07-13 세션)
+
+- **보관(🗄) → 장기기억 자동 저장** — `src/server.ts`(`POST /api/sessions/archive`)가 파일을
+  `chats/archive/`로 이동하면서 `memory-ingest` 잡을 자동 큐잉하도록 개선. 기존엔 `🧠 기억에 저장`
+  버튼 수동 조작만 위키 ingest를 걸었고 보관은 파일 이동만 했다. 이제 **보관 = 아카이빙 + 장기기억 저장**.
+  - **멱등 게이트**: 트랜스크립트가 있고 아직 저장 안 했거나 저장 후 대화가 더 이어진(변경된) 경우에만
+    ingest — `rememberedAt`(아카이브로 함께 이동) vs 트랜스크립트 변경 시각 비교. 이미 최신이면 건너뜀.
+  - **함정**: 보관은 파일을 곧 이동하므로 ingest 입력을 **이동 후 경로**(`chats/archive/<id>.md`)로 지정.
+  - 프런트: 보관 버튼 툴팁·안내 문구에 저장 반영, `apps/web/dist` 빌드. 응답에 `remembered` 플래그.
+  - 배포는 서버 재시작 필요(`launchctl kickstart -k gui/$(id -u)/io.lampas.harness`) — 어시스턴트는
+    자기 턴에서 재시작하면 채널이 끊겨([[self-hosted-agent-server-ops]]) 직접 실행하지 않음.
+  - → 세션: [[2026-07-13-보관시-자동-기억저장]] · 배경: [[long-term-memory-architecture]]
+
 ## 커밋 이력 (2026-07-11 세션)
 
 | 커밋 | 내용 |

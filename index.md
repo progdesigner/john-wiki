@@ -16,6 +16,7 @@
 - [[2026-07-11-desktop-퀵채팅-설치-스크립트]] — desktop 퀵 채팅(Electron) launchd 설치 스크립트, 로컬 모델 결과물 실행불가 → 고급 모델 재작성, git 도구·재시작 스크립트
 - [[2026-07-12-하네스-뜻-질문]] — "하네스가 뭐야" quick 채팅 1왕복. 일반 사전식 답변(lampas 맥락 인식 못함) → quick-chat 경로에 AI_CONTEXT.md/장기기억 미주입 정황
 - [[2026-07-13-람파스-누적운영기억-이관]] — 람파스 auto-memory 13개(운영 함정·피드백)를 위키로 이관. Google 401 근본원인(env-empty-shadow) 규명, MCP 브리지·naver-blog-mcp·rapid-mlx launchd 정리
+- [[2026-07-13-보관시-자동-기억저장]] — 대화 보관(🗄) 시 memory-ingest 자동 큐잉 구현. rememberedAt 멱등 게이트·이동후 경로 함정. 위키 저장 진입점 3개로 확장
 
 ## Entities
 
