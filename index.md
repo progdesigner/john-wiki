@@ -19,6 +19,7 @@
 - [[2026-07-13-보관시-자동-기억저장]] — 대화 보관(🗄) 시 memory-ingest 자동 큐잉 구현. rememberedAt 멱등 게이트·이동후 경로 함정. 위키 저장 진입점 3개로 확장
 - [[2026-07-13-모델별-시간당-코딩비용]] — Claude Code 1시간 코딩 시 모델별 API 종량제 비용 추정 (캐싱이 비용 좌우, 구독 vs 종량제) 1왕복
 - [[2026-07-13-블로그-ai기억글-해시태그]] — 네이버 블로그 SEO 태그 30개 추천. 대상 글이 곧 이 위키 아키텍처 공개 연재(블로그 study-ai-what). 블로그의 recall 3층 주장 vs 기존 "방법 C 미완" 관찰 모순 기록
+- [[2026-07-14-은행환불-거래처매칭]] — 은행 거래내역·프랑스 와인 인보이스 이미지 해석, 환불액 vs 인보이스 합계 대조(6,948.60 차액 미해소), 거래처 영어 회신 초안. 하네스를 업무 비서로 사용
 
 ## Entities
 
@@ -30,6 +31,7 @@
 - [[progdesigner]] — 개발자·소스 공급자, 맥미니 운용
 - [[cwc-commerce]] — 씨더블유씨커머스 유한회사, 위키/제품군 배경 회사 "CWC" (대표 이용욱/John Lee, 엘레망 광화문 임차)
 - [[sylvan-korea]] — CWC 계열사, 공유오피스 계약 2026-09 종료 → 엘레망 광화문 일부 공간 공동 사용 검토
+- [[cwc-lab-singapore]] — CWC LAB PTE. LTD, 싱가포르 계열법인. 프랑스 보르도 와인 수입 매수 주체(EUR)
 - [[dongwon-building]] — 동원빌딩/동원리소스 서울지점, 엘레망 광화문 사무실 임대인·관리 주체
 - [[rapid-mlx]] — Apple Silicon 로컬 LLM 서버(vllm-mlx), 하네스 "Local" 프로바이더. launchd `io.lampas.rapidmlx` KeepAlive 상주
 - [[naver-blog-mcp]] — 네이버 블로그 자동 발행 MCP(Playwright). 본문 순수 텍스트만·SRT 쿠키 ~24h 만료
@@ -47,6 +49,7 @@
 - [[local-llm-on-apple-silicon]] — Apple Silicon 로컬 LLM: 모델크기·양자화·백엔드(Metal/MLX/CPU), Rapid-MLX vs llama.cpp vs Ollama
 - [[use-area-personas]] — 하네스 사용 영역별 전문가 페르소나(6영역) + "일반" 정책 비어있음→채움 변천
 - [[harness-mcp-bridge]] — 하네스가 `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출 (mcpBridge, cwd 우회·PATH·재시작 반영)
+- [[harness-as-business-assistant]] — 하네스를 코딩 외 업무 비서로 사용 (이미지 첨부 해석·인보이스 대조·대외 이메일 초안)
 
 ## Skills
 
@@ -67,3 +70,4 @@
 - [[self-hosted-agent-server-ops]] — 에이전트 턴을 호스팅하는 서버 재시작·종료·디버그 안전 규칙(stray-port·restart-kills-own-turn·pkill-prod)
 - [[naver-blog-mcp-posting]] — naver-blog-mcp 발행: 순수 텍스트 본문·SRT 세션 갱신(headed 캡차)·서버 버그 대응
 - [[naver-blog-tag-seo]] — 네이버 블로그 SEO 태그 30개 생성(본문 근거 필수·대표+롱테일 배분·무관 인기태그 저품질 위험)
+- [[bank-refund-invoice-reconciliation]] — 애매한 은행 환입/입금을 인보이스와 대조·검증하고 거래처 회신 잡기(코드 단정 금지·차액 명시·통화 확인)

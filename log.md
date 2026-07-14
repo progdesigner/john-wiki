@@ -156,3 +156,15 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - AI_CONTEXT.md 갱신: [[progdesigner]] 줄에 블로그 연재 맥락 추가(태그 요청 반복). <40줄 유지.
 - index.md 갱신 (세션1·스킬1 추가). 참고: claude-model-pricing 세션/토픽은 병행 ingest가 이미 반영.
 - 특이사항: 블로그 서술을 근거 있는 사실이 아니라 **사용자 저작 주장**으로 취급 — recall 구현 여부는 채팅 실측 전까지 미확정으로 명시.
+
+## [2026-07-14] ingest | 은행 환불 거래처 매칭 (source: quick-5bc3f296-7b29-4d41-ba98-77eabe76180a.md)
+- 소스: raw/conversations/2026-07-14-은행환불-거래처매칭.md (원본 archive/quick-5bc3f296-...md 복사)
+- quick 채팅. 코딩 아님 — [[lampas]]를 업무 비서로 사용. 은행 거래내역·프랑스 와인 프로포마 인보이스 이미지 해석 + 거래처 영어 회신 초안.
+- 핵심: "지급 후 환불 요청" 사실 확정 → PRINC CR/T/W FR ADV = 프랑스 거래처 선지급 환입(90,377.76)으로 해석. 단 인보이스 합계 83,429.16(Mestrezat 30,255.96 + Mähler-Besse 53,173.20)과 6,948.60 차액 미해소 → 확신도 하향, 통화 단위·거래처명 되묻기로 마감.
+- 세션 신설: [[2026-07-14-은행환불-거래처매칭]]
+- 엔티티 신설: [[cwc-lab-singapore]] (CWC LAB PTE. LTD 싱가포르, 와인 수입 매수 주체)
+- 엔티티 갱신: [[cwc-commerce]] (계열 구조 LAB/COMMERCE 병기·보르도 와인 수입 사업 추가)
+- 토픽 신설: [[harness-as-business-assistant]] (전대 메일 세션과 함께 코딩 외 사용 패턴 묶음)
+- 스킬 신설: [[bank-refund-invoice-reconciliation]]
+- index.md 갱신 (세션1·엔티티1·토픽1·스킬1). AI_CONTEXT.md 변경 없음(업무 맥락은 엔티티/토픽으로 충분, 40줄 유지). 
+- 특이사항: 은행 코드·계좌번호 해석은 전부 추정(비표준 표기)·미검증. SRKK/Scott 별건은 맥락 미상으로 세션에 추적 표시만.

@@ -16,7 +16,11 @@ updated: 2026-07-10
   지하 1층 "엘레망"을 운영, 광화문 사무실을 **임차** 중 (임대인/관리: [[dongwon-building]]).
 - 연락처(서명): m +82 10 8925 4658 · t +82 70 8657 1765 · e john@cwc.sg.
 - 계열사: [[sylvan-korea]] — 사무실 일부 공간 공동 사용 검토 대상.
+  - **[[cwc-lab-singapore]]** (CWC LAB PTE. LTD, 싱가포르) — 2026-07-14 세션에서 확인. 사용자가
+    "CWC 계열사(LAB/COMMERCE)"로 병기 → KR **COMMERCE**와 SG **LAB**이 병존하는 계열 구조.
+- 사업: **프랑스 보르도 와인 수입** — 매수 주체는 싱가포르 [[cwc-lab-singapore]], 통화 EUR,
+  매도처 네고시앙 Mestrezat·Mähler-Besse (2026-07-14 세션).
 
 ## 관련
-- 세션: [[2026-07-10-전대-동의-메일-작성]]
-- 임대인: [[dongwon-building]] · 계열사: [[sylvan-korea]] · 사람: [[progdesigner]]
+- 세션: [[2026-07-10-전대-동의-메일-작성]], [[2026-07-14-은행환불-거래처매칭]]
+- 임대인: [[dongwon-building]] · 계열사: [[sylvan-korea]], [[cwc-lab-singapore]] · 사람: [[progdesigner]]
