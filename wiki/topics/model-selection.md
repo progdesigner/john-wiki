@@ -29,6 +29,7 @@ claude-opus-4-1-20250805, claude-opus-4-5-20251101, claude-sonnet-4-5-20250929
 ## 권장
 - 최고 성능: `claude-opus-4-8` / 비용 절감: `claude-sonnet-5`.
 - 코드 고정이 필요하면 `.env`의 `HARNESS_MODEL`을 chat/runner 양쪽에서 읽게 배선.
+- 모델별 API 단가·Claude Code 시간당 비용 추정은 [[claude-model-pricing]] 참조 (기본 Opus 4.8 = 시간당 ~$10~25).
 
 ## 로컬→고급 모델 수동 에스컬레이션 (2026-07-11 관찰)
 로컬 LLM(`qwen3.5-35b-8bit`, [[local-llm-on-apple-silicon]])이 첫 시도를 하고, 결과가 부실하면

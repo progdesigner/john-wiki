@@ -17,6 +17,7 @@
 - [[2026-07-12-하네스-뜻-질문]] — "하네스가 뭐야" quick 채팅 1왕복. 일반 사전식 답변(lampas 맥락 인식 못함) → quick-chat 경로에 AI_CONTEXT.md/장기기억 미주입 정황
 - [[2026-07-13-람파스-누적운영기억-이관]] — 람파스 auto-memory 13개(운영 함정·피드백)를 위키로 이관. Google 401 근본원인(env-empty-shadow) 규명, MCP 브리지·naver-blog-mcp·rapid-mlx launchd 정리
 - [[2026-07-13-보관시-자동-기억저장]] — 대화 보관(🗄) 시 memory-ingest 자동 큐잉 구현. rememberedAt 멱등 게이트·이동후 경로 함정. 위키 저장 진입점 3개로 확장
+- [[2026-07-13-모델별-시간당-코딩비용]] — Claude Code 1시간 코딩 시 모델별 API 종량제 비용 추정 (캐싱이 비용 좌우, 구독 vs 종량제) 1왕복
 
 ## Entities
 
@@ -35,6 +36,7 @@
 ## Topics
 
 - [[model-selection]] — 하네스 요청별 모델 선택 (기본 claude-opus-4-8, Claude+OpenAI)
+- [[claude-model-pricing]] — Claude 모델 API 단가·Claude Code 시간당 코딩 비용 추정 (캐싱 중심 산정, 종량제 vs 구독)
 - [[harness-queue-vs-chat]] — 채팅(즉시 실행) vs 큐(백그라운드 적재) 두 경로 구분
 - [[instagram-reference-integration]] — Instagram 레퍼런스 이미지 통합 (소스 3종·프록시·캐러셀·폐기된 오래된순)
 - [[long-term-memory-architecture]] — LLM 장기기억: 저장≠조회, 3계층 저장 전략, 조회 연결 3방법
