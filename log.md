@@ -144,3 +144,15 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 토픽 갱신: [[model-selection]] (권장 절에 [[claude-model-pricing]] 링크·Opus 4.8 시간당 ~$10~25 추가)
 - index.md 갱신 (세션1·토픽1 추가)
 - 특이사항: 신규 엔티티/스킬 없음. AI_CONTEXT.md 변경 없음(일회성 정보성 질의, 핵심 사실 불변). 단가·프로모션 종료일은 어시스턴트 답변 시점 값이라 낡을 수 있음 → 세션·토픽에 "2026-07-13 기준" 명시. 실측 집계는 제안만 하고 미실행.
+
+## [2026-07-14] ingest | 블로그 AI기억글 해시태그 추천 (source: 8f549187-c6a3-4e80-984c-c308c581aee9.md)
+- 소스: raw/conversations/2026-07-13-블로그-ai기억글-해시태그.md (원본 archive/8f549187-...md 복사). 한 트랜스크립트 두 주제.
+- Part1(기억 이관 트리거)는 이미 [[2026-07-13-람파스-누적운영기억-이관]]에 정리됨 — 여기선 하네스 측 실행 방식(작업폴더 밖·위키 못 읽음→memory-ingest 잡, queue/*.processing→done/failed 폴링)만 세션에 보강.
+- Part2(고유): 네이버 블로그 SEO 태그 30개 추천. 대상 글이 곧 이 위키/[[lampas]] 장기기억 아키텍처의 **공개 연재글**(블로그 `study-ai-what`, 글 224345496699).
+- 세션 신설: [[2026-07-13-블로그-ai기억글-해시태그]]
+- 스킬 신설: [[naver-blog-tag-seo]] (본문 근거 필수·대표+핵심+롱테일 배분·무관 인기태그 저품질 위험·URL만이면 본문 요청)
+- 엔티티 갱신: [[progdesigner]](공개 채널 절 신설 — 네이버 블로그 study-ai-what 연재), [[naver-blog-mcp]](발행 전용·글 읽기 기능 없음 재확인, 대상 블로그 config.NAVER_BLOG_ID=study-ai-what)
+- 토픽 갱신: [[long-term-memory-architecture]](블로그의 recall 3층 구현 주장 vs 2026-07-11~12 "방법 C 미완" 관찰 **모순 병기** — 로컬 LLM search/read/list_memory 도구·corpus 요약 스트리밍 API·5:30 크론·주간 lint는 사용자 공개 서술, 미검증)
+- AI_CONTEXT.md 갱신: [[progdesigner]] 줄에 블로그 연재 맥락 추가(태그 요청 반복). <40줄 유지.
+- index.md 갱신 (세션1·스킬1 추가). 참고: claude-model-pricing 세션/토픽은 병행 ingest가 이미 반영.
+- 특이사항: 블로그 서술을 근거 있는 사실이 아니라 **사용자 저작 주장**으로 취급 — recall 구현 여부는 채팅 실측 전까지 미확정으로 명시.

@@ -1,7 +1,7 @@
 ---
 tags: [entity, tool, mcp, playwright, naver, automation]
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-07-14
 ---
 # naver-blog-mcp
 
@@ -12,6 +12,12 @@ updated: 2026-07-13
 - 저장 세션: `playwright-state/auth.json` (로그인 쿠키 영속).
 - 편의 래퍼: `tools/post_to_naver_blog.py --title --content-file(.txt) --tags`
 - 발행 절차·함정 총정리: [[naver-blog-mcp-posting]]
+- 대상 블로그: `[[progdesigner]]`의 `study-ai-what`(`config.NAVER_BLOG_ID`). → 공개 연재 [[long-term-memory-architecture]]
+
+## 발행 전용 — 글 읽기 기능 없음 (2026-07-13 재확인)
+MCP는 **발행(작성) 도구만** 있고 **기존 글을 읽어오는 도구가 없다**. 따라서 특정 글의 본문을 확인해야
+하는 작업(예: 그 글의 SEO 태그 추천)에서 URL만으로는 내용을 못 가져온다 — 네이버가 외부 크롤(WebFetch)도
+차단하므로, 본문이 필요하면 **사람에게 직접 붙여받아야** 한다. → [[naver-blog-tag-seo]]
 
 ## 핵심 제약 — 본문은 순수 텍스트만 (plaintext-only)
 
@@ -40,5 +46,5 @@ updated: 2026-07-13
 
 ## 관련
 - 호스트: [[lampas-harness]] (노출 경로: [[harness-mcp-bridge]])
-- 스킬: [[naver-blog-mcp-posting]]
-- 세션: [[2026-07-13-람파스-누적운영기억-이관]]
+- 스킬: [[naver-blog-mcp-posting]] · [[naver-blog-tag-seo]]
+- 세션: [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-13-블로그-ai기억글-해시태그]]

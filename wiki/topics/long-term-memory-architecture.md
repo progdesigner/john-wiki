@@ -1,7 +1,7 @@
 ---
 tags: [topic, long-term-memory, memory-provider, context-injection, rag]
 created: 2026-07-09
-updated: 2026-07-12
+updated: 2026-07-14
 ---
 # 장기기억 아키텍처 (LLM long-term memory)
 
@@ -60,6 +60,20 @@ updated: 2026-07-12
 - 즉 저장 계층(john-wiki에 이력 축적)은 상당히 자동화됨. 남은 병목은 여전히 **방법 C(능동 조회 tool)** —
   쌓인 이력을 어시스턴트가 채팅 중 검색해 읽는 부분.
 
+## 사용자 공개 서술 vs 관찰 (2026-07-13 블로그)
+
+`[[progdesigner]]`가 네이버 블로그 `study-ai-what`에 이 아키텍처를 **공개 연재**하며 서술한 내용
+([[2026-07-13-블로그-ai기억글-해시태그]]). 이 위키의 관찰과 **부분적으로 어긋나므로** 병기한다:
+
+- 블로그(사용자, 2026-07-13) 주장: 회수(recall)가 **3층으로 이미 동작** — (1) AI_CONTEXT.md 상시 주입,
+  (2) index.md 기반 능동 조회로 **로컬 LLM(Rapid-MLX)이 `search_memory`/`read_memory`/`list_memory`
+  읽기 전용 MCP 3도구**로 위키를 직접 검색, (3) **위키 corpus 전체를 로컬 모델에 넘겨 요약을 스트리밍**하는
+  별도 API. 자동화는 **매일 새벽 5:30 launchd 크론** ingest + **주 1회 `memory-lint`**.
+- 위 관찰(2026-07-11~12 채팅): **방법 C(능동 조회 tool)는 미완**으로 기록됨(위 "구현 진행 상태" 절).
+- 해석: 블로그의 (2)·(3)은 **로컬 LLM 경로에 한정**한 구현이거나, 지향/설계의 서술일 수 있다. Claude
+  채팅 경로에서 방법 C가 실제로 동작하는지는 **여전히 미검증** — 실측 재확인 필요. (5:30 크론·주간 lint는
+  기존 "야간 자동 ingest" 서술을 시각·주기까지 구체화한 것.)
+
 ## 이 위키(john-wiki)와의 관계
 
 이 저장소 자체가 이 아키텍처의 B/C 계층 구현체다. CLAUDE.md의 ingest/query 워크플로가
@@ -67,6 +81,6 @@ updated: 2026-07-12
 `raw/` + `wiki/`가 검색 대상 코퍼스(C) 역할을 한다.
 
 ## 관련
-- 세션: [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-13-보관시-자동-기억저장]]
+- 세션: [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-13-보관시-자동-기억저장]] · [[2026-07-13-블로그-ai기억글-해시태그]]
 - 엔티티: [[john-wiki]] · [[lampas-harness]] · [[progdesigner]]
 - 스킬: [[wiki-memory-provider-integration]]

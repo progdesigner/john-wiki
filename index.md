@@ -18,6 +18,7 @@
 - [[2026-07-13-람파스-누적운영기억-이관]] — 람파스 auto-memory 13개(운영 함정·피드백)를 위키로 이관. Google 401 근본원인(env-empty-shadow) 규명, MCP 브리지·naver-blog-mcp·rapid-mlx launchd 정리
 - [[2026-07-13-보관시-자동-기억저장]] — 대화 보관(🗄) 시 memory-ingest 자동 큐잉 구현. rememberedAt 멱등 게이트·이동후 경로 함정. 위키 저장 진입점 3개로 확장
 - [[2026-07-13-모델별-시간당-코딩비용]] — Claude Code 1시간 코딩 시 모델별 API 종량제 비용 추정 (캐싱이 비용 좌우, 구독 vs 종량제) 1왕복
+- [[2026-07-13-블로그-ai기억글-해시태그]] — 네이버 블로그 SEO 태그 30개 추천. 대상 글이 곧 이 위키 아키텍처 공개 연재(블로그 study-ai-what). 블로그의 recall 3층 주장 vs 기존 "방법 C 미완" 관찰 모순 기록
 
 ## Entities
 
@@ -65,3 +66,4 @@
 - [[env-empty-var-shadows-dotenv]] — 새 API 키가 기능/목록에 안 뜰 때: 셸의 빈 env가 `.env` 값을 가리는지 진단·수정
 - [[self-hosted-agent-server-ops]] — 에이전트 턴을 호스팅하는 서버 재시작·종료·디버그 안전 규칙(stray-port·restart-kills-own-turn·pkill-prod)
 - [[naver-blog-mcp-posting]] — naver-blog-mcp 발행: 순수 텍스트 본문·SRT 세션 갱신(headed 캡차)·서버 버그 대응
+- [[naver-blog-tag-seo]] — 네이버 블로그 SEO 태그 30개 생성(본문 근거 필수·대표+롱테일 배분·무관 인기태그 저품질 위험)
