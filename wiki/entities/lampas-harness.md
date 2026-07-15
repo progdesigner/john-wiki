@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, claude-agent-sdk, typescript]
 created: 2026-07-07
-updated: 2026-07-13
+updated: 2026-07-15
 ---
 # lampas-harness
 
@@ -84,6 +84,25 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
     자기 턴에서 재시작하면 채널이 끊겨([[self-hosted-agent-server-ops]]) 직접 실행하지 않음.
   - → 세션: [[2026-07-13-보관시-자동-기억저장]] · 배경: [[long-term-memory-architecture]]
 
+## 추가 기능 (2026-07-15 관찰)
+
+- **프로젝트 스킬 시스템 + 스킬 번들** — 커밋 `ef36c5f`에서 프로젝트 스킬 시스템과 대량의 스킬 번들이
+  추가됨. 어시스턴트(Skill 도구)로 호출 가능한 스킬이 크게 늘었다:
+  - **마케팅 계열**(가장 많음): 전략/기획(product-marketing, marketing-plan, marketing-ideas,
+    marketing-council, marketing-psychology, marketing-loops, competitor-profiling, competitors),
+    콘텐츠/카피(content-strategy, copywriting, copy-editing, lead-magnets, free-tools),
+    퍼널(signup, onboarding, cro, popups, paywalls, pricing, churn-prevention, referrals),
+    채널 실행(ads, ad-creative, cold-email, emails, social, sms, video, image, public-relations,
+    co-marketing, community-marketing, prospecting, revops, sales-enablement),
+    SEO(seo-audit, ai-seo, schema, site-architecture, programmatic-seo, directory-submissions),
+    측정(analytics, ab-testing, customer-research, aso).
+  - **Remotion(영상 제작)**: remotion-best-practices/-captions/-create/-interactivity/-markup/
+    -render/-saas, mediabunny.
+  - **개발/운영**: deep-research, dataviz, update-config, keybindings-help, verify, code-review,
+    simplify, fewer-permission-prompts, loop, schedule, claude-api, run, init, review, security-review.
+  - → 이 스킬들이 [[lampas]]를 코딩 외 [[harness-as-business-assistant]](특히 마케팅 컨설팅) 도구로
+    확장한다. 첫 실사용: [[2026-07-15-올리브유-마케팅-포지셔닝]].
+
 ## 커밋 이력 (2026-07-11 세션)
 
 | 커밋 | 내용 |
@@ -136,7 +155,7 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   → [[env-empty-var-shadows-dotenv]]
 
 ## 관련
-- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-올리브유-마케팅-포지셔닝]]
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
 - 연동 대상 장기기억: [[john-wiki]] (제안).
 - 상주 서비스·도구: [[rapid-mlx]] (로컬 LLM) · [[naver-blog-mcp]] (외부 MCP).
