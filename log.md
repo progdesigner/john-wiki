@@ -178,3 +178,15 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - AI_CONTEXT.md 갱신: 하네스 스킬 번들 보유, 코딩 외 업무 비서 사용 패턴 한 줄 추가. 28줄(<40 준수).
 - index.md 갱신 (세션1 추가).
 - 특이사항: 신규 엔티티/토픽/스킬 없음. 마케팅 방법론이 얇고 세션이 스킬 실행 전 끊겨 별도 스킬 미추출 — 방법론은 토픽에 기록으로 충분. 스킬 카탈로그는 어시스턴트 답변 시점(2026-07-15) 목록이라 이후 변동 가능.
+
+## [2026-07-15] ingest | 과금 모드 토글·구독 컨텍스트 표시 (source: 4d8a9cd6-2a96-4692-93b5-67936c472cf9.md)
+- 소스: raw/conversations/2026-07-15-과금모드-토글-컨텍스트표시.md (원본 4d8a9cd6-...md 복사)
+- 세션: [[2026-07-15-과금모드-토글-컨텍스트표시]] (약 6왕복 코딩, 2026-07-15 01:17~01:40). [[lampas-harness]] 웹 채팅에 Claude 과금 모드(API vs 구독 OAuth) 토글 + 구독 모드 컨텍스트 잔여 표시 구현.
+- 핵심 사실: 하네스 Claude 실행은 **기본 Claude Code 구독(OAuth, CLAUDE_CODE_OAUTH_TOKEN) 과금** — query()가 apiKey 미전달, SDK Options에 apiKey 없음(env가 통째 교체). init 메시지 apiKeySource='oauth'로 판별. stream.getContextUsage()/usage_EXPERIMENTAL로 컨텍스트·5h/7d 한도 조회.
+- 구현: TurnOpts.apiBilling + claudeAuthEnv() 헬퍼(env에서 원치 않는 자격증명 제거), apiKeySource/getContextUsage 캡처→UsageTotals.billingMode/contextWindow, /api/models에 anthropicApiKeyConfigured, 프론트 "API 사용" 체크박스(Claude 모델 한정)·구독 모드 컨텍스트 잔여% 표시.
+- 엔티티 갱신: [[lampas-harness]] (2026-07-15 과금모드 토글 절 신설, 인증 줄 정정 — 기존 "ANTHROPIC_API_KEY 직접 키(구독 아님)"와 **모순** 명시)
+- 토픽 갱신: [[claude-model-pricing]](하네스 기본=구독 과금 명시), [[model-selection]](과금 모드 토글 절)
+- 스킬 신설: [[sdk-claude-code-vs-api-billing]]
+- AI_CONTEXT.md 갱신: 확정된 결정에 하네스 기본 구독 과금·토글 한 줄 추가 (30줄, <40 준수)
+- index.md 갱신 (세션1·스킬1)
+- 특이사항: .env의 ANTHROPIC_API_KEY 주석 상태가 세션 내에서 진술 엇갈림(01:17 주석됨 ↔ 01:40 해제됨) → 재확인 필요로 세션/엔티티에 기록. "Stream closed" 쓰기 도구 끊김 재발(새로고침으로 복구). 서버 재시작은 사용자 몫으로 남김.

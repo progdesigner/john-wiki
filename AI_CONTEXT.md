@@ -1,7 +1,7 @@
 ---
 tags: [ai-context, summary]
 created: 2026-07-12
-updated: 2026-07-14
+updated: 2026-07-15
 ---
 # AI_CONTEXT — 핵심 기억 요약
 
@@ -23,6 +23,7 @@ updated: 2026-07-14
 - 로컬 LLM은 Rapid-MLX 상주 ([[local-llm-rapidmlx-install]]).
 - 사용자 대면 이름은 **"람파스"**로 표기 (내부 식별자 env `HARNESS_*`·저장소명 `lampas-harness`는 유지). → [[lampas]]
 - 2026-07-12: 위키 회수(recall) 연결 — AI_CONTEXT.md 상시 주입 + index.md 능동 조회 + 스킬 카탈로그 노출 + 야간 자동 ingest.
+- 2026-07-15: 하네스 Claude 실행은 **기본 Claude Code 구독(OAuth) 과금** (API 종량 아님). 대화별 "API 사용" 토글로 전환 가능, 구독 모드는 컨텍스트 잔여율 표시. → [[sdk-claude-code-vs-api-billing]]
 
 ## 업무 맥락
 - CWC 엘레망 광화문 사무실: [[sylvan-korea]] 공간 공동 사용(전대) 동의 절차 진행 중 (2026-07 기준), 임대인 측 [[dongwon-building]].

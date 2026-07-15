@@ -1,7 +1,7 @@
 ---
 tags: [topic, claude-agent-sdk, model, config]
 created: 2026-07-07
-updated: 2026-07-13
+updated: 2026-07-15
 ---
 # 하네스 모델 선택
 
@@ -46,6 +46,12 @@ claude-opus-4-1-20250805, claude-opus-4-5-20251101, claude-sonnet-4-5-20250929
 키를 가리는** 함정을 먼저 의심하라. `GOOGLE_API_KEY=`(빈 export) → dotenv가 `.env` 값을 안 넣음 →
 `googleModels()`가 `[]` 반환 → Google 그룹이 통째로 사라진다. 2026-07-08~11 미해결 "Google Models 401"의
 유력한 근본 원인. 진단·수정: [[env-empty-var-shadows-dotenv]].
+
+## Claude 과금 모드 토글 (2026-07-15)
+Claude 모델을 고르면 입력창 하단에 "API 사용" 체크박스가 뜬다 — 켜면 API 종량, 끄면 Claude Code
+구독(OAuth) 과금. 하네스 기본은 **구독(OAuth)**이다. 구독 모드에선 컨텍스트 모달이 비용($) 대신
+컨텍스트 잔여율을 보인다. 판별·전환 절차: [[sdk-claude-code-vs-api-billing]] · 비용 비교: [[claude-model-pricing]].
+→ [[2026-07-15-과금모드-토글-컨텍스트표시]]
 
 ## 관련
 - [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]] / [[2026-07-13-람파스-누적운영기억-이관]]

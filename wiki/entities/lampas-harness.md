@@ -13,7 +13,8 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
 - 언어/런타임: TypeScript, `@anthropic-ai/claude-agent-sdk@0.3.201`
 - 실행: 맥미니, UI(웹) `8787` + API `3787` 두 포트, `0.0.0.0` 바인딩, LAN `http://192.168.0.5:8787`. (포트 확인: [[2026-07-11-desktop-퀵채팅-설치-스크립트]])
 - 원격 접속: 2026-07-06 세션 기준 **Tailscale 사설 VPN 권장**(자기 기기끼리 `100.x` 연결, 공유기 포트포워딩 불필요·비권장). 당시 실제 설치는 미진행. → [[2026-07-06-lampas-harness-구축]]
-- 인증: `HARNESS_TOKEN` (비-localhost 접속 시 필수), `ANTHROPIC_API_KEY` 직접 키(구독 로그인 아님). OpenAI 키도 보유.
+- 인증: `HARNESS_TOKEN` (비-localhost 접속 시 필수). OpenAI 키도 보유.
+  - **Claude 실행 과금**: 2026-07-15 코드 확인 결과 **기본은 Claude Code 구독(OAuth, `CLAUDE_CODE_OAUTH_TOKEN`) 과금**이다 — `query()`가 `apiKey`를 안 넘겨 SDK가 `ANTHROPIC_API_KEY`가 없으면 OAuth로 폴백. `ANTHROPIC_API_KEY`는 모델 목록 조회에만 쓰였음. ⚠️ 2026-07-06~07 기록의 "`ANTHROPIC_API_KEY` 직접 키(구독 로그인 아님)"와 **모순** — 그 사이 인증 방식이 바뀌었거나 초기 기록이 부정확. (`.env`의 API 키 주석 상태는 2026-07-15 세션 내에서도 진술이 엇갈려 재확인 필요.) → [[sdk-claude-code-vs-api-billing]] · [[2026-07-15-과금모드-토글-컨텍스트표시]]
 - 권한 모드: 기본 `bypassPermissions`(맥 전체 제어) — 그래서 공개 노출은 위험.
 
 ## 아키텍처 (관찰된 범위)
@@ -103,6 +104,20 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   - → 이 스킬들이 [[lampas]]를 코딩 외 [[harness-as-business-assistant]](특히 마케팅 컨설팅) 도구로
     확장한다. 첫 실사용: [[2026-07-15-올리브유-마케팅-포지셔닝]].
 
+## 추가 기능 (2026-07-15 세션 — 과금 모드 토글)
+
+- **API 과금 vs 구독 과금 토글** — Claude 모델 실행을 Claude Code 구독(OAuth)과 API 종량 중 골라 쓰게.
+  - `src/server.ts`: `TurnOpts.apiBilling` 추가(`/api/chat` 파싱), **`claudeAuthEnv()` 헬퍼** 신설 —
+    서브프로세스 env에서 `ANTHROPIC_API_KEY` 또는 `CLAUDE_CODE_OAUTH_TOKEN` 중 원치 않는 쪽을 지워
+    인증 강제(SDK `Options`엔 `apiKey`가 없고 `env`가 통째 교체라 이 방식). API 모드인데 키 없으면 에러.
+  - init 메시지의 `apiKeySource`, `stream.getContextUsage()`를 캡처해 `UsageTotals`에 `billingMode`/
+    `contextWindow`로 저장. `/api/models`에 `anthropicApiKeyConfigured` 노출.
+  - `apps/web/index.html`: 입력창 하단 "API 사용" 체크박스(**Claude 모델 선택 시에만** 표시, 키 없으면 비활성,
+    `localStorage` 저장). 컨텍스트 모달(`◔ 컨텍스트`)이 **구독(oauth) 모드면 비용($) 대신 컨텍스트 잔여
+    %(잔여 토큰)** 표시, API 모드면 기존 비용 표시.
+  - 배포는 서버 재시작 필요 → 어시스턴트는 자기 턴에서 재시작 안 함([[self-hosted-agent-server-ops]]).
+  - → 세션: [[2026-07-15-과금모드-토글-컨텍스트표시]] · 스킬: [[sdk-claude-code-vs-api-billing]] · 배경: [[claude-model-pricing]]
+
 ## 커밋 이력 (2026-07-11 세션)
 
 | 커밋 | 내용 |
@@ -155,7 +170,7 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   → [[env-empty-var-shadows-dotenv]]
 
 ## 관련
-- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-올리브유-마케팅-포지셔닝]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-올리브유-마케팅-포지셔닝]] · [[2026-07-15-과금모드-토글-컨텍스트표시]]
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
 - 연동 대상 장기기억: [[john-wiki]] (제안).
 - 상주 서비스·도구: [[rapid-mlx]] (로컬 LLM) · [[naver-blog-mcp]] (외부 MCP).
