@@ -25,6 +25,7 @@
 - [[2026-07-15-아우보카사-공동구매-단가설계]] — 인플루언서 공동구매 단가표 사진 1장 해석(1왕복 quick). 할인 티어 설계 의도·인플루언서 수익 10%+·시뮬레이션(실질 병당 판매가) 풀이
 - [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] — Works 12개 저장소 일괄 최신화 + lampas-system(=lampas-studio) 로컬 미커밋 18파일을 원격 9커밋(리팩터) 위로 충돌 없이 rebase·push
 - [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] — cwc-system에 elevino DB를 그대로 재사용하는 멤버십 검색+크레딧 지급/차감 관리자 기능 설계 완료, 구현 착수 직전 하네스 권한 채널 장애로 중단(실제 구현 미완)
+- [[2026-07-15-데스크톱-file메뉴-new-window]] — lampas-harness desktop(Electron) File 메뉴에 New Window(Cmd+Shift+N) 추가 + 쌓여있던 변경사항 3커밋으로 push
 
 ## Entities
 

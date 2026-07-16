@@ -118,6 +118,16 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   - 배포는 서버 재시작 필요 → 어시스턴트는 자기 턴에서 재시작 안 함([[self-hosted-agent-server-ops]]).
   - → 세션: [[2026-07-15-과금모드-토글-컨텍스트표시]] · 스킬: [[sdk-claude-code-vs-api-billing]] · 배경: [[claude-model-pricing]]
 
+## 추가 기능 (2026-07-15 세션 — desktop File 메뉴 New Window)
+
+- **`apps/desktop/main.js`(Electron)에 File 메뉴 신설** — `createNewWindow()`가 mainWin과 동일한
+  스타일(숨긴 타이틀바, `#1F2127` 배경)로 `index.html`을 로드하는 독립 창을 연다. mainWin과 달리
+  닫으면 그냥 닫힘(앱 상주는 mainWin이 담당). 단축키 **`Cmd+Shift+N`**(`Cmd+N`은 `index.html` 내부
+  "새 대화"와 충돌 회피). `app.whenReady()`에서 `Menu.setApplicationMenu(buildMenu())` 호출.
+  → 세션: [[2026-07-15-데스크톱-file메뉴-new-window]]
+- 같은 세션에서 쌓여있던 변경사항을 3커밋으로 정리해 push: `bc7d150`(quick.html 사진 첨부),
+  `5c737bd`(대화별 API 과금 토글 — [[2026-07-15-과금모드-토글-컨텍스트표시]] 구현분), `085faa2`(이 기능).
+
 ## 커밋 이력 (2026-07-11 세션)
 
 | 커밋 | 내용 |
@@ -170,7 +180,7 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   → [[env-empty-var-shadows-dotenv]]
 
 ## 관련
-- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-올리브유-마케팅-포지셔닝]] · [[2026-07-15-과금모드-토글-컨텍스트표시]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-올리브유-마케팅-포지셔닝]] · [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-데스크톱-file메뉴-new-window]]
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
 - 연동 대상 장기기억: [[john-wiki]] (제안).
 - 상주 서비스·도구: [[rapid-mlx]] (로컬 LLM) · [[naver-blog-mcp]] (외부 MCP).

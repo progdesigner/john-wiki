@@ -228,3 +228,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: 이 세션은 실제 구현이 완료되지 않은 채 끝남 — 다음 세션에서 하네스 권한 상태를 먼저 확인하고
   이어서 구현해야 함. 부수적으로 cwc-system 프로덕션 env 파일에 DB 비밀번호·JWT 시크릿이 평문 커밋되어
   있는 보안 이슈가 발견됨(미조치, cwc-system 엔티티 페이지에 기록).
+
+## [2026-07-16] ingest | 데스크톱 File 메뉴 New Window + 3커밋 push (source: 4d3cb780-11be-4c55-8f53-94ea35644849.md)
+- 원본 세션(대화 발생 2026-07-15 06:40~06:45 UTC)을 raw/conversations/2026-07-15-데스크톱-file메뉴-new-window.md로 보관.
+- wiki/sessions/2026-07-15-데스크톱-file메뉴-new-window.md 신규 작성.
+- wiki/entities/lampas-harness.md 갱신: "추가 기능 (2026-07-15 세션 — desktop File 메뉴 New Window)" 섹션 신설
+  (apps/desktop/main.js Cmd+Shift+N New Window), 커밋 3건(bc7d150·5c737bd·085faa2) 기록, 관련 세션 링크 추가.
+- index.md 갱신 (세션 1건 추가). 엔티티/토픽/스킬 신규 없음 — 기존 lampas-harness·desktop 범위 내 소규모 기능 추가로 판단.
+- AI_CONTEXT.md 갱신 없음 — 소규모 기능 세션이라 40줄 예산 내 유지할 만큼 장기 핵심 사실 아님.
+- 특이사항: 커밋 5c737bd(API 과금 토글)는 [[2026-07-15-과금모드-토글-컨텍스트표시]] 세션에서 구현만 되고
+  이번 세션에서야 커밋됨 — 구현/커밋 세션 분리 사례로 기록.
