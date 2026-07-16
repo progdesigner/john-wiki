@@ -1,7 +1,7 @@
 ---
 tags: [topic, long-term-memory, memory-provider, context-injection, rag]
 created: 2026-07-09
-updated: 2026-07-14
+updated: 2026-07-16
 ---
 # 장기기억 아키텍처 (LLM long-term memory)
 
@@ -59,6 +59,11 @@ updated: 2026-07-14
   ingest 잡. 세 경로 모두 같은 `memory-ingest` 잡을 큐잉하고 `rememberedAt`/source 키로 중복을 막는다.
 - 즉 저장 계층(john-wiki에 이력 축적)은 상당히 자동화됨. 남은 병목은 여전히 **방법 C(능동 조회 tool)** —
   쌓인 이력을 어시스턴트가 채팅 중 검색해 읽는 부분.
+- **확인 방법(2026-07-14 사용자 재확인 세션)**: 보관이 실제로 ingest 큐잉됐는지는 API 응답의
+  `remembered: true` 값, 또는 데몬 로그의 `chat archived: <id> (memory ingest queued)` 문구로 확인
+  가능. 보관은 **동기 저장이 아니라 잡 큐 enqueue**이므로, 위키 실반영은 `memory-ingest` 잡 처리 후
+  이뤄진다 — 방금 보관했다면 로그·위키 커밋으로 완료를 별도 확인해야 한다. →
+  [[2026-07-14-보관-자동저장-확인-볼린저밴드]]
 
 ## 사용자 공개 서술 vs 관찰 (2026-07-13 블로그)
 
@@ -81,6 +86,6 @@ updated: 2026-07-14
 `raw/` + `wiki/`가 검색 대상 코퍼스(C) 역할을 한다.
 
 ## 관련
-- 세션: [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-13-보관시-자동-기억저장]] · [[2026-07-13-블로그-ai기억글-해시태그]]
+- 세션: [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-13-보관시-자동-기억저장]] · [[2026-07-13-블로그-ai기억글-해시태그]] · [[2026-07-14-보관-자동저장-확인-볼린저밴드]]
 - 엔티티: [[john-wiki]] · [[lampas-harness]] · [[progdesigner]]
 - 스킬: [[wiki-memory-provider-integration]]
