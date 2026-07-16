@@ -29,6 +29,7 @@
 - [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] — cwc-system에 elevino DB를 그대로 재사용하는 멤버십 검색+크레딧 지급/차감 관리자 기능 설계 완료, 구현 착수 직전 하네스 권한 채널 장애로 중단(실제 구현 미완)
 - [[2026-07-15-데스크톱-file메뉴-new-window]] — lampas-harness desktop(Electron) File 메뉴에 New Window(Cmd+Shift+N) 추가 + 쌓여있던 변경사항 3커밋으로 push
 - [[2026-07-15-srkk-azure-펀딩메일-번역]] — SRKK Group의 MS Azure 펀딩 영업메일 영→한 번역 요청(1왕복 quick). 대행 작성 아닌 순수 번역 사례
+- [[2026-07-15-주식투자-10만원-질문]] — "10만원으로 주식 거래 가능한가?" 개인 재무 상담 1왕복 quick. 국내/미국 주식(소수점 매매) 가능 여부·현실적 제약 답변
 
 ## Entities
 
