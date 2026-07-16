@@ -57,11 +57,13 @@
 - [[2026-07-15-대화테스트-확인]] — "내 말이 잘 들려?" 1왕복 초단타 세션(22:51:46~22:52:06). 콘텐츠 가치 없음, [[2026-07-15-gpt-realtime-음성입력-길게누르기]] 마지막 항목 직전과 시간대 겹침 — 음성입력 테스트 시도로 추정(미확정)
 - [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] — dark-system 내 dark-upbit-api/web·dark-toss-api/web 4앱을 넘나든 장시간 기능개발 세션(21:52~22:38, 7커밋). 초단타 자동제외/수동허용 전환+구조적 LLM 차단, 모바일 표 가로스크롤+확대방지, 모델 카탈로그 날짜필터, 토스 장마감 자동판단 일시정지/재개, 초기화 시 비용도 초기화. dark-system 앱 구성이 위키에 처음 노출된 세션
 - [[2026-07-15-세션상주프로세스-백그라운드작업생존-구현]] — 채팅 중 Agent/Workflow 백그라운드 작업이 턴 종료로 끊기던 버그를 대화당 상주 Claude 프로세스로 근본 수정(11:50~12:08 구현·검증) + 재시작·커밋 배포(12:27~12:28, `d20b439`). 커밋 메시지 슬래시 문자열 차단 함정 신규 발견
+- [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] — 오전 세션(11:39~12:26). lampas-system 구조 분석(문서-실제 괴리 3건)+lampas-web-ai 주요 앱 승격+기능 3종(Object 프롬프트 항목별 수정·샷 변경·채팅 되돌리기) 구현·배포·커밋+Space 설계(권한 채널 장애로 구현 전 중단). [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]](같은 날 23:11~)보다 11시간 앞선 선행 설계, 두 세션 전략 차이 병기
 
 ## Entities
 
 - [[lampas-harness]] — Claude Agent SDK 기반 웹 하네스 (맥미니 데몬, 큐, 채팅 UI)
 - [[lampas-studio]] — Lampas AI 이미지 생성 스튜디오 제품 (lampas-api + lampas-web-sdk + lampas-web-product, sdk.lampas.io)
+- [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
 - [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai)
 - [[lampas]] — 하네스 에이전트의 이름(람파스/Lampas)
 - [[john-wiki]] — progdesigner의 공통 장기기억 저장소·개인 위키 (이 저장소)

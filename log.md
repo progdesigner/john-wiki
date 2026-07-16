@@ -818,3 +818,26 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: 이 세션은 [[harness-background-process-lifecycle]]이 규명한 "턴은 배경작업보다 수명이
   짧다" 원칙이 예약 타이머·다운로드에 이어 채팅 자체에도 적용된 사례이자, 처음으로 우회(detach/서버
   내장화)가 아니라 근본 아키텍처 변경으로 해결한 사례.
+
+## [2026-07-16] ingest | lampas-system 구조 분석 + web-ai 프롬프트분할·샷변경·되돌리기 + Space 설계 (source: 2465ae9d-d81c-4e29-ad4d-aa7f7ce8513f.md)
+- 원본 보관: `raw/conversations/2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계.md`
+- 세션 신설: [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] — 2026-07-15 11:39~12:26 UTC.
+  ① lampas-system(9앱 모노레포) 구조 분석, CLAUDE.md 문서-실제 괴리 3건 발견. ② `lampas-web-ai`가
+  사용자 지정으로 주요 앱 승격, 구조 정밀 분석(actorFlow.ts 단일 2,658줄 상태머신 3개). ③ SDK의 Object
+  프롬프트 6필드 분할 구조를 web-ai에 이식(프롬프트 항목별 수정 칩), 배포(ai.lampas.io)+커밋 2건
+  (`05cda59`/`19b95e8`). ④ Object 촬영 "샷 변경" 칩 추가, 배포+커밋 `77e1b69`. ⑤ 채팅 되돌리기("이전"
+  명령+메시지별 ✏️ 재시작, 상태 스냅샷 방식) 구현, 배포+커밋 `4e0fe77`. ⑥ Space(공간) 신규 엔티티 설계
+  (category='space' 재사용안, spaceType/timeOfDay/lighting/mood/description 5필드) — 하네스 권한 채널
+  "Stream closed" 장애로 구현 착수 직전 세션 종료, **코드 변경 없음**.
+- 엔티티 신설: [[lampas-web-ai]] (구조·핵심 동작 방식·2026-07-15 기능 3종 상세)
+- 엔티티 갱신: [[lampas-studio]] (앱 구성·CLAUDE.md 괴리 3건 추가, Space 섹션에 "선행 설계와의 차이" 절
+  추가 — 이 세션의 최소변경(category 재사용) 설계가 저녁 세션의 독립 `Space` 모델 신설과 다름을 병기)
+- 세션 갱신: [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] (같은 날 23:11~ 세션 상단에 이 선행
+  세션과의 관계 참고 추가 — 시간상 앞서지만 이 세션이 그 설계를 참조하지 않고 재조사했음을 명시)
+- AI_CONTEXT.md 갱신: [[lampas-studio]] 줄에 `lampas-web-ai` 주요 앱 승격·actorFlow.ts 단일파일 위험·
+  기능 3종 배포 사실 추가. 39줄(<40 준수).
+- index.md 갱신 (세션1·엔티티1 추가)
+- 특이사항: 이 소스는 같은 날 저녁(23:11~) 세션보다 11시간 이상 앞서지만 늦게(2026-07-16) ingest됨 —
+  두 세션 모두 "Space가 코드베이스에 없다"를 독립적으로 확인했고 설계 전략이 달라 모순이 아니라 순차
+  탐색으로 기록. "Stream closed" 권한 채널 장애는 이 세션에서도 2회 재발(기존 [[lampas-harness]] 함정과
+  일치, 다음 사용자 메시지로 자연 복구) — 별도 갱신 불필요할 만큼 이미 잘 문서화된 패턴.

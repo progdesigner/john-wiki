@@ -14,6 +14,14 @@ updated: 2026-07-16
 - **로컬 폴더명 `lampas-system`**(`~/Works/lampas/lampas-system`) — `[[lampas-harness]]`의 로컬 폴더명
   `lampas-harness`와 다른 형제 폴더. 2026-07-15까지 위키의 "인접 저장소" 메모로만 존재하다 이 세션에서
   본 엔티티와 동일 저장소임이 확인됨. → [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]
+- **앱 구성**(2026-07-15 구조 분석): pnpm 워크스페이스에 Lampas 6앱(`lampas-api`, `lampas-web-sdk`,
+  `lampas-web-www`, `lampas-web-ai`, `lampas-web-admin`, `lampas-app-toss`) + Iileex 3앱(`iileex-api`,
+  `iileex-web-www`, `iileex-web-admin`) 총 9개. `lampas-api`는 `src/modules/` 19개 도메인 모듈·Prisma 모델
+  35개. **제품 CLAUDE.md 문서와 실제 코드 괴리 3건 확인**(미수정): ① 모듈 목록에 `admin`/`api-clients`/
+  `audit-logs`/`email`/`products` 누락(실제 존재), ② `lampas-web-sdk` organisms의 `references/` 디렉터리가
+  문서 구조도에 없음, ③ 루트에 `AGENTS.md`가 `CLAUDE.md`와 별도 존재. → [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]]
+- **`lampas-web-ai`가 2026-07-15부터 주요 앱**으로 승격 — 구조·기능 상세는 별도 엔티티 페이지 →
+  [[lampas-web-ai]]
 - **DB: PostgreSQL** (2026-07-15 확인 — 로컬 커밋이 잘못 가정했던 "MySQL collation" 로직을 rebase 중
   PostgreSQL 대소문자 무시 JS 비교 방식으로 교체하며 드러남).
 - 배포 스크립트: `./scripts/deploy-api.sh`, `deploy-web.sh <project>`, `deploy-app.sh <target>` — **배포는 반드시 이 스크립트로**(제품 CLAUDE.md 명문화, 2026-07-08). → `[[deploy-sandbox-pnpm-shim]]`
@@ -97,6 +105,12 @@ Actor·Object처럼 "만들어서 저장해두고 촬영에 반복 사용"할 �
   기존 Object 패턴과 동일.
 - 이 세션 시점 **web-ai/API tsc 통과·SDK esbuild 검증까지 완료, 배포는 미진행**(3개 앱 모두 배포 필요).
 - 절차 스킬 → [[clone-sibling-entity-pipeline]] · 세션 → [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]]
+- **선행 설계와의 차이**: 같은 날 11:39~12:26 세션([[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]])이
+  먼저 Space를 설계했으나(스키마 마이그레이션 없이 `category:'space'`인 `StudioObject` 재사용 + spaceType·
+  timeOfDay·lighting·mood·description 5필드 분할안) 권한 채널 장애로 구현 착수 전 중단됐다. 저녁 세션은
+  이 선행 설계를 참조하지 않고 "Space가 코드베이스에 없다"는 결론까지 처음부터 재조사했고, 실제 구현은
+  더 무거운 **독립 `Space` Prisma 모델 신설**로 갔다(위 필드 분할 대신 공간 카테고리 11종 열거형만 채택).
+  두 세션 사이 논의는 이 위키 소스로 확인 불가 — timeOfDay/lighting을 구조화 필드로 분리할지는 열린 질문.
 
 ## `lampas-web-product` — 제품 이미지 분석·마케팅 앱 (신규 앱, 2026-07-16 세션)
 
@@ -121,7 +135,9 @@ Actor·Object·Space와 별개로, **회사(Actor/Object) 엔티티 시스템과
 
 ## 관련
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
-  [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] · [[2026-07-16-lampas-web-product-신규앱-구현]]
+  [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
+  [[2026-07-16-lampas-web-product-신규앱-구현]]
+- 앱: [[lampas-web-ai]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
 - 포트폴리오 배경: [[works-project-portfolio]]
