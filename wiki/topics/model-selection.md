@@ -1,7 +1,7 @@
 ---
 tags: [topic, claude-agent-sdk, model, config]
 created: 2026-07-07
-updated: 2026-07-15
+updated: 2026-07-16
 ---
 # 하네스 모델 선택
 
@@ -53,6 +53,26 @@ Claude 모델을 고르면 입력창 하단에 "API 사용" 체크박스가 뜬�
 컨텍스트 잔여율을 보인다. 판별·전환 절차: [[sdk-claude-code-vs-api-billing]] · 비용 비교: [[claude-model-pricing]].
 → [[2026-07-15-과금모드-토글-컨텍스트표시]]
 
+## "Auto" — 난이도 자동 선택 (v0.1.25 도입, 2026-07-15 extreme 확장)
+모델 드롭다운의 "Auto — 난이도 자동 선택" 옵션. **판단은 서버(`src/server.ts`) 100% 전담**, 클라이언트는
+표시만 한다(옵션 노출 865-869행, 결과 표시 `data.auto` 1675행) — [[2026-07-15-auto모델-난이도판정-확인ux-개선]]에서
+file:line 근거로 확인.
+
+`runChatTurn()`(3300-3306행)이 auto 감지 시 `resolveAutoModel()`(716-737행) 호출, 3단계 순차 폴백:
+1. **Claude API 판정** `judgeTierClaude()`(669-690행) — `claude-haiku-4-5`(`LAMPAS_AUTO_JUDGE`로 재정의)
+2. **로컬 LLM 판정** `judgeTierLocal()`(692-714행) — rapid-mlx, 5초 타임아웃
+3. **휴리스틱 폴백** `heuristicTier()`(661-667행) — 키워드(`구현|리팩터|디버그|배포|fix|refactor|...`)·
+   메시지 길이(>300자 hard, >80자 medium)·사진 첨부(medium 이상). LLM 판정 실패해도 턴은 안 막힘.
+
+**티어→모델 매핑** (env로 재정의): easy→`claude-haiku-4-5`(`LAMPAS_AUTO_EASY`),
+medium→`claude-sonnet-5`(`LAMPAS_AUTO_MEDIUM`), hard→`claude-opus-4-8`(`LAMPAS_AUTO_HARD`),
+**extreme→`claude-fable-5`**(`LAMPAS_AUTO_EXTREME`, 2026-07-15 신설).
+
+**extreme 티어 설계 의도**: hard보다 명백히 상위(대규모 아키텍처 개편, 다중 시스템 교차 리팩터,
+프로덕션 장애 대응, 보안 설계)로 제한, 모호하면 hard 선택하도록 프롬프트에 명시(값비싼 모델 남용 방지).
+**휴리스틱 폴백은 hard까지만** — extreme은 실제 LLM 판정으로만 도달 가능, 판정 실패 안전망에서
+근거 없이 최상위 모델로 튀지 않게 하는 의도적 비대칭.
+
 ## 관련
-- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]] / [[2026-07-13-람파스-누적운영기억-이관]]
+- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]] / [[2026-07-13-람파스-누적운영기억-이관]] / [[2026-07-15-auto모델-난이도판정-확인ux-개선]]
 - [[local-llm-on-apple-silicon]] / [[env-empty-var-shadows-dotenv]]

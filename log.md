@@ -541,3 +541,26 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - index.md 갱신 (세션 1개, 엔티티 2개, 스킬 1개 추가)
 - AI_CONTEXT.md 갱신 — `dark-system`/`dark-toss-api` 발견 및 장시간 게이트 미작동 사실을 진행 중
   프로젝트 항목에 1줄 추가 (37줄, 40줄 이내 유지).
+
+## [2026-07-16] ingest | Auto 모델 난이도 판정 감사·Fable 5(extreme 티어) 추가·확인UX 개선 (source: 340f19dc-2c7d-4bbe-9e78-d980e3d8e554.md)
+- 원본 보관: `raw/conversations/2026-07-15-auto모델-난이도판정-확인ux-개선.md`
+- 세션 신설: [[2026-07-15-auto모델-난이도판정-확인ux-개선]] — [[2026-07-15-dark-toss-api-장전매수-코드조사]]
+  직후(23:23~23:31 UTC, 5왕복). (1) "Auto가 난이도를 누가 판단하는지" 질문에 `src/server.ts` file:line
+  감사 — 판단은 **서버 100% 전담**(`resolveAutoModel()` 3단계 폴백: Claude API `judgeTierClaude()` →
+  로컬 LLM `judgeTierLocal()` → 휴리스틱 `heuristicTier()`), 클라이언트는 표시만. (2) "Fable 5도
+  판정에 포함시켜 달라" 요청으로 easy/medium/hard 3단계를 **`"extreme"` 티어 신설**해 4단계로 확장,
+  `claude-fable-5` 매핑 — 휴리스틱 폴백은 hard까지만(안전망에서 최상위 모델로 안 튀게 의도적 비대칭).
+  (3) 진행 중 턴 "■ 중지" 버튼에 **2단계 확인**(첫 클릭→3초 확인창→재클릭해야 실제 중지) 추가.
+  (4) 대화 목록 hover 보관 버튼을 제거하고 **롱프레스(0.6초)+확인창** 방식으로 전환. (5) v0.1.27
+  빌드 후 `restart-when-idle.sh`로 다른 대화 완료 대기 후 안전 재시작.
+- 엔티티 갱신: [[lampas-harness]] — "추가 기능 (2026-07-15 세션 — Auto 모델 난이도 판정 + 확인UX)"
+  절 신설(위 5개 항목 상세 + file:line 표), 관련 세션 링크 추가.
+- 토픽 갱신: [[model-selection]] — "Auto — 난이도 자동 선택" 절 신설(판정 로직 3단계 폴백표, 티어→모델
+  매핑, extreme 설계 의도).
+- 신규 스킬: [[destructive-action-inline-confirm]] — 되돌리기 어려운 버튼에 모달 없이 인라인 확인을
+  넣는 두 변형(같은 버튼 2회클릭 타임아웃 vs 롱프레스+확인창) 정리. §3·§4 두 구현 사례를 일반화.
+- AI_CONTEXT.md 갱신 — [[lampas-harness]] 줄에 Auto 4단계 판정(extreme=Fable 5) 한 줄 추가.
+- index.md 갱신 (세션 1개, 스킬 1개 추가)
+- 특이사항: Auto 난이도 감사(§1)는 [[config-flag-gate-audit]]과 유사한 "판정 로직 전수 추적" 패턴이나
+  이미 커버된 접근이라 별도 스킬로 분리하지 않고 세션 페이지에서만 교차 언급. §3·§4 UI 변경은 실행
+  로직(`archiveSession` 등)은 그대로 두고 트리거만 교체 — 배포는 재시작 필요해 §5로 이어짐.
