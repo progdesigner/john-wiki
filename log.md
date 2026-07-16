@@ -650,3 +650,24 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 주제 갱신: [[model-selection]] — Auto 옵션이 quick.html로도 확장됐음을 반영.
 - index.md 갱신 (세션 1개 추가). AI_CONTEXT.md는 이미 v0.1.27/커밋 `c100edd` 반영 완료 상태라 추가
   갱신 없음(38줄 유지).
+
+## [2026-07-16] ingest | SRKK 인보이스 독촉 스레드 번역 + "James 확인" (source: quick-58839510-9c3b-4782-9e9e-6eb53e7c8184.md)
+- 원본 보관: `raw/conversations/2026-07-16-srkk-인보이스-james확인.md`
+- 세션 신설: [[2026-07-16-srkk-인보이스-james확인]] — 2026-07-16 02:15 UTC, 1왕복 quick 채팅.
+  SRKK Consulting Pte Ltd 발 연체 인보이스 독촉 이메일 스레드(5통)를 최신순 한국어 번역. 정식
+  법인명·주소가 처음 확인(`srkk.com`, 21 Woodlands Close 싱가포르)되어 [[srkk]] 등장1(CWC
+  도메인/Microsoft 계정 건)과 주제가 정확히 일치. Scott Jeun(`scottjeun@thesylvangroup.com`)·
+  Clara K(`Clara.K@thesylvangroup.com`, 둘 다 Sylvan Capital Management Pte. Ltd./The Sylvan
+  Group 소속) 이메일이 헤더로 확정되어 등장1의 "Scott" 및 [[fy-group]] cc의 "Scott Jeun"과 동일인
+  심증이 크게 강화됨. "James가 실제로 했는지 확인 후 결제" → "James가 했다고 답장"으로 최종 정리.
+- 엔티티 갱신: [[srkk]] — 등장3(SRKK Consulting Pte Ltd 인보이스 스레드) 신설, 등장1의 Scott 신원
+  강화 절 재구성, 등장1↔등장3 시점 관계(인보이스 납기일이 등장1 세션보다 앞서 모순 아닐 가능성) 명시.
+  [[fy-group]] — Scott Jeun 동일인 심증 강화 기록 추가. [[sylvan-korea]] — "The Sylvan
+  Group"/"Sylvan Capital Management Pte. Ltd."(싱가포르)와의 미확정 연결 절 신설(이름 일치 + CWC
+  관여 정황, 직접 근거는 아직 없음).
+- index.md 갱신 (세션1 추가, srkk 엔티티 한줄요약 갱신). AI_CONTEXT.md 갱신 없음 — 업무 맥락 절의
+  "srkk 미연장 확정" 기록은 이미 [[srkk]] 페이지로 상세가 넘어가 있고, 이번 세션은 그 벤더 신원을
+  구체화·강화할 뿐 새로운 확정된 결정이 아니라 40줄 예산 내에서 반영 생략.
+- 특이사항: 신규 스킬 없음(순수 번역 1턴). "James"는 결제 여부를 좌우하는 핵심 인물로 처음 등장하나
+  성·소속·이메일 불명이라 엔티티 미생성. Clara K가 [[2026-07-14-clara-바바라-위스키분쟁-번역]]의
+  "Clara"와 동일인인지는 이번 ingest에서 그 세션을 재조회하지 않아 단정하지 않음(향후 확인 필요).

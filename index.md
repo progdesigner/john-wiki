@@ -49,6 +49,7 @@
 - [[2026-07-16-네이버데이터api-콘텐츠자동화-의사결정]] — 네이버 DataLab API 연동 키워드 자동 글쓰기·배포 파이프라인(신규 확인 사실)의 마케팅-상품 얼라인 판단 자동화 상담 1왕복 quick. 6-패턴 프레임워크(채점게이트·LLM-as-judge·배치승인·피드백루프·포트폴리오배분·신호다변화) 제안
 - [[2026-07-16-quick-html-폴더선택기-auto모델-구현]] — "quick.html에도 폴더선택·Auto 넣어줘" 1왕복 quick(02:16~02:20). 위 세션이 flag했던 quick.html 작업 폴더 선택기의 실제 구현(index.html 로직 이식) + Auto 모델 추가. vite `public/` 정적 파일은 cp만으로 반영되는 배포 요령 신규 확인
 - [[2026-07-16-quick-작업폴더선택기-커밋푸시]] — "밀린 코드 커밋·push해줘" 1왕복 quick. v0.1.27 5개 변경(롱프레스 보관확인·중지버튼 재확인·진동비프·extreme티어 4개는 기록됨 확인) + **quick.html 작업 폴더 선택기**(첫 턴 이후 대화가 폴더에 묶임, 신규 확인 사실) 커밋 `c100edd` push 완료
+- [[2026-07-16-srkk-인보이스-james확인]] — SRKK Consulting 인보이스 독촉 이메일 스레드(5통) 번역. 정식 법인명·Scott Jeun/Clara K(The Sylvan Group) 신원 확정, [[srkk]] 등장1과의 시점 관계 정리, "James 확인 후 결제" 결론
 
 ## Entities
 
@@ -67,7 +68,7 @@
 - [[cwc-system]] — CWC ERP 분석/관리 pnpm 모노레포 (cwc-api NestJS+Prisma, cwc-web-admin React+Vite)
 - [[elevino-system]] — CWC 계열 서비스 저장소 (elevino-api NestJS+TypeORM, elevino-admin Next.js). 원장 방식 크레딧 시스템 보유
 - [[netpeul-yeonga]] — 소셜/취미 정기 모임 플랫폼(넷플연가). progdesigner가 엘레망 와인샵 기반 블라인드 테이스팅 모임 모임장으로 참여
-- [[srkk]] — 이름이 같은 두 등장(싱가포르 도메인/Microsoft 계정 건 vs SRKK Group Azure 펀딩 영업메일)의 동일성 미확정 벤더/조직
+- [[srkk]] — SRKK Consulting Pte Ltd(도메인/Microsoft 계정·인보이스 건, 등장1·3은 사실상 동일 확정) vs SRKK Group(Azure 펀딩 영업메일, 등장2)의 동일성은 여전히 미확정
 - [[fy-group]] — FY Group Pte Ltd(싱가포르), CEO Keira Zhang. cwc-lab-singapore에 이탈리아 위스키를 공급하다 선적 지연 분쟁의 상대방이 됨
 - [[dark-system]] — progdesigner 개인 소유 pnpm 모노레포(`~/Works/dark/dark-system`). 앱 `dark-toss-api`(토스증권 자동매매 봇) 확인됨, 나머지 앱은 미조사
 - [[dark-toss-api]] — dark-system 내 토스증권 API 자동매매 서비스. 기본 설정상 장시간 게이트 없음(marketHoursOnly false), manualBuy는 시간체크 경로 자체가 없음
