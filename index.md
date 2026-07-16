@@ -30,6 +30,7 @@
 - [[2026-07-15-데스크톱-file메뉴-new-window]] — lampas-harness desktop(Electron) File 메뉴에 New Window(Cmd+Shift+N) 추가 + 쌓여있던 변경사항 3커밋으로 push
 - [[2026-07-15-srkk-azure-펀딩메일-번역]] — SRKK Group의 MS Azure 펀딩 영업메일 영→한 번역 요청(1왕복 quick). 대행 작성 아닌 순수 번역 사례
 - [[2026-07-15-주식투자-10만원-질문]] — "10만원으로 주식 거래 가능한가?" 개인 재무 상담 1왕복 quick. 국내/미국 주식(소수점 매매) 가능 여부·현실적 제약 답변
+- [[2026-07-15-삼성전자-주식분할-배너-html-인사이트]] — 무관한 두 왕복이 한 quick 파일에 묶임: (1) 삼성전자 2018년 50:1 액면분할 이력 질문, (2) 사진 첨부 "정리해봐" → 배너 디자인을 AI가 통째로 HTML로 변환하는 워크플로우 인사이트 + 셀프서비스 툴 제품 아이디어
 
 ## Entities
 
@@ -63,6 +64,7 @@
 - [[harness-mcp-bridge]] — 하네스가 `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출 (mcpBridge, cwd 우회·PATH·재시작 반영)
 - [[harness-as-business-assistant]] — 하네스를 코딩 외 업무 비서로 사용 (이미지 첨부 해석·인보이스 대조·대외 이메일 초안)
 - [[works-project-portfolio]] — `~/Works` 하위 git 저장소 12개 목록(2026-07-15 시점) — 다수 미문서화
+- [[ai-design-to-html-banner-conversion]] — 배너 디자인 이미지를 AI가 이미지 조각 조합 없이 통째로 HTML로 변환하는 워크플로우 인사이트 + 셀프서비스 툴 제품 아이디어
 
 ## Skills
 
