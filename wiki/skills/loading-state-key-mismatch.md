@@ -25,3 +25,4 @@ tags: [debugging, frontend, react, loading-state, ux]
 - 조회 측이 `busy[key]`가 아니라 `busy[key] && ...` 같은 파생 조건이면 그 파생식도 함께 본다.
 
 ## 출처: [[2026-07-08-toktalk-에피소드-배경전환-플레이]] (talk-web-admin `runBeatAi` / `.../episodes/[id]/page.tsx`)
+관련: [[null-merge-nan-display]] (증상은 비슷하지만 원인이 다른 프런트 표시 버그 — 키 불일치 vs null 병합)

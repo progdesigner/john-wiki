@@ -51,6 +51,7 @@
 - [[2026-07-16-quick-작업폴더선택기-커밋푸시]] — "밀린 코드 커밋·push해줘" 1왕복 quick. v0.1.27 5개 변경(롱프레스 보관확인·중지버튼 재확인·진동비프·extreme티어 4개는 기록됨 확인) + **quick.html 작업 폴더 선택기**(첫 턴 이후 대화가 폴더에 묶임, 신규 확인 사실) 커밋 `c100edd` push 완료
 - [[2026-07-16-srkk-인보이스-james확인]] — SRKK Consulting 인보이스 독촉 이메일 스레드(5통) 번역. 정식 법인명·Scott Jeun/Clara K(The Sylvan Group) 신원 확정, [[srkk]] 등장1과의 시점 관계 정리, "James 확인 후 결제" 결론
 - [[2026-07-16-lampas-web-product-신규앱-구현]] — "제품 이미지 올리면 분석+마케팅 방향" 신규 앱 `lampas-web-product`(포트 8236) + 백엔드 `product-insights` 공개 모듈을 처음부터 스캐폴딩·구현·검증·커밋push. lampas-web-ai 슬림 베이스 복사, AIDA 카피 개선 후속
+- [[2026-07-16-기억버튼-보관통합-NaN토큰버그수정]] — 상단 "기억에 저장"→"기억에 보관" 버튼 개명 + 보관 API로 통합(저장 진입점 3개→UI상 사실상 2개로 수렴) + 사용량 배지 "◔ NaN 토큰" 표시 버그(null 병합) 수정, 2왕복
 
 ## Entities
 
@@ -124,3 +125,4 @@
 - [[destructive-action-inline-confirm]] — 되돌리기 어려운 버튼(중지·보관)에 모달 없이 인라인 확인: 같은 버튼 2회클릭 타임아웃 방식 vs 롱프레스+확인창 방식
 - [[clone-sibling-entity-pipeline]] — 기존 엔티티(Actor/Object)와 동형인 새 엔티티(Space) 추가 시 DB→API→SDK UI→실사용 지점을 계층별로 그대로 복제하는 절차
 - [[new-app-scaffold-from-slim-base]] — 모노레포에 새 프론트 앱+백엔드 모듈 추가 시 기존 앱 중 슬림한 쪽을 복사 베이스로 고르고 독립 공개 모듈로 배선하는 절차
+- [[null-merge-nan-display]] — `Object.assign({}, null, {...})`이 필드를 못 채워 산술 연산이 NaN으로 새는 버그 진단(생성측 빈객체 안만들기+표시측 `?? 0` 둘 다 방어)

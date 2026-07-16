@@ -693,3 +693,23 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - AI_CONTEXT.md 갱신: [[lampas-studio]] 항목에 `lampas-web-product` 추가+커밋 해시 반영, 배포 미완 상태
   명시(39줄 유지, 예산 내).
 - index.md 갱신 (세션1, 스킬1 추가, lampas-studio 한줄요약에 앱 추가).
+
+## [2026-07-16] ingest | 기억버튼 보관통합 + NaN토큰버그수정 (source: 7922701e-084b-431c-beee-70d528304f78.md)
+- 원본 보관: `raw/conversations/2026-07-16-기억버튼-보관통합-NaN토큰버그수정.md`
+- 세션 신설: [[2026-07-16-기억버튼-보관통합-NaN토큰버그수정]] — 02:36~02:41 UTC, 2왕복. (1) 상단
+  "기억에 저장" 버튼을 "기억에 보관"으로 개명하고 호출 대상을 저장-only `/api/remember`에서 기존
+  보관 API `/api/sessions/archive`로 교체(새 엔드포인트 신설 없음) — 아카이빙+memory-ingest 큐잉+새
+  대화 전환이 버튼 하나로 통합. (2) 사용량 배지 "◔ NaN 토큰" 표시 버그: `usage: null`을
+  `Object.assign({}, null, {...})`로 병합해 필드 결손 → NaN. `loadUsage()`/`updateUsage()` 두 곳
+  방어적 수정.
+- 엔티티 갱신: [[lampas-harness]] — 2026-07-16 섹션 신설(버튼 통합+NaN버그), 보관 자동화 절 세션
+  링크에 이번 세션 추가, "관련" 세션 목록 갱신.
+- 토픽 갱신: [[long-term-memory-architecture]] — "저장 진입점 3개" 서술에 갱신 절 추가: 진입점
+  (1)수동 버튼과 (2)보관 자동이 UI 레벨에서 동일 동작으로 수렴(엔드포인트는 백엔드에 둘 다 남아
+  있으나 UI에서 저장-only 경로 소멸), 옛 `/api/remember` 잔존 여부는 미확인으로 명시.
+- 스킬 신설: [[null-merge-nan-display]] — `Object.assign({}, possiblyNull, {...})` null 병합이
+  필드를 못 채워 산술 연산이 NaN으로 새는 버그 진단·수정 절차(생성측+표시측 이중 방어). 유사하지만
+  다른 버그인 [[loading-state-key-mismatch]](키 불일치)와 구분 기준 명시.
+- AI_CONTEXT.md 갱신: [[john-wiki]] 항목의 "저장 진입점 3개" 서술을 버튼 개명+통합 사실에 맞게
+  수정(38줄 유지, 예산 내).
+- index.md 갱신 (세션1, 스킬1 추가).

@@ -12,7 +12,7 @@ updated: 2026-07-16
 
 ## 진행 중 프로젝트
 - [[lampas-harness]] — Claude Agent SDK 웹 하네스. 맥미니 launchd 데몬(웹 8787/API 3787), 원격 접속은 Tailscale 사설 VPN 권장. 기본 모델 claude-opus-4-8, "Auto" 선택 시 서버가 easy/medium/hard/**extreme**(Fable 5, v0.1.27~) 4단계로 난이도 판정해 자동 배정([[model-selection]]). `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출([[harness-mcp-bridge]]) — 예 [[naver-blog-mcp]]. 로컬 LLM은 [[rapid-mlx]](launchd 상주). 프로젝트 스킬 시스템+대량 스킬 번들 보유(마케팅·Remotion영상·개발운영, 커밋 ef36c5f). 전송버튼 길게누르기 GPT Realtime 음성입력 구현 완료, 노랑→빨강 전환에 진동+비프 피드백 추가(2026-07-16)([[realtime-voice-mic-buffer-before-connect]]). v0.1.27(롱프레스 보관확인·중지버튼 재확인·진동비프·extreme티어·quick.html 작업폴더선택기) 커밋 `c100edd` push 완료.
-- [[john-wiki]] — 이 위키. 공통 장기 기억 저장소. 저장 진입점 3개: 수동 🧠 버튼·보관 🗄 자동(2026-07-13~)·야간 자동 ingest. 능동 조회(검색 tool)는 미완.
+- [[john-wiki]] — 이 위키. 공통 장기 기억 저장소. 저장 진입점: 상단 "기억에 보관" 버튼(2026-07-16~ 옛 "기억에 저장"에서 개명, 보관 API로 통합)·대화목록 롱프레스 보관·야간 자동 ingest — 앞 둘은 이제 동일 동작. 능동 조회(검색 tool)는 미완.
 - [[toktalk]] — 에피소드 beat 플레이·배경 전환 시스템 개발 중.
 - 코딩 외 [[harness-as-business-assistant]]: 이메일 대행·인보이스 대조·마케팅 컨설팅(사진 첨부 해석) 반복.
 - [[progdesigner]]가 네이버 DataLab API 연동 키워드 자동 글쓰기·배포 파이프라인을 이미 운영 중(별도 시스템, study-ai-what과 무관 추정) — 마케팅-상품 얼라인 판단 자동화 상담 → [[content-automation-decision-framework]].
