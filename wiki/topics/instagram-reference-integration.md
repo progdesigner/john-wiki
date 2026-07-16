@@ -1,7 +1,7 @@
 ---
 tags: [topic, instagram, api, reference, scraping, pagination]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-16
 ---
 # Instagram 레퍼런스 통합
 
@@ -49,6 +49,20 @@ Instagram API는 오래된순 정렬을 제공하지 않는다. 4단계로 시�
 
 → 신뢰성 확보 실패(+검증이 IP 제한에 반복 차단)로 **오래된순 기능 전체 제거**, 최신순+더 불러오기만 남김. 관련 코드(`order` 파라미터, 이진탐색, 걷기 수집, asc 커서 모드) 모두 삭제.
 
+## ⚠️ 모순/갱신 — `order` 파라미터 재도입 (2026-07-15)
+
+위 폐기 기록(2026-07-08)과 달리, 2026-07-15 [[lampas-studio]] `lampas-system` rebase 세션
+([[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]])에서 `reference-account-images`에
+**`order=newest|oldest` 쿼리가 다시 추가**됐다(게시 시각 `takenAt` 수집 + 정렬).
+
+- 이 세션 소스 문구상 새 기능은 **"본인 연결 계정만 공식 own-media API로 조회"**하는 별도 함수
+  (`getOwnConnectedMedia`)로 분리돼 있어, 2026-07-08에 폐기된 **공개 프로필(비로그인 feed)** 케이스와는
+  범위가 다를 가능성이 있다 — 연결 계정은 official API로 전체 미디어를 정상 페이지네이션할 수 있어
+  오래된순 자체가 더 이상 "불가능한 문제"가 아닐 수 있음.
+- 다만 이 rebase 세션 텍스트만으로는 **공개 프로필 케이스에도 order가 다시 적용됐는지 확정할 수 없다**
+  ("페이지 반환 4지점에 적용"이 소스 3종 전체인지 연결 계정 한정인지 불명). 실사용 확인 전까지 두 시점
+  기록을 모두 남긴다.
+
 ## 함정 — feed 엔드포인트 IP 일시 제한
 
 `feed/user`(더 불러오기·공개 프로필)는 IP·호출빈도 기반으로 일시 차단된다.
@@ -62,4 +76,4 @@ Instagram API는 오래된순 정렬을 제공하지 않는다. 4단계로 시�
 ## 관련
 - 제품: [[lampas-studio]]
 - 스킬: [[instagram-public-media-fetch]]
-- 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]]
+- 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]

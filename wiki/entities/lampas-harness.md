@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, claude-agent-sdk, typescript]
 created: 2026-07-07
-updated: 2026-07-15
+updated: 2026-07-16
 ---
 # lampas-harness
 
@@ -174,7 +174,9 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
 - 연동 대상 장기기억: [[john-wiki]] (제안).
 - 상주 서비스·도구: [[rapid-mlx]] (로컬 LLM) · [[naver-blog-mcp]] (외부 MCP).
-- `lampas-system` — 인접 저장소(이 세션과 별개, 미커밋 변경 2개 존재).
+- `lampas-system` = `[[lampas-studio]]`의 로컬 저장소명(형제 폴더, `~/Works/lampas/lampas-system`) — 당시
+  미커밋 변경 2개는 2026-07-15 세션에서 rebase로 정리·push 완료. → [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]
+- 이 하네스가 속한 상위 포트폴리오(`~/Works` 12개 저장소) → [[works-project-portfolio]]
 
 ## 재확인된 함정 (2026-07-08~09 세션)
 - **"Stream closed"** — 파일 수정 도구 권한 승인 채널이 세션 중 끊겨 편집 불가(2회). 사용자 재전송/재시작으로 복구.

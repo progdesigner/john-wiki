@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, image-generation, nestjs, react, instagram]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-16
 ---
 # lampas-studio (Lampas 이미지 생성 스튜디오)
 
@@ -11,6 +11,11 @@ updated: 2026-07-09
 
 - 배포: 웹 `sdk.lampas.io` (S3 + CloudFront), API는 원격 서버 PM2(`lampas-api`).
 - 모노레포(`~/Works/lampas` 하위): `apps/lampas-api`(NestJS, `nest build`), `apps/lampas-web-sdk`(Vite, `vite build`).
+- **로컬 폴더명 `lampas-system`**(`~/Works/lampas/lampas-system`) — `[[lampas-harness]]`의 로컬 폴더명
+  `lampas-harness`와 다른 형제 폴더. 2026-07-15까지 위키의 "인접 저장소" 메모로만 존재하다 이 세션에서
+  본 엔티티와 동일 저장소임이 확인됨. → [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]
+- **DB: PostgreSQL** (2026-07-15 확인 — 로컬 커밋이 잘못 가정했던 "MySQL collation" 로직을 rebase 중
+  PostgreSQL 대소문자 무시 JS 비교 방식으로 교체하며 드러남).
 - 배포 스크립트: `./scripts/deploy-api.sh`, `deploy-web.sh <project>`, `deploy-app.sh <target>` — **배포는 반드시 이 스크립트로**(제품 CLAUDE.md 명문화, 2026-07-08). → `[[deploy-sandbox-pnpm-shim]]`
 
 ## 스튜디오 구조 (관찰된 범위)
@@ -48,7 +53,28 @@ updated: 2026-07-09
 - Instagram: 공식 Graph API는 **임의 게시물 조회 불가**(본인 미디어·Business Discovery만). oEmbed는 Meta "oEmbed Read" 앱 심사 필요. `.env`에 `META_APP_ID/SECRET`(장기 토큰 교환용, 현재 파싱 경로엔 미사용).
 - 인프라: AWS S3 + CloudFront(웹), 원격 서버 PM2(API).
 
+## 추가 기능·이슈 (2026-07-15 세션 — Works 최신화 중 lampas-system rebase)
+
+원격 9개 커밋이 Instagram 레퍼런스 조회를 **커서 페이지네이션(`IgMediaPage`)·캐러셀 구조**로 크게 개편.
+그 위에 로컬 미커밋 18개 파일을 rebase로 이식(2개 커밋으로 정리):
+
+- **API** — `reference-account-images`에 `order=newest|oldest` 쿼리 재도입, 게시 시각(`takenAt`) 수집,
+  본인 연결 계정만 공식 own-media API로 조회하는 `getOwnConnectedMedia` 분리. (2026-07-08엔 공개 프로필
+  오래된순 정렬을 전부 폐기했던 이력과의 관계 → [[instagram-reference-integration]] 모순 병기 참고.)
+- **web-sdk** — 스튜디오 `RegeneratePrompt` 버튼/모달 제거, Transform 예시 이미지를 캐시버스터 없는
+  안정 URL로 저장. 원격이 새로 만든 레퍼런스 시트 모델 선택(`REF_SHEET_MODEL_OPTIONS`)·개편된 계정 검색
+  UI는 원격 버전 채택.
+- 검증: lampas-api `tsc --noEmit`(Prisma 클라이언트 재생성 후) 통과, lampas-web-sdk vite 프로덕션 빌드 통과.
+- **알려진 기존 이슈(미해결, 이 세션이 만든 문제 아님)**: `pnpm install`이 저장소 전체에서 실패 —
+  `apps/iileex-api`가 참조하는 워크스페이스 패키지 `@iileex/shared`가 저장소 어디에도 없음. `origin/main`도
+  동일.
+- `lampas-system` 저장소에 git user 설정이 없어 기존 커밋과 동일하게 `John <john@progdesigner.com>`으로
+  로컬(저장소 한정) 설정.
+- 절차 스킬 → [[rebase-local-feature-onto-refactored-remote]] · 세션 →
+  [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]
+
 ## 관련
-- 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]]
+- 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
+- 포트폴리오 배경: [[works-project-portfolio]]

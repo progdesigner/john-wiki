@@ -23,6 +23,7 @@
 - [[2026-07-15-올리브유-마케팅-포지셔닝]] — 사용 가능 스킬 목록(마케팅·Remotion 번들, 커밋 ef36c5f) + 올리브유 사진 프리미엄 포지셔닝 상담(ICP 선행 → product-marketing 착수 제안)
 - [[2026-07-15-과금모드-토글-컨텍스트표시]] — 하네스에 Claude 과금 모드 토글(API vs 구독 OAuth) + 구독 모드 컨텍스트 잔여 표시 구현. 기본 과금이 구독(OAuth)임을 코드로 확인(기존 기록과 모순)
 - [[2026-07-15-아우보카사-공동구매-단가설계]] — 인플루언서 공동구매 단가표 사진 1장 해석(1왕복 quick). 할인 티어 설계 의도·인플루언서 수익 10%+·시뮬레이션(실질 병당 판매가) 풀이
+- [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] — Works 12개 저장소 일괄 최신화 + lampas-system(=lampas-studio) 로컬 미커밋 18파일을 원격 9커밋(리팩터) 위로 충돌 없이 rebase·push
 
 ## Entities
 
@@ -53,6 +54,7 @@
 - [[use-area-personas]] — 하네스 사용 영역별 전문가 페르소나(6영역) + "일반" 정책 비어있음→채움 변천
 - [[harness-mcp-bridge]] — 하네스가 `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출 (mcpBridge, cwd 우회·PATH·재시작 반영)
 - [[harness-as-business-assistant]] — 하네스를 코딩 외 업무 비서로 사용 (이미지 첨부 해석·인보이스 대조·대외 이메일 초안)
+- [[works-project-portfolio]] — `~/Works` 하위 git 저장소 12개 목록(2026-07-15 시점) — 다수 미문서화
 
 ## Skills
 
@@ -75,3 +77,5 @@
 - [[naver-blog-tag-seo]] — 네이버 블로그 SEO 태그 30개 생성(본문 근거 필수·대표+롱테일 배분·무관 인기태그 저품질 위험)
 - [[bank-refund-invoice-reconciliation]] — 애매한 은행 환입/입금을 인보이스와 대조·검증하고 거래처 회신 잡기(코드 단정 금지·차액 명시·통화 확인)
 - [[sdk-claude-code-vs-api-billing]] — Claude Agent SDK 실행이 구독(OAuth) 과금인지 API 종량인지 판별하고 options.env로 전환·한도 조회
+- [[multi-repo-safe-bulk-update]] — 다중 git 저장소 일괄 업데이트 시 미커밋 변경 저장소만 골라 보류
+- [[rebase-local-feature-onto-refactored-remote]] — 원격이 구조를 리팩터한 코드 위에 로컬 미커밋 기능을 rebase로 이식

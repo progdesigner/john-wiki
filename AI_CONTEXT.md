@@ -1,7 +1,7 @@
 ---
 tags: [ai-context, summary]
 created: 2026-07-12
-updated: 2026-07-15
+updated: 2026-07-16
 ---
 # AI_CONTEXT — 핵심 기억 요약
 
@@ -15,7 +15,8 @@ updated: 2026-07-15
 - [[john-wiki]] — 이 위키. 공통 장기 기억 저장소. 저장 진입점 3개: 수동 🧠 버튼·보관 🗄 자동(2026-07-13~)·야간 자동 ingest. 능동 조회(검색 tool)는 미완.
 - [[toktalk]] — 에피소드 beat 플레이·배경 전환 시스템 개발 중.
 - 코딩 외 [[harness-as-business-assistant]]: 이메일 대행·인보이스 대조·마케팅 컨설팅(사진 첨부 해석) 반복.
-- [[lampas-studio]] — 스튜디오 레퍼런스·Instagram 통합.
+- [[lampas-studio]] — 스튜디오 레퍼런스·Instagram 통합. 로컬 저장소명 `lampas-system`. `pnpm install`이 저장소 전체에서 실패(누락된 `@iileex/shared`, origin/main도 동일 — 기존 이슈).
+- `~/Works` 하위 git 저장소 12개 → [[works-project-portfolio]] (다수는 아직 내용 미조사).
 
 ## 확정된 결정
 - 원격 접속: 공개 노출 회피(하네스가 맥 전체 제어) — Tailscale 사설 VPN 권장, 공유기 포트포워딩 비권장. (근거: 2026-07-06 세션; 당시 실제 설치는 미진행 — 설치 여부·구체 방식은 재확인 필요.)

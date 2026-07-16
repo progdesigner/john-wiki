@@ -198,3 +198,14 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 토픽 갱신: [[harness-as-business-assistant]] (사례 추가 — 표 해석·시뮬레이션 계산, 표 자체는 사용자 초안)
 - index.md 갱신 (세션1 추가)
 - 특이사항: 신규 엔티티/스킬 없음. "아우보카사" 제품 정체(카테고리·[[cwc-commerce]] 연결 여부)는 소스에 미상이라 임의 연결하지 않음. 방법론이 1턴 해석으로 얇아 스킬 미추출(2026-07-15 올리브유 세션과 동일 판단 기준). AI_CONTEXT.md는 기존 "코딩 외 업무 비서" 일반 패턴 줄이 이미 이 사례를 포괄해 변경 없음.
+
+## [2026-07-16] ingest | Works 전체 프로젝트 일괄 최신화·lampas-system 리베이스 (source: 2d5c9979-48a0-4df2-b244-9c646c8fbe7e.md)
+- 소스: raw/conversations/2026-07-15-works-프로젝트-최신화-lampas-system-리베이스.md (원본 archive/2d5c9979-...md 복사)
+- 세션: [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] (2026-07-15 06:48~07:04). "Works 전체 최신화" 요청 → 12개 저장소 점검·pull → `lampas-system`(=[[lampas-studio]]) 한 곳만 로컬 미커밋 18파일 vs 원격 9커밋 충돌 위험으로 보류 → 사용자 지시로 rebase 정리 후 push.
+- 토픽 신설: [[works-project-portfolio]] (`~/Works` 하위 git 저장소 12개 최초 전수 열거 — 다수는 이름·변경 규모만 확인, 내용 미조사)
+- 스킬 신설: [[multi-repo-safe-bulk-update]] (미커밋 변경 저장소 선별 보류), [[rebase-local-feature-onto-refactored-remote]] (원격 구조 리팩터 위에 로컬 기능 rebase 이식)
+- 엔티티 갱신: [[lampas-studio]] (로컬 저장소명 `lampas-system` 확인, DB=PostgreSQL, 2026-07-15 rebase로 추가된 Instagram `order` 재도입·RegeneratePrompt 제거 커밋, pnpm install 저장소 전체 실패 기존 이슈, git user 설정 신설), [[lampas-harness]] (기존 "lampas-system 인접 저장소" 메모를 lampas-studio와 동일 저장소로 정정·해소 기록)
+- 토픽 갱신: [[instagram-reference-integration]] (**모순 병기** — 2026-07-08 폐기했던 오래된순 정렬이 2026-07-15 `order=newest|oldest`로 재도입됨, 범위가 연결계정 한정인지 불명확)
+- AI_CONTEXT.md 갱신: [[lampas-studio]] 줄에 로컬 저장소명·pnpm 이슈 추가, Works 12개 저장소 포트폴리오 한 줄 신설. 30줄(<40 준수).
+- index.md 갱신 (세션1·토픽1·스킬2 추가)
+- 특이사항: 미문서화 저장소 7개(elevino-system/-operator, cwc-system, goraesa-system, bokziri-system, ai-labs-notes, dark-system, arca8-system)는 이름·파일 변경 규모만 확인됐고 성격은 조사되지 않아 임의로 엔티티를 만들지 않음(추측 금지). pnpm install 실패는 이 세션이 만든 문제가 아니라 origin/main에도 있던 기존 이슈로 명시.
