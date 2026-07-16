@@ -417,3 +417,27 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: `find` 지연으로 사용자가 "작업이 완료 되었나요?" 두 번 확인 — 백그라운드 프로세스가
   세션 전환 중 끊기는 [[harness-background-process-lifecycle]] 패턴의 또 다른 사례로 볼 수 있으나,
   이번엔 파일 검색(find)이라 별도 토픽 갱신은 보류(이미 알려진 한계의 반복 관찰).
+
+## [2026-07-16] ingest | SRKK 도메인/Scott 확인 + Princ 번역 (source: f07d5a7e-ab17-4858-9faf-77b4dc6a0884.md)
+- 원본 보관: `raw/conversations/2026-07-14-srkk-도메인-scott-확인-princ-번역.md`
+- 세션 신설: [[2026-07-14-srkk-도메인-scott-확인-princ-번역]] — 2026-07-14 09:17~09:54 UTC, [[2026-07-14-은행환불-거래처매칭]]
+  종료 17분 후 이어진 quick 채팅. WhatsApp 대화 스크린샷 다수를 번역 + Scott에게 보낼 대응 메시지를
+  영/한으로 단계적으로 다듬음. 두 갈래: (1) "싱가포르 SRKK" 도메인·Microsoft 계정을 승인 없이
+  연장하려 한 의혹 → John Lee가 "대표님"에게 보고 → "누구 허락으로 진행했죠?" 질책 → Scott과 협의
+  끝에 **CWC Domain·Microsoft 계정 둘 다 미연장으로 최종 확정**. (2) `PRINC CR` 거래 상대방("Princ")
+  식별 조사 지속 — 이 세션에서도 확정 안 됨.
+- 엔티티 신설: [[srkk]] — "싱가포르 SRKK"(이 세션)와 "SRKK Group"([[2026-07-15-srkk-azure-펀딩메일-번역]])
+  이름이 같으나 동일 실체인지는 미확정으로 병기.
+- 엔티티 갱신: [[cwc-commerce]] (모순 관찰 — "John Lee"가 이 세션에서 "대표님"에게 보고하는 발신자로
+  등장, 기존 "대표=John Lee=progdesigner 가능성" 추정과 배치될 수 있어 단정하지 않고 병기만 추가).
+- 세션 갱신: [[2026-07-14-은행환불-거래처매칭]] (후속 절 추가 — SRKK/Scott 플래그 부분 해소, Princ 미해결 유지)
+- 스킬 갱신: [[bank-refund-invoice-reconciliation]] (거래 상대방명이 여러 세션에 걸쳐 미해결로 남을 수
+  있다는 함정 추가), 세션 갱신: [[2026-07-15-srkk-azure-펀딩메일-번역]] (소급 관찰 — 시점상 하루 차이,
+  이름 일치뿐 직접 근거 없음 명시)
+- 토픽 갱신: [[harness-as-business-assistant]] (대응 전략 수립 사례 추가 — 상대 질문별 대응·액션
+  주체 진단 방식)
+- AI_CONTEXT.md 갱신: 업무 맥락에 SRKK 도메인/Microsoft 계정 미연장 확정 + Princ 식별 미해결 한 줄 추가. 37줄(<40 준수).
+- index.md 갱신 (세션1·엔티티1 추가)
+- 특이사항: 이 세션은 같은 날 앞선 은행환불 세션의 직접 후속(17분 뒤)이라 두 세션을 연결하는 데
+  ingest의 초점을 맞춤. "John Lee"↔"대표님" 관계는 트랜스크립트만으로 단정 불가 — 향후 소스로
+  재확인 필요 항목으로 남김.

@@ -1,7 +1,7 @@
 ---
 tags: [session, translation, business, spam-vendor-email, quick-chat]
 created: 2026-07-15
-updated: 2026-07-15
+updated: 2026-07-16
 ---
 # 2026-07-15 SRKK Azure 펀딩 영업메일 번역 요청
 
@@ -26,8 +26,13 @@ SQL VM, SQL Database, SQL Managed Instance, PostgreSQL DB. 마감은 9월 말이
   후속 조치(통화 예약 여부 등)는 트랜스크립트에 없음.
 - 스킬 미추출: 순수 번역 1턴 작업으로 재사용 가능한 절차라 부를 만한 방법론 없음.
 - 신규 엔티티/토픽 생성 안 함 — SRKK Group은 이 1회성 영업메일 외 맥락이 없어 엔티티화 보류.
+- **(2026-07-16 ingest, 소급 관찰)** 하루 전인 2026-07-14 09시 UTC경 [[2026-07-14-srkk-도메인-scott-확인-princ-번역]]
+  세션에서 "싱가포르 SRKK"의 CWC 도메인·Microsoft 계정 연장 건이 "연장 안 함"으로 이미 확정되었다.
+  이름이 같은 "SRKK Group"이 바로 다음 날 Azure 마이그레이션 펀딩 영업메일을 보낸 것 — 시점상
+  공교롭지만, 도메인/Microsoft/Azure라는 서비스 영역이 겹치는 점 외에 두 SRKK가 동일 실체라는
+  직접 근거는 없음 → [[srkk]]에 미확정으로 기록.
 
 ## 관련
 - 패턴: [[harness-as-business-assistant]]
-- 엔티티: [[lampas-harness]] · [[progdesigner]] · [[lampas]]
+- 엔티티: [[lampas-harness]] · [[progdesigner]] · [[lampas]] · [[srkk]](미확정 동일성)
 - 유사 사례(같은 날, 첨부 이미지 해석): [[2026-07-15-아우보카사-공동구매-단가설계]], [[2026-07-15-올리브유-마케팅-포지셔닝]]

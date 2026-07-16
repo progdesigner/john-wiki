@@ -32,3 +32,4 @@ updated: 2026-07-16
 ## 업무 맥락
 - CWC 엘레망 광화문 사무실: [[sylvan-korea]] 공간 공동 사용(전대) 동의 절차 진행 중 (2026-07 기준), 임대인 측 [[dongwon-building]].
 - [[progdesigner]]는 엘레망 와인샵 운영자 겸 [[netpeul-yeonga]] 와인 블라인드 테이스팅 모임 모임장. 고가 와인 재료비 적자 해소를 위한 콘텐츠·원가 재설계 상담 진행 → [[wine-meetup-cost-reduction]].
+- 2026-07-14: [[srkk]](싱가포르) CWC 도메인·Microsoft 계정 승인 없는 연장 의혹 → Scott과 협의해 **양쪽 다 미연장으로 확정**. 은행거래 `PRINC CR`의 상대방("Princ") 식별은 두 세션에 걸쳐 아직 미해결.
