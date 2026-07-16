@@ -671,3 +671,25 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: 신규 스킬 없음(순수 번역 1턴). "James"는 결제 여부를 좌우하는 핵심 인물로 처음 등장하나
   성·소속·이메일 불명이라 엔티티 미생성. Clara K가 [[2026-07-14-clara-바바라-위스키분쟁-번역]]의
   "Clara"와 동일인인지는 이번 ingest에서 그 세션을 재조회하지 않아 단정하지 않음(향후 확인 필요).
+
+## [2026-07-16] ingest | lampas-web-product 신규앱(제품 이미지 분석+마케팅) 구현 (source: a566ac46-0364-46bd-840d-24e332e91529.md)
+- 원본 보관: `raw/conversations/2026-07-16-lampas-web-product-신규앱-구현.md`
+- 세션 신설: [[2026-07-16-lampas-web-product-신규앱-구현]] — 01:40~01:59 UTC. "제품 이미지 올리면 분석+
+  마케팅 방향" 신규 앱을 병렬 조사(프론트 베이스 비교·백엔드 vision 관례 조사) → 스캐폴딩 → 구현 →
+  검증 → 커밋push까지 한 세션에 완료. `lampas-web-ai`를 슬림 복사 베이스로 신규 앱 `lampas-web-product`
+  (포트 8236) 생성, 백엔드는 기존 `products`(Prisma CRUD) 모듈과 분리한 독립 무상태 공개 모듈
+  `product-insights`(`@Public()`, `GeminiService.analyzeProductMarketing()` 신설, `analyzeObjectTraits`
+  패턴 재사용) 신설. 사용자가 음성입력 오인식으로 추정되는 파편화된 문장을 3회 연속 보냈으나 어시스턴트가
+  추측 대신 매번 명확화 질문 → 최종 "알아서 해줘" 위임에 AIDA 프레임 광고카피+채널별 해시태그+복사버튼으로
+  개선. 커밋 2건 push(`8f1b066` 제품앱, `d4c4ffd` 전날 Space 모듈 잔여분).
+- 엔티티 갱신: [[lampas-studio]] — `lampas-web-product`/`product-insights` 섹션 신설(배포 미완 상태 명시,
+  CloudFront ID 플레이스홀더), 관련 세션 링크·태그 추가.
+- 스킬 신설: [[new-app-scaffold-from-slim-base]] — 모노레포에 새 프론트 앱+백엔드 모듈을 슬림 기존 앱
+  복사로 스캐폴딩하는 절차(포트/스크립트 네이밍, 공개 엔드포인트 가드 패턴, 무관 workspace install
+  실패 시 부분 검증 등). [[clone-sibling-entity-pipeline]](엔티티 복제)의 앱 레벨 자매 스킬.
+- 스킬 갱신: [[deploy-sandbox-pnpm-shim]] — 샌드박스가 `/tmp`·`/var/folders`를 막을 때 shim을 저장소
+  안에 만드는 함정, 저장소 전체 install이 무관한 워크스페이스 오류로 막힐 때 새 앱만 부분 검증하는
+  우회 절차 추가.
+- AI_CONTEXT.md 갱신: [[lampas-studio]] 항목에 `lampas-web-product` 추가+커밋 해시 반영, 배포 미완 상태
+  명시(39줄 유지, 예산 내).
+- index.md 갱신 (세션1, 스킬1 추가, lampas-studio 한줄요약에 앱 추가).

@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram, space]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights]
 created: 2026-07-09
 updated: 2026-07-16
 ---
@@ -98,9 +98,30 @@ Actor·Object처럼 "만들어서 저장해두고 촬영에 반복 사용"할 �
 - 이 세션 시점 **web-ai/API tsc 통과·SDK esbuild 검증까지 완료, 배포는 미진행**(3개 앱 모두 배포 필요).
 - 절차 스킬 → [[clone-sibling-entity-pipeline]] · 세션 → [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]]
 
+## `lampas-web-product` — 제품 이미지 분석·마케팅 앱 (신규 앱, 2026-07-16 세션)
+
+Actor·Object·Space와 별개로, **회사(Actor/Object) 엔티티 시스템과 무관한 독립 무상태 서비스**로 신설. 제품
+이미지 한 장을 올리면 Gemini vision이 제품 특성 분석 + 마케팅 방향(타깃·앵글·채널·광고 카피·해시태그)을
+바로 생성해주는 단일 화면 앱.
+
+- **프론트**: `apps/lampas-web-product`(신규, 포트 **8236**) — `lampas-web-ai`를 슬림 복사 베이스로 스캐폴딩
+  (Vite 6 + React + Tailwind, 로그인 불필요). 이미지 업로드(`fileToDownscaledDataUrl` 재사용) → 분석 →
+  결과 카드(요약·특징·강약점·타깃·브랜드 키워드·마케팅 앵글·채널 전술·광고 카피·콘텐츠 아이디어·해시태그).
+  광고 카피는 **AIDA 프레임**(Attention/Interest/Desire/Action)으로 정규화, 카피·해시태그 개별/일괄 복사
+  버튼 지원(반복 사용자 요청으로 후속 개선됨).
+- **백엔드**: `apps/lampas-api`에 신규 무상태 공개 모듈 `src/modules/product-insights/` —
+  `POST /api/product-insights/analyze`(`@Public()`, 로그인·DB 불필요). `GeminiService.analyzeProductMarketing()`
+  신설 — 기존 `analyzeObjectTraits`(Object 분석)와 동일한 vision+JSON파싱 패턴을 재사용, 마케팅 전략가
+  프롬프트만 교체.
+- 기존 `products` 모듈(Prisma CRUD 엔티티)과는 성격이 달라 **의도적으로 분리**됨 — 섞으면 지저분해진다는
+  판단.
+- **배포 미완**: `scripts/deploy-web.sh`에 항목은 추가했으나 CloudFront ID가 `__SET_CLOUDFRONT_ID__`
+  플레이스홀더 — 실제 배포 전 S3/CloudFront 인프라 발급 필요.
+- 절차 스킬 → [[new-app-scaffold-from-slim-base]] · 세션 → [[2026-07-16-lampas-web-product-신규앱-구현]]
+
 ## 관련
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
-  [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]]
+  [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] · [[2026-07-16-lampas-web-product-신규앱-구현]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
 - 포트폴리오 배경: [[works-project-portfolio]]
