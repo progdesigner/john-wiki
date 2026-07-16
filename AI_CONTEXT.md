@@ -17,6 +17,9 @@ updated: 2026-07-16
 - 코딩 외 [[harness-as-business-assistant]]: 이메일 대행·인보이스 대조·마케팅 컨설팅(사진 첨부 해석) 반복.
 - [[lampas-studio]] — 스튜디오 레퍼런스·Instagram 통합. 로컬 저장소명 `lampas-system`. `pnpm install`이 저장소 전체에서 실패(누락된 `@iileex/shared`, origin/main도 동일 — 기존 이슈).
 - `~/Works` 하위 git 저장소 12개 → [[works-project-portfolio]] (다수는 아직 내용 미조사).
+- [[cwc-system]]에 [[elevino-system]] DB(원장 방식 크레딧)를 그대로 재사용해 멤버십 검색+크레딧
+  지급/차감 관리자 기능을 이식하는 설계 완료, **구현은 하네스 권한 장애로 미완**(재개 필요) →
+  [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]].
 
 ## 확정된 결정
 - 원격 접속: 공개 노출 회피(하네스가 맥 전체 제어) — Tailscale 사설 VPN 권장, 공유기 포트포워딩 비권장. (근거: 2026-07-06 세션; 당시 실제 설치는 미진행 — 설치 여부·구체 방식은 재확인 필요.)

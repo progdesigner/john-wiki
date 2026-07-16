@@ -209,3 +209,22 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - AI_CONTEXT.md 갱신: [[lampas-studio]] 줄에 로컬 저장소명·pnpm 이슈 추가, Works 12개 저장소 포트폴리오 한 줄 신설. 30줄(<40 준수).
 - index.md 갱신 (세션1·토픽1·스킬2 추가)
 - 특이사항: 미문서화 저장소 7개(elevino-system/-operator, cwc-system, goraesa-system, bokziri-system, ai-labs-notes, dark-system, arca8-system)는 이름·파일 변경 규모만 확인됐고 성격은 조사되지 않아 임의로 엔티티를 만들지 않음(추측 금지). pnpm install 실패는 이 세션이 만든 문제가 아니라 origin/main에도 있던 기존 이슈로 명시.
+
+## [2026-07-16] ingest | cwc-system 멤버십 크레딧 지급/차감 이식 설계 (source: 4a072a02-1fe6-491d-9d69-52c8b2a69771.md)
+- 원본 보관: `raw/conversations/2026-07-15-cwc-system-멤버십-크레딧-이식-설계.md`
+- 세션 신설: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] — elevino DB를 그대로 재사용해 cwc-system에
+  멤버십 검색+크레딧 지급/차감 관리자 기능을 이식하는 설계(DB/API/UI 3단 계획) 완료. 구현 착수 직전
+  하네스 권한 채널 장애(`Tool permission request failed: Stream closed`)로 중단 — 실제 구현·커밋·푸시는
+  이루어지지 않음.
+- 엔티티 신설: [[cwc-system]] (CWC ERP 분석/관리 모노레포, cwc-api NestJS+Prisma6 + cwc-web-admin
+  React19+Vite6), [[elevino-system]] (CWC 계열 서비스, elevino-api NestJS+TypeORM + elevino-admin
+  Next.js14, 원장 방식 크레딧 시스템 보유). [[works-project-portfolio]]에서 "미문서화"였던 두 저장소가
+  최초로 내용 조사됨.
+- 스킬 신설: [[credit-ledger-balance-pattern]] — 잔액 컬럼 없이 원장(ledger) 방식으로 크레딧을 관리하는
+  시스템을 이식할 때 확인할 것들(네이밍 역전 함정, 동시성 미보호, 검색 대상 실제 테이블 불일치 등).
+- 토픽 갱신: [[works-project-portfolio]] (cwc-system·elevino-system을 미문서화 목록에서 제외, 엔티티 링크 추가)
+- AI_CONTEXT.md 갱신: 진행 중 프로젝트에 cwc-system 멤버십 크레딧 이식(설계 완료·구현 미완, 재개 필요) 2줄 추가. 33줄(<40 준수).
+- index.md 갱신 (세션1·엔티티2·스킬1 추가)
+- 특이사항: 이 세션은 실제 구현이 완료되지 않은 채 끝남 — 다음 세션에서 하네스 권한 상태를 먼저 확인하고
+  이어서 구현해야 함. 부수적으로 cwc-system 프로덕션 env 파일에 DB 비밀번호·JWT 시크릿이 평문 커밋되어
+  있는 보안 이슈가 발견됨(미조치, cwc-system 엔티티 페이지에 기록).

@@ -24,6 +24,7 @@
 - [[2026-07-15-과금모드-토글-컨텍스트표시]] — 하네스에 Claude 과금 모드 토글(API vs 구독 OAuth) + 구독 모드 컨텍스트 잔여 표시 구현. 기본 과금이 구독(OAuth)임을 코드로 확인(기존 기록과 모순)
 - [[2026-07-15-아우보카사-공동구매-단가설계]] — 인플루언서 공동구매 단가표 사진 1장 해석(1왕복 quick). 할인 티어 설계 의도·인플루언서 수익 10%+·시뮬레이션(실질 병당 판매가) 풀이
 - [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] — Works 12개 저장소 일괄 최신화 + lampas-system(=lampas-studio) 로컬 미커밋 18파일을 원격 9커밋(리팩터) 위로 충돌 없이 rebase·push
+- [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] — cwc-system에 elevino DB를 그대로 재사용하는 멤버십 검색+크레딧 지급/차감 관리자 기능 설계 완료, 구현 착수 직전 하네스 권한 채널 장애로 중단(실제 구현 미완)
 
 ## Entities
 
@@ -39,6 +40,8 @@
 - [[dongwon-building]] — 동원빌딩/동원리소스 서울지점, 엘레망 광화문 사무실 임대인·관리 주체
 - [[rapid-mlx]] — Apple Silicon 로컬 LLM 서버(vllm-mlx), 하네스 "Local" 프로바이더. launchd `io.lampas.rapidmlx` KeepAlive 상주
 - [[naver-blog-mcp]] — 네이버 블로그 자동 발행 MCP(Playwright). 본문 순수 텍스트만·SRT 쿠키 ~24h 만료
+- [[cwc-system]] — CWC ERP 분석/관리 pnpm 모노레포 (cwc-api NestJS+Prisma, cwc-web-admin React+Vite)
+- [[elevino-system]] — CWC 계열 서비스 저장소 (elevino-api NestJS+TypeORM, elevino-admin Next.js). 원장 방식 크레딧 시스템 보유
 
 ## Topics
 
@@ -79,3 +82,4 @@
 - [[sdk-claude-code-vs-api-billing]] — Claude Agent SDK 실행이 구독(OAuth) 과금인지 API 종량인지 판별하고 options.env로 전환·한도 조회
 - [[multi-repo-safe-bulk-update]] — 다중 git 저장소 일괄 업데이트 시 미커밋 변경 저장소만 골라 보류
 - [[rebase-local-feature-onto-refactored-remote]] — 원격이 구조를 리팩터한 코드 위에 로컬 미커밋 기능을 rebase로 이식
+- [[credit-ledger-balance-pattern]] — 원장(ledger) 방식 크레딧 잔액 시스템 이식 시 확인할 것들(네이밍 역전·동시성·검색 대상 불일치)
