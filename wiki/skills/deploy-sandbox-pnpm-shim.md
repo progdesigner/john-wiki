@@ -35,7 +35,19 @@ tags: [deploy, sandbox, pnpm, corepack, harness]
   `origin/main`도 동일). `nodeLinker: hoisted`라면 루트 `node_modules`가 이미 존재하므로, 새로 추가한
   앱/모듈만 골라 `tsc -b`/`vite build`로 직접 검증하고 "전체 install은 무관한 기존 이슈로 실패, 새 코드는
   개별 검증함"이라고 명시하면 된다 — 새 앱 스캐폴딩 시 자주 재현됨 → [[new-app-scaffold-from-slim-base]].
+- **gitignore된 프로덕션 env 파일이 로컬 체크아웃에 없어 배포가 중단될 수 있다** — 예: `env/.env.production`.
+  API용은 실서버에 이미 떠 있는 `.env`를 그대로 받아와 복구하고, 웹용은 이미 배포된 번들에서 확인 가능한
+  값(예: `VITE_API_URL`)을 역으로 읽어 복원하면 된다. 이 파일들은 gitignore 대상이라 복구해도 커밋에는
+  안 잡힌다 — 절차 자체를 기억해두면 다음 배포부터 바로 처리 가능 ([[dark-upbit-api]]/[[dark-toss-api]]
+  배포에서 재현, [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]]).
+
+## 다른 저장소로 일반화 확인
+원래 [[lampas-studio]]에서 정립된 절차였으나, 2026-07-15
+[[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] 세션에서 별도 저장소 [[dark-system]](4개 앱:
+[[dark-upbit-api]]·[[dark-upbit-web]]·[[dark-toss-api]]·[[dark-toss-web]])의 배포에도 그대로
+적용되며 절차가 저장소 특정적이지 않음이 확인됨.
 
 ## 출처: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] ([[lampas-studio]])
 관련 함정: [[lampas-harness]] (Stream closed, 인자 스캐너)
-갱신: [[2026-07-16-lampas-web-product-신규앱-구현]] (샌드박스 임시 디렉토리 차단·부분 install 우회 재확인)
+갱신: [[2026-07-16-lampas-web-product-신규앱-구현]] (샌드박스 임시 디렉토리 차단·부분 install 우회 재확인),
+[[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] (dark-system 4개 앱 배포로 일반화 확인 + env 복구 함정 추가)

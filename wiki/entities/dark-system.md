@@ -15,12 +15,20 @@ updated: 2026-07-16
 질문을 계기로 앱 하나의 내용이 처음 조사되었다.
 
 ## 확인된 앱
+같은 날 저녁 21:52~22:38 UTC [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] 세션(아래
+장전매수 조사 세션보다 시간상 **먼저** 있었음)에서 최소 4개 앱이 한 번에 확인됨:
+- [[dark-upbit-api]] (`apps/dark-upbit-api`) — Upbit(업비트, 코인) API 연동 자동매매 서비스.
+- [[dark-upbit-web]] — 위 앱의 대시보드 웹.
 - [[dark-toss-api]] (`apps/dark-toss-api`) — 토스증권 API 연동 자동매매(트레이딩 봇) 서비스.
-  2026-07-15 [[2026-07-15-dark-toss-api-장전매수-코드조사]] 세션에서 매매 게이트·장시간 판정 로직
-  조사됨.
+  이후(같은 날 23:04) [[2026-07-15-dark-toss-api-장전매수-코드조사]] 세션에서 매매 게이트·장시간
+  판정 로직이 더 깊이 조사됨.
+- [[dark-toss-web]] — 위 앱의 대시보드 웹.
 
-모노레포에 다른 앱이 더 있는지는 아직 확인되지 않았다 — `apps/` 전체 목록은 미조사.
+Upbit·Toss 두 자산군 앱이 스타일(초단타/단타/스윙/장기투자) 개념·전략 스캔(LLM 자동 전환)·`.panel-wrap`
+CSS 구조를 공유하는 자매 앱 쌍으로 확인됨.
+
+모노레포에 이 4개 외 다른 앱이 더 있는지는 아직 확인되지 않았다 — `apps/` 전체 목록은 미조사.
 
 ## 관련
-- [[dark-toss-api]] · [[progdesigner]] · [[works-project-portfolio]]
-- [[2026-07-15-dark-system-저장소-클론]] · [[2026-07-15-dark-toss-api-장전매수-코드조사]]
+- [[dark-toss-api]] · [[dark-toss-web]] · [[dark-upbit-api]] · [[dark-upbit-web]] · [[progdesigner]] · [[works-project-portfolio]]
+- [[2026-07-15-dark-system-저장소-클론]] · [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] · [[2026-07-15-dark-toss-api-장전매수-코드조사]]

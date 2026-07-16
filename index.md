@@ -55,6 +55,7 @@
 - [[2026-07-15-음성입력-3-4초-잘림-수정]] — 음성입력 앞부분 3~4초 잘림 신고→마이크 선오픈+버퍼링 수정(단독 소스, 15:29~15:33). [[2026-07-15-gpt-realtime-음성입력-길게누르기]] 6번 항목(22:28~22:30, 커밋 938d4e4)과 서술이 사실상 동일 — 시각·커밋 불일치를 아카이브 이상 정황으로 기록
 - [[2026-07-15-auto모델-기능-최초구현]] — "Auto 기능 만들어줘" 요청으로 난이도 자동선택(easy/medium/hard) 최초 구현(22:42~22:52, 커밋 802af89). 판정모델 Haiku 4.5 선택 근거 + `ANTHROPIC_API_KEY` 크레딧 잔액 0 확인(API 판정 400 실패 근본원인) + rapid-mlx 로컬판정 7/7 검증. [[2026-07-15-auto모델-난이도판정-확인ux-개선]](31분 후)이 감사한 원본 구현 세션
 - [[2026-07-15-대화테스트-확인]] — "내 말이 잘 들려?" 1왕복 초단타 세션(22:51:46~22:52:06). 콘텐츠 가치 없음, [[2026-07-15-gpt-realtime-음성입력-길게누르기]] 마지막 항목 직전과 시간대 겹침 — 음성입력 테스트 시도로 추정(미확정)
+- [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] — dark-system 내 dark-upbit-api/web·dark-toss-api/web 4앱을 넘나든 장시간 기능개발 세션(21:52~22:38, 7커밋). 초단타 자동제외/수동허용 전환+구조적 LLM 차단, 모바일 표 가로스크롤+확대방지, 모델 카탈로그 날짜필터, 토스 장마감 자동판단 일시정지/재개, 초기화 시 비용도 초기화. dark-system 앱 구성이 위키에 처음 노출된 세션
 
 ## Entities
 
@@ -75,8 +76,11 @@
 - [[netpeul-yeonga]] — 소셜/취미 정기 모임 플랫폼(넷플연가). progdesigner가 엘레망 와인샵 기반 블라인드 테이스팅 모임 모임장으로 참여
 - [[srkk]] — SRKK Consulting Pte Ltd(도메인/Microsoft 계정·인보이스 건, 등장1·3은 사실상 동일 확정) vs SRKK Group(Azure 펀딩 영업메일, 등장2)의 동일성은 여전히 미확정
 - [[fy-group]] — FY Group Pte Ltd(싱가포르), CEO Keira Zhang. cwc-lab-singapore에 이탈리아 위스키를 공급하다 선적 지연 분쟁의 상대방이 됨
-- [[dark-system]] — progdesigner 개인 소유 pnpm 모노레포(`~/Works/dark/dark-system`). 앱 `dark-toss-api`(토스증권 자동매매 봇) 확인됨, 나머지 앱은 미조사
-- [[dark-toss-api]] — dark-system 내 토스증권 API 자동매매 서비스. 기본 설정상 장시간 게이트 없음(marketHoursOnly false), manualBuy는 시간체크 경로 자체가 없음
+- [[dark-system]] — progdesigner 개인 소유 pnpm 모노레포(`~/Works/dark/dark-system`). 최소 4앱 확인: dark-upbit-api/web, dark-toss-api/web(자매 앱), 나머지 앱은 미조사
+- [[dark-upbit-api]] — dark-system 내 Upbit(코인) API 자동매매 서비스. 초단타 스타일 자동제외/수동허용+엔진교체로 구조적 LLM 차단, 모델 카탈로그 날짜필터
+- [[dark-upbit-web]] — dark-upbit-api 대시보드 웹. 모바일 표 가로스크롤·확대방지·스타일 드롭다운 하드코딩 사고 사례
+- [[dark-toss-api]] — dark-system 내 토스증권 API 자동매매 서비스. 기본 설정상 장시간 게이트 없음(marketHoursOnly false), manualBuy는 시간체크 경로 자체가 없음. 국장/미장 자동 장이동 시 양쪽마감 자동판단 일시정지·재개 구현됨
+- [[dark-toss-web]] — dark-toss-api 대시보드 웹. 모바일 표 가로스크롤·확대방지·장마감 일시정지 배지
 
 ## Topics
 
@@ -130,3 +134,4 @@
 - [[new-app-scaffold-from-slim-base]] — 모노레포에 새 프론트 앱+백엔드 모듈 추가 시 기존 앱 중 슬림한 쪽을 복사 베이스로 고르고 독립 공개 모듈로 배선하는 절차
 - [[null-merge-nan-display]] — `Object.assign({}, null, {...})`이 필드를 못 채워 산술 연산이 NaN으로 새는 버그 진단(생성측 빈객체 안만들기+표시측 `?? 0` 둘 다 방어)
 - [[llm-judge-fallback-chain]] — LLM 분류/라우팅 판정을 유료 API→로컬 LLM→휴리스틱 3단으로 저하 설계(모호하면 상위 티어, few-shot 검증, 최상위 티어는 안전망 도달 불가)
+- [[trading-feature-flag-auto-exclude-manual-allow]] — "자동은 막되 수동은 허용" 요청 시 전면차단→자동전용제외 플래그 전환+엔진교체로 구조적 위험경로(LLM 호출) 차단, 수동선택 보호
