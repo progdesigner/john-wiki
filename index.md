@@ -52,6 +52,7 @@
 - [[2026-07-16-srkk-인보이스-james확인]] — SRKK Consulting 인보이스 독촉 이메일 스레드(5통) 번역. 정식 법인명·Scott Jeun/Clara K(The Sylvan Group) 신원 확정, [[srkk]] 등장1과의 시점 관계 정리, "James 확인 후 결제" 결론
 - [[2026-07-16-srkk-인보이스-james확인-0243]] — 위 세션과 글자 단위로 동일한 이메일 스레드가 28분 뒤 다른 아카이브 파일명으로 재노출·재번역된 quick 채팅. 아카이브 중복 이상 정황 기록, 새 사실 없음
 - [[2026-07-16-lampas-web-product-신규앱-구현]] — "제품 이미지 올리면 분석+마케팅 방향" 신규 앱 `lampas-web-product`(포트 8236) + 백엔드 `product-insights` 공개 모듈을 처음부터 스캐폴딩·구현·검증·커밋push. lampas-web-ai 슬림 베이스 복사, AIDA 카피 개선 후속
+- [[2026-07-16-사용영역-페르소나-폐기]] — "사용영역을 일반/이미지만 남기고 페르소나 이제 쓰지마" 지시로 6영역 페르소나 시스템 전면 조사 후 UI 메뉴 축소+설정 편집UI+백엔드 3경로 주입로직+`/api/presets`+`presets/*.md` 전부 삭제. 나중에 커밋 `7b27897`로 묶여 push됨(원본 작업 세션)
 - [[2026-07-16-기억버튼-보관통합-NaN토큰버그수정]] — 상단 "기억에 저장"→"기억에 보관" 버튼 개명 + 보관 API로 통합(저장 진입점 3개→UI상 사실상 2개로 수렴) + 사용량 배지 "◔ NaN 토큰" 표시 버그(null 병합) 수정, 2왕복
 - [[2026-07-16-메모리인제스트-크레딧버그-근본수정]] — "보관해도 위키 저장이 안 되는 것 같다" 제보 → 큐 실행기(`runner.ts`)가 채팅과 달리 `ANTHROPIC_API_KEY` 제거 처리 누락, 크레딧 0으로 보관 35건 ingest 실패 규명·수정 + 데몬 재시작·재큐잉
 - [[2026-07-15-음성입력-3-4초-잘림-수정]] — 음성입력 앞부분 3~4초 잘림 신고→마이크 선오픈+버퍼링 수정(단독 소스, 15:29~15:33). [[2026-07-15-gpt-realtime-음성입력-길게누르기]] 6번 항목(22:28~22:30, 커밋 938d4e4)과 서술이 사실상 동일 — 시각·커밋 불일치를 아카이브 이상 정황으로 기록
@@ -103,7 +104,7 @@
 - [[system-prompt-mimicry-misconception]] — 공개 시스템 프롬프트 복제로 모델 흉내내기 통념의 한계 + 출처미상 지침 붙여넣기 보안 주의
 - [[harness-background-process-lifecycle]] — 에이전트가 턴 안에서 띄운 배경작업은 턴/세션 종료로 죽는다 (스케줄러·다운로드 관통 한계)
 - [[local-llm-on-apple-silicon]] — Apple Silicon 로컬 LLM: 모델크기·양자화·백엔드(Metal/MLX/CPU), Rapid-MLX vs llama.cpp vs Ollama
-- [[use-area-personas]] — 하네스 사용 영역별 전문가 페르소나(6영역) + "일반" 정책 비어있음→채움 변천
+- [[use-area-personas]] — 하네스 사용 영역별 전문가 페르소나(6영역) + "일반" 정책 비어있음→채움 변천. **2026-07-16 전면 폐기**(메뉴 일반/이미지 2개로 축소, 주입로직 삭제)
 - [[harness-mcp-bridge]] — 하네스가 `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출 (mcpBridge, cwd 우회·PATH·재시작 반영)
 - [[harness-as-business-assistant]] — 하네스를 코딩 외 업무 비서로 사용 (이미지 첨부 해석·인보이스 대조·대외 이메일 초안)
 - [[works-project-portfolio]] — `~/Works` 하위 git 저장소 12개 목록(2026-07-15 시점) — 다수 미문서화
@@ -145,3 +146,4 @@
 - [[null-merge-nan-display]] — `Object.assign({}, null, {...})`이 필드를 못 채워 산술 연산이 NaN으로 새는 버그 진단(생성측 빈객체 안만들기+표시측 `?? 0` 둘 다 방어)
 - [[llm-judge-fallback-chain]] — LLM 분류/라우팅 판정을 유료 API→로컬 LLM→휴리스틱 3단으로 저하 설계(모호하면 상위 티어, few-shot 검증, 최상위 티어는 안전망 도달 불가)
 - [[trading-feature-flag-auto-exclude-manual-allow]] — "자동은 막되 수동은 허용" 요청 시 전면차단→자동전용제외 플래그 전환+엔진교체로 구조적 위험경로(LLM 호출) 차단, 수동선택 보호
+- [[full-stack-feature-removal-audit]] — 이중관리 프론트+백엔드 여러 실행경로에 흩어진 기능을 잔재 없이 완전 제거하는 조사→삭제(UI→API→로직→저장소)→재grep 검증 절차
