@@ -23,7 +23,7 @@ updated: 2026-07-16
 | `dbs/talk-system` | [[toktalk]] | 업데이트됨(432파일, api→talk-api 리네이밍 등 대규모 구조변경) |
 | `cwc/elevino-system` | [[elevino-system]] | 업데이트됨(609파일, +3.1만 라인). 2026-07-15 내용 조사됨 |
 | `cwc/elevino-operator` | (미문서화) | 이미 최신 |
-| `cwc/cwc-system` | [[cwc-system]] | 이미 최신. 2026-07-15 내용 조사됨 |
+| `cwc/cwc-system` | [[cwc-system]] | 이미 최신(06:42 [[2026-07-15-cwc-system-저장소-클론]]으로 이 세션 6분 전 막 클론됨). 2026-07-15 내용 조사됨 |
 | `goraesa/goraesa-system` | (미문서화) | 업데이트됨(360파일, +45만 라인 — 대형 변경) |
 | `bokziri/bokziri-system` | (미문서화) | 업데이트됨(281파일) |
 | `ai-labs/ai-labs-notes` | (미문서화) | 이미 최신 |
@@ -40,6 +40,6 @@ updated: 2026-07-16
 생겼다 — 위 표 참고.)
 
 ## 관련
-- 세션: [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]], [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]]
+- 세션: [[2026-07-15-cwc-system-저장소-클론]], [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]], [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]]
 - 스킬: [[multi-repo-safe-bulk-update]], [[credit-ledger-balance-pattern]]
 - 알려진 저장소 엔티티: [[lampas-harness]] · [[lampas-studio]] · [[toktalk]] · [[john-wiki]] · [[cwc-system]] · [[elevino-system]]

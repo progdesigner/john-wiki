@@ -6,8 +6,10 @@ updated: 2026-07-16
 # cwc-system
 
 `~/Works/cwc/cwc-system` — [[cwc-commerce]] 소유 ERP 분석/관리 pnpm 모노레포. "ERP 데이터를 크롤링해
-사업자(gateway)별로 분석·관리". [[works-project-portfolio]]에서 "미문서화"로만 등장했다가 2026-07-15
-[[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] 세션에서 처음 내용이 조사됨.
+사업자(gateway)별로 분석·관리". 2026-07-15 06:42 UTC [[2026-07-15-cwc-system-저장소-클론]] 세션에서
+`git@github.com:cwc-commerce/cwc-system.git`를 최초 클론(로컬에 처음 등장) → 06:48
+[[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]에서 "이미 최신"으로 집계 → 06:51
+[[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] 세션에서 처음으로 내용이 깊이 조사됨.
 
 ## 사실 (2026-07-15 조사 시점)
 - pnpm workspace (`apps/*`), `pnpm@10.30.1`, node >=22.
@@ -37,7 +39,7 @@ updated: 2026-07-16
   구현 재개 필요.
 
 ## 관련
-- 세션: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]]
+- 세션: [[2026-07-15-cwc-system-저장소-클론]] (최초 클론), [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]]
 - 관련 저장소: [[elevino-system]] (DB 소스), [[works-project-portfolio]]
 - 배경 회사: [[cwc-commerce]]
 - 스킬: [[credit-ledger-balance-pattern]]
