@@ -28,6 +28,7 @@
 - [[2026-07-15-cwc-system-저장소-클론]] — `git@github.com:cwc-commerce/cwc-system.git`을 `~/Works/cwc/cwc-system`에 최초 클론(1왕복). 이후 두 세션(Works 최신화·멤버십 크레딧 설계)의 선행 이벤트
 - [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] — cwc-system에 elevino DB를 그대로 재사용하는 멤버십 검색+크레딧 지급/차감 관리자 기능 설계 완료, 구현 착수 직전 하네스 권한 채널 장애로 중단(실제 구현 미완)
 - [[2026-07-15-데스크톱-file메뉴-new-window]] — lampas-harness desktop(Electron) File 메뉴에 New Window(Cmd+Shift+N) 추가 + 쌓여있던 변경사항 3커밋으로 push
+- [[2026-07-15-srkk-azure-펀딩메일-번역]] — SRKK Group의 MS Azure 펀딩 영업메일 영→한 번역 요청(1왕복 quick). 대행 작성 아닌 순수 번역 사례
 
 ## Entities
 
