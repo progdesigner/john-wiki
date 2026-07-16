@@ -893,3 +893,17 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   [[idempotent-message-retry]]의 msgId 멱등성이 실행 중복은 막은 것으로 보이나, 트랜스크립트 자체엔
   중복 항목이 그대로 남음. [[2026-07-16-srkk-인보이스-james확인-0243]] 계열의 로그/아카이브 중복
   이상 정황과 유사해 세션 페이지에 병기.
+
+## [2026-07-16] ingest | 롱프레스설정-자동음성재생-구현 (source: ae5121bf-92a9-424a-97ef-1ef1b498adc4.md)
+- 원본을 raw/conversations/2026-07-16-롱프레스설정-자동음성재생-구현.md로 보관.
+- wiki/sessions/2026-07-16-롱프레스설정-자동음성재생-구현.md 신규 작성.
+- wiki/entities/lampas-harness.md 갱신: 신규 "배경 롱프레스 설정 열기 + 자동 음성 재생" 섹션 추가,
+  tts-stream(ElevenLabs) 섹션에 이 세션과의 관계(대체/병행 미확정) 교차주석.
+- wiki/skills/destructive-action-inline-confirm.md 갱신: 변형B 메커니즘이 비파괴적 트리거(설정 열기)로도
+  재사용된 사례를 "관련 패턴" 절로 추가.
+- AI_CONTEXT.md lampas-harness 항목 갱신 (tts-stream 미확인 상태 + 이 세션의 완결된 대안 병기).
+- index.md 갱신 (세션 1개 추가).
+- 특이사항: 이 세션이 목표(봇 답변 읽어주기)는 같지만 방식(브라우저 Web Speech API vs ElevenLabs
+  스트리밍)이 다른 별개 구현을 완성·커밋까지 마쳐, 약 1시간 전 미완 상태로 끝난
+  [[2026-07-16-tts-stream-elevenlabs-구현착수]]와의 관계(대체 vs 병행)가 불명확한 채로 남음 — 관련
+  페이지 3곳에 명시적으로 병기.
