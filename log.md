@@ -395,3 +395,25 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   일회성 정보성 질의.
 - 특이사항: 두 왕복이 12시간 이상 간격을 두고 같은 quick 파일에 묶임 — [[2026-07-15-삼성전자-주식분할-배너-html-인사이트]]와
   같은 "무관한 두 왕복 결합" 패턴. 파일명 prefix는 첫 메시지 날짜(2026-07-14) 기준.
+
+## [2026-07-16] ingest | quick.html 이미지 드래그 첨부 구현 + 스크린샷 번역 (source: quick-3c682f70-7364-4f44-858e-3f5e39909eb9.md)
+- 원본 보관: `raw/conversations/2026-07-14-quick-html-이미지-첨부-구현.md`
+- 세션 신설: [[2026-07-14-quick-html-이미지-첨부-구현]] — 서로 무관한 두 왕복. (1) 2026-07-14 09:16~09:57 UTC:
+  "quick.html에서도 index.html처럼 드래그하면 이미지 첨부되게 해줘" → `apps/web/public/quick.html`(퀵 채팅
+  오버레이)에 `index.html`의 이미지 드래그·붙여넣기·파일선택 첨부 기능을 동일하게 이식, `vite build`로
+  `dist/quick.html` 갱신, **Playwright + macOS 시스템 Chrome(`channel:'chrome'`)**으로 실브라우저 종단
+  검증(PNG 드롭→썸네일→전송 바디 `images` 포함→말풍선 렌더링, JS 에러 없음). 초반 `quick.html` 위치를
+  찾는 `find`가 홈 디렉터리 전체 스캔이라 반복 지연(백그라운드 세션 전환 중 끊김 1회 포함), 결국
+  포그라운드 동기 실행으로 해결. (2) 2026-07-14 10:43 UTC: 메신저 대화 캡처 스크린샷 번역 1턴(임대/
+  공급업체 관련 짧은 대화) — 대행 작성 아닌 순수 번역, [[harness-as-business-assistant]] 패턴 사례.
+- 스킬 신설: [[playwright-system-chrome-verify]] (Playwright 브라우저 바이너리 미설치 시 시스템 Chrome
+  `channel:'chrome'` 폴백으로 실브라우저 종단 검증 — 저장소 내부 스크립트 배치·DataTransfer 이벤트
+  재현·좁은 검증 항목 명시)
+- 엔티티 갱신: [[lampas-harness]] (2026-07-14 quick.html 이미지 첨부 기능 절 신설, 관련 세션 링크 추가)
+- 토픽 갱신: [[harness-as-business-assistant]] (스크린샷 번역 사례 추가)
+- index.md 갱신 (세션1·스킬1 추가)
+- AI_CONTEXT.md 갱신 없음 — index.html 기능을 quick.html에 맞추는 기능 패리티 작업으로, 새 결정이나
+  진행 프로젝트 상태 변화 아님(기존 lampas-harness 줄이 포괄). 번역 왕복도 일회성.
+- 특이사항: `find` 지연으로 사용자가 "작업이 완료 되었나요?" 두 번 확인 — 백그라운드 프로세스가
+  세션 전환 중 끊기는 [[harness-background-process-lifecycle]] 패턴의 또 다른 사례로 볼 수 있으나,
+  이번엔 파일 검색(find)이라 별도 토픽 갱신은 보류(이미 알려진 한계의 반복 관찰).

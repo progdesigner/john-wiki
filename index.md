@@ -36,6 +36,7 @@
 - [[2026-07-15-대화-가능-확인]] — "대화 가능?" 1왕복 초단타 세션. 콘텐츠 가치 없음, [[2026-07-15-사용량한도-rate-limit-sdk-확인]] 직전 시점의 단순 핑성 대화
 - [[2026-07-15-arvie-화장품-마케팅-재분석]] — K-뷰티 브랜드 인스타 피드 사진 마케팅 상담, "다시 분석해줘" 재요청으로 자산 확장형→갭 분석형(무드→효능 증거) 답변 프레임 전환 관찰
 - [[2026-07-14-보관-자동저장-확인-볼린저밴드]] — 무관한 두 왕복: (1) 보관(Archive)→memory-ingest 자동저장 동작 사용자 재확인(stale 게이트·로그 문구·`remembered` 필드 확인법), (2) 볼린저 밴드 개념 설명 1왕복 quick
+- [[2026-07-14-quick-html-이미지-첨부-구현]] — 무관한 두 왕복: (1) quick.html에 index.html과 동일한 이미지 드래그 첨부 기능 이식 + Playwright·시스템 Chrome 실브라우저 검증, (2) 메신저 캡처 스크린샷 번역 1왕복
 
 ## Entities
 
@@ -97,3 +98,4 @@
 - [[multi-repo-safe-bulk-update]] — 다중 git 저장소 일괄 업데이트 시 미커밋 변경 저장소만 골라 보류
 - [[rebase-local-feature-onto-refactored-remote]] — 원격이 구조를 리팩터한 코드 위에 로컬 미커밋 기능을 rebase로 이식
 - [[credit-ledger-balance-pattern]] — 원장(ledger) 방식 크레딧 잔액 시스템 이식 시 확인할 것들(네이밍 역전·동시성·검색 대상 불일치)
+- [[playwright-system-chrome-verify]] — Playwright 브라우저 바이너리 미설치 시 macOS 시스템 Chrome(`channel:'chrome'`)으로 실브라우저 종단 검증
