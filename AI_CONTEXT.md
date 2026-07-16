@@ -16,7 +16,7 @@ updated: 2026-07-16
 - [[toktalk]] — 에피소드 beat 플레이·배경 전환 시스템 개발 중.
 - 코딩 외 [[harness-as-business-assistant]]: 이메일 대행·인보이스 대조·마케팅 컨설팅(사진 첨부 해석) 반복.
 - [[progdesigner]]가 네이버 DataLab API 연동 키워드 자동 글쓰기·배포 파이프라인을 이미 운영 중(별도 시스템, study-ai-what과 무관 추정) — 마케팅-상품 얼라인 판단 자동화 상담 → [[content-automation-decision-framework]].
-- [[lampas-studio]] — 스튜디오 레퍼런스·Instagram 통합. 로컬 저장소명 `lampas-system`. `pnpm install`이 저장소 전체에서 실패(누락된 `@iileex/shared`, origin/main도 동일 — 기존 이슈).
+- [[lampas-studio]] — 스튜디오 레퍼런스·Instagram 통합. 로컬 저장소명 `lampas-system`. `pnpm install`이 저장소 전체에서 실패(누락된 `@iileex/shared`, origin/main도 동일 — 기존 이슈). Actor·Object에 이어 세 번째 촬영 대상 **Space(공간)** 엔티티를 신규 구현(DB+API+SDK+web-ai, 2026-07-15~16) — **배포는 아직 안 됨**(3앱 모두 배포 필요, 재개 시 우선 확인).
 - `~/Works` 하위 git 저장소 12개 → [[works-project-portfolio]] (다수는 아직 내용 미조사). 그중 [[dark-system]](개인 소유)은 앱 [[dark-toss-api]](토스증권 자동매매 봇) 확인됨 — 기본 설정상 장시간 게이트 없음(`marketHoursOnly:false`), 수동매수도 시간체크 없음 → 08시대 매수 주문 가능, 안전 전환 여부는 미결정.
 - [[cwc-system]]에 [[elevino-system]] DB(원장 방식 크레딧)를 그대로 재사용해 멤버십 검색+크레딧
   지급/차감 관리자 기능을 이식하는 설계 완료, **구현은 하네스 권한 장애로 미완**(재개 필요) →

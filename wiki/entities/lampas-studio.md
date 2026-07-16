@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space]
 created: 2026-07-09
 updated: 2026-07-16
 ---
@@ -32,6 +32,9 @@ updated: 2026-07-16
 - **분석**: Grok / Gemini.
 - 갤러리 편집 기본 이미지 모델: `google/nano-banana-2/edit`.
 - UI 선택은 localStorage로 기억(`lampas_gallery_edit_image_model`, `lampas_studio_analyze_model`). → `[[localstorage-ui-preference-persistence]]`
+- **주의 — CLAUDE.md 요약과 실제 경로가 다름** (2026-07-15 세션 확인): 제품 CLAUDE.md엔 "스튜디오 합성=Atlas
+  Cloud"로 요약돼 있지만, **Object 단독 촬영은 실제로 Gemini 직접 경로**다(`objects.service.ts:794`).
+  Atlas Cloud는 Actor/Actor+Object 촬영 쪽 경로. → [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]]
 
 ## 백엔드 (`lampas-api`, 관찰된 범위)
 
@@ -73,8 +76,31 @@ updated: 2026-07-16
 - 절차 스킬 → [[rebase-local-feature-onto-refactored-remote]] · 세션 →
   [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]
 
+## Space(공간) 엔티티 — 신규 기능 (2026-07-15~16 세션에서 설계·구현)
+
+Actor·Object처럼 "만들어서 저장해두고 촬영에 반복 사용"할 수 있는 세 번째 촬영 대상. 이전엔 `environment`
+(자유 텍스트)와 `sceneReferenceImageData`(1회성, 저장 안 됨) 두 임시 형태로만 존재했고 **독립 엔티티는
+없었음** — Actor·Object 파이프라인을 그대로 복제해 신설.
+
+- **DB**: `Space` 모델(테이블 `spaces`) 신설, 기존 enum(`ActorStatus`/`ScopeArea`) 재사용.
+- **API**: `modules/spaces/`(생성·목록·조회·수정·삭제·복원·Draft↔Workspace 이전·공개 이미지 스트림) —
+  `modules/objects/` 복제.
+- **web-sdk**: `/spaces`, `/spaces/create`, `/spaces/view/:spaceKey` 신설. 공간 카테고리 11종(Studio·Indoor·
+  Outdoor·Urban·Nature·Cafe 등). 내비게이션에 Spaces 탭 추가(Objects-Gallery 사이).
+- **촬영 합성 연결**:
+  - Actor / Actor+Object 촬영(Atlas Cloud) — 기존 `background` 레퍼런스 슬롯 그대로 재사용, 거의 무개조.
+  - Object 단독 촬영(Gemini 직접 경로) — 2슬롯(제품+씬레퍼런스) 하드코딩에 **3번째 슬롯**으로 Space 이미지
+    추가(Gemini 최대 8장 지원이라 여유 있음).
+- **web-ai 채팅 촬영 플로우**: 피사체 확정 직후 저장된 Space가 있으면 배경 선택 카드 그리드 제안(없으면
+  기존 플로우 무변화). **채팅에서 Space를 "만드는" 플로우는 없음** — 생성은 SDK 웹에서만.
+- **모델 배정**: 레퍼런스 분석 Grok(1차)→Gemini(폴백), 프로필 이미지 생성 Gemini, 연출 프롬프트 Grok —
+  기존 Object 패턴과 동일.
+- 이 세션 시점 **web-ai/API tsc 통과·SDK esbuild 검증까지 완료, 배포는 미진행**(3개 앱 모두 배포 필요).
+- 절차 스킬 → [[clone-sibling-entity-pipeline]] · 세션 → [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]]
+
 ## 관련
-- 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]
+- 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
+  [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
 - 포트폴리오 배경: [[works-project-portfolio]]
