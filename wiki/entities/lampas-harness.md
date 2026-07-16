@@ -216,6 +216,12 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   대화의 작업이 끝나는 것을 5초 폴링으로 기다렸다가(2회 연속 큐 비어있음 확인, 최대 1시간 대기)
   데몬 재시작 — 진행 중인 다른 작업은 안 죽임. → [[self-hosted-agent-server-ops]] ·
   [[detach-long-job-nohup]]
+- **quick.html에 작업 폴더 선택기 추가** — `apps/web/public/quick.html`(퀵 채팅 오버레이)에서
+  작업 폴더를 고를 수 있게 되어, 첫 턴 이후 그 대화가 선택된 폴더에 묶인다. [[work-folder-sandboxing]]
+  스킬(에이전트를 작업 폴더 안으로 제한)과 연관 가능성 있으나 구체 구현 코드는 미확인.
+  → 세션: [[2026-07-16-quick-작업폴더선택기-커밋푸시]]
+- 위 v0.1.27 변경 5종(롱프레스 보관 확인·중지버튼 재클릭 확인·음성 진동+비프·extreme 티어·
+  quick.html 작업 폴더 선택기) 커밋 **`c100edd`**로 `main` 반영, origin push 완료(2026-07-16).
 
 ## 커밋 이력 (2026-07-11 세션)
 

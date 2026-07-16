@@ -622,3 +622,15 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 미해결 플래그(기록만, 이 세션이 만든 문제 아님): 병합으로 들어온 원격 커밋에
   `apps/lampas-api/env/.env.development`가 저장소에 커밋된 채 존재 — 개발용 시크릿 노출 가능성,
   사용자 확인 권고했으나 이 세션 내 확인은 없었음.
+
+## [2026-07-16] ingest | quick.html 작업 폴더 선택기 + v0.1.27 커밋·push 확인 (source: quick-62e7d2bc-6326-421e-84ac-e7beb0bffdc9.md)
+- 원본 보관: `raw/conversations/2026-07-16-quick-작업폴더선택기-커밋푸시.md`
+- 세션 신설: [[2026-07-16-quick-작업폴더선택기-커밋푸시]] — "밀린 코드 커밋·push해줘" 1왕복 quick.
+  커밋 `c100edd` → `main → origin/main` push 확인. 포함된 5개 변경 중 4개(롱프레스 보관확인·
+  중지버튼 재클릭 확인·음성 진동+비프·extreme 티어)는 [[2026-07-15-auto모델-난이도판정-확인ux-개선]]·
+  [[2026-07-16-음성입력-진동비프-피드백]]에 이미 기록된 작업의 반영 확인. 나머지 1개
+  **quick.html 작업 폴더 선택기**(첫 턴 이후 대화가 폴더에 묶임)는 위키에 처음 등장하는 신규 사실.
+- 엔티티 갱신: [[lampas-harness]] — "추가 기능" 절에 quick.html 작업 폴더 선택기 항목 추가,
+  v0.1.27 변경 5종 전체가 커밋 `c100edd`로 반영·push됨을 명시.
+- AI_CONTEXT.md 갱신: lampas-harness 줄에 v0.1.27 커밋(`c100edd`) push 완료 사실 반영(38줄 유지).
+- index.md 갱신 (세션 1개 추가).
