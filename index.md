@@ -67,6 +67,7 @@
 - [[2026-07-16-봇메시지-클릭읽어주기-구현]] — 봇 말풍선 클릭 시 읽어주기/정지 토글(세 번째 TTS 트리거) 구현 세션(09:10~09:17). 기존 `speak()`/`stopSpeech()` Web Speech API 인프라 재사용으로 확정(ElevenLabs와 무관), 직전 병합 커밋(`dca1422`, 위 세션에서 생성)이 남긴 충돌 마커로 빌드 실패 중이던 것 발견·수정(package.json 0.1.32, index.html CATEGORIES 병합), Playwright 실브라우저 검증. 커밋은 하지 않고 다음 세션에 위임
 - [[2026-07-16-봇메시지-클릭읽어주기-커밋푸시]] — "모두 commit 해줘"→"푸시 해줘" 2왕복 quick 운영 세션(위 구현 세션 4분 뒤). 커밋 `4cff973`→rebase→`9e45de9` push, v0.1.36. 직전 기록 버전(0.1.30)과 5개 버전 간극 관찰. 구현 방식·마커 원본 커밋 둘 다 위 두 세션 발견으로 해소됨
 - [[2026-07-16-람파스-개발일지-블로그-seo최적화]] — "지난주 진행한 내용 블로그 글로 써줘" 요청(04:28~04:30). 어시스턴트가 git 커밋 47개를 직접 읽어 4주제 개발일지 초안 작성 + SEO 최적화/태그 30개, 발행은 미확인. `study-ai-what` 연재가 아키텍처 소개→주간 개발일지로 확장된 정황, git 커밋 로그 기반 블로그 작성 절차 최초 관찰
+- [[2026-07-16-launchctl-불필요서비스-점검]] — macOS `launchctl list` 전체 출력 붙여넣고 "불필요한 건 없는지 판단해봐" 1왕복 quick 채팅. watchman/Adobe CC/OneDrive 업데이터를 제거 후보로, lampas-harness·rapid-mlx·redis·postgresql을 필수 유지로 분류. Redis/PostgreSQL 실사용 여부는 미확인으로 남음, 콘텐츠 가치 낮음
 
 ## Entities
 
@@ -113,6 +114,7 @@
 - [[wine-meetup-cost-reduction]] — 와인 블라인드 테이스팅 모임 재료비 구조 재설계: 콘텐츠 재설계(가격 블라인드·BYOB)→원가 구조 재설계(회차당 2병 상한·재료비 실비) 2단계 프레임워크
 - [[cwc-fy-group-whisky-dispute]] — CWC Lab-FY Group 간 이탈리아 위스키(강남 위스키클럽용) 선적 지연·환불·법적 조치 언급된 장기 분쟁 타임라인(2024-10~2025-01, 2025-01-06 시점 미해결)
 - [[content-automation-decision-framework]] — 네이버 DataLab API 키워드 자동화 파이프라인의 마케팅-상품 얼라인 의사결정 6-패턴 프레임워크(채점게이트→배치승인→피드백루프 순 도입 권장)
+- [[macos-launchctl-cleanup-candidates]] — progdesigner 맥미니 `launchctl list` 정리 후보 목록(watchman·Adobe CC·OneDrive 업데이터 제거 검토, lampas-harness/rapid-mlx/redis/postgresql 유지) — 실행 여부 미확인, 다음 정리 시 재검토용
 
 ## Skills
 

@@ -1012,3 +1012,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - index.md 갱신: 신규 세션·스킬 라인 추가.
 - AI_CONTEXT.md는 변경 안 함 — 기존 "블로그/SEO 태그 요청 반복" 서술이 이미 이 패턴을 포괄하고,
   이번 세션의 실제 발행 여부도 미확인이라 상시 요약에 추가할 만한 확정 사실이 없음.
+
+## [2026-07-16] ingest | launchctl 불필요 서비스 점검 (source: quick-d10bd265-ef3c-4a3d-8872-b36ee8ddabaf.md)
+- raw/conversations/2026-07-16-launchctl-불필요서비스-점검.md 보관(원본 아카이브 파일명:
+  `quick-d10bd265-ef3c-4a3d-8872-b36ee8ddabaf.md`).
+- 세션 요약 신설: wiki/sessions/2026-07-16-launchctl-불필요서비스-점검.md — `launchctl list` 전체
+  출력(약 560줄) 붙여넣고 "불필요한 건 없는지 판단해봐" 1왕복. watchman/Adobe CC/OneDrive 업데이터를
+  제거 후보로, lampas-harness·rapid-mlx·redis·postgresql을 필수 유지로 분류. 되물음("확인해볼까요?")
+  이후 사용자 응답 없이 소스 종료 — 실제 실행 여부 미확인. 콘텐츠 가치 낮음.
+- 신규 토픽: wiki/topics/macos-launchctl-cleanup-candidates.md — 위 분석을 재사용 가능한 참고 목록으로
+  정리(다음 정리 시 출발점).
+- wiki/entities/lampas-harness.md 갱신: Redis/PostgreSQL 실사용 여부가 이 하네스 소스에서 미확인이라는
+  미해결 질문을 "운영 사실" 절에 추가 + 세션 링크 반영.
+- index.md 갱신: 신규 세션·토픽 라인 추가.
+- 스킬 추출 안 함 — 데몬화 절차([[macos-launchd-daemon]])와 달리 이번 건은 일반적 판단(무엇이 필요한
+  프로세스인지 분류)이라 재사용 가능한 별도 절차로 보기 어려움.
+- AI_CONTEXT.md는 변경 안 함 — 일회성 시스템 점검 질문이고 확정된 결정·실행 결과가 없어 상시 요약에
+  넣을 확정 사실이 없음.
