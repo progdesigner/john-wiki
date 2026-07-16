@@ -2,6 +2,7 @@
 name: naver-blog-tag-seo
 description: 네이버 블로그 글에 붙일 SEO용 태그 30개를 내용 근거로 생성할 때
 created: 2026-07-14
+updated: 2026-07-16
 tags: [naver-blog, seo, hashtag, tag, marketing, content]
 ---
 # 네이버 블로그 SEO 태그 30개 생성
@@ -16,6 +17,11 @@ tags: [naver-blog, seo, hashtag, tag, marketing, content]
 - 네이버는 **외부 크롤(WebFetch)을 차단** → URL로 본문을 못 읽는다.
 - 연결된 [[naver-blog-mcp]]는 **발행 전용, 글 읽기 기능 없음** → MCP로도 본문 못 가져온다.
 - 따라서 사용자에게 **글 제목 + 본문 붙여넣기**를 요청하는 것이 유일하게 정확한 경로.
+
+**단, 이 제약은 "이미 존재하는 글"(남이 썼거나 이미 발행된 글)의 태그를 추천할 때만 적용된다.**
+어시스턴트 자신이 그 자리에서 글을 새로 쓰는 경우(예: git 커밋 로그 기반 개발일지 초안,
+→ [[dev-log-blog-from-git-log]])는 본문이 이미 자기 손에 있으므로 이 단계를 건너뛰고 바로
+아래 배분 절차로 넘어간다.
 
 ## 절차 (단계별)
 1. **본문 확보** — 제목·본문을 받는다(위 선결 조건). 최소한 제목 + 주제 한 줄이라도.
@@ -38,5 +44,5 @@ tags: [naver-blog, seo, hashtag, tag, marketing, content]
 - URL만 주고 본문을 안 주면 **반드시 본문을 요청**하고, 그전엔 태그를 만들지 않는다(추측 금지).
 
 ## 출처
-- 세션: [[2026-07-13-블로그-ai기억글-해시태그]]
-- 관련: [[naver-blog-mcp]] (발행 전용·읽기 없음) · [[naver-blog-mcp-posting]]
+- 세션: [[2026-07-13-블로그-ai기억글-해시태그]] · [[2026-07-16-람파스-개발일지-블로그-seo최적화]]
+- 관련: [[naver-blog-mcp]] (발행 전용·읽기 없음) · [[naver-blog-mcp-posting]] · [[dev-log-blog-from-git-log]]
