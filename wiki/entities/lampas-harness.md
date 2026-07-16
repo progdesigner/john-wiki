@@ -3,6 +3,7 @@ tags: [entity, project, tool, claude-agent-sdk, typescript]
 created: 2026-07-07
 updated: 2026-07-16
 ---
+
 # lampas-harness
 
 Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데몬으로 돌며,
@@ -145,6 +146,28 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
     → [[playwright-system-chrome-verify]]
   - → 세션: [[2026-07-14-quick-html-이미지-첨부-구현]]
 
+## 추가 기능 (2026-07-15 세션 — GPT Realtime 음성입력)
+
+- **전송 버튼 길게 누르기(push-to-talk) 음성 입력** — OpenAI Realtime `gpt-4o-transcribe`(한국어 우선)로
+  실시간 전사. 서버가 **1분짜리 임시 키**를 발급해 브라우저가 OpenAI에 직접 WebSocket 연결(키 노출 없음,
+  전사 성공 여부는 서버 로그에 안 남음). 최초 구현 커밋 `b9eac27`.
+- **버튼 3단계 시각 피드백**: 🟡노랑(준비중, 마이크 오픈 전 — 유실 가능) → 🔴빨강(녹음중, 유실 없음) →
+  🟢초록(인식중, OpenAI `speech_started` 이벤트 수신 후). 커밋 `7450997`(웹만 변경, 새로고침으로 반영).
+- **시작 부분 끊김 수정**: 원래 토큰발급→WebSocket 연결(0.5~1.5초) 완료 후에야 마이크 캡처가 시작돼
+  그 사이 말한 내용이 유실되던 구조적 버그를 발견·수정 — 마이크를 먼저 열고 연결 중 오디오를 로컬
+  버퍼에 쌓았다가 연결 직후 순서대로 플러시. 커밋 `938d4e4`. 재사용 가능한 패턴으로 스킬 추출:
+  → [[realtime-voice-mic-buffer-before-connect]]
+- **밀어내기 취소(swipe-to-cancel)**: 녹음 중 버튼에서 60px 이상 벗어나면 회색 "✕ 떼면 취소"로 전환,
+  그 상태에서 떼면 전송하지 않되 받아쓴 텍스트는 입력창에 남김. 커밋 `5182ee0`.
+- **재발견된 배포 함정 2종** (같은 세션에서): (a) launchd 데몬은 `dist/index.js`를 실행하므로 `src`만
+  고치고 `npm run build:server`를 빠뜨리면 새 라우트가 반영 안 됨, (b) 이전 날(7/12) 수동 실행된 옛
+  서버가 IPv6 와일드카드로 포트를 리슨하며 localhost를 가로챈 채 남아있었음. → [[self-hosted-agent-server-ops]]
+  (함정 1 보강 + 함정 4 신설)
+- **크레딧 소진의 파급 범위 재확인**: API 크레딧 부족이 `/compact`뿐 아니라 **백그라운드 `memory-ingest`
+  잡**(이 위키로의 야간 자동 적재)까지 실패시킴을 이 세션에서 재확인(22:27, 2회 재시도 모두 실패,
+  "Credit balance is too low"). → [[sdk-claude-code-vs-api-billing]] · [[long-term-memory-architecture]]
+- → 세션: [[2026-07-15-gpt-realtime-음성입력-길게누르기]]
+
 ## 커밋 이력 (2026-07-11 세션)
 
 | 커밋 | 내용 |
@@ -197,7 +220,7 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   → [[env-empty-var-shadows-dotenv]]
 
 ## 관련
-- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-14-quick-html-이미지-첨부-구현]] · [[2026-07-15-올리브유-마케팅-포지셔닝]] · [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-사용량한도-rate-limit-sdk-확인]] · [[2026-07-15-데스크톱-file메뉴-new-window]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-14-quick-html-이미지-첨부-구현]] · [[2026-07-15-올리브유-마케팅-포지셔닝]] · [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-사용량한도-rate-limit-sdk-확인]] · [[2026-07-15-데스크톱-file메뉴-new-window]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]]
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
 - 연동 대상 장기기억: [[john-wiki]] (제안).
 - 상주 서비스·도구: [[rapid-mlx]] (로컬 LLM) · [[naver-blog-mcp]] (외부 MCP).

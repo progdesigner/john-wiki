@@ -468,3 +468,27 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: Barbara 이메일(와이너리·올리브 농장)은 2026-07-15 올리브유 마케팅 세션과 주제상 겹치나
   등장인물·시점이 달라 직접 연결 근거 없어 임의 연결하지 않음. Clara 메시지도 발신자 소속 미상으로
   Princ 조사와의 연관은 추정하지 않음.
+
+## [2026-07-16] ingest | GPT Realtime 음성입력(길게누르기) 구현 (source: 3df735b1-aebf-4c87-83af-2f20f8f70bae.md)
+- 원본 보관: `raw/conversations/2026-07-15-gpt-realtime-음성입력-길게누르기.md`
+- 세션 신설: [[2026-07-15-gpt-realtime-음성입력-길게누르기]] — 12:37~22:55 장시간 연속 개발 세션.
+  전송버튼 길게누르기 → OpenAI Realtime(`gpt-4o-transcribe`) 실시간 음성입력 최초 구현(`b9eac27`) →
+  재시작 미반영 발견·수정(dist빌드누락 + IPv6 떠돌이서버 2중 원인) → API크레딧 소진이 `/compact`·
+  백그라운드 `memory-ingest` 둘 다 실패시킴 발견 → 시작부분 끊김 버그(마이크가 WebSocket 연결 완료 후에야
+  열림) 발견·수정(`938d4e4`, 마이크 선오픈+로컬버퍼링) → 3단계 색상 시각피드백(`7450997`) → 밀어내기
+  취소 UX(`5182ee0`) 총 4커밋.
+- 스킬 신설: [[realtime-voice-mic-buffer-before-connect]] — push-to-talk 실시간 음성입력의 연결 전
+  마이크 버퍼링 패턴 + speech_started 이벤트 기반 3단계 시각 피드백 (재사용 가능한 절차로 추출)
+- 스킬 갱신: [[self-hosted-agent-server-ops]] (함정 1에 IPv6 와일드카드 변종 추가, 함정 4 "dist 빌드
+  누락" 신설 — 두 함정이 증상이 같아 헷갈리기 쉬움을 명시), [[sdk-claude-code-vs-api-billing]] (API
+  크레딧 소진이 백그라운드 memory-ingest까지 실패시키는 파급 범위 절 추가)
+- 토픽 갱신: [[long-term-memory-architecture]] (저장(ingest) 실패 모드 — API 크레딧 소진 절 신설.
+  저장 자동화됐다고 항상 성공한다고 가정하면 안 됨을 명시)
+- 엔티티 갱신: [[lampas-harness]] ("추가 기능 (2026-07-15 세션 — GPT Realtime 음성입력)" 절 신설,
+  커밋 4개·배포 함정 2종·크레딧 파급 재확인 반영)
+- AI_CONTEXT.md 갱신: 진행 중 프로젝트에 음성입력 기능 완료 한 줄 추가, 확정된 결정에 크레딧 소진→
+  백그라운드 ingest 실패 한 줄 추가. 37줄(<40 준수)
+- index.md 갱신 (세션1·스킬1 추가, self-hosted-agent-server-ops 설명 보강)
+- 특이사항: 소스 파일이 물리적으로 `logs/chats/`가 아니라 `logs/chats/archive/`에 있었다(요청받은 경로에는
+  없었음) — find로 archive 하위에서 찾아 확인 후 진행. 이 대화 자체가 진행 중이던 음성입력 기능을
+  사용자가 직접 검증(요? / 확인해보자 잘 돼? 등 음성 테스트 발화)한 라이브 사용 흔적을 포함.

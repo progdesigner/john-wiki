@@ -39,6 +39,7 @@
 - [[2026-07-15-arvie-화장품-마케팅-재분석]] — K-뷰티 브랜드 인스타 피드 사진 마케팅 상담, "다시 분석해줘" 재요청으로 자산 확장형→갭 분석형(무드→효능 증거) 답변 프레임 전환 관찰
 - [[2026-07-14-보관-자동저장-확인-볼린저밴드]] — 무관한 두 왕복: (1) 보관(Archive)→memory-ingest 자동저장 동작 사용자 재확인(stale 게이트·로그 문구·`remembered` 필드 확인법), (2) 볼린저 밴드 개념 설명 1왕복 quick
 - [[2026-07-14-quick-html-이미지-첨부-구현]] — 무관한 두 왕복: (1) quick.html에 index.html과 동일한 이미지 드래그 첨부 기능 이식 + Playwright·시스템 Chrome 실브라우저 검증, (2) 메신저 캡처 스크린샷 번역 1왕복
+- [[2026-07-15-gpt-realtime-음성입력-길게누르기]] — 전송버튼 길게누르기 GPT Realtime 음성입력 구현(12:37~22:55 장시간 연속 세션). 최초 구현→dist빌드누락/IPv6 떠돌이서버 발견·수정→API크레딧 소진이 /compact·백그라운드 memory-ingest 둘 다 실패시킴 발견→시작부분 끊김 버그 수정(마이크 선오픈+버퍼링)→3단계 색상 피드백→밀어내기 취소 UX 4커밋
 
 ## Entities
 
@@ -95,7 +96,7 @@
 - [[local-llm-rapidmlx-install]] — Rapid-MLX로 Apple Silicon에 로컬 LLM 설치·launchd 상주·하네스 모델 선택기 통합
 - [[business-email-consent-first]] — 상대가 서류 요구만 반복할 때 원칙적 동의 여부를 먼저 확정 요청하는 정중한 회신 메일 작성
 - [[env-empty-var-shadows-dotenv]] — 새 API 키가 기능/목록에 안 뜰 때: 셸의 빈 env가 `.env` 값을 가리는지 진단·수정
-- [[self-hosted-agent-server-ops]] — 에이전트 턴을 호스팅하는 서버 재시작·종료·디버그 안전 규칙(stray-port·restart-kills-own-turn·pkill-prod)
+- [[self-hosted-agent-server-ops]] — 에이전트 턴을 호스팅하는 서버 재시작·종료·디버그 안전 규칙(stray-port·IPv6 변종·restart-kills-own-turn·pkill-prod·stale-dist-build)
 - [[naver-blog-mcp-posting]] — naver-blog-mcp 발행: 순수 텍스트 본문·SRT 세션 갱신(headed 캡차)·서버 버그 대응
 - [[naver-blog-tag-seo]] — 네이버 블로그 SEO 태그 30개 생성(본문 근거 필수·대표+롱테일 배분·무관 인기태그 저품질 위험)
 - [[bank-refund-invoice-reconciliation]] — 애매한 은행 환입/입금을 인보이스와 대조·검증하고 거래처 회신 잡기(코드 단정 금지·차액 명시·통화 확인·다른 소스 전수 검색으로 배제 후보 확정)
@@ -104,3 +105,4 @@
 - [[rebase-local-feature-onto-refactored-remote]] — 원격이 구조를 리팩터한 코드 위에 로컬 미커밋 기능을 rebase로 이식
 - [[credit-ledger-balance-pattern]] — 원장(ledger) 방식 크레딧 잔액 시스템 이식 시 확인할 것들(네이밍 역전·동시성·검색 대상 불일치)
 - [[playwright-system-chrome-verify]] — Playwright 브라우저 바이너리 미설치 시 macOS 시스템 Chrome(`channel:'chrome'`)으로 실브라우저 종단 검증
+- [[realtime-voice-mic-buffer-before-connect]] — 누르고-말하기 실시간 음성입력에서 연결 전 마이크 선오픈+로컬 버퍼링으로 시작부분 유실 방지, 3단계(노랑/빨강/초록) 시각 피드백
