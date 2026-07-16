@@ -12,6 +12,12 @@ Apple Silicon용 로컬 LLM 서버(vllm-mlx 계열). `[[progdesigner]]`의 맥�
 - 상주 모델: `qwen3.5-35b-8bit`(= `mlx-community/Qwen3.5-35B-A3B-8bit`, 약 37.7GB) — 64GB에 sweet spot.
 - 설치 절차: [[local-llm-rapidmlx-install]] · 배경(양자화·사이징): [[local-llm-on-apple-silicon]]
 
+## Auto 모델 난이도 판정의 실질적 1순위 경로 (2026-07-15 확인)
+[[model-selection]]의 "Auto" 기능은 원래 Claude Haiku 4.5(API)를 판정 1순위로 설계했으나,
+`ANTHROPIC_API_KEY` 크레딧 잔액이 0이라 API 판정이 항상 400으로 실패 → **rapid-mlx(Qwen3.5-35B)가
+현재 실질적인 1순위 판정 경로**로 동작 중. 판정 속도 ~250ms, 비용 0원, 실사용 예시 7건 테스트에서
+7/7 기대대로 분류(few-shot 보정 후). → [[2026-07-15-auto모델-기능-최초구현]]
+
 ## launchd 관리 (KeepAlive) — 2026-07-11 확인
 
 rapid-mlx 서버는 LaunchAgent **`io.lampas.rapidmlx`**가 `KeepAlive`로 관리한다. 프로세스를 kill하면

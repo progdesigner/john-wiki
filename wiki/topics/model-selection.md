@@ -53,10 +53,24 @@ Claude 모델을 고르면 입력창 하단에 "API 사용" 체크박스가 뜬�
 컨텍스트 잔여율을 보인다. 판별·전환 절차: [[sdk-claude-code-vs-api-billing]] · 비용 비교: [[claude-model-pricing]].
 → [[2026-07-15-과금모드-토글-컨텍스트표시]]
 
-## "Auto" — 난이도 자동 선택 (v0.1.25 도입, 2026-07-15 extreme 확장)
-모델 드롭다운의 "Auto — 난이도 자동 선택" 옵션. **판단은 서버(`src/server.ts`) 100% 전담**, 클라이언트는
-표시만 한다(옵션 노출 865-869행, 결과 표시 `data.auto` 1675행) — [[2026-07-15-auto모델-난이도판정-확인ux-개선]]에서
-file:line 근거로 확인.
+## "Auto" — 난이도 자동 선택 (v0.1.25 최초 구현, 2026-07-15 extreme 확장)
+모델 드롭다운의 "Auto — 난이도 자동 선택" 옵션. 사용자가 기능만 요청하고 **판정 모델 선택은
+어시스턴트 재량에 위임**해 도입됨(커밋 `802af89`, 22:42~22:52) → [[2026-07-15-auto모델-기능-최초구현]].
+같은 날 31분 후 [[2026-07-15-auto모델-난이도판정-확인ux-개선]]에서 file:line 근거로 감사·재확인하고
+extreme 티어를 추가했다. **판단은 서버(`src/server.ts`) 100% 전담**, 클라이언트는 표시만 한다(옵션
+노출 865-869행, 결과 표시 `data.auto` 1675행).
+
+**판정 모델 선택 근거(최초 구현 세션)**: 분류가 한 단어 라벨링이라 지능보다 속도·비용이 중요 →
+Haiku 4.5를 1순위로 결정. 검증 중 **`.env`의 `ANTHROPIC_API_KEY`는 있으나 크레딧 잔액 0이라 API
+직접 호출이 400으로 거절됨을 확인** — [[sdk-claude-code-vs-api-billing]]·[[long-term-memory-architecture]]가
+기록해 온 "API 크레딧 소진이 `/compact`·백그라운드 `memory-ingest`를 실패시킨다"는 관찰의 근본
+원인(잔액 0)이 이 세션에서 처음 명시적으로 확인됐다. 크레딧을 충전하면 코드 수정 없이 판정이 Haiku
+경로로 자동 승격되도록 폴백 체인이 설계됨.
+
+로컬 판정(rapid-mlx, [[local-llm-on-apple-silicon]])은 실제 예시 7건으로 검증해 7/7 기대대로 분류
+확인 — 초기 "블로그 글 다듬기 → easy" 오분류를 few-shot 예시 추가로 수정. **설계 원칙**: 애매하면
+상위 티어로 틀리게 해 "약한 모델이 어려운 일을 받는" 최악의 경우를 피함(31분 후 extreme 티어의
+"모호하면 hard" 규칙과 동일 원칙).
 
 `runChatTurn()`(3300-3306행)이 auto 감지 시 `resolveAutoModel()`(716-737행) 호출, 3단계 순차 폴백:
 1. **Claude API 판정** `judgeTierClaude()`(669-690행) — `claude-haiku-4-5`(`LAMPAS_AUTO_JUDGE`로 재정의)
@@ -78,5 +92,5 @@ medium→`claude-sonnet-5`(`LAMPAS_AUTO_MEDIUM`), hard→`claude-opus-4-8`(`LAMP
 같은 드롭다운·표시 UI를 이식. → [[2026-07-16-quick-html-폴더선택기-auto모델-구현]]
 
 ## 관련
-- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]] / [[2026-07-13-람파스-누적운영기억-이관]] / [[2026-07-15-auto모델-난이도판정-확인ux-개선]] / [[2026-07-16-quick-html-폴더선택기-auto모델-구현]]
+- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]] / [[2026-07-13-람파스-누적운영기억-이관]] / [[2026-07-15-auto모델-기능-최초구현]] / [[2026-07-15-auto모델-난이도판정-확인ux-개선]] / [[2026-07-16-quick-html-폴더선택기-auto모델-구현]]
 - [[local-llm-on-apple-silicon]] / [[env-empty-var-shadows-dotenv]]
