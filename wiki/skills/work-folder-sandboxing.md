@@ -18,6 +18,9 @@ tags: [claude-agent-sdk, security, sandbox, permission]
    - bash는 명령 문자열에서 절대경로·`~` 경로를 추출해 검사(시스템 경로 `/usr/bin`,`/tmp` 등은 실행 위해 허용).
 3. **cwd 검증** — 요청의 `cwd`가 존재하지 않거나 홈 밖(`/etc` 등)이면 요청 자체를 400으로 거부.
 4. **UI** — 입력창 위 폴더 선택기(`/api/workdirs`가 `~/Works` 하위 + "전체(제한 없음)" 제공), `localStorage` 저장. 첫 턴 이후 대화가 폴더에 묶이면 선택기 잠금. 큐 패널에 `@폴더명` 태그 표시.
+   - **퀵 채팅 오버레이로 확장(2026-07-16)**: 원래 index.html(메인 채팅)에만 있던 이 UI를
+     `apps/web/public/quick.html`에도 동일하게 이식(`quick_workdir` localStorage 키). 서버 쪽 가드
+     로직은 공유, 클라이언트 UI만 복제. → [[2026-07-16-quick-html-폴더선택기-auto모델-구현]]
 
 ## 검증 (실서버 테스트)
 - 폴더 안 파일 읽기 → 정상. 폴더 밖 파일(`~/.zshrc`) Read → 차단.

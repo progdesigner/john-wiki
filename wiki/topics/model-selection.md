@@ -73,6 +73,10 @@ medium→`claude-sonnet-5`(`LAMPAS_AUTO_MEDIUM`), hard→`claude-opus-4-8`(`LAMP
 **휴리스틱 폴백은 hard까지만** — extreme은 실제 LLM 판정으로만 도달 가능, 판정 실패 안전망에서
 근거 없이 최상위 모델로 튀지 않게 하는 의도적 비대칭.
 
+**quick.html로 확장(2026-07-16)** — 기존엔 index.html(메인 채팅)에만 있던 "Auto" 옵션을 퀵 채팅
+오버레이(`apps/web/public/quick.html`)에도 동일하게 추가. 서버 판정 로직은 공유, 클라이언트 쪽만
+같은 드롭다운·표시 UI를 이식. → [[2026-07-16-quick-html-폴더선택기-auto모델-구현]]
+
 ## 관련
-- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]] / [[2026-07-13-람파스-누적운영기억-이관]] / [[2026-07-15-auto모델-난이도판정-확인ux-개선]]
+- [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]] / [[2026-07-13-람파스-누적운영기억-이관]] / [[2026-07-15-auto모델-난이도판정-확인ux-개선]] / [[2026-07-16-quick-html-폴더선택기-auto모델-구현]]
 - [[local-llm-on-apple-silicon]] / [[env-empty-var-shadows-dotenv]]

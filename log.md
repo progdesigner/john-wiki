@@ -634,3 +634,19 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   v0.1.27 변경 5종 전체가 커밋 `c100edd`로 반영·push됨을 명시.
 - AI_CONTEXT.md 갱신: lampas-harness 줄에 v0.1.27 커밋(`c100edd`) push 완료 사실 반영(38줄 유지).
 - index.md 갱신 (세션 1개 추가).
+
+## [2026-07-16] ingest | quick.html 작업 폴더 선택기 + Auto 모델 구현 세션 (source: 605d1768-15e5-4e60-9a21-74ba9d9f2993.md)
+- 원본 보관: `raw/conversations/2026-07-16-quick-html-폴더선택기-auto모델-구현.md`
+- 세션 신설: [[2026-07-16-quick-html-폴더선택기-auto모델-구현]] — "quick.html 에도 어느 폴더로 할건지와
+  Auto 를 선택할 수 있게 해줘" 1왕복 quick(02:16~02:20). [[2026-07-16-quick-작업폴더선택기-커밋푸시]]
+  (02:34~, 이미 위키에 기록됨)이 "신규 확인, 구체 구현 코드는 미확인"으로 남겨뒀던 quick.html 작업
+  폴더 선택기의 **실제 구현 세션**임을 확인(18분 먼저 실행) — index.html의 폴더 선택·잠금·Auto 모델
+  로직을 quick.html에 이식. 부수적으로 vite `public/` 정적 파일은 전체 빌드 없이 cp만으로 반영
+  가능하다는 배포 요령이 신규로 드러남.
+- 엔티티 갱신: [[lampas-harness]] — "quick.html에 작업 폴더 선택기 추가" 항목을 구현 상세(폴더
+  선택·잠금·Auto 모델·배포 요령)로 보강, "구체 구현 코드 미확인" 플래그 해소.
+- 스킬 갱신: [[work-folder-sandboxing]](퀵 채팅 오버레이로 UI 확장 사실 추가),
+  [[self-hosted-agent-server-ops]](함정4 반대 사례 — `public/` 정적 파일 cp 배포 요령 추가).
+- 주제 갱신: [[model-selection]] — Auto 옵션이 quick.html로도 확장됐음을 반영.
+- index.md 갱신 (세션 1개 추가). AI_CONTEXT.md는 이미 v0.1.27/커밋 `c100edd` 반영 완료 상태라 추가
+  갱신 없음(38줄 유지).

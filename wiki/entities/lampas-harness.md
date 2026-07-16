@@ -216,10 +216,20 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   대화의 작업이 끝나는 것을 5초 폴링으로 기다렸다가(2회 연속 큐 비어있음 확인, 최대 1시간 대기)
   데몬 재시작 — 진행 중인 다른 작업은 안 죽임. → [[self-hosted-agent-server-ops]] ·
   [[detach-long-job-nohup]]
-- **quick.html에 작업 폴더 선택기 추가** — `apps/web/public/quick.html`(퀵 채팅 오버레이)에서
-  작업 폴더를 고를 수 있게 되어, 첫 턴 이후 그 대화가 선택된 폴더에 묶인다. [[work-folder-sandboxing]]
-  스킬(에이전트를 작업 폴더 안으로 제한)과 연관 가능성 있으나 구체 구현 코드는 미확인.
-  → 세션: [[2026-07-16-quick-작업폴더선택기-커밋푸시]]
+- **quick.html에 작업 폴더 선택기 + Auto 모델 추가**(02:16~02:20, 구현 세션 확인됨) —
+  `apps/web/public/quick.html`(퀵 채팅 오버레이)에 index.html의 두 기능을 그대로 이식:
+  - **폴더 선택** — 헤더 드롭다운, `/api/workdirs`로 목록 채움, 선택 폴더를 메시지 `cwd`로 전송해
+    도구 실행을 그 폴더로 제한([[work-folder-sandboxing]] 재사용). `quick_workdir` 키로 `localStorage`
+    저장([[localstorage-ui-preference-persistence]]).
+  - **폴더 잠금** — 첫 턴 종료 후(서버 `done` 이벤트·히스토리 `workDir`) 선택기 비활성화, "새 대화"(⌘N)로 해제.
+  - **Auto 모델** — 모델 목록 맨 위 "Auto — 난이도 자동 선택" 추가, [[model-selection]]의 서버 판정
+    로직(easy/medium/hard/extreme) 재사용, 배정 결과를 `⚙ auto → claude-…`로 채팅에 표시.
+  - **배포 요령**: `dist/quick.html`은 vite가 `public/`에서 그대로 복사하는 정적 파일이라, 전체
+    `vite build` 없이 `cp`만으로 반영 확인 가능(퀵 창 재오픈으로 확인) → [[self-hosted-agent-server-ops]]
+    함정4의 반대 사례로 스킬에 편입.
+  - 수정 파일은 `quick.html` 하나, 이 시점엔 커밋 미완료.
+  → 세션: [[2026-07-16-quick-html-폴더선택기-auto모델-구현]](구현) ·
+  [[2026-07-16-quick-작업폴더선택기-커밋푸시]](18분 후 커밋 `c100edd`·push 확인)
 - 위 v0.1.27 변경 5종(롱프레스 보관 확인·중지버튼 재클릭 확인·음성 진동+비프·extreme 티어·
   quick.html 작업 폴더 선택기) 커밋 **`c100edd`**로 `main` 반영, origin push 완료(2026-07-16).
 
