@@ -44,6 +44,7 @@
 - [[2026-07-15-주식-개장전-매수시간-질문]] — "9시 개장 전에도 매수 가능한가?" 1왕복 quick. 국내 주식 동시호가(08:30~09:00)·정규거래(09:00~15:30) 구조 설명. [[2026-07-15-주식투자-10만원-질문]]과 같은 계열 개인 재무 상담
 - [[2026-07-15-dark-toss-api-장전매수-코드조사]] — 같은 날 저녁, `dark-system` 내 토스증권 자동매매 앱 `dark-toss-api`가 국장 9시 이전 매수를 실제로 막는지 코드로 조사. 결론: 안 막음(marketHoursOnly 기본 false, manualBuy는 게이트 자체 없음) — 미문서화였던 dark-system 정체 최초 확인
 - [[2026-07-15-auto모델-난이도판정-확인ux-개선]] — 위 세션 직후(23:23~23:31). Auto 모델 난이도 판정 로직 file:line 감사(서버 100% 전담 확인) + extreme 티어(Fable 5) 신설 + 중지버튼 2단계 확인·대화목록 롱프레스 보관확인 UI 패턴 2종 + v0.1.27 빌드·유휴시 재시작
+- [[2026-07-16-음성입력-진동비프-피드백]] — 전송버튼 길게누르기 음성입력 노랑→빨강 전환에 진동(`navigator.vibrate`, iOS 미지원)+비프(기존 `AudioContext` 재사용, 880Hz) 동시 피드백 추가. [[2026-07-15-gpt-realtime-음성입력-길게누르기]] 3단계 색상 피드백의 후속
 
 ## Entities
 
@@ -111,6 +112,6 @@
 - [[rebase-local-feature-onto-refactored-remote]] — 원격이 구조를 리팩터한 코드 위에 로컬 미커밋 기능을 rebase로 이식
 - [[credit-ledger-balance-pattern]] — 원장(ledger) 방식 크레딧 잔액 시스템 이식 시 확인할 것들(네이밍 역전·동시성·검색 대상 불일치)
 - [[playwright-system-chrome-verify]] — Playwright 브라우저 바이너리 미설치 시 macOS 시스템 Chrome(`channel:'chrome'`)으로 실브라우저 종단 검증
-- [[realtime-voice-mic-buffer-before-connect]] — 누르고-말하기 실시간 음성입력에서 연결 전 마이크 선오픈+로컬 버퍼링으로 시작부분 유실 방지, 3단계(노랑/빨강/초록) 시각 피드백
+- [[realtime-voice-mic-buffer-before-connect]] — 누르고-말하기 실시간 음성입력에서 연결 전 마이크 선오픈+로컬 버퍼링으로 시작부분 유실 방지, 3단계(노랑/빨강/초록) 시각 피드백 + 진동/비프
 - [[config-flag-gate-audit]] — "시스템이 특정 상황을 막는가" 질문에 코드로 답할 때: 정보 존재 여부→대체 판정 로직→게이트 호출부 전수→플래그 기본값→진입점 우회 여부→코드 vs 외부시스템 책임 분리 순 추적
 - [[destructive-action-inline-confirm]] — 되돌리기 어려운 버튼(중지·보관)에 모달 없이 인라인 확인: 같은 버튼 2회클릭 타임아웃 방식 vs 롱프레스+확인창 방식

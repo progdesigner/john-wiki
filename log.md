@@ -564,3 +564,17 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: Auto 난이도 감사(§1)는 [[config-flag-gate-audit]]과 유사한 "판정 로직 전수 추적" 패턴이나
   이미 커버된 접근이라 별도 스킬로 분리하지 않고 세션 페이지에서만 교차 언급. §3·§4 UI 변경은 실행
   로직(`archiveSession` 등)은 그대로 두고 트리거만 교체 — 배포는 재시작 필요해 §5로 이어짐.
+
+## [2026-07-16] ingest | 음성입력 진동+비프 피드백 (source: 58623de9-163d-408c-b9a5-fce33d5176d4.md)
+- [[2026-07-15-gpt-realtime-음성입력-길게누르기]] 세션에서 만든 3단계 시각 피드백(노랑/빨강/초록)에
+  이어, 노랑(준비중)→빨강(녹음중) 전환 순간에 진동+비프를 동시에 추가한 1왕복 후속 세션.
+  `navigator.vibrate(40)`(iOS Safari 미지원) + 이미 열린 `AudioContext` 재사용 880Hz 비프(~90ms) —
+  기기별 지원 격차를 이중 채널로 보완. vite 빌드 확인, 배포는 `npm run build:web`+데몬 재시작 필요
+  (이 세션에서 재시작 미실행).
+- 신규 세션 페이지: [[2026-07-16-음성입력-진동비프-피드백]]
+- 엔티티 갱신: [[lampas-harness]] — "추가 기능 (2026-07-16 세션 — 음성입력 진동+비프 피드백)" 절 신설,
+  관련 세션 링크 추가.
+- 스킬 갱신: [[realtime-voice-mic-buffer-before-connect]] — "노랑→빨강 전환에 진동+비프 추가" 절 신설,
+  제목·description·tags·출처에 반영.
+- AI_CONTEXT.md 갱신 — [[lampas-harness]] 줄에 진동+비프 피드백 추가 한 절 반영.
+- index.md 갱신 (세션 1개 추가, 스킬 설명 1개 갱신).
