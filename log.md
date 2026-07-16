@@ -924,3 +924,27 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   시도([[2026-07-16-tts-stream-elevenlabs-구현착수]] 미완·[[2026-07-16-롱프레스설정-자동음성재생-구현]]
   완료)와의 관계를 세 갈래 병기, 확정하지 않음. 위키에 기록된 직전 버전(0.1.30)과 이 세션의 버전
   (0.1.36) 사이 5개 버전 간극도 원인 미확정으로 병기(누락 ingest 가능성 플래그).
+
+## [2026-07-16] ingest | 봇메시지-클릭읽어주기-구현 (source: ed6c6f76-b3aa-41b5-861b-72de11e3b96d.md)
+- 원본을 raw/conversations/2026-07-16-봇메시지-클릭읽어주기-구현.md로 보관.
+- wiki/sessions/2026-07-16-봇메시지-클릭읽어주기-구현.md 신규 작성 — 09:10~09:17 UTC, 3왕복.
+  [[2026-07-16-봇메시지-클릭읽어주기-커밋푸시]](09:21~09:22, 4분 뒤)가 diff만 보고 커밋했던
+  기능의 실제 구현 세션. 기존 `speak()`/`stopSpeech()` Web Speech API 인프라를
+  `speak(md, bubble)`로 확장·재사용해 봇 말풍선 클릭 읽기/재클릭 정지 토글 구현, 링크·이미지
+  클릭 예외 처리. 부수적으로 직전 병합 커밋 `dca1422`가 package.json·index.html에 남긴 충돌
+  마커로 빌드가 깨져 있던 것 발견·수정(package.json 0.1.32, index.html CATEGORIES 양쪽 병합).
+  Playwright 실브라우저 검증 완료, 이 세션 끝에서는 커밋하지 않고 사용자에게 위임.
+- wiki/sessions/2026-07-16-봇메시지-클릭읽어주기-커밋푸시.md 갱신: "구현 방식 미상"으로 남겨뒀던
+  두 지점(요약·관찰 섹션)에 취소선 + "[해소: ...]" 표기로 Web Speech API 확정 사실 명시(원문은
+  보존, 덮어쓰지 않음).
+- wiki/entities/lampas-harness.md 갱신: ElevenLabs tts-stream 섹션에 "클릭 읽어주기는 이 경로가
+  아님" 해소 노트 추가, v0.1.36 섹션을 구현 세션 발견 내용으로 재작성(충돌마커 원인 `dca1422`
+  특정, 카테고리 병합 방식, Playwright 검증 명시), 세션 링크 목록에 신규 세션 추가.
+- wiki/skills/rebase-local-feature-onto-refactored-remote.md 갱신: 함정7 각주의 소스를
+  커밋푸시 세션→구현 세션으로 교체(실제 마커 발견 지점), dca1422 커밋 특정.
+- AI_CONTEXT.md 갱신: lampas-harness 줄의 "구현 방식 미확인" 표현을 "Web Speech API로 확정"으로
+  수정 + dca1422 충돌마커 발견 한 문장 추가. 38줄(<40 준수).
+- index.md 갱신: 구현 세션 신규 추가, 커밋푸시 세션 요약에 해소 사실 반영.
+- 결론: 같은 날 있었던 TTS 관련 세 시도의 관계가 이번 ingest로 명확해짐 — ①ElevenLabs
+  tts-stream(완료 미확인, 독립) ②Web Speech API 자동재생(완료, 3d16ed5) ③Web Speech API를
+  재사용한 클릭 읽어주기(완료, 4cff973→9e45de9) — ①은 ②③과 무관, ③은 ②의 확장.
