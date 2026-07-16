@@ -20,6 +20,7 @@
 - [[2026-07-13-모델별-시간당-코딩비용]] — Claude Code 1시간 코딩 시 모델별 API 종량제 비용 추정 (캐싱이 비용 좌우, 구독 vs 종량제) 1왕복
 - [[2026-07-13-블로그-ai기억글-해시태그]] — 네이버 블로그 SEO 태그 30개 추천. 대상 글이 곧 이 위키 아키텍처 공개 연재(블로그 study-ai-what). 블로그의 recall 3층 주장 vs 기존 "방법 C 미완" 관찰 모순 기록
 - [[2026-07-14-은행환불-거래처매칭]] — 은행 거래내역·프랑스 와인 인보이스 이미지 해석, 환불액 vs 인보이스 합계 대조(6,948.60 차액 미해소), 거래처 영어 회신 초안. 하네스를 업무 비서로 사용
+- [[2026-07-14-clara-바바라-위스키분쟁-번역]] — 은행환불 세션(~09:00) 직후·srkk 세션(09:17~) 직전 공백을 메우는 quick. Clara/Barbara 메시지·메일 번역 + Princ 문구 재작성 + CWC Lab-FY Group 위스키 선적 분쟁 이메일 전체 붙여넣기(Princ 무관 확인). 소스 파일명이 은행환불 세션과 동일한데 내용이 전혀 달라 아카이브 파일명 재사용 이상 정황 기록
 - [[2026-07-14-srkk-도메인-scott-확인-princ-번역]] — 위 세션 17분 후 이어진 quick. WhatsApp 스크린샷 다중 번역, SRKK 도메인/Microsoft 계정 무단 연장 의혹→Scott과 협의해 미연장 확정, Princ 거래 상대방 식별은 여전히 미해결
 - [[2026-07-15-올리브유-마케팅-포지셔닝]] — 사용 가능 스킬 목록(마케팅·Remotion 번들, 커밋 ef36c5f) + 올리브유 사진 프리미엄 포지셔닝 상담(ICP 선행 → product-marketing 착수 제안)
 - [[2026-07-15-과금모드-토글-컨텍스트표시]] — 하네스에 Claude 과금 모드 토글(API vs 구독 OAuth) + 구독 모드 컨텍스트 잔여 표시 구현. 기본 과금이 구독(OAuth)임을 코드로 확인(기존 기록과 모순)
@@ -57,6 +58,7 @@
 - [[elevino-system]] — CWC 계열 서비스 저장소 (elevino-api NestJS+TypeORM, elevino-admin Next.js). 원장 방식 크레딧 시스템 보유
 - [[netpeul-yeonga]] — 소셜/취미 정기 모임 플랫폼(넷플연가). progdesigner가 엘레망 와인샵 기반 블라인드 테이스팅 모임 모임장으로 참여
 - [[srkk]] — 이름이 같은 두 등장(싱가포르 도메인/Microsoft 계정 건 vs SRKK Group Azure 펀딩 영업메일)의 동일성 미확정 벤더/조직
+- [[fy-group]] — FY Group Pte Ltd(싱가포르), CEO Keira Zhang. cwc-lab-singapore에 이탈리아 위스키를 공급하다 선적 지연 분쟁의 상대방이 됨
 
 ## Topics
 
@@ -75,6 +77,7 @@
 - [[works-project-portfolio]] — `~/Works` 하위 git 저장소 12개 목록(2026-07-15 시점) — 다수 미문서화
 - [[ai-design-to-html-banner-conversion]] — 배너 디자인 이미지를 AI가 이미지 조각 조합 없이 통째로 HTML로 변환하는 워크플로우 인사이트 + 셀프서비스 툴 제품 아이디어
 - [[wine-meetup-cost-reduction]] — 와인 블라인드 테이스팅 모임 재료비 구조 재설계: 콘텐츠 재설계(가격 블라인드·BYOB)→원가 구조 재설계(회차당 2병 상한·재료비 실비) 2단계 프레임워크
+- [[cwc-fy-group-whisky-dispute]] — CWC Lab-FY Group 간 이탈리아 위스키(강남 위스키클럽용) 선적 지연·환불·법적 조치 언급된 장기 분쟁 타임라인(2024-10~2025-01, 2025-01-06 시점 미해결)
 
 ## Skills
 
@@ -95,7 +98,7 @@
 - [[self-hosted-agent-server-ops]] — 에이전트 턴을 호스팅하는 서버 재시작·종료·디버그 안전 규칙(stray-port·restart-kills-own-turn·pkill-prod)
 - [[naver-blog-mcp-posting]] — naver-blog-mcp 발행: 순수 텍스트 본문·SRT 세션 갱신(headed 캡차)·서버 버그 대응
 - [[naver-blog-tag-seo]] — 네이버 블로그 SEO 태그 30개 생성(본문 근거 필수·대표+롱테일 배분·무관 인기태그 저품질 위험)
-- [[bank-refund-invoice-reconciliation]] — 애매한 은행 환입/입금을 인보이스와 대조·검증하고 거래처 회신 잡기(코드 단정 금지·차액 명시·통화 확인)
+- [[bank-refund-invoice-reconciliation]] — 애매한 은행 환입/입금을 인보이스와 대조·검증하고 거래처 회신 잡기(코드 단정 금지·차액 명시·통화 확인·다른 소스 전수 검색으로 배제 후보 확정)
 - [[sdk-claude-code-vs-api-billing]] — Claude Agent SDK 실행이 구독(OAuth) 과금인지 API 종량인지 판별하고 options.env로 전환·5시간/주간 사용량 한도 조회(usage_EXPERIMENTAL/rate_limit_event)
 - [[multi-repo-safe-bulk-update]] — 다중 git 저장소 일괄 업데이트 시 미커밋 변경 저장소만 골라 보류
 - [[rebase-local-feature-onto-refactored-remote]] — 원격이 구조를 리팩터한 코드 위에 로컬 미커밋 기능을 rebase로 이식

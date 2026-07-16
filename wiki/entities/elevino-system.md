@@ -31,8 +31,13 @@ updated: 2026-07-16
   검색(이메일은 검색 대상 아님). `member`는 `user.member_id`로 user와 간접 연결.
 - 인증: JWT(Bearer) + StaffGuard 2단, `@Route`/`@StaffInfo` 커스텀 데코레이터.
 
+## 관찰
+- 2026-07-14 CWC-FY Group 위스키분쟁 이메일 서명에 **"CWC ⎢ ELEMENTS ⎢ ELEVINO"**가 나란히
+  표기됨 — micro.elevino.io 도메인 겹침으로 추정만 하던 [[cwc-commerce]] 계열 관계가 이메일
+  서명으로 명시적으로 뒷받침됨.
+
 ## 관련
-- 세션: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]]
+- 세션: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]], [[2026-07-14-clara-바바라-위스키분쟁-번역]]
 - 이식 대상: [[cwc-system]] (DB를 그대로 재사용해 멤버십 크레딧 기능 이식 중)
 - 배경 회사: [[cwc-commerce]]
 - 스킬: [[credit-ledger-balance-pattern]]

@@ -29,8 +29,14 @@ updated: 2026-07-16
     "CWC 계열사(LAB/COMMERCE)"로 병기 → KR **COMMERCE**와 SG **LAB**이 병존하는 계열 구조.
 - 사업: **프랑스 보르도 와인 수입** — 매수 주체는 싱가포르 [[cwc-lab-singapore]], 통화 EUR,
   매도처 네고시앙 Mestrezat·Mähler-Besse (2026-07-14 세션).
+- 브랜드 패밀리: 이메일 서명에 **"CWC ⎢ ELEMENTS ⎢ ELEVINO"**가 나란히 등장(2026-07-14 위스키
+  분쟁 메일) — [[elevino-system]]이 CWC 계열 브랜드임을 명시적으로 재확인.
+- 임원 — **Ryan Lee**: 이사 ⎢ Director, `ryan@cwc.sg`, m +82 10 4333 3814 / t +82 70 8657 1765.
+  John Lee(대표/CEO)와 별개의 명의 담당자로, [[cwc-fy-group-whisky-dispute]] 분쟁을 실무 처리.
+  2025-01 시점 "다음 주 한국으로 발령"되며 이 건을 **"John과 Kim"에게 인계**한다고 밝힘(John Lee=
+  대표로 추정되나 이메일 헤더상 확인 불가).
 
 ## 관련
-- 세션: [[2026-07-10-전대-동의-메일-작성]], [[2026-07-14-은행환불-거래처매칭]], [[2026-07-14-srkk-도메인-scott-확인-princ-번역]], [[2026-07-15-넷플연가-와인모임-재료비-절감]]
-- 임대인: [[dongwon-building]] · 계열사: [[sylvan-korea]], [[cwc-lab-singapore]] · 사람: [[progdesigner]]
-- 플랫폼: [[netpeul-yeonga]] · 토픽: [[wine-meetup-cost-reduction]] · 벤더(미확정): [[srkk]]
+- 세션: [[2026-07-10-전대-동의-메일-작성]], [[2026-07-14-은행환불-거래처매칭]], [[2026-07-14-srkk-도메인-scott-확인-princ-번역]], [[2026-07-14-clara-바바라-위스키분쟁-번역]], [[2026-07-15-넷플연가-와인모임-재료비-절감]]
+- 임대인: [[dongwon-building]] · 계열사: [[sylvan-korea]], [[cwc-lab-singapore]], [[elevino-system]] · 사람: [[progdesigner]]
+- 플랫폼: [[netpeul-yeonga]] · 토픽: [[wine-meetup-cost-reduction]], [[cwc-fy-group-whisky-dispute]] · 벤더(미확정): [[srkk]] · 거래분쟁 상대: [[fy-group]]
