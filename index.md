@@ -32,6 +32,7 @@
 - [[2026-07-15-srkk-azure-펀딩메일-번역]] — SRKK Group의 MS Azure 펀딩 영업메일 영→한 번역 요청(1왕복 quick). 대행 작성 아닌 순수 번역 사례
 - [[2026-07-15-주식투자-10만원-질문]] — "10만원으로 주식 거래 가능한가?" 개인 재무 상담 1왕복 quick. 국내/미국 주식(소수점 매매) 가능 여부·현실적 제약 답변
 - [[2026-07-15-삼성전자-주식분할-배너-html-인사이트]] — 무관한 두 왕복이 한 quick 파일에 묶임: (1) 삼성전자 2018년 50:1 액면분할 이력 질문, (2) 사진 첨부 "정리해봐" → 배너 디자인을 AI가 통째로 HTML로 변환하는 워크플로우 인사이트 + 셀프서비스 툴 제품 아이디어
+- [[2026-07-15-넷플연가-와인모임-재료비-절감]] — 넷플연가 커리큘럼 페이지 원문 전체 붙여넣기 → 와인 블라인드 테이스팅 모임 재료비 적자 상담. 콘텐츠 재설계+원가 구조 재설계 2단계, 회차별 원가표 산출
 
 ## Entities
 
@@ -49,6 +50,7 @@
 - [[naver-blog-mcp]] — 네이버 블로그 자동 발행 MCP(Playwright). 본문 순수 텍스트만·SRT 쿠키 ~24h 만료
 - [[cwc-system]] — CWC ERP 분석/관리 pnpm 모노레포 (cwc-api NestJS+Prisma, cwc-web-admin React+Vite)
 - [[elevino-system]] — CWC 계열 서비스 저장소 (elevino-api NestJS+TypeORM, elevino-admin Next.js). 원장 방식 크레딧 시스템 보유
+- [[netpeul-yeonga]] — 소셜/취미 정기 모임 플랫폼(넷플연가). progdesigner가 엘레망 와인샵 기반 블라인드 테이스팅 모임 모임장으로 참여
 
 ## Topics
 
@@ -66,6 +68,7 @@
 - [[harness-as-business-assistant]] — 하네스를 코딩 외 업무 비서로 사용 (이미지 첨부 해석·인보이스 대조·대외 이메일 초안)
 - [[works-project-portfolio]] — `~/Works` 하위 git 저장소 12개 목록(2026-07-15 시점) — 다수 미문서화
 - [[ai-design-to-html-banner-conversion]] — 배너 디자인 이미지를 AI가 이미지 조각 조합 없이 통째로 HTML로 변환하는 워크플로우 인사이트 + 셀프서비스 툴 제품 아이디어
+- [[wine-meetup-cost-reduction]] — 와인 블라인드 테이스팅 모임 재료비 구조 재설계: 콘텐츠 재설계(가격 블라인드·BYOB)→원가 구조 재설계(회차당 2병 상한·재료비 실비) 2단계 프레임워크
 
 ## Skills
 

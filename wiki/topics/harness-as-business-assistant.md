@@ -23,6 +23,10 @@ updated: 2026-07-16
 - 2026-07-15 [[2026-07-15-삼성전자-주식분할-배너-html-인사이트]] — 사진 1장("정리해봐") 요청에
   배너 디자인→HTML 전환 인사이트를 구조화된 요약으로 정리. 문서 대행이 아니라 **아이디어/워크플로우
   정리**로, 이 패턴군에서 사업 상담보다 제품 기획에 가까운 케이스 → [[ai-design-to-html-banner-conversion]].
+- 2026-07-15 [[2026-07-15-넷플연가-와인모임-재료비-절감]] — 사진이 아니라 **모임 플랫폼 커리큘럼
+  페이지 원문 전체**를 컨텍스트로 붙여넣은 사례. 와인 블라인드 테이스팅 모임의 재료비 적자 문제에
+  콘텐츠 재설계 + 원가 구조 재설계 2단계로 대응, **회차별 원가표까지 산출** — 이 패턴군에서 손익
+  계산이 가장 구체적인 케이스 → [[wine-meetup-cost-reduction]].
 
 ## 특징
 - **멀티모달**: 스크린샷·사진을 근거로 축약어/숫자를 해석. 단, 은행 코드처럼 비표준 표기는 추정임을 명시하고
@@ -34,4 +38,5 @@ updated: 2026-07-16
 
 ## 관련
 - 스킬: [[business-email-consent-first]], [[bank-refund-invoice-reconciliation]]
-- 배경: [[cwc-commerce]], [[cwc-lab-singapore]]
+- 배경: [[cwc-commerce]], [[cwc-lab-singapore]], [[netpeul-yeonga]]
+- 토픽: [[wine-meetup-cost-reduction]]
