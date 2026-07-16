@@ -874,3 +874,22 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 엔티티/토픽/스킬: 신규·변경 없음 — [[srkk]] 등장3 정보는 이미 원 세션에 전부 반영됨, 새 사실 없음.
 - AI_CONTEXT.md: 변경 없음 — 지속적 핵심 사실 추가 없음(중복 정황은 세션 레벨 상세로 충분).
 - index.md 갱신 (세션 1개 추가).
+
+## [2026-07-16] ingest | tts-stream(ElevenLabs) 구현 착수 (source: b94bb46c-e6f6-419d-a6dc-3c7a21ea0a03.md)
+- 원본 보관: `raw/conversations/2026-07-16-tts-stream-elevenlabs-구현착수.md`
+- 세션 신설: [[2026-07-16-tts-stream-elevenlabs-구현착수]] — 봇 메시지를 ElevenLabs로 실시간 읽어주는
+  `tts-stream` 기능 요청. 참고 예시 `dbs/talk-system`(=[[toktalk]])은 작업 폴더 밖이라 [[work-folder-sandboxing]]
+  가드가 읽기조차 차단(읽기 전용 우회 시도도 실패 — SDK 레벨 폴더 제한으로 재확인). 사용자 무응답으로
+  어시스턴트가 표준 ElevenLabs 스트리밍 API(모델 `eleven_flash_v2_5`, 보이스 env `ELEVENLABS_VOICE_ID`
+  오버라이드)로 독자 구현 착수. "server.ts에 ElevenLabs 상수 추가" 직후 소스 종료 — **실제 구현·커밋
+  완료 여부 미확인**.
+- 엔티티 갱신: [[lampas-harness]] (제안된 기능 절 신설 — tts-stream 상태 미확인), [[toktalk]] (참고
+  예시로 지목됐으나 접근 실패 절 신설)
+- 스킬 갱신: [[work-folder-sandboxing]] (파일 도구 차단이 하네스 가드보다 아래, SDK 레벨까지 내려간다는
+  디테일 보강)
+- AI_CONTEXT.md 갱신: [[lampas-harness]] 줄에 tts-stream 착수·미확인 상태 한 줄 추가. 38줄(<40 준수).
+- index.md 갱신 (세션 1개 추가).
+- 특이사항: 원문에 동일한 사용자 요청 텍스트가 6회 그대로 반복 등장(뒤 5회는 40초 안에 몰림) —
+  [[idempotent-message-retry]]의 msgId 멱등성이 실행 중복은 막은 것으로 보이나, 트랜스크립트 자체엔
+  중복 항목이 그대로 남음. [[2026-07-16-srkk-인보이스-james확인-0243]] 계열의 로그/아카이브 중복
+  이상 정황과 유사해 세션 페이지에 병기.

@@ -30,5 +30,11 @@ tags: [claude-agent-sdk, security, sandbox, permission]
 ## 주의사항 / 함정
 - **완전한 OS 샌드박스가 아니다.** bash는 문자열 경로 추출 기반이라 우회 여지 존재. 파일 도구는 확실히 막히지만 bash는 명백한 이탈만 차단.
 - "전체(제한 없음)" 선택 시 기존처럼 `bypassPermissions`로 무제한 동작.
+- **파일 도구(Read 등) 차단은 하네스 가드보다 아래 단계, SDK 레벨**로 보인다(2026-07-16 재확인).
+  형제 프로젝트(`dbs/talk-system`)를 "읽기 전용으로만" 보려는 시도조차 막혔고, 어시스턴트는
+  `dangerouslyDisableSandbox` 상당의 우회도 듣지 않는다고 진단했다 — 즉 canUseTool 콜백을
+  통과하더라도 Claude Agent SDK 자체가 cwd 밖 파일 도구 호출을 허용하지 않을 가능성.
+  **폴더 밖 레퍼런스 코드를 보여주고 싶다면, 참고 대상을 작업 폴더 자체로 잡거나("전체(제한
+  없음)") 내용을 프롬프트에 직접 붙여넣는 우회가 필요**하다. → [[2026-07-16-tts-stream-elevenlabs-구현착수]]
 
-## 출처: [[2026-07-06-lampas-harness-구축]] ([[lampas-harness]])
+## 출처: [[2026-07-06-lampas-harness-구축]] ([[lampas-harness]]) · 보강: [[2026-07-16-tts-stream-elevenlabs-구현착수]]

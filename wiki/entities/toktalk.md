@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, toktalk, nestjs, react, monorepo, ai-chat]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-07-16
 ---
 # toktalk (TokTalk — AI 캐릭터/보이스 챗)
 
@@ -44,8 +44,14 @@ updated: 2026-07-09
 ## 보안 주의 (관찰됨)
 - `.env`(실제 API 키)와 Firebase 서비스 계정 JSON(`apps/talk-app-toss-api/config/toktalk-*-firebase-adminsdk-*.json`)이 **git 추적 중**이며 원격에 푸시됨(커밋 `0664ea9`, 이전 `b7fdf05` 패턴). 노출 상태 기록만.
 
+## 참고 예시로 지목됐으나 미확인 (2026-07-16)
+- `[[lampas-harness]]`에 ElevenLabs 실시간 TTS(`tts-stream`) 기능을 만들며 사용자가 `dbs/talk-system`
+  (이 프로젝트)의 기존 구현을 참고 예시로 지목했으나, **작업 폴더 밖이라 하네스가 읽기조차 차단**해
+  실제 구현(보이스 ID·모델·스트리밍 방식)은 끝내 확인되지 않았다. → [[work-folder-sandboxing]] ·
+  [[2026-07-16-tts-stream-elevenlabs-구현착수]]
+
 ## 관련
-- 세션: [[2026-07-08-toktalk-에피소드-배경전환-플레이]]
+- 세션: [[2026-07-08-toktalk-에피소드-배경전환-플레이]] · [[2026-07-16-tts-stream-elevenlabs-구현착수]](참고 예시로 지목, 접근 실패)
 - 토픽: [[episode-beat-play-system]] / 스킬: [[loading-state-key-mismatch]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]] · 공급자: [[progdesigner]]
 - 자매 제품(별개 코드베이스): [[lampas-studio]]
