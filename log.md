@@ -311,3 +311,21 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: 첨부 사진의 원본 내용(대화/노트 캡처로 추정)은 소스 텍스트에 남아있지 않아 어시스턴트 요약만
   근거로 기록. 같은 날 [[2026-07-15-주식투자-10만원-질문]]과 함께 [[progdesigner]]의 주식 관련 quick
   질의 2건째이나 두 세션 간 직접적 후속 관계는 소스에 근거 없음.
+
+## [2026-07-16] ingest | 사용량 한도(5시간/주간) 게이지 표시 가능 여부 확인 (source: f63be918-0585-46f1-a363-7dda10de75ca.md)
+- 원본 보관: `raw/conversations/2026-07-15-사용량한도-rate-limit-sdk-확인.md`
+- 세션 신설: [[2026-07-15-사용량한도-rate-limit-sdk-확인]] — [[2026-07-15-과금모드-토글-컨텍스트표시]]
+  (01:17~01:40) 세션의 같은 날 후속 질문(02:53~02:56). 사용자가 컨텍스트 잔여율 옆에 5시간/주간
+  사용량 한도도 보여줄 수 있는지 질문 → 어시스턴트가 조사 완료 전 일반론으로 "불가능"이라 먼저
+  답했다가, 조사 완료 후 "정정하겠습니다 — 가능합니다"로 자체 정정. SDK(`usage_EXPERIMENTAL_MAY_
+  CHANGE_DO_NOT_RELY_ON_THIS_API_YET()`, `rate_limit_event`)엔 5시간/7일(opus/sonnet 세분·
+  model_scoped·extra_usage 포함) 한도 조회 훅이 이미 있으나 `src/server.ts`는 둘 다 호출하지 않음
+  확인(grep 0건) — 기술적으로 가능, 미구현. 소스 트랜스크립트가 어시스턴트의 구현 제안 질문에서
+  끝나 사용자 승인 여부 불명.
+- 스킬 갱신: [[sdk-claude-code-vs-api-billing]] — rate_limits 필드 세분화(five_hour/seven_day/
+  seven_day_opus/seven_day_sonnet/model_scoped/extra_usage), `SDKRateLimitEvent` 실시간 이벤트
+  추가, "하네스는 이 API들을 아직 미사용" 상태 기록, "일반론으로 단정 금지" 함정 추가.
+- 엔티티 갱신: [[lampas-harness]] — 과금 모드 토글 섹션에 후속 항목 추가, 관련 세션 목록 갱신.
+- index.md 갱신 (세션1 추가, 스킬 한 줄 요약 보강). 신규 엔티티·토픽 없음(기존 스킬로 흡수).
+- AI_CONTEXT.md 갱신 없음 — 새 결정·상태 변화 아님(기존 "구현 완료" 기록에 영향 없는 미구현 후속
+  조사), 위키 페이지로 충분.

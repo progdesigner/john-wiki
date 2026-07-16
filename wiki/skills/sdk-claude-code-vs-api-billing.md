@@ -1,8 +1,9 @@
 ---
 name: sdk-claude-code-vs-api-billing
-description: Claude Agent SDK로 실행할 때 Claude Code 구독(OAuth) 과금과 API 종량 과금 중 어느 쪽으로 도는지 판별하고, options.env로 전환하는 절차
+description: Claude Agent SDK로 실행할 때 Claude Code 구독(OAuth) 과금과 API 종량 과금 중 어느 쪽으로 도는지 판별하고, options.env로 전환하는 절차. 구독 모드 5시간/주간 사용량 한도(rate limit) 조회 API 상세 포함
 created: 2026-07-15
-tags: [claude-agent-sdk, billing, auth, oauth, env, lampas-harness]
+updated: 2026-07-16
+tags: [claude-agent-sdk, billing, auth, oauth, env, rate-limit, lampas-harness]
 ---
 # Claude Agent SDK — 구독 과금 vs API 과금 판별·전환
 
@@ -46,15 +47,29 @@ function claudeAuthEnv(apiBilling: boolean): Record<string,string|undefined> {
 `query()`가 반환한 `stream`(=`Query`) 핸들에서:
 - `stream.getContextUsage()` → `{ totalTokens, maxTokens, percentage, categories, gridRows }` (컨텍스트 윈도우 잔여율).
 - `stream.usage_EXPERIMENTAL_MAY_CHANGE_...()` → `session.total_cost_usd`, `subscription_type`
-  (`'pro'|'max'|'team'|'enterprise'|null`), `rate_limits.five_hour/seven_day`(claude.ai 5시간/7일 한도).
-  **API 키 세션은 `rate_limits_available: false`** — 이 값으로도 모드 구분 가능.
+  (`'pro'|'max'|'team'|'enterprise'|null`), `rate_limits.five_hour/seven_day/seven_day_opus/
+  seven_day_sonnet/model_scoped/extra_usage` — 각각 `utilization`(사용률 %)과 `resets_at`(리셋 시각)
+  포함 (`/usage` 커맨드와 같은 데이터, sdk.d.ts:3081-3150). **API 키 세션은 `rate_limits_available: false`**
+  로 null — 이 값으로도 모드 구분 가능.
+- `SDKRateLimitEvent`(`type: 'rate_limit_event'`, sdk.d.ts:3971-3999) — 위와 같은 한도 정보를 턴
+  진행 중 **실시간 이벤트**로도 받을 수 있다. `SDKRateLimitInfo`에 `status`/`rateLimitType`
+  (`five_hour`/`seven_day` 등)/`utilization`/`resetsAt`.
 - 턴 종료 후(또는 세션 핸들 보관 후 별도 엔드포인트에서) 호출해 SSE/`/api/usage`로 내려준다.
   `for await`로 스트림만 순회하면 이 메서드들은 호출되지 않으니 별도로 불러야 한다.
+
+## 상태 (2026-07-15 재확인)
+[[lampas-harness]]의 `src/server.ts`는 `usage_EXPERIMENTAL...()`도 `rate_limit_event`도 **둘 다 호출/
+리스닝하지 않는다**(grep 0건 확인). 즉 컨텍스트 잔여율만 구현돼 있고, 5시간/주간 사용량 한도 게이지는
+SDK 훅이 이미 있는데도 **미구현 상태**(기술적으로는 가능, 구현 승인 여부 미확인) →
+[[2026-07-15-사용량한도-rate-limit-sdk-확인]].
 
 ## 주의사항 / 함정
 - API 키가 있어도 목록 조회용으로만 쓰이고 실행엔 안 쓰일 수 있다 — 실행 인증은 반드시 `apiKeySource`로 확정.
 - `.env`의 주석 상태는 실제와 어긋날 수 있다(이 소스 세션에서도 "주석됨↔해제됨" 진술이 엇갈림) — 코드/`apiKeySource`로 교차검증.
 - 실험적 usage API는 이름에 `EXPERIMENTAL_MAY_CHANGE_DO_NOT_RELY_ON_THIS_API_YET`이 붙어 SDK 버전 간 깨질 수 있다.
+- **한도 API의 존재 여부를 일반론으로 단정하지 말 것** — "Anthropic이 공개 API로 안 준다"는 추정만으로
+  먼저 "불가능"이라 답했다가, 실제 SDK 조사 후 정정한 사례가 있다. 구독/한도 관련 질문은 반드시
+  `sdk.d.ts` 실물 확인 후 답할 것. → [[2026-07-15-사용량한도-rate-limit-sdk-확인]]
 
-## 출처: [[2026-07-15-과금모드-토글-컨텍스트표시]] ([[lampas-harness]])
+## 출처: [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-사용량한도-rate-limit-sdk-확인]] ([[lampas-harness]])
 </content>
