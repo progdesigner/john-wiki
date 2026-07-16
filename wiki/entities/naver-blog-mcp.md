@@ -1,7 +1,7 @@
 ---
 tags: [entity, tool, mcp, playwright, naver, automation]
 created: 2026-07-13
-updated: 2026-07-14
+updated: 2026-07-16
 ---
 # naver-blog-mcp
 
@@ -44,7 +44,13 @@ MCP는 **발행(작성) 도구만** 있고 **기존 글을 읽어오는 도구�
 - 갱신법: `cd mcp-servers/naver-blog-mcp && uv run python tools/manual_login.py` → headed 창에서
   캡차 풀고 로그인 → `auth.json` 자동 재저장 → 헤드리스 발행이 ~24h 다시 동작. → [[naver-blog-mcp-posting]]
 
+## 별개 시스템 — 네이버 DataLab 키워드 자동화 파이프라인 (2026-07-16)
+[[progdesigner]]가 언급한 "네이버 데이터랩 API 연결 키워드 자동 글쓰기·배포" 파이프라인이 이
+MCP를 발행 단(퍼블리싱)으로 재사용하는지, 완전히 별개 시스템인지는 미확인. 대상이 study-ai-what
+개인 연재가 아니라 "상품/마케팅" 정렬을 언급한 것으로 보아 별도 블로그·별도 시스템일 가능성이
+높다(단정 보류). → [[content-automation-decision-framework]]
+
 ## 관련
 - 호스트: [[lampas-harness]] (노출 경로: [[harness-mcp-bridge]])
 - 스킬: [[naver-blog-mcp-posting]] · [[naver-blog-tag-seo]]
-- 세션: [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-13-블로그-ai기억글-해시태그]]
+- 세션: [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-13-블로그-ai기억글-해시태그]] · [[2026-07-16-네이버데이터api-콘텐츠자동화-의사결정]]

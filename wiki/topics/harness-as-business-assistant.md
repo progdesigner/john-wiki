@@ -43,6 +43,11 @@ updated: 2026-07-16
   좋은 비주얼을 어떻게 더 알릴까)와 전혀 다른 2차(갭 분석형: "사야 할 이유"가 비어있다는 진단 →
   무드에서 효능 증거 레이어로 방향 전환) 답변이 나온 사례. 같은 입력에 "다시"만으로 프레임 자체가
   바뀔 수 있음을 보여주는 데이터포인트.
+- 2026-07-16 [[2026-07-16-네이버데이터api-콘텐츠자동화-의사결정]] — 사진 아닌 **전략 상담**만의
+  사례. [[progdesigner]]가 이미 운영 중인 네이버 DataLab API 연동 키워드 자동 글쓰기·배포
+  파이프라인의 "마케팅-상품 얼라인 판단을 혼자 한다" 고민에 6-패턴 의사결정 프레임워크
+  (채점 게이트·LLM-as-judge·배치승인·피드백루프·포트폴리오배분·신호다변화)로 응답 →
+  [[content-automation-decision-framework]].
 
 ## 특징
 - **멀티모달**: 스크린샷·사진을 근거로 축약어/숫자를 해석. 단, 은행 코드처럼 비표준 표기는 추정임을 명시하고
@@ -59,4 +64,4 @@ updated: 2026-07-16
 ## 관련
 - 스킬: [[business-email-consent-first]], [[bank-refund-invoice-reconciliation]]
 - 배경: [[cwc-commerce]], [[cwc-lab-singapore]], [[netpeul-yeonga]], [[srkk]]
-- 토픽: [[wine-meetup-cost-reduction]]
+- 토픽: [[wine-meetup-cost-reduction]], [[content-automation-decision-framework]]
