@@ -3,7 +3,7 @@ name: sdk-claude-code-vs-api-billing
 description: Claude Agent SDK로 실행할 때 Claude Code 구독(OAuth) 과금과 API 종량 과금 중 어느 쪽으로 도는지 판별하고, options.env로 전환하는 절차. 구독 모드 5시간/주간 사용량 한도(rate limit) 조회 API 상세 포함
 created: 2026-07-15
 updated: 2026-07-16
-tags: [claude-agent-sdk, billing, auth, oauth, env, rate-limit, lampas-harness]
+tags: [claude-agent-sdk, billing, auth, oauth, env, rate-limit, lampas-harness, memory-ingest]
 ---
 # Claude Agent SDK — 구독 과금 vs API 과금 판별·전환
 
@@ -75,6 +75,20 @@ API 크레딧이 부족하면 대화 자체(구독/OAuth 과금 경로)는 멀�
 하나. 백그라운드 잡처럼 사용자가 토글을 직접 못 켜는 경로는 **기본값을 구독(OAuth)으로 고정**해두는 편이
 크레딧 잔액에 덜 취약하다. → [[2026-07-15-gpt-realtime-음성입력-길게누르기]]
 
+### 실제 사례로 확정 — 큐 실행기가 `claudeAuthEnv` 적용을 빠뜨린 경우 (2026-07-16)
+
+이 파급 범위가 추상적 경고에 그치지 않고 **실제 장애로 발생**한 사례: `[[lampas-harness]]`의
+`src/runner.ts`(큐 작업 실행기)는 `src/server.ts`(인터랙티브 채팅)와 달리 `claudeAuthEnv()`류 처리가
+아예 없어서, 크레딧 0인 `ANTHROPIC_API_KEY`를 그대로 물려받아 API 종량 시도 → 실패를 반복했다.
+2026-07-16 07:27~08:33+ 사이 보관된 대화 35건이 이 버그로 위키 미반영 상태로 쌓였다.
+
+**교훈**: 채팅 경로에 `claudeAuthEnv()`(또는 동등한 키 제거 로직)를 적용했다고 해서 **같은 SDK를
+호출하는 다른 실행 경로(큐 워커, 스케줄러, 배치 잡 등)에도 자동으로 적용되는 게 아니다** — SDK를
+호출하는 진입점이 여럿이면 진입점마다 개별로 확인·적용해야 한다. 특히 백그라운드/큐 실행기처럼
+사용자가 직접 토글을 못 켜는 경로일수록 이 처리가 빠지면 **조용히, 대량으로** 실패가 쌓인다.
+수정: `runner.ts`에도 동일 키 제거 처리 추가 + 빌드. → [[2026-07-16-메모리인제스트-크레딧버그-근본수정]] ·
+[[long-term-memory-architecture]]
+
 **근본 원인 확정(2026-07-15 22:42~22:52)**: `ANTHROPIC_API_KEY` 자체는 `.env`에 정상 설정돼 있으나
 **크레딧 잔액이 0**이라 API 호출이 400으로 거절됨을 [[model-selection]] Auto 판정 기능 구현 중
 확인 — "크레딧 부족"이 막연한 추정이 아니라 확정 사실. → [[2026-07-15-auto모델-기능-최초구현]]
@@ -87,5 +101,5 @@ API 크레딧이 부족하면 대화 자체(구독/OAuth 과금 경로)는 멀�
   먼저 "불가능"이라 답했다가, 실제 SDK 조사 후 정정한 사례가 있다. 구독/한도 관련 질문은 반드시
   `sdk.d.ts` 실물 확인 후 답할 것. → [[2026-07-15-사용량한도-rate-limit-sdk-확인]]
 
-## 출처: [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-사용량한도-rate-limit-sdk-확인]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]] ([[lampas-harness]])
+## 출처: [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-사용량한도-rate-limit-sdk-확인]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]] · [[2026-07-16-메모리인제스트-크레딧버그-근본수정]] ([[lampas-harness]])
 </content>

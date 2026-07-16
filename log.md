@@ -841,3 +841,24 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   두 세션 모두 "Space가 코드베이스에 없다"를 독립적으로 확인했고 설계 전략이 달라 모순이 아니라 순차
   탐색으로 기록. "Stream closed" 권한 채널 장애는 이 세션에서도 2회 재발(기존 [[lampas-harness]] 함정과
   일치, 다음 사용자 메시지로 자연 복구) — 별도 갱신 불필요할 만큼 이미 잘 문서화된 패턴.
+
+## [2026-07-16] ingest | memory-ingest 크레딧 버그 근본 수정 + 실패 35건 재처리 (source: e2f0f24a-b483-4030-956b-e2c1fa11d8e3.md)
+- 원본 보관: `raw/conversations/2026-07-16-메모리인제스트-크레딧버그-근본수정.md`
+- 세션 신설: [[2026-07-16-메모리인제스트-크레딧버그-근본수정]] — 02:42~02:48 UTC. "보관해도 위키 저장이
+  안 되는 것 같다" 제보 → `queue/failed/`에서 07-16 08:33 이후 `memory-ingest` 잡 전부 "Credit balance
+  is too low" 실패 확인 → 근본 원인: 큐 실행기 `src/runner.ts`가 인터랙티브 채팅(`server.ts`의
+  `claudeAuthEnv()`)과 달리 `ANTHROPIC_API_KEY` 제거 처리가 없어 크레딧 0 키로 API 종량 시도 후 실패.
+  07:27 이후 보관 35건이 이 버그로 미반영 누적. 수정: (1) `runner.ts`에 동일 키 제거 처리 추가, (2)
+  야간 안전망 잡(`memory-ingest-daily.job.json`)이 `chats/` 최상위만 훑던 것을 `chats/archive/`까지
+  확장. 데몬 재시작(사용자 확인 후, 반복 "재처리해줘" 7회)+실패 35건 재큐잉 완료.
+- 엔티티 갱신: [[lampas-harness]] (2026-07-16 세션 절 신설 — runner.ts 수정·잡 범위 확장·재시작 내역)
+- 토픽 갱신: [[long-term-memory-architecture]] ("저장 실패 모드 — API 크레딧 소진" 절에 근본원인 규명·
+  수정 내용 추가, 2026-07-15 관찰의 후속 해결로 명시)
+- 스킬 갱신: [[sdk-claude-code-vs-api-billing]] (크레딧 소진 파급 범위의 실제 사례로 이 세션 추가, "채팅
+  경로 수정이 다른 진입점에 자동 전파되지 않는다"는 교훈 신설), [[self-hosted-agent-server-ops]] (함정2에
+  반복 확인요청 대응 사례 추가 — 같은 요청이 여러 번 재전송되면 응답 전달 레이스를 의심하고 재시도)
+- AI_CONTEXT.md 갱신: [[john-wiki]] 줄에 이 수정 사실 추가. 38줄(<40 준수).
+- index.md 갱신 (세션 1개 추가)
+- 특이사항: [[sdk-claude-code-vs-api-billing]]과 [[long-term-memory-architecture]]가 2026-07-15에
+  "크레딧 소진이 memory-ingest도 실패시킨다"를 관찰만 하고 정확한 원인은 미확인으로 남겨뒀던 것을,
+  이 세션이 코드 레벨에서 완전히 규명하고 수정까지 완료한 후속 사례.
