@@ -518,3 +518,26 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 기존 세션 [[2026-07-15-주식투자-10만원-질문]]에 상호 링크 추가 — 같은 날 개인 재무 상담 quick 계열.
 - index.md 갱신 (세션 1개 추가)
 - AI_CONTEXT.md 갱신 없음 — 일회성 정보성 질의, 사용자 선호·확정 결정·프로젝트 상태 변화 없음.
+
+## [2026-07-16] ingest | dark-toss-api 국장 9시 이전 매수 가능 여부 코드 조사 (source: 83593c4a-07ab-465c-b0bd-17104b49a174.md)
+- 세션 신설: [[2026-07-15-dark-toss-api-장전매수-코드조사]] — [[progdesigner]]가 "국장 9시 전에도 매수
+  가능한지 소스 API로 확인해 달라" 요청(2026-07-15 23:04~23:06 UTC, 2왕복). 어시스턴트가
+  `dark-system` 모노레포 `apps/dark-toss-api`(토스증권 API 자동매매 봇) 소스를 file:line 근거로
+  조사: 토스 API 응답에 장 세션 필드 파싱 없음, 로컬 시계로 09:00~15:30만 하드코딩 판정,
+  `marketHoursOnly`·`autoRegionSwitch` 둘 다 기본값 `false`로 게이트 사실상 비활성, `executeBuy`/
+  `manualBuy`엔 시간 체크 자체 없음 → 결론: 코드는 장전 매수를 막지도 인지하지도 않음, 실제 체결
+  여부는 토스 서버 쪽에 달림(코드로 확인 불가). `marketHoursOnly:true` 전환 제안했으나 사용자 응답은
+  이 소스에 없어 미결정으로 남음.
+- 신규 엔티티: [[dark-toss-api]] (토스증권 자동매매 앱), [[dark-system]] (그 앱을 담은 개인 소유
+  모노레포 — 그동안 [[works-project-portfolio]]에 미문서화로만 있던 저장소의 정체 최초 확인).
+- 신규 스킬: [[config-flag-gate-audit]] — "시스템이 특정 상황을 막는가" 질문에 코드로 답할 때의 추적
+  절차(정보 존재 여부 → 대체 판정 로직 → 게이트 호출부 전수 → 플래그 기본값 → 진입점 우회 여부 →
+  코드 vs 외부시스템 책임 분리). [[bank-refund-invoice-reconciliation]]과 같은 "근거 우선, 단정
+  금지" 계열로 일반화.
+- 토픽 갱신: [[works-project-portfolio]] — `dark-system`을 미문서화 목록에서 제외, 표에 엔티티 링크
+  연결(단 `apps/` 전체가 조사된 건 아니고 `dark-toss-api` 하나만 확인됨을 명시).
+- 기존 세션 [[2026-07-15-주식-개장전-매수시간-질문]]에 상호 링크 추가 — 표면적으로 비슷해 보이나
+  하나는 일반 재무상담, 이쪽은 실제 자동매매 코드의 기술 감사임을 명시.
+- index.md 갱신 (세션 1개, 엔티티 2개, 스킬 1개 추가)
+- AI_CONTEXT.md 갱신 — `dark-system`/`dark-toss-api` 발견 및 장시간 게이트 미작동 사실을 진행 중
+  프로젝트 항목에 1줄 추가 (37줄, 40줄 이내 유지).

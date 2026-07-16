@@ -42,6 +42,7 @@
 - [[2026-07-15-gpt-realtime-음성입력-길게누르기]] — 전송버튼 길게누르기 GPT Realtime 음성입력 구현(12:37~22:55 장시간 연속 세션). 최초 구현→dist빌드누락/IPv6 떠돌이서버 발견·수정→API크레딧 소진이 /compact·백그라운드 memory-ingest 둘 다 실패시킴 발견→시작부분 끊김 버그 수정(마이크 선오픈+버퍼링)→3단계 색상 피드백→밀어내기 취소 UX 4커밋
 - [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]] — 위 세션 직후(22:55~23:00) 짧은 운영 세션: 보관→memory-ingest 배선 코드 재확인(2차, 라인단위)+야간잡 파일명(`memory-ingest-daily`) 특정, `restart-lampas.sh`로 하네스 안전 재시작(지연 nohup 방식임을 확인, 2026-07-11 기록의 "즉시 pkill" 서술과 불일치 발견), 밀린 로컬 커밋 7개 origin 푸시
 - [[2026-07-15-주식-개장전-매수시간-질문]] — "9시 개장 전에도 매수 가능한가?" 1왕복 quick. 국내 주식 동시호가(08:30~09:00)·정규거래(09:00~15:30) 구조 설명. [[2026-07-15-주식투자-10만원-질문]]과 같은 계열 개인 재무 상담
+- [[2026-07-15-dark-toss-api-장전매수-코드조사]] — 같은 날 저녁, `dark-system` 내 토스증권 자동매매 앱 `dark-toss-api`가 국장 9시 이전 매수를 실제로 막는지 코드로 조사. 결론: 안 막음(marketHoursOnly 기본 false, manualBuy는 게이트 자체 없음) — 미문서화였던 dark-system 정체 최초 확인
 
 ## Entities
 
@@ -62,6 +63,8 @@
 - [[netpeul-yeonga]] — 소셜/취미 정기 모임 플랫폼(넷플연가). progdesigner가 엘레망 와인샵 기반 블라인드 테이스팅 모임 모임장으로 참여
 - [[srkk]] — 이름이 같은 두 등장(싱가포르 도메인/Microsoft 계정 건 vs SRKK Group Azure 펀딩 영업메일)의 동일성 미확정 벤더/조직
 - [[fy-group]] — FY Group Pte Ltd(싱가포르), CEO Keira Zhang. cwc-lab-singapore에 이탈리아 위스키를 공급하다 선적 지연 분쟁의 상대방이 됨
+- [[dark-system]] — progdesigner 개인 소유 pnpm 모노레포(`~/Works/dark/dark-system`). 앱 `dark-toss-api`(토스증권 자동매매 봇) 확인됨, 나머지 앱은 미조사
+- [[dark-toss-api]] — dark-system 내 토스증권 API 자동매매 서비스. 기본 설정상 장시간 게이트 없음(marketHoursOnly false), manualBuy는 시간체크 경로 자체가 없음
 
 ## Topics
 
@@ -108,3 +111,4 @@
 - [[credit-ledger-balance-pattern]] — 원장(ledger) 방식 크레딧 잔액 시스템 이식 시 확인할 것들(네이밍 역전·동시성·검색 대상 불일치)
 - [[playwright-system-chrome-verify]] — Playwright 브라우저 바이너리 미설치 시 macOS 시스템 Chrome(`channel:'chrome'`)으로 실브라우저 종단 검증
 - [[realtime-voice-mic-buffer-before-connect]] — 누르고-말하기 실시간 음성입력에서 연결 전 마이크 선오픈+로컬 버퍼링으로 시작부분 유실 방지, 3단계(노랑/빨강/초록) 시각 피드백
+- [[config-flag-gate-audit]] — "시스템이 특정 상황을 막는가" 질문에 코드로 답할 때: 정보 존재 여부→대체 판정 로직→게이트 호출부 전수→플래그 기본값→진입점 우회 여부→코드 vs 외부시스템 책임 분리 순 추적
