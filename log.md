@@ -251,3 +251,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - index.md 갱신 (세션1 추가). 신규 엔티티/토픽/스킬 없음 — 단순 git clone 요청이라 재사용 절차로 추출할 내용 없음.
 - AI_CONTEXT.md 갱신 없음 — cwc-system 프로젝트 상태는 기존 줄이 이미 포괄, 이 세션은 그 선행 이벤트를 보강할 뿐 새 핵심 사실 아님.
 - 특이사항: 매우 짧은(1왕복) 세션이지만 같은 날 후속 두 세션의 순서를 재구성하는 데 필요해 ingest함.
+
+## [2026-07-16] ingest | dark 폴더 생성·dark-system 저장소 클론 (source: quick-18c9f545-162d-4ff1-ae9b-8d6655b53e62.md)
+- 원본 보관: `raw/conversations/2026-07-15-dark-system-저장소-클론.md`
+- 세션 신설: [[2026-07-15-dark-system-저장소-클론]] — 2026-07-15 06:38 UTC, `~/Works/dark` 폴더 생성 후
+  `git@github.com:progdesigner/dark-system.git`을 `~/Works/dark/dark-system`에 최초 클론(2왕복, 짧은 세션quick).
+  원격 소유자는 `progdesigner` 개인 계정(cwc-commerce 등 org 아님).
+- 시간순 규명: 이 세션(06:38)이 [[2026-07-15-cwc-system-저장소-클론]](06:42)보다 4분 앞서고, 같은 날 06:48
+  [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]에서 `dark/dark-system`이 "이미 최신"으로
+  집계된 이유가 바로 이 세션임을 확인 — cwc-system과 동일한 "일괄 최신화 직전 신규 클론" 패턴.
+- 토픽 갱신: [[works-project-portfolio]] (표의 dark/dark-system 행에 "이미 최신"의 근거인 직전 클론 사실
+  추가, 상단 갱신 노트·관련 세션 링크 추가)
+- index.md 갱신 (세션1 추가). 신규 엔티티/토픽/스킬 없음 — dark-system 내용(제품 성격·스택)은 여전히
+  미조사라 포트폴리오 자체 규칙(실제로 다뤄지는 세션이 생기기 전엔 엔티티 미생성)에 따라 엔티티 미생성.
+  단순 mkdir+git clone이라 재사용 절차로 추출할 내용도 없음.
+- AI_CONTEXT.md 갱신 없음 — 매우 짧은 선행 이벤트 세션으로, 기존 works-project-portfolio 한 줄이 이미 포괄.
+- 특이사항: 매우 짧은(2왕복) 세션이지만 같은 날 후속 세션의 "이미 최신" 집계 근거를 재구성하는 데 필요해
+  ingest함 — cwc-system-저장소-클론 세션과 동일한 판단 기준 적용.

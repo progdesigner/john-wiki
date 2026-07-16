@@ -6,6 +6,8 @@ updated: 2026-07-16
 > 2026-07-16 갱신: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] 세션에서 `cwc-system`·`elevino-system`
 > 두 저장소의 내용이 처음 조사됨 → [[cwc-system]] · [[elevino-system]] 엔티티 생성. 나머지(elevino-operator,
 > goraesa-system, bokziri-system, ai-labs-notes, dark-system, arca8-system)는 여전히 미문서화.
+> 같은 날 [[2026-07-15-dark-system-저장소-클론]] 세션에서 `dark/dark-system`도 Works 일괄 최신화(06:48)
+> 10분 전(06:38)에 막 폴더 생성·클론됐음이 확인됨 — `cwc-system`(06:42 클론)과 같은 패턴. 내용은 여전히 미조사.
 
 # Works 프로젝트 포트폴리오
 
@@ -27,7 +29,7 @@ updated: 2026-07-16
 | `goraesa/goraesa-system` | (미문서화) | 업데이트됨(360파일, +45만 라인 — 대형 변경) |
 | `bokziri/bokziri-system` | (미문서화) | 업데이트됨(281파일) |
 | `ai-labs/ai-labs-notes` | (미문서화) | 이미 최신 |
-| `dark/dark-system` | (미문서화) | 이미 최신 |
+| `dark/dark-system` | (미문서화) | 이미 최신(06:38 [[2026-07-15-dark-system-저장소-클론]]으로 이 세션 10분 전 막 생성·클론됨) |
 | `arca8/arca8-system` | (미문서화) | 이미 최신 |
 | `john-wiki` | [[john-wiki]] | 이 위키 자체. 이미 최신 |
 
@@ -40,6 +42,6 @@ updated: 2026-07-16
 생겼다 — 위 표 참고.)
 
 ## 관련
-- 세션: [[2026-07-15-cwc-system-저장소-클론]], [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]], [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]]
+- 세션: [[2026-07-15-dark-system-저장소-클론]], [[2026-07-15-cwc-system-저장소-클론]], [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]], [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]]
 - 스킬: [[multi-repo-safe-bulk-update]], [[credit-ledger-balance-pattern]]
 - 알려진 저장소 엔티티: [[lampas-harness]] · [[lampas-studio]] · [[toktalk]] · [[john-wiki]] · [[cwc-system]] · [[elevino-system]]
