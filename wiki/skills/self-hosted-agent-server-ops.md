@@ -37,6 +37,13 @@ tags: [lampas-harness, launchd, server, port, restart, operations, self-hosting,
 - 대응: 턴 안에서 재시작이 필요하면 **코드 수정·빌드까지만** 하고 재시작은 사용자에게 맡기거나,
   nohup 지연 스크립트로 분리 실행([[detach-long-job-nohup]])하고 **최종 답변을 먼저 마친 뒤** 재시작되게.
   재시작 직후엔 권한 필요 작업(curl, 새 파일 Write 등)이 모두 실패한다.
+- **`scripts/restart-lampas.sh`가 이 패턴을 내장**: 인자 없이 실행하면 자신을 `--worker` 모드로
+  `nohup` 재호출 후 즉시 "예약됨" 반환(현재 응답 전달 보장) → 워커가 `sleep 5` 후
+  `launchctl kickstart -k gui/$(id -u)/io.lampas.harness.daemon` → `/api/health`를 최대 10초 폴링해
+  성공/실패를 `logs/server.log`에 남김. pkill은 쓰지 않는다(함정 3과 무관). 2026-07-11 세션 당시엔 이
+  스크립트가 "수동 즉시(pkill 기반)"로 기록됐었는데, 2026-07-15 세션에서 원본을 다시 읽어보니 이미
+  지연 방식으로 바뀌어 있었다 — 스크립트 자체가 이 함정에 대한 대응으로 재작성된 것으로 보인다.
+  → [[lampas-harness]] · [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]]
 
 ## 함정 3 — pkill -f가 운영 데몬까지 죽인다 (pkill-hits-prod-daemon)
 테스트 인스턴스(`PORT=8899 npx tsx src/index.ts serve`)를 `pkill -f "tsx src/index.ts serve"`로 종료하면
@@ -64,4 +71,4 @@ launchd 데몬은 소스(`src/`)가 아니라 **컴파일된 `dist/index.js`를 
   프로세스를 구분할 땐 명령줄(-f 패턴)이 아니라 **포트→PID**(`lsof -ti`)로 특정하라.
 - rapid-mlx도 같은 launchd 관리 함정을 공유 → [[rapid-mlx]].
 
-## 출처: [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]] ([[lampas-harness]])
+## 출처: [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]] · [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]] ([[lampas-harness]])

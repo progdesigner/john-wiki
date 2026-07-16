@@ -66,8 +66,16 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   - **로컬 모델 결과물이 실행 불가**여서 상위 모델이 재작성한 사례(권한/Electron 바이너리/launchctl 순서 3중 오류).
     로컬→고급 모델 수동 에스컬레이션 → [[model-selection]] · [[local-llm-on-apple-silicon]].
 - **git 도구 in-agent 노출** — `src/fsTools.ts`에 git 관련 도구 추가, `src/webTools.ts` 신규(웹 도구 유틸).
-- **재시작 스크립트 2종** — `restart-lampas.sh`(수동 즉시: `pkill -f lampas` 후 daemon/server/scheduler 재시작),
-  `restart-when-idle.sh`(유휴 감지 후 `restart-lampas.sh` 호출 — 자동 메모리 정리용).
+- **재시작 스크립트 2종** — `restart-lampas.sh`, `restart-when-idle.sh`(유휴 감지 후 `restart-lampas.sh`
+  호출 — 자동 메모리 정리용).
+  - ⚠️ **`restart-lampas.sh` 동작 방식 기록 불일치**: 2026-07-11 세션 당시엔 "수동 즉시: `pkill -f lampas`
+    후 daemon/server/scheduler 재시작"으로 관찰됐다. 그러나 2026-07-15 세션 두 건
+    ([[2026-07-15-gpt-realtime-음성입력-길게누르기]] 22:40~22:41, [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]])
+    에서 원본을 직접 읽어 대조한 결과 **지금은 pkill 없이 nohup 지연 실행 + `launchctl kickstart -k`
+    방식**이다 — 즉시 반환 → 백그라운드 워커가 5초 대기 → launchd로 데몬 재시작 → `/api/health` 폴링
+    확인. 진행 중인 턴이 재시작으로 끊기지 않도록 안전화된 것으로 보인다(스크립트가 2026-07-11 이후
+    재작성된 것으로 추정, 정확한 변경 커밋은 미확인). → [[self-hosted-agent-server-ops]] ·
+    [[detach-long-job-nohup]]
 - ⚠️→✅ **Google Models 401 / 미표시** — 2026-07-08~11 사이 20회+ 미해결로 이월됐던 항목. 2026-07-13
   auto-memory 이관에서 **유력한 근본 원인 규명**: 셸에 `GOOGLE_API_KEY=`(빈 값 export)가 있어 dotenv가
   `.env`의 진짜 키를 안 덮어씀 → `googleModels()`가 `[]` 반환. `src/config.ts`에서 빈 값 변수만 `.env`로
@@ -84,7 +92,14 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   - 프런트: 보관 버튼 툴팁·안내 문구에 저장 반영, `apps/web/dist` 빌드. 응답에 `remembered` 플래그.
   - 배포는 서버 재시작 필요(`launchctl kickstart -k gui/$(id -u)/io.lampas.harness`) — 어시스턴트는
     자기 턴에서 재시작하면 채널이 끊겨([[self-hosted-agent-server-ops]]) 직접 실행하지 않음.
-  - → 세션: [[2026-07-13-보관시-자동-기억저장]] · 배경: [[long-term-memory-architecture]]
+  - **큐→실행 경로 상세(2026-07-15 재확인)**: `enqueueJob`(`src/queue.ts:54-61`)은 `queue/`에 잡 파일만
+    쓰고 즉시 반환(비동기) → `src/daemon.ts`가 `config.pollIntervalMs`(기본 5000ms, `src/config.ts:24`)
+    간격으로 폴링, rename으로 원자적 선점 후 `runJob` 실행(최대 15분 타임아웃,
+    `jobs/memory-ingest.job.json`). 야간 안전망 배치는 `jobs/memory-ingest-daily.job.json` +
+    `io.lampas.harness.memory-ingest-daily.plist`라는 구체적 파일명으로 존재(기존엔 "새벽 5:30 크론"으로만
+    뭉뚱그려 기록됨) → [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]]
+  - → 세션: [[2026-07-13-보관시-자동-기억저장]] · [[2026-07-14-보관-자동저장-확인-볼린저밴드]](1차 재확인) ·
+    [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]](2차 재확인) · 배경: [[long-term-memory-architecture]]
 
 ## 추가 기능 (2026-07-15 관찰)
 
@@ -220,7 +235,7 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   → [[env-empty-var-shadows-dotenv]]
 
 ## 관련
-- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-14-quick-html-이미지-첨부-구현]] · [[2026-07-15-올리브유-마케팅-포지셔닝]] · [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-사용량한도-rate-limit-sdk-확인]] · [[2026-07-15-데스크톱-file메뉴-new-window]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]]
+- 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-08-장기기억-provider-연동-설계]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-14-quick-html-이미지-첨부-구현]] · [[2026-07-15-올리브유-마케팅-포지셔닝]] · [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-사용량한도-rate-limit-sdk-확인]] · [[2026-07-15-데스크톱-file메뉴-new-window]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]] · [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]]
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
 - 연동 대상 장기기억: [[john-wiki]] (제안).
 - 상주 서비스·도구: [[rapid-mlx]] (로컬 LLM) · [[naver-blog-mcp]] (외부 MCP).

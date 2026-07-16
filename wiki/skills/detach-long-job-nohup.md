@@ -2,7 +2,7 @@
 name: detach-long-job-nohup
 description: 에이전트 세션보다 오래 걸리는 다운로드·빌드·장기 명령이 턴/세션 종료로 죽지 않게 분리 실행할 때
 created: 2026-07-09
-updated: 2026-07-13
+updated: 2026-07-16
 tags: [nohup, background, lampas-harness, download, shell]
 ---
 # 장기 실행 작업을 세션에서 분리 (nohup & disown)
@@ -11,6 +11,12 @@ tags: [nohup, background, lampas-harness, download, shell]
 `rapid-mlx pull`(수십 GB 다운로드), 대형 빌드 등 **한 턴보다 오래 걸리는 명령**을 돌릴 때.
 에이전트가 그냥 `&`로 백그라운드에 띄우면 세션이 넘어갈 때 부모가 사라지며 함께 죽는다
 (다운로드가 8GB 부근에서 반복 정지한 원인 → [[harness-background-process-lifecycle]]).
+
+같은 패턴이 **자기 자신을 재시작하는 스크립트**에도 쓰인다 — `scripts/restart-lampas.sh`는 자신을
+`nohup ... --worker &`로 재호출해 즉시 반환한 뒤, 워커가 `sleep 5` 후 실제 재시작을 수행한다. 목적은
+다운로드 생존이 아니라 **현재 응답이 사용자에게 먼저 전달되게 하는 것**(재시작이 응답 전송 채널 자체를
+끊는 걸 방지) — 자세한 안전 규칙은 [[self-hosted-agent-server-ops]] 함정 2. →
+[[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]]
 
 ## 절차 (단계별)
 1. **세션과 분리해 실행**:
@@ -44,4 +50,4 @@ tags: [nohup, background, lampas-harness, download, shell]
 - SDK 인자 스캐너가 `https://…`·슬래시 경로를 막으면 명령을 스크립트 파일로 써서 실행
   → [[deploy-sandbox-pnpm-shim]].
 
-## 출처: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-13-람파스-누적운영기억-이관]] · 배경: [[harness-background-process-lifecycle]]
+## 출처: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]] · 배경: [[harness-background-process-lifecycle]]

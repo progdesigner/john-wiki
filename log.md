@@ -492,3 +492,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: 소스 파일이 물리적으로 `logs/chats/`가 아니라 `logs/chats/archive/`에 있었다(요청받은 경로에는
   없었음) — find로 archive 하위에서 찾아 확인 후 진행. 이 대화 자체가 진행 중이던 음성입력 기능을
   사용자가 직접 검증(요? / 확인해보자 잘 돼? 등 음성 테스트 발화)한 라이브 사용 흔적을 포함.
+
+## [2026-07-16] ingest | 보관메모리 확인·하네스 재시작·커밋 푸시 세션 (source: caaf92e2-e047-4a4f-a5b4-0f16b988fdf5.md)
+- 소스: raw/conversations/2026-07-15-보관메모리확인-하네스재시작-커밋푸시.md (원본 caaf92e2-e047-4a4f-a5b4-0f16b988fdf5.md 복사)
+- 세션 신설: [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]]
+- 엔티티 갱신: [[lampas-harness]] (재시작 스크립트 동작 방식 불일치 기록·정정, 큐→실행 경로 라인단위
+  상세·야간잡 파일명 추가)
+- 스킬 갱신: [[self-hosted-agent-server-ops]] (`restart-lampas.sh`가 nohup 지연 패턴을 내장함을 원본 확인
+  후 반영), [[detach-long-job-nohup]] (재시작 스크립트를 이 패턴의 사례로 교차연결)
+- 토픽 갱신: [[long-term-memory-architecture]] (보관→ingest 3차 재확인, memory-ingest-daily 잡/plist
+  파일명 특정)
+- index.md 갱신 (세션 1개 추가)
+- 모순 기록: `restart-lampas.sh`가 2026-07-11 세션엔 "수동 즉시(pkill 기반)"로 관찰됐으나, 이번 세션+
+  같은 날 앞선 GPT Realtime 세션에서 스크립트 원본을 직접 읽어 대조한 결과 현재는 **pkill 없는 nohup
+  지연 실행 + launchctl kickstart** 방식임을 확인 — 2026-07-11 이후 스크립트가 재작성된 것으로 추정
+  (변경 커밋 미확인).
+- AI_CONTEXT.md 갱신 없음 — 이 세션은 기존 결정을 재확인·상세화한 것으로 새로운 핵심 사실(사용자 선호·
+  확정 결정·프로젝트 상태 변화) 없음, 40줄 여유 내에서 갱신 불필요로 판단.
