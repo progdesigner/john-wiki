@@ -70,6 +70,7 @@
 - [[2026-07-16-launchctl-불필요서비스-점검]] — macOS `launchctl list` 전체 출력 붙여넣고 "불필요한 건 없는지 판단해봐" 1왕복 quick 채팅. watchman/Adobe CC/OneDrive 업데이터를 제거 후보로, lampas-harness·rapid-mlx·redis·postgresql을 필수 유지로 분류. Redis/PostgreSQL 실사용 여부는 미확인으로 남음, 콘텐츠 가치 낮음
 - [[2026-07-17-하얏트-빙수-추천]] — "하야트에 빙수 뭐가 유명해?" 개발 무관 개인 질문 3왕복. 처음엔 답 거절→사용자 재촉("너가 할.")→웹 검색으로 그랜드 하얏트 서울 '갤러리' 카이막 애플망고 빙수(11만원)·수박 빙수(9만원) 추천. 콘텐츠 가치 낮음
 - [[2026-07-16-청구기업-용어질문]] — "청구 기업이 뭐야?" 4왕복 quick 채팅. 일반 회계 정의(인보이스 발급 측)→"주식상장에서 청구 기업"으로 맥락 재질문. 상장 신청 기업/청약 기업/발행 기업 후보 제시했으나 최종 확정 없이 세션 종료, 콘텐츠 가치 낮음
+- [[2026-07-16-볼린저밴드-평균회귀-트레이딩전략-질문]] — 볼린저 밴드·평균회귀 개념 3왕복 quick 채팅. [[2026-07-14-보관-자동저장-확인-볼린저밴드]](같은 주제 1왕복, 페이지 미생성)와 달리 매 답변이 [[dark-toss-api]]를 반복 언급하며 혼합 전략(평균회귀 기본+추세감지 시 모멘텀 전환)까지 제안 — 실제 구현은 없었으나 신규 토픽 페이지 생성 기준 충족
 
 ## Entities
 
@@ -117,6 +118,7 @@
 - [[cwc-fy-group-whisky-dispute]] — CWC Lab-FY Group 간 이탈리아 위스키(강남 위스키클럽용) 선적 지연·환불·법적 조치 언급된 장기 분쟁 타임라인(2024-10~2025-01, 2025-01-06 시점 미해결)
 - [[content-automation-decision-framework]] — 네이버 DataLab API 키워드 자동화 파이프라인의 마케팅-상품 얼라인 의사결정 6-패턴 프레임워크(채점게이트→배치승인→피드백루프 순 도입 권장)
 - [[macos-launchctl-cleanup-candidates]] — progdesigner 맥미니 `launchctl list` 정리 후보 목록(watchman·Adobe CC·OneDrive 업데이터 제거 검토, lampas-harness/rapid-mlx/redis/postgresql 유지) — 실행 여부 미확인, 다음 정리 시 재검토용
+- [[trading-strategy-mean-reversion-bollinger]] — 볼린저 밴드(도구)·평균회귀(전략) 개념 정리 + [[dark-toss-api]] 적용 시나리오(횡보장=평균회귀, 추세장=모멘텀 혼합) — 미구현, 상담 단계
 
 ## Skills
 

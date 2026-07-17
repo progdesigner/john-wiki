@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, trading, toss-securities, dark-system]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-17
 ---
 > 2026-07-16 갱신: [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] 세션(21:52~22:38 UTC,
 > 아래 코드 조사 세션보다 **먼저** 있었던 세션)에서 국장/미장 자동 장이동(`autoRegionSwitch`)에
@@ -72,8 +72,15 @@ KR/US 지역 슬롯 간 동기화되는 구조라 **활성 지역 슬롯만 지�
 않고 LLM 서비스에 대기 중이던 사용량도 `drainUsage` 후 폐기해, 초기화 직후 첫 사이클에서 이전 비용이
 되살아나지 않게 함. [[dark-upbit-api]]도 동일하게 수정됨(단, upbit은 지역 슬롯 없이 단일 집계).
 
+## 전략 후보 — 볼린저 밴드 / 평균회귀 (2026-07-16, 미구현)
+[[2026-07-16-볼린저밴드-평균회귀-트레이딩전략-질문]] quick 세션에서 [[progdesigner]]가 볼린저
+밴드·평균회귀 개념을 물으며 dark-toss-api 적용 시나리오를 상담. 어시스턴트가 "평균회귀 기본 +
+추세 전환 시 모멘텀 전환" 혼합 전략을 제안했으나 **실제 코드 구현은 없었음** — 순수 상담 단계.
+상세: [[trading-strategy-mean-reversion-bollinger]].
+
 ## 관련
 - [[dark-system]] · [[progdesigner]] · [[dark-toss-web]] · [[dark-upbit-api]] · [[dark-upbit-web]]
 - [[2026-07-15-dark-toss-api-장전매수-코드조사]]
 - [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]]
+- [[2026-07-16-볼린저밴드-평균회귀-트레이딩전략-질문]] · [[trading-strategy-mean-reversion-bollinger]]
 - [[config-flag-gate-audit]] · [[deploy-sandbox-pnpm-shim]]
