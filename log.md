@@ -1242,3 +1242,5 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   일회성 사건이라 CLAUDE.md 규칙상 AI_CONTEXT 편입 대상 아님(entity·topic 페이지로 충분).
 - 특이사항: 이 ingest 자체가 "위키 저장소에 실제 비밀을 옮기지 않는다"는 원칙을 처음 실천한 사례 —
   이후 유사 소스 ingest 시 참고할 선례로 [[secrets-plaintext-exposure-pattern]]에 명시.
+
+## [2026-07-19] ingest | 하네스 재시작 + PWA 이름/아이콘 최초 설정 + Vite manifest 버그 수정 (source: 8028c121-b640-4550-942e-3ae0c2e27e42.md)
