@@ -74,6 +74,7 @@
 - [[2026-07-16-청구기업-산업트렌드-분석]] — 상장예비심사 청구 기업 표(2021~2026, 150개사) 붙여넣고 "산업 트랜드" 3회 질문한 quick 채팅. "3개 파도"(2차전지/AI·반도체/바이오) 프레임→2026 상반기 4파도(방어·항공우주·자산재평가) 확장→"너가 볼 땐?" 요청에 더 절제된 자체 관점(옥석가리기·AI 산업인프라화·후공정 반도체·현금창출형 전통산업 귀환) 제시. 직전 [[2026-07-16-청구기업-용어질문]]의 미해결 용어를 실사용례로 사실상 해소
 - [[2026-07-16-needtovent-io-서비스-추측]] — 제3자 웹사이트 `needtovent.io` 정체 추측 3왕복 quick 채팅. 도메인명·랜딩 카피("Chat with me")만으로 AI/사람 대화·익명 감정공유·개인용 공유링크 등 서비스 모델 가설 제시, 실제 확인 없이 종료. 콘텐츠 가치 낮음, 진행 중 프로젝트와 무관
 - [[2026-07-17-nginx-스캐너-차단-조사]] — 미상 AWS 서버 nginx 로그에 찍힌 `.env`/`.git`/phpinfo 정찰 스캔 2왕복 quick. 사설 IP를 공격자로 오인해 직접 차단하지 말라는 경고 중심 방어 전략(Nginx 차단+real IP 복원+WAF)+정체 가설(자동 스캐너 vs 내부 인스턴스 침투 가능성)
+- [[2026-07-17-env읽기-pwa세이프에어리어-여백수정]] — `.env` 파일 그대로 읽어달라는 요청에 API 키/토큰 전체를 평문 출력한 보안 사고([[secrets-plaintext-exposure-pattern]] 신설 계기) + PWA 상단 safe-area-inset 여백 추가·하단 여백 제거 CSS 수정·배포
 - [[2026-07-18-desktop-web-아이콘-통일]] — desktop(주황 face)·web static 아이콘(남색 사운드바) 통일 요청. 1차 시도 방향 오인(반대로 적용+재설치까지 실행)→사용자 정정→git 복원 후 올바른 방향(desktop→web)으로 재작업·커밋
 - [[2026-07-18-works-전체저장]] — "Works 의 모든 git 저장소 저장해줘" 2왕복 quick 운영 세션. 12개 중 미커밋 변경 있던 4개([[john-wiki]]/[[dark-system]]/[[lampas-harness]]/[[lampas-studio]]) 커밋·push. dark-system은 push 거부 → `pull --rebase` 후 재push로 해소. 2026-07-15 pull 방향 최신화 세션의 대칭 작업(save 방향)
 - [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] — Higgsfield 대비 차별화 전략 상담(Actor/Object/Space 콘텐츠 엔진)·개체 등록 동사(스카우트/선정/매핑) 정리·Works 저장 요청이 quick 채팅 샌드박싱으로 차단된 3개 화제 quick 세션
@@ -129,6 +130,7 @@
 - [[trading-strategy-mean-reversion-bollinger]] — 볼린저 밴드(도구)·평균회귀(전략) 개념 정리 + [[dark-toss-api]] 적용 시나리오(횡보장=평균회귀, 추세장=모멘텀 혼합) — 미구현, 상담 단계
 - [[korea-ipo-filing-trends-2021-2026]] — 한국 상장예비심사 청구 기업(2021~2026, 150개사) 산업 트렌드 분석: 2차전지 옥석가리기·AI 산업인프라화·반도체 후공정 중심·방산 공급망화·현금창출형 전통산업 귀환, 향후 2~3년 우선순위 표 포함 — 외부 검증 없는 LLM 표 분석이라는 한계 명시
 - [[lampas-actor-object-space-positioning]] — 람파스 Higgsfield 대비 차별화 포지셔닝 전략: Actor/Object/Space 3축 결합, 차별화 요소 6가지, 개체 등록 동사(스카우트/선정/매핑) — 상담 결과일 뿐 채택 미확정
+- [[secrets-plaintext-exposure-pattern]] — 실제 API 키/토큰이 평문 노출된 반복 사고 3건([[toktalk]] 커밋·[[cwc-system]] 프로덕션 env·이 위키 자체 ingest 중 `.env` 채팅 노출) 묶음 + 권장 대응(레닥트·재발급) 미시스템화 기록
 
 ## Skills
 
@@ -168,3 +170,4 @@
 - [[nginx-aws-scanner-hardening]] — nginx 스캐너 정찰 대응: 사설 IP 오인 차단 금지→real IP 복원→rate limit→Security Group 축소→AWS WAF Managed Rules→과거 로그 200 응답 검증 순 계층 방어
 - [[icon-source-of-truth-before-replace]] — "A 아이콘을 B에 맞춰라" 요청에서 재생성 파이프라인 원본과 유지할 디자인 방향을 분리 판단, 모호하면 실행 전 확인
 - [[multi-repo-bulk-commit-push]] — 다중 git 저장소 일괄 "저장"(commit+push): 변경 있는 저장소만 커밋, push 거부는 pull --rebase로 해소(구조적 충돌이면 [[rebase-local-feature-onto-refactored-remote]]로 승격), [[multi-repo-safe-bulk-update]](pull 방향)의 대칭 스킬
+- [[pwa-safe-area-inset-padding]] — PWA(홈 화면 추가) 모드 상단/하단 여백을 `env(safe-area-inset-*)`로 노치/상태바 침범 없이 고정(calc() 필수, 방향별 추가/제거 구분)

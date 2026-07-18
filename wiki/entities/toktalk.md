@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, toktalk, nestjs, react, monorepo, ai-chat]
 created: 2026-07-09
-updated: 2026-07-16
+updated: 2026-07-19
 ---
 # toktalk (TokTalk — AI 캐릭터/보이스 챗)
 
@@ -43,6 +43,7 @@ updated: 2026-07-16
 
 ## 보안 주의 (관찰됨)
 - `.env`(실제 API 키)와 Firebase 서비스 계정 JSON(`apps/talk-app-toss-api/config/toktalk-*-firebase-adminsdk-*.json`)이 **git 추적 중**이며 원격에 푸시됨(커밋 `0664ea9`, 이전 `b7fdf05` 패턴). 노출 상태 기록만.
+  → 반복 패턴으로 묶임: [[secrets-plaintext-exposure-pattern]]
 
 ## 참고 예시로 지목됐으나 미확인 (2026-07-16)
 - `[[lampas-harness]]`에 ElevenLabs 실시간 TTS(`tts-stream`) 기능을 만들며 사용자가 `dbs/talk-system`

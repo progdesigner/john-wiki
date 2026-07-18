@@ -1218,3 +1218,27 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: Space가 "3앱 모두 배포 필요"(2026-07-15~16 기록)에서 API 1개만 진전됐을 뿐 SDK(생성 UI)
   미배포 추정이라 사용자 입장에서 Space는 여전히 완전히 열리지 않은 상태 — 다음 세션에서 SDK 배포
   여부 재확인 필요.
+
+## [2026-07-19] ingest | .env 파일 평문 노출 사고 + PWA 세이프 에어리어 여백 수정 (source: 2a66b6ce-6111-4edb-9741-a3902fc162e8.md)
+- 원본 보관: `raw/conversations/2026-07-17-env읽기-pwa세이프에어리어-여백수정.md` — **⚠️ 원본에 실제 API 키/토큰
+  (CLAUDE_CODE_OAUTH_TOKEN·ANTHROPIC_API_KEY·OPENAI_API_KEY·GOOGLE_API_KEY·ELEVENLABS_API_KEY·HARNESS_TOKEN)이
+  평문 노출되어 있어, 이 위키(git 추적) 사본에는 레닥트(접두사만 남김) 후 저장함. 원본 로그 파일 자체는
+  CLAUDE.md 규칙대로 손대지 않음.**
+- 세션 신설: [[2026-07-17-env읽기-pwa세이프에어리어-여백수정]] (2026-07-17 12:50~12:55 UTC, 무관한 두 화제).
+  ①사용자가 "`.env` 파일을 그대로 읽어줘" 요청 → 어시스턴트가 위험 고지 없이 전체 키 값을 표로 채팅
+  응답에 출력, `logs/chats/archive/`에 평문 영구 저장된 상태(재발급 여부 미확인). ②"PWA일 때 상단 여백이
+  없어졌다" 제보 → `header`에 `env(safe-area-inset-top)` 누락이 원인으로 진단·수정
+  (`padding-top: calc(10px + env(safe-area-inset-top))`), 후속으로 `footer` 하단 패딩 `10px→0`도 제거,
+  웹 빌드+서버 재시작(PID 74969)까지 완료.
+- 토픽 신설: [[secrets-plaintext-exposure-pattern]] — 이 사고를 [[toktalk]](커밋 `0664ea9`)·
+  [[cwc-system]](프로덕션 env 평문 커밋) 기존 두 사례와 묶어 반복 패턴으로 문서화, 권장 대응(값 마스킹·
+  재발급·위키 ingest 시 레닥트 원칙) 기록. 두 기존 entity 페이지에 상호링크 추가.
+- 스킬 신설: [[pwa-safe-area-inset-padding]] — `env(safe-area-inset-*)` + `calc()` 패턴, 방향별
+  추가/제거 구분, iOS 실기기 재확인 필요성.
+- 엔티티 갱신: [[lampas-harness]] (2026-07-17 세션 두 섹션 신설 — 보안 관찰 + PWA 기능), [[toktalk]]·
+  [[cwc-system]] (보안 주의 절에 패턴 토픽 링크 추가).
+- index.md 갱신 (세션1·토픽1·스킬1 추가).
+- AI_CONTEXT.md 갱신 없음 — PWA 수정은 소규모 기능(기존 판단 기준과 동일), `.env` 노출 사고는
+  일회성 사건이라 CLAUDE.md 규칙상 AI_CONTEXT 편입 대상 아님(entity·topic 페이지로 충분).
+- 특이사항: 이 ingest 자체가 "위키 저장소에 실제 비밀을 옮기지 않는다"는 원칙을 처음 실천한 사례 —
+  이후 유사 소스 ingest 시 참고할 선례로 [[secrets-plaintext-exposure-pattern]]에 명시.

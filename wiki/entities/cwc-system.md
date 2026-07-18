@@ -1,7 +1,7 @@
 ---
 tags: [entity, repository, cwc, nestjs, prisma, react]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-19
 ---
 # cwc-system
 
@@ -31,7 +31,7 @@ updated: 2026-07-16
 - Git: 브랜치 `main`, origin `git@github.com:cwc-commerce/cwc-system.git`. 커밋 스타일 Conventional
   Commits, `feat:`/`chore(release):` 프리픽스 + **본문 한국어**.
 - ⚠️ 프로덕션 env(`apps/cwc-api/env/.env.production`)에 DB 비밀번호·JWT 시크릿·Google Client ID가
-  **평문 커밋**되어 있음 (2026-07-15 발견, 미조치 보안 이슈).
+  **평문 커밋**되어 있음 (2026-07-15 발견, 미조치 보안 이슈). → 반복 패턴으로 묶임: [[secrets-plaintext-exposure-pattern]]
 
 ## 진행 중 작업
 - [[elevino-system]] DB를 그대로 재사용해 "멤버십 검색 + 크레딧 지급/차감" 관리자 기능을 신규 이식하는
