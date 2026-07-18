@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, trading, toss-securities, dark-system]
 created: 2026-07-16
-updated: 2026-07-17
+updated: 2026-07-19
 ---
 > 2026-07-16 갱신: [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] 세션(21:52~22:38 UTC,
 > 아래 코드 조사 세션보다 **먼저** 있었던 세션)에서 국장/미장 자동 장이동(`autoRegionSwitch`)에
@@ -78,9 +78,23 @@ KR/US 지역 슬롯 간 동기화되는 구조라 **활성 지역 슬롯만 지�
 추세 전환 시 모멘텀 전환" 혼합 전략을 제안했으나 **실제 코드 구현은 없었음** — 순수 상담 단계.
 상세: [[trading-strategy-mean-reversion-bollinger]].
 
+## `decide-signal.ts` 신호 판정 로직 + 스타일별 리스크 설계 (2026-07-17, 미검증)
+[[2026-07-17-dark-system-신호리스크-설계-코드업데이트]] 세션에서 어시스턴트가 보고한 변경(업비트와
+공통, [[dark-upbit-api]] 동일 섹션 참고):
+- 신규 `decide-signal.ts` — 신호 판정 로직.
+- `trading.config.ts`·`trading.service.ts` 확대 — LLM 카탈로그 연동, 신호 처리 강화.
+- 웹 UI 전면 개편(차트·포트폴리오·거래기록), 신규 엔드포인트 `/trading/status`·`/trading/signal`.
+- 설계 문서 `2026-07-17-per-style-signal-risk-design.md`(스타일별 신호 리스크 설계안).
+
+**주의**: 이 항목은 커밋 해시·line 번호·코드 확인 없이 어시스턴트 자기 보고만으로 기록됐다(위 세션
+페이지의 "신뢰도 관찰" 참고). [[trading-strategy-mean-reversion-bollinger]]가 같은 날짜 기준
+"미구현"이라 적어둔 볼린저/평균회귀 전략과 연결될 가능성이 있으나 단정하지 않음 — 다음에 dark-toss-api
+코드를 다시 열어볼 때 `decide-signal.ts` 실존 여부·내용을 실제로 확인할 것.
+
 ## 관련
 - [[dark-system]] · [[progdesigner]] · [[dark-toss-web]] · [[dark-upbit-api]] · [[dark-upbit-web]]
 - [[2026-07-15-dark-toss-api-장전매수-코드조사]]
 - [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]]
 - [[2026-07-16-볼린저밴드-평균회귀-트레이딩전략-질문]] · [[trading-strategy-mean-reversion-bollinger]]
+- [[2026-07-17-dark-system-신호리스크-설계-코드업데이트]]
 - [[config-flag-gate-audit]] · [[deploy-sandbox-pnpm-shim]]

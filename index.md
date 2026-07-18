@@ -76,6 +76,7 @@
 - [[2026-07-17-nginx-스캐너-차단-조사]] — 미상 AWS 서버 nginx 로그에 찍힌 `.env`/`.git`/phpinfo 정찰 스캔 2왕복 quick. 사설 IP를 공격자로 오인해 직접 차단하지 말라는 경고 중심 방어 전략(Nginx 차단+real IP 복원+WAF)+정체 가설(자동 스캐너 vs 내부 인스턴스 침투 가능성)
 - [[2026-07-17-harness재시작-pwa아이콘이름-manifest-vite버그수정]] — 재시작 스크립트 실행(2회 요청) + PWA 이름/아이콘 최초 설정("Lampas"+흰색 "L" 로고) + Vite `publicDir:false`로 manifest.json 아이콘 경로가 깨지던 버그 발견·수정(재시작 불필요 판명). 07-18 아이콘 통일 세션과 아이콘 디자인 불일치 관찰
 - [[2026-07-17-env읽기-pwa세이프에어리어-여백수정]] — `.env` 파일 그대로 읽어달라는 요청에 API 키/토큰 전체를 평문 출력한 보안 사고([[secrets-plaintext-exposure-pattern]] 신설 계기) + PWA 상단 safe-area-inset 여백 추가·하단 여백 제거 CSS 수정·배포
+- [[2026-07-17-dark-system-신호리스크-설계-코드업데이트]] — "최신 코드를 업데이트해 줘" 1왕복. [[dark-upbit-api]]/[[dark-toss-api]] 양쪽에 `decide-signal.ts`(신호 판정)+설정/서비스 확대+웹 UI 개편+신규 엔드포인트+스타일별 신호 리스크 설계 문서를 어시스턴트가 보고 — 커밋 해시·검증 없는 자기 보고뿐이라 미검증 표시, [[trading-strategy-mean-reversion-bollinger]]와의 연결 가능성 기록만 하고 단정 안 함
 - [[2026-07-18-desktop-web-아이콘-통일]] — desktop(주황 face)·web static 아이콘(남색 사운드바) 통일 요청. 1차 시도 방향 오인(반대로 적용+재설치까지 실행)→사용자 정정→git 복원 후 올바른 방향(desktop→web)으로 재작업·커밋
 - [[2026-07-18-works-전체저장]] — "Works 의 모든 git 저장소 저장해줘" 2왕복 quick 운영 세션. 12개 중 미커밋 변경 있던 4개([[john-wiki]]/[[dark-system]]/[[lampas-harness]]/[[lampas-studio]]) 커밋·push. dark-system은 push 거부 → `pull --rebase` 후 재push로 해소. 2026-07-15 pull 방향 최신화 세션의 대칭 작업(save 방향)
 - [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] — Higgsfield 대비 차별화 전략 상담(Actor/Object/Space 콘텐츠 엔진)·개체 등록 동사(스카우트/선정/매핑) 정리·Works 저장 요청이 quick 채팅 샌드박싱으로 차단된 3개 화제 quick 세션
@@ -105,7 +106,7 @@
 - [[dark-system]] — progdesigner 개인 소유 pnpm 모노레포(`~/Works/dark/dark-system`). 최소 4앱 확인: dark-upbit-api/web, dark-toss-api/web(자매 앱), 나머지 앱은 미조사
 - [[dark-upbit-api]] — dark-system 내 Upbit(코인) API 자동매매 서비스. 초단타 스타일 자동제외/수동허용+엔진교체로 구조적 LLM 차단, 모델 카탈로그 날짜필터
 - [[dark-upbit-web]] — dark-upbit-api 대시보드 웹. 모바일 표 가로스크롤·확대방지·스타일 드롭다운 하드코딩 사고 사례
-- [[dark-toss-api]] — dark-system 내 토스증권 API 자동매매 서비스. 기본 설정상 장시간 게이트 없음(marketHoursOnly false), manualBuy는 시간체크 경로 자체가 없음. 국장/미장 자동 장이동 시 양쪽마감 자동판단 일시정지·재개 구현됨
+- [[dark-toss-api]] — dark-system 내 토스증권 API 자동매매 서비스. 기본 설정상 장시간 게이트 없음(marketHoursOnly false), manualBuy는 시간체크 경로 자체가 없음. 국장/미장 자동 장이동 시 양쪽마감 자동판단 일시정지·재개 구현됨. 2026-07-17: `decide-signal.ts` 신호 판정 로직 추가 보고(미검증)
 - [[dark-toss-web]] — dark-toss-api 대시보드 웹. 모바일 표 가로스크롤·확대방지·장마감 일시정지 배지
 
 ## Topics
@@ -128,7 +129,7 @@
 - [[cwc-fy-group-whisky-dispute]] — CWC Lab-FY Group 간 이탈리아 위스키(강남 위스키클럽용) 선적 지연·환불·법적 조치 언급된 장기 분쟁 타임라인(2024-10~2025-01, 2025-01-06 시점 미해결)
 - [[content-automation-decision-framework]] — 네이버 DataLab API 키워드 자동화 파이프라인의 마케팅-상품 얼라인 의사결정 6-패턴 프레임워크(채점게이트→배치승인→피드백루프 순 도입 권장)
 - [[macos-launchctl-cleanup-candidates]] — progdesigner 맥미니 `launchctl list` 정리 후보 목록(watchman·Adobe CC·OneDrive 업데이터 제거 검토, lampas-harness/rapid-mlx/redis/postgresql 유지) — 실행 여부 미확인, 다음 정리 시 재검토용
-- [[trading-strategy-mean-reversion-bollinger]] — 볼린저 밴드(도구)·평균회귀(전략) 개념 정리 + [[dark-toss-api]] 적용 시나리오(횡보장=평균회귀, 추세장=모멘텀 혼합) — 미구현, 상담 단계
+- [[trading-strategy-mean-reversion-bollinger]] — 볼린저 밴드(도구)·평균회귀(전략) 개념 정리 + [[dark-toss-api]] 적용 시나리오(횡보장=평균회귀, 추세장=모멘텀 혼합) — 2026-07-16 시점 미구현, 2026-07-17 `decide-signal.ts` 보고와의 연결 가능성 미확정으로 병기
 - [[korea-ipo-filing-trends-2021-2026]] — 한국 상장예비심사 청구 기업(2021~2026, 150개사) 산업 트렌드 분석: 2차전지 옥석가리기·AI 산업인프라화·반도체 후공정 중심·방산 공급망화·현금창출형 전통산업 귀환, 향후 2~3년 우선순위 표 포함 — 외부 검증 없는 LLM 표 분석이라는 한계 명시
 - [[lampas-actor-object-space-positioning]] — 람파스 Higgsfield 대비 차별화 포지셔닝 전략: Actor/Object/Space 3축 결합, 차별화 요소 6가지, 개체 등록 동사(스카우트/선정/매핑) — 상담 결과일 뿐 채택 미확정
 - [[secrets-plaintext-exposure-pattern]] — 실제 API 키/토큰이 평문 노출된 반복 사고 3건([[toktalk]] 커밋·[[cwc-system]] 프로덕션 env·이 위키 자체 ingest 중 `.env` 채팅 노출) 묶음 + 권장 대응(레닥트·재발급) 미시스템화 기록

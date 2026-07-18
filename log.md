@@ -1244,3 +1244,19 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   이후 유사 소스 ingest 시 참고할 선례로 [[secrets-plaintext-exposure-pattern]]에 명시.
 
 ## [2026-07-19] ingest | 하네스 재시작 + PWA 이름/아이콘 최초 설정 + Vite manifest 버그 수정 (source: 8028c121-b640-4550-942e-3ae0c2e27e42.md)
+
+## [2026-07-19] ingest | dark-system 신호 판정·스타일별 리스크 설계 코드 업데이트 (source: 123fdfff-b54f-4a00-9192-4fb4083f247c.md)
+- 원본: raw/conversations/2026-07-17-dark-system-신호리스크-설계-코드업데이트.md (2026-07-17T12:30 UTC, 1왕복)
+- 세션 페이지 신설: [[2026-07-17-dark-system-신호리스크-설계-코드업데이트]] — "최신 코드 업데이트해줘"
+  요청에 어시스턴트가 [[dark-upbit-api]]/[[dark-toss-api]] 공통 `decide-signal.ts`(신호 판정) 신설,
+  `trading.config.ts`/`trading.service.ts` 확대, 웹 UI 개편, 신규 엔드포인트(`/trading/status`,
+  `/trading/signal`), 설계 문서(`2026-07-17-per-style-signal-risk-design.md`)를 보고. 커밋 해시·
+  line 번호·검증 절차가 전혀 없는 자기 보고뿐이라 "미검증" 표시로 기록.
+- 엔티티 갱신: [[dark-toss-api]]·[[dark-upbit-api]](decide-signal.ts 섹션 신설, 미검증 명시),
+  [[dark-system]](기타 변경에 항목 추가).
+- 토픽 갱신: [[trading-strategy-mean-reversion-bollinger]] — "2026-07-17 기준 미구현" 서술을
+  덮어쓰지 않고, 같은 날짜에 나온 이 보고와의 연결 가능성만 병기(단정 안 함) — 다음 코드 확인
+  세션에서 확정할 것.
+- index.md 갱신 (세션 1 추가, dark-toss-api·trading-strategy 토픽 한 줄 요약 갱신).
+- AI_CONTEXT.md 갱신 없음 — 미검증 자기 보고 상태라 40줄 예산을 쓸 만큼 확정된 핵심 사실이 아직
+  아님. 코드로 확인되면 그때 반영.
