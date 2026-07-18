@@ -7,7 +7,9 @@ updated: 2026-07-19
 > (pull이 아니라 commit+push 방향, 대칭 스킬 [[multi-repo-bulk-commit-push]] 신설). 12개 중
 > [[john-wiki]]·[[dark-system]]·[[lampas-harness]]·[[lampas-studio]] 4개에 미커밋 변경이 있어
 > 커밋·push. `dark-system`은 push가 한 번 거부돼(원격에 새 커밋 존재) `pull --rebase` 후 재push로
-> 해소 — 구조적 충돌은 아니었던 것으로 보임.
+> 해소 — 구조적 충돌은 아니었던 것으로 보임. **이 세션 3분 전, 같은 요청이 다른(작업 폴더 샌드박싱된
+> quick) 채팅에서 먼저 시도됐다가 `~/Works` 접근 차단으로 막힌 바 있음** →
+> [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[work-folder-sandboxing]].
 >
 > 2026-07-16 갱신: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] 세션에서 `cwc-system`·`elevino-system`
 > 두 저장소의 내용이 처음 조사됨 → [[cwc-system]] · [[elevino-system]] 엔티티 생성. 나머지(elevino-operator,

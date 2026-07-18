@@ -133,6 +133,15 @@ Actor·Object·Space와 별개로, **회사(Actor/Object) 엔티티 시스템과
   플레이스홀더 — 실제 배포 전 S3/CloudFront 인프라 발급 필요.
 - 절차 스킬 → [[new-app-scaffold-from-slim-base]] · 세션 → [[2026-07-16-lampas-web-product-신규앱-구현]]
 
+## 포지셔닝 전략 — Higgsfield 대비 차별화 (2026-07-17 상담)
+
+`[[progdesigner]]`가 [[lampas]]에게 힉스필드(Higgsfield) 대비 차별화 전략을 상담. 결론은 "생성 품질
+경쟁이 아니라 Actor(사람)/Object(상품)/Space(공간) 3축을 결합해 브랜드 콘텐츠 자산을 지속 운영하는
+체계"로 포지셔닝하라는 것 — Space 엔티티 구현(위 절, 2026-07-15~16)과 별개로 진행된 사업 전략
+논의이며, **채택이 확정된 기록은 아님**(상담 결과일 뿐). 개체 등록 동사도 Actor=스카우트/Object=선정/
+Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-positioning]] ·
+세션 [[2026-07-17-람파스-차별화전략-용어-works저장-quick]].
+
 ## 기타 변경 (2026-07-18)
 - 액터 플로우 및 gemini/actors API 확장 커밋·push. [[works-project-portfolio]] 일괄 저장 요청의 일부로,
   변경 세부 내용은 소스에 한 줄 요약만 있어 미상. → [[2026-07-18-works-전체저장]]
@@ -140,7 +149,9 @@ Actor·Object·Space와 별개로, **회사(Actor/Object) 엔티티 시스템과
 ## 관련
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
-  [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-18-works-전체저장]]
+  [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-18-works-전체저장]] ·
+  [[2026-07-17-람파스-차별화전략-용어-works저장-quick]]
+- 토픽: [[lampas-actor-object-space-positioning]]
 - 앱: [[lampas-web-ai]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]

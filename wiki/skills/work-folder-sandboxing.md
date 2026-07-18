@@ -37,4 +37,11 @@ tags: [claude-agent-sdk, security, sandbox, permission]
   **폴더 밖 레퍼런스 코드를 보여주고 싶다면, 참고 대상을 작업 폴더 자체로 잡거나("전체(제한
   없음)") 내용을 프롬프트에 직접 붙여넣는 우회가 필요**하다. → [[2026-07-16-tts-stream-elevenlabs-구현착수]]
 
-## 출처: [[2026-07-06-lampas-harness-구축]] ([[lampas-harness]]) · 보강: [[2026-07-16-tts-stream-elevenlabs-구현착수]]
+## 추가 실사례 (2026-07-18)
+quick 채팅이 `lampas/lampas-harness` 폴더에 샌드박싱된 상태에서 "Works의 모든 git 저장소 저장해줘"
+요청 → `~/Works` 상위 접근이 막혀 진행 불가, 어시스턴트가 폴더 확장 재요청 또는 현재 저장소만 저장
+중 선택을 묻고 대화가 끊김. 3분 뒤 별도의(제한 없는) 세션에서 같은 요청이 재시도되어 12개 저장소를
+순회·완료됨 → [[2026-07-18-works-전체저장]]. quick 채팅 창구가 기본적으로 특정 작업 폴더에 묶인다는
+것을 보여주는 사례. → [[2026-07-17-람파스-차별화전략-용어-works저장-quick]]
+
+## 출처: [[2026-07-06-lampas-harness-구축]] ([[lampas-harness]]) · 보강: [[2026-07-16-tts-stream-elevenlabs-구현착수]] · [[2026-07-17-람파스-차별화전략-용어-works저장-quick]]

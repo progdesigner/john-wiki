@@ -76,6 +76,7 @@
 - [[2026-07-17-nginx-스캐너-차단-조사]] — 미상 AWS 서버 nginx 로그에 찍힌 `.env`/`.git`/phpinfo 정찰 스캔 2왕복 quick. 사설 IP를 공격자로 오인해 직접 차단하지 말라는 경고 중심 방어 전략(Nginx 차단+real IP 복원+WAF)+정체 가설(자동 스캐너 vs 내부 인스턴스 침투 가능성)
 - [[2026-07-18-desktop-web-아이콘-통일]] — desktop(주황 face)·web static 아이콘(남색 사운드바) 통일 요청. 1차 시도 방향 오인(반대로 적용+재설치까지 실행)→사용자 정정→git 복원 후 올바른 방향(desktop→web)으로 재작업·커밋
 - [[2026-07-18-works-전체저장]] — "Works 의 모든 git 저장소 저장해줘" 2왕복 quick 운영 세션. 12개 중 미커밋 변경 있던 4개([[john-wiki]]/[[dark-system]]/[[lampas-harness]]/[[lampas-studio]]) 커밋·push. dark-system은 push 거부 → `pull --rebase` 후 재push로 해소. 2026-07-15 pull 방향 최신화 세션의 대칭 작업(save 방향)
+- [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] — Higgsfield 대비 차별화 전략 상담(Actor/Object/Space 콘텐츠 엔진)·개체 등록 동사(스카우트/선정/매핑) 정리·Works 저장 요청이 quick 채팅 샌드박싱으로 차단된 3개 화제 quick 세션
 
 ## Entities
 
@@ -125,6 +126,7 @@
 - [[macos-launchctl-cleanup-candidates]] — progdesigner 맥미니 `launchctl list` 정리 후보 목록(watchman·Adobe CC·OneDrive 업데이터 제거 검토, lampas-harness/rapid-mlx/redis/postgresql 유지) — 실행 여부 미확인, 다음 정리 시 재검토용
 - [[trading-strategy-mean-reversion-bollinger]] — 볼린저 밴드(도구)·평균회귀(전략) 개념 정리 + [[dark-toss-api]] 적용 시나리오(횡보장=평균회귀, 추세장=모멘텀 혼합) — 미구현, 상담 단계
 - [[korea-ipo-filing-trends-2021-2026]] — 한국 상장예비심사 청구 기업(2021~2026, 150개사) 산업 트렌드 분석: 2차전지 옥석가리기·AI 산업인프라화·반도체 후공정 중심·방산 공급망화·현금창출형 전통산업 귀환, 향후 2~3년 우선순위 표 포함 — 외부 검증 없는 LLM 표 분석이라는 한계 명시
+- [[lampas-actor-object-space-positioning]] — 람파스 Higgsfield 대비 차별화 포지셔닝 전략: Actor/Object/Space 3축 결합, 차별화 요소 6가지, 개체 등록 동사(스카우트/선정/매핑) — 상담 결과일 뿐 채택 미확정
 
 ## Skills
 
