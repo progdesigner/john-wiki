@@ -1126,3 +1126,21 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: 스캐너 요청 IP가 AWS VPC 사설 대역이라는 점을 놓치면 방어책이 역효과(정상 트래픽 차단)를
   낼 수 있다는 경고가 두 턴 모두의 핵심 축. 서버 소유/프로젝트가 확인되면 이 세션·[[progdesigner]]
   엔티티를 갱신할 것.
+
+## [2026-07-19] ingest | desktop/web 아이콘 통일 세션 (2026-07-18) (source: eaf17006-4706-406d-935c-02385ac58edd.md)
+- 원본 보관: `raw/conversations/2026-07-18-desktop-web-아이콘-통일.md`
+- 세션 신설: [[2026-07-18-desktop-web-아이콘-통일]] — "desktop 아이콘으로 web static 아이콘을 바꿔줘"
+  요청. 1차 시도에서 방향을 반대로 잡아(web 남색 사운드바 아이콘을 desktop에 이식) `install-desktop.sh`
+  재실행(Dock/Finder 반영)까지 사용자 승인 하에 완료했다가, 사용자가 "반대로 한거 같은데?"로 정정 →
+  git 상태 확인 후 desktop 원본(주황 face) 복원 → 올바른 방향(desktop→web)으로 재작업·커밋 완료.
+  `apps/web/static/icon-512.png`·`icon-192.png` 교체, `icon-384.png` 신규 생성, desktop `icon.icns`
+  재생성.
+- 스킬 신설: [[icon-source-of-truth-before-replace]] — "A를 B에 맞춰라" 요청에서 재생성 파이프라인의
+  "원본 파일" 방향과 요청자가 "유지하고 싶은 디자인" 방향을 분리해 판단하는 절차, 모호하면 실행 전
+  한 줄 확인 권장.
+- 엔티티 갱신: [[lampas-harness]] (2026-07-18 세션 절 신설, 관련 세션 목록에 추가, updated 2026-07-19)
+- index.md 갱신 (세션1·스킬1 추가)
+- AI_CONTEXT.md 갱신 없음 — 소규모 브랜딩/기능 세션이라 40줄 예산 내 유지할 만큼 장기 핵심 사실 아님
+  (2026-07-15 desktop File 메뉴 세션과 동일 판단 기준).
+- 특이사항: 방향 오인을 이미 시스템 반영(재설치)까지 실행한 뒤 발견 → 롤백이 단순 파일 되돌리기보다
+  커진 사례. 커밋 해시는 소스에 명시되지 않음(마지막 턴에서 "완료됐습니다" 보고만 있고 해시 미노출).
