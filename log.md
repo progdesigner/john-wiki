@@ -1144,3 +1144,23 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   (2026-07-15 desktop File 메뉴 세션과 동일 판단 기준).
 - 특이사항: 방향 오인을 이미 시스템 반영(재설치)까지 실행한 뒤 발견 → 롤백이 단순 파일 되돌리기보다
   커진 사례. 커밋 해시는 소스에 명시되지 않음(마지막 턴에서 "완료됐습니다" 보고만 있고 해시 미노출).
+
+## [2026-07-19] ingest | Works 전체 git 저장소 저장 세션 (2026-07-18) (source: 73d2a722-3760-4eb8-98b9-a54c58c6a973.md)
+- 원본 보관: `raw/conversations/2026-07-18-works-전체저장.md`
+- 세션 신설: [[2026-07-18-works-전체저장]] — "Works 의 모든 git 저장소 저장해줘" 요청. [[works-project-portfolio]]
+  12개 저장소 중 미커밋 변경이 있던 4개([[john-wiki]]·[[dark-system]]·[[lampas-harness]]·[[lampas-studio]])를
+  각각 커밋·push. [[dark-system]]은 원격에 새 커밋이 있어 push가 한 번 거부됐고 `git pull --rebase`로
+  통합 후 재push. 나머지 8개는 변경 없어 손대지 않음. 2026-07-15 pull 방향 최신화 세션의 대칭 작업(save
+  방향)이라 판단, works-project-portfolio.md에 노트 추가.
+- 스킬 신설: [[multi-repo-bulk-commit-push]] — 다중 저장소 일괄 commit+push 절차(변경 있는 저장소만
+  커밋, push 거부는 pull --rebase로 우선 해소, 구조적 충돌이면 [[rebase-local-feature-onto-refactored-remote]]로
+  승격). 기존 [[multi-repo-safe-bulk-update]](pull 방향)와 짝을 이루는 반대 방향 루틴이라 대칭 스킬로
+  분리 신설, 서로 상호 링크.
+- 엔티티 갱신: [[dark-system]]·[[lampas-harness]]·[[lampas-studio]] (각각 "기타 변경 (2026-07-18)"
+  절 신설, 관련 세션 목록에 추가, updated 2026-07-19). [[john-wiki]]는 이 세션이 위키 저장소 자신의
+  git 이력(메타)이라 엔티티 페이지 갱신 생략.
+- index.md 갱신 (세션1·스킬1 추가)
+- AI_CONTEXT.md 갱신 없음 — 소스가 최종 보고 요약뿐인 매우 짧은 routine 운영 세션이라 40줄 예산 내
+  유지할 만큼 장기 핵심 사실 아님(2026-07-18 desktop/web 아이콘 세션과 동일 판단 기준).
+- 특이사항: 소스가 어시스턴트 최종 보고 텍스트만 담고 있어 각 저장소의 실제 diff·커밋 해시는 확인 불가
+  (john-wiki 자체 커밋 내용도 "sdk 과금 스킬 수정 + 세션 기록 2건"이라는 한 줄 요약뿐).

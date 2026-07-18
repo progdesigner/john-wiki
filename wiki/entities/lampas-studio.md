@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights]
 created: 2026-07-09
-updated: 2026-07-16
+updated: 2026-07-19
 ---
 # lampas-studio (Lampas 이미지 생성 스튜디오)
 
@@ -133,10 +133,14 @@ Actor·Object·Space와 별개로, **회사(Actor/Object) 엔티티 시스템과
   플레이스홀더 — 실제 배포 전 S3/CloudFront 인프라 발급 필요.
 - 절차 스킬 → [[new-app-scaffold-from-slim-base]] · 세션 → [[2026-07-16-lampas-web-product-신규앱-구현]]
 
+## 기타 변경 (2026-07-18)
+- 액터 플로우 및 gemini/actors API 확장 커밋·push. [[works-project-portfolio]] 일괄 저장 요청의 일부로,
+  변경 세부 내용은 소스에 한 줄 요약만 있어 미상. → [[2026-07-18-works-전체저장]]
+
 ## 관련
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
-  [[2026-07-16-lampas-web-product-신규앱-구현]]
+  [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-18-works-전체저장]]
 - 앱: [[lampas-web-ai]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]

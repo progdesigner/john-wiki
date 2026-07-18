@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, repo, monorepo]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-19
 ---
 # dark-system
 
@@ -29,6 +29,11 @@ CSS 구조를 공유하는 자매 앱 쌍으로 확인됨.
 
 모노레포에 이 4개 외 다른 앱이 더 있는지는 아직 확인되지 않았다 — `apps/` 전체 목록은 미조사.
 
+## 기타 변경
+- 2026-07-18: `tools` 모델 필터 테스트 추가(커밋·push). 원격에 새 커밋이 있어 push가 한 번 거부돼
+  `git pull --rebase` 후 재push로 해소 — [[2026-07-18-works-전체저장]] (Works 전체 저장 세션의 일부,
+  변경 내용 자체는 소스에 한 줄 요약만 있어 세부 미상).
+
 ## 관련
 - [[dark-toss-api]] · [[dark-toss-web]] · [[dark-upbit-api]] · [[dark-upbit-web]] · [[progdesigner]] · [[works-project-portfolio]]
-- [[2026-07-15-dark-system-저장소-클론]] · [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] · [[2026-07-15-dark-toss-api-장전매수-코드조사]]
+- [[2026-07-15-dark-system-저장소-클론]] · [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] · [[2026-07-15-dark-toss-api-장전매수-코드조사]] · [[2026-07-18-works-전체저장]]

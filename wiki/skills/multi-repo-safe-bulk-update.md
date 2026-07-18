@@ -2,6 +2,7 @@
 name: multi-repo-safe-bulk-update
 description: 여러 git 저장소를 한 번에 최신화(pull)해달라는 요청을 받았을 때, 미커밋 변경이 있는 저장소만 안전하게 골라 보류하는 절차
 created: 2026-07-16
+updated: 2026-07-19
 tags: [git, ops, bulk-update, works-portfolio]
 ---
 # 다중 저장소 안전 일괄 업데이트
@@ -9,7 +10,7 @@ tags: [git, ops, bulk-update, works-portfolio]
 ## 언제 쓰는가
 "Works(또는 특정 상위 폴더)의 모든 프로젝트를 최신화해줘" 같은 일괄 `git pull` 요청. 저장소가
 여러 개고 각각 로컬 작업 상태가 다를 수 있어, 무조건 pull하면 미커밋 변경과 충돌해 워킹트리를 망칠 위험이
-있다.
+있다. 반대 방향("모두 저장해줘" = commit+push)은 → [[multi-repo-bulk-commit-push]].
 
 ## 절차 (단계별)
 1. 대상 상위 폴더 하위의 `.git` 디렉터리를 찾아 전체 저장소 목록을 만든다.

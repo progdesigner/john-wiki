@@ -1,8 +1,14 @@
 ---
 tags: [topic, works, portfolio, git, ops]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-19
 ---
+> **2026-07-19 추가 갱신**: [[2026-07-18-works-전체저장]] 세션(2026-07-18) — "Works 전체 저장해줘"
+> (pull이 아니라 commit+push 방향, 대칭 스킬 [[multi-repo-bulk-commit-push]] 신설). 12개 중
+> [[john-wiki]]·[[dark-system]]·[[lampas-harness]]·[[lampas-studio]] 4개에 미커밋 변경이 있어
+> 커밋·push. `dark-system`은 push가 한 번 거부돼(원격에 새 커밋 존재) `pull --rebase` 후 재push로
+> 해소 — 구조적 충돌은 아니었던 것으로 보임.
+>
 > 2026-07-16 갱신: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] 세션에서 `cwc-system`·`elevino-system`
 > 두 저장소의 내용이 처음 조사됨 → [[cwc-system]] · [[elevino-system]] 엔티티 생성. 나머지(elevino-operator,
 > goraesa-system, bokziri-system, ai-labs-notes, arca8-system)는 여전히 미문서화.
@@ -49,6 +55,6 @@ updated: 2026-07-16
 `apps/dark-toss-api` 하나만 조사됨 → [[dark-system]] 참고.)
 
 ## 관련
-- 세션: [[2026-07-15-dark-system-저장소-클론]], [[2026-07-15-cwc-system-저장소-클론]], [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]], [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]], [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]], [[2026-07-15-dark-toss-api-장전매수-코드조사]]
-- 스킬: [[multi-repo-safe-bulk-update]], [[credit-ledger-balance-pattern]], [[config-flag-gate-audit]], [[trading-feature-flag-auto-exclude-manual-allow]], [[deploy-sandbox-pnpm-shim]]
+- 세션: [[2026-07-15-dark-system-저장소-클론]], [[2026-07-15-cwc-system-저장소-클론]], [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]], [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]], [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]], [[2026-07-15-dark-toss-api-장전매수-코드조사]], [[2026-07-18-works-전체저장]]
+- 스킬: [[multi-repo-safe-bulk-update]], [[multi-repo-bulk-commit-push]], [[credit-ledger-balance-pattern]], [[config-flag-gate-audit]], [[trading-feature-flag-auto-exclude-manual-allow]], [[deploy-sandbox-pnpm-shim]]
 - 알려진 저장소 엔티티: [[lampas-harness]] · [[lampas-studio]] · [[toktalk]] · [[john-wiki]] · [[cwc-system]] · [[elevino-system]] · [[dark-system]] · [[dark-upbit-api]] · [[dark-upbit-web]] · [[dark-toss-api]] · [[dark-toss-web]]
