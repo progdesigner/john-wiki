@@ -77,6 +77,7 @@
 - [[2026-07-18-desktop-web-아이콘-통일]] — desktop(주황 face)·web static 아이콘(남색 사운드바) 통일 요청. 1차 시도 방향 오인(반대로 적용+재설치까지 실행)→사용자 정정→git 복원 후 올바른 방향(desktop→web)으로 재작업·커밋
 - [[2026-07-18-works-전체저장]] — "Works 의 모든 git 저장소 저장해줘" 2왕복 quick 운영 세션. 12개 중 미커밋 변경 있던 4개([[john-wiki]]/[[dark-system]]/[[lampas-harness]]/[[lampas-studio]]) 커밋·push. dark-system은 push 거부 → `pull --rebase` 후 재push로 해소. 2026-07-15 pull 방향 최신화 세션의 대칭 작업(save 방향)
 - [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] — Higgsfield 대비 차별화 전략 상담(Actor/Object/Space 콘텐츠 엔진)·개체 등록 동사(스카우트/선정/매핑) 정리·Works 저장 요청이 quick 채팅 샌드박싱으로 차단된 3개 화제 quick 세션
+- [[2026-07-18-인스타그램-추천계정-알림끄기]] — 인스타그램(개인 소비자 앱) 추천 계정·게시물 알림 끄는 방법 2왕복 quick 세션. 1차 답변이 실제 앱과 안 맞아 "최신으로 다시" 재요청받아 갱신, 콘텐츠 가치 낮음
 
 ## Entities
 
