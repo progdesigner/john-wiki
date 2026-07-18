@@ -1,7 +1,7 @@
 ---
 tags: [entity, app, lampas-studio, react, chat, ai]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-19
 ---
 # lampas-web-ai ("Lampas AI", 대화형 AI 스튜디오)
 
@@ -62,7 +62,24 @@ lampas-web-sdk와 달리 Atomic Design·variant 체계를 쓰지 않는 별도 �
    상태 스냅샷을 메시지에 저장하는 방식(`store.tsx`). base64 이미지는 스냅샷에서 제거되므로 새로고침 후
    사진 단계 복귀 시 재업로드 필요. 배포 전 대화엔 스냅샷 없어 ✏️ 미표시. 커밋 `4e0fe77`.
 
+## 2026-07-18 세션 — 새 대화 시작 2단계화 + 등록 사진 우선 분류 → [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
+
+1. **새 대화 시작 2칩화** — 기존엔 새 대화 시작 시 Actor/Object/Space 만들기 3개 메뉴가 곧바로 나왔으나,
+   **📝 등록하기 / 📸 촬영하기** 2개 칩으로 먼저 분기하도록 변경. "등록하기"를 누르면 그제서야 기존
+   3개 메뉴가 이어서 나옴. 플로우 종료·취소 후 재노출 메뉴·세션 복원 시 칩도 전부 2개 구성으로 통일.
+2. **등록하기 — 사진 우선 분류 플로우** — 위 1과 같은 세션에서 곧바로 더 개편: 등록하기를 누르면
+   "등록할 사진을 올려주세요 📷" 안내가 먼저 나오고(사진 없이 진행할 Actor/Object/Space 선택 칩도
+   병기), 사진을 올리면 **Gemini Vision**(`GeminiService.classifyRegistrationSubject`,
+   `POST /actors/classify-registration-photo`)이 인물/제품/공간을 분류해 해당 등록 플로우로 자동
+   연결한다. **Actor로 분류되면 사진을 닮은꼴 레퍼런스로 자동 첨부하고 이름부터 묻는, 이번에 신규로
+   생긴 경로**로 시작하고, Object/Space는 기존 사진 업로드 플로우(특성 분석→이름 입력)로 연결된다.
+   사진과 함께 "공간이야" 등 키워드를 적으면 분류 API를 건너뛰고 직행하며, 분류 API 실패 시 사진을
+   잃지 않고 수동 선택 칩으로 폴백. `startActorFlowWithPhoto` 신설, `api.ts`에
+   `classifyRegistrationPhoto` 추가. **API+web-ai 둘 다 배포해야 완전 동작**(웹만 배포 시 폴백만 동작).
+   2026-07-18T14:04~14:06 UTC에 API→web-ai 순으로 배포 완료.
+
 ## 관련
 - [[lampas-studio]] (상위 제품) · [[deploy-sandbox-pnpm-shim]]
-- 세션: [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-16-lampas-web-product-신규앱-구현]](슬림 베이스로 재사용)
+- 세션: [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-16-lampas-web-product-신규앱-구현]](슬림 베이스로 재사용) ·
+  [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
 - [[progdesigner]] · [[lampas]] on [[lampas-harness]]

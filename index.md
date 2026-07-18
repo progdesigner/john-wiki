@@ -78,6 +78,7 @@
 - [[2026-07-18-works-전체저장]] — "Works 의 모든 git 저장소 저장해줘" 2왕복 quick 운영 세션. 12개 중 미커밋 변경 있던 4개([[john-wiki]]/[[dark-system]]/[[lampas-harness]]/[[lampas-studio]]) 커밋·push. dark-system은 push 거부 → `pull --rebase` 후 재push로 해소. 2026-07-15 pull 방향 최신화 세션의 대칭 작업(save 방향)
 - [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] — Higgsfield 대비 차별화 전략 상담(Actor/Object/Space 콘텐츠 엔진)·개체 등록 동사(스카우트/선정/매핑) 정리·Works 저장 요청이 quick 채팅 샌드박싱으로 차단된 3개 화제 quick 세션
 - [[2026-07-18-인스타그램-추천계정-알림끄기]] — 인스타그램(개인 소비자 앱) 추천 계정·게시물 알림 끄는 방법 2왕복 quick 세션. 1차 답변이 실제 앱과 안 맞아 "최신으로 다시" 재요청받아 갱신, 콘텐츠 가치 낮음
+- [[2026-07-18-web-ai-등록플로우-사진분류-배포]] — 05:57~14:06 UTC 장시간 세션. web-ai 단독 배포→git pull로 최신 변경 확인→lampas-api/web-ai/web-www/app-photobooth 4앱 배포→web-ai 새 대화 시작 2칩화(등록하기/촬영하기)→등록하기를 사진 우선 Gemini Vision 분류(Actor/Object/Space 자동판별) 플로우로 재구현·배포. Space 백엔드는 배포됐으나 SDK(생성 UI)는 여전히 미배포로 추정
 
 ## Entities
 

@@ -1,7 +1,7 @@
 ---
 tags: [ai-context, summary]
 created: 2026-07-12
-updated: 2026-07-16
+updated: 2026-07-19
 ---
 # AI_CONTEXT — 핵심 기억 요약
 
@@ -16,7 +16,7 @@ updated: 2026-07-16
 - [[toktalk]] — 에피소드 beat 플레이·배경 전환 시스템 개발 중.
 - 코딩 외 [[harness-as-business-assistant]]: 이메일 대행·인보이스 대조·마케팅 컨설팅(사진 첨부 해석) 반복.
 - [[progdesigner]]가 네이버 DataLab API 연동 키워드 자동 글쓰기·배포 파이프라인을 이미 운영 중(별도 시스템, study-ai-what과 무관 추정) — 마케팅-상품 얼라인 판단 자동화 상담 → [[content-automation-decision-framework]].
-- [[lampas-studio]] — 스튜디오 레퍼런스·Instagram 통합. 로컬 저장소명 `lampas-system`. `pnpm install`이 저장소 전체에서 실패(누락된 `@iileex/shared`, origin/main도 동일 — 기존 이슈). **`lampas-web-ai`가 주요 앱으로 격상**(2026-07-15) — 액터/Object/촬영 3개 상태머신이 `actorFlow.ts` 단일 파일(~2,658줄)에 집중, Object 프롬프트 항목별 수정·샷 변경·채팅 되돌리기 기능 배포·커밋 완료. Actor·Object에 이어 세 번째 촬영 대상 **Space(공간)** 엔티티(DB+API+SDK+web-ai)와 신규 독립 앱 **`lampas-web-product`**(제품 이미지→마케팅 분석, 포트 8236, `product-insights` 공개 API)를 커밋·push 완료(`d4c4ffd`/`8f1b066`) — **배포는 둘 다 아직 안 됨**(Space 3앱 + product-insights S3/CloudFront ID 미발급, 재개 시 우선 확인).
+- [[lampas-studio]] — 스튜디오 레퍼런스·Instagram 통합. 로컬 저장소명 `lampas-system`. `pnpm install`이 저장소 전체에서 실패(누락된 `@iileex/shared`, origin/main도 동일 — 기존 이슈). **`lampas-web-ai`가 주요 앱으로 격상**(2026-07-15) — 액터/Object/촬영 3개 상태머신이 `actorFlow.ts` 단일 파일(~2,658줄)에 집중, Object 프롬프트 항목별 수정·샷 변경·채팅 되돌리기 기능 배포·커밋 완료. Actor·Object에 이어 세 번째 촬영 대상 **Space(공간)** 엔티티(DB+API+SDK+web-ai)와 신규 독립 앱 **`lampas-web-product`**(제품 이미지→마케팅 분석, 포트 8236, `product-insights` 공개 API)를 커밋·push 완료(`d4c4ffd`/`8f1b066`). **2026-07-18: Space 백엔드(API)는 배포 완료**(PM2 반영), **`lampas-web-sdk`(Space 생성 UI)는 여전히 미배포로 추정**·`lampas-web-product`도 인프라 미발급으로 미배포. 같은 날 web-ai 새 대화 시작을 등록하기/촬영하기 2칩으로 개편 + 등록하기에 **사진 우선 Gemini Vision 분류**(Actor/Object/Space 자동 판별) 플로우 신설·배포 완료 → [[2026-07-18-web-ai-등록플로우-사진분류-배포]].
 - `~/Works` 하위 git 저장소 12개 → [[works-project-portfolio]] (다수는 아직 내용 미조사). 그중 [[dark-system]](개인 소유)은 트레이딩 봇 4앱 확인 — [[dark-upbit-api]]/[[dark-toss-api]](자매 앱, 스타일·전략스캔 공유)+각 web. [[dark-toss-api]] 기본 설정상 장시간 게이트 없음(`marketHoursOnly:false`) → 08시대 매수 가능, 안전 전환 여부 미결정.
 - [[cwc-system]]에 [[elevino-system]] DB(원장 방식 크레딧)를 그대로 재사용해 멤버십 검색+크레딧
   지급/차감 관리자 기능을 이식하는 설계 완료, **구현은 하네스 권한 장애로 미완**(재개 필요) →

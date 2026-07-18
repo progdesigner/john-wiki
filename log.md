@@ -1197,3 +1197,24 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - AI_CONTEXT.md 갱신 없음 — 콘텐츠 가치 낮은 1회성 개인 질문, 장기 핵심 사실 없음.
 - 특이사항: 이 세션의 "인스타그램"은 [[instagram-reference-integration]](lampas-studio 레퍼런스 이미지
   통합 기능)과 무관한 개인 소비자 앱 맥락 — 동명이의 혼동 방지를 세션 페이지에 명시.
+
+## [2026-07-19] ingest | web-ai 배포·등록플로우 2단계화·사진 우선 분류 구현 세션 (2026-07-18) (source: 4c7e05b4-5b19-46e1-aa5b-66b13c3e23b9.md)
+- 원본 보관: `raw/conversations/2026-07-18-web-ai-등록플로우-사진분류-배포.md`
+- 세션 신설: [[2026-07-18-web-ai-등록플로우-사진분류-배포]] — 05:57~14:06 UTC 장시간 세션, 6개 왕복.
+  ①web-ai 단독 배포(corepack pnpm shim, `.bin` 심볼릭 링크 잔재 발견·정리). ②"최신 코드로 업데이트"
+  모호 지시 명확화→git pull 선택→변경 요약(lampas-app-toss→lampas-app-photobooth 리네이밍, Space 모듈
+  백엔드 확장, web-www landing 재디자인, 설계문서 3건 추가). ③lampas-api/web-ai/web-www/app-photobooth
+  4앱 순차 배포(web-product는 인프라 미비로 계속 제외). ④web-ai 새 대화 시작을 등록하기/촬영하기
+  2칩으로 개편. ⑤등록하기를 "사진 먼저→Gemini Vision 분류(Actor/Object/Space)→해당 플로우 연결"로
+  재구현(신규 백엔드 엔드포인트 `POST /actors/classify-registration-photo`). ⑥위 ④⑤ 배포 완료.
+- 엔티티 갱신: [[lampas-web-ai]] — 새 대화 2칩화·사진 우선 분류 플로우 절 신설. [[lampas-studio]] —
+  앱 리네이밍 반영, Space 모듈 API 배포 완료 기록(단 SDK는 미배포 추정으로 명시), web-www 재디자인·
+  설계문서 절 신설, 2026-07-18 works-전체저장 세션과의 커밋 시점 관계를 추정으로 병기.
+- 스킬 갱신: [[deploy-sandbox-pnpm-shim]] — corepack이 `ln -sf`로 `.bin` 심볼릭 링크를 잘못 남기는
+  새 함정 사례 추가.
+- AI_CONTEXT.md 갱신: [[lampas-studio]] 절에 Space API 배포 완료(SDK는 미배포 추정)·web-ai 등록 플로우
+  개편 사실 반영, 40줄 예산 유지(38줄).
+- index.md 갱신 (세션1 추가).
+- 특이사항: Space가 "3앱 모두 배포 필요"(2026-07-15~16 기록)에서 API 1개만 진전됐을 뿐 SDK(생성 UI)
+  미배포 추정이라 사용자 입장에서 Space는 여전히 완전히 열리지 않은 상태 — 다음 세션에서 SDK 배포
+  여부 재확인 필요.

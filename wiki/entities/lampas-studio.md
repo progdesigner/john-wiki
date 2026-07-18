@@ -20,6 +20,8 @@ updated: 2026-07-19
   35개. **제품 CLAUDE.md 문서와 실제 코드 괴리 3건 확인**(미수정): ① 모듈 목록에 `admin`/`api-clients`/
   `audit-logs`/`email`/`products` 누락(실제 존재), ② `lampas-web-sdk` organisms의 `references/` 디렉터리가
   문서 구조도에 없음, ③ 루트에 `AGENTS.md`가 `CLAUDE.md`와 별도 존재. → [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]]
+  **2026-07-18: `lampas-app-toss` 디렉터리가 `lampas-app-photobooth`로 이름 변경**(토스 미니앱의 실제
+  기능이 포토부스임을 명확화하는 리네이밍, 앱 자체는 동일) → [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
 - **`lampas-web-ai`가 2026-07-15부터 주요 앱**으로 승격 — 구조·기능 상세는 별도 엔티티 페이지 →
   [[lampas-web-ai]]
 - **DB: PostgreSQL** (2026-07-15 확인 — 로컬 커밋이 잘못 가정했던 "MySQL collation" 로직을 rebase 중
@@ -104,6 +106,13 @@ Actor·Object처럼 "만들어서 저장해두고 촬영에 반복 사용"할 �
 - **모델 배정**: 레퍼런스 분석 Grok(1차)→Gemini(폴백), 프로필 이미지 생성 Gemini, 연출 프롬프트 Grok —
   기존 Object 패턴과 동일.
 - 이 세션 시점 **web-ai/API tsc 통과·SDK esbuild 검증까지 완료, 배포는 미진행**(3개 앱 모두 배포 필요).
+- **2026-07-18 갱신**: `lampas-api`의 Space 모듈이 DTO·컨트롤러·서비스 구현이 추가되며 확장되고,
+  이 확장분이 **API 배포로 프로덕션에 반영**됨(PM2 재시작 확인). 단 이번에 배포된 건 API뿐이고
+  **Space 생성 UI가 있는 `lampas-web-sdk`는 이 배포·직전 git pull 요약에 등장하지 않아 여전히
+  미배포로 추정**(확인 필요) — 위 "3개 앱 모두 배포 필요" 상태가 API 1개만큼만 진전된 것으로 보임,
+  Space가 실제 사용자에게 완전히 열렸다고 보긴 어려움. `lampas-web-product`의 `SpaceCreation` 컴포넌트도
+  같은 pull에 개선분이 포함됐으나 이 앱 자체가 배포 인프라 미비로 미배포 상태(아래 절 참고).
+  → [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
 - 절차 스킬 → [[clone-sibling-entity-pipeline]] · 세션 → [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]]
 - **선행 설계와의 차이**: 같은 날 11:39~12:26 세션([[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]])이
   먼저 Space를 설계했으나(스키마 마이그레이션 없이 `category:'space'`인 `StudioObject` 재사용 + spaceType·
@@ -142,15 +151,29 @@ Actor·Object·Space와 별개로, **회사(Actor/Object) 엔티티 시스템과
 Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-positioning]] ·
 세션 [[2026-07-17-람파스-차별화전략-용어-works저장-quick]].
 
-## 기타 변경 (2026-07-18)
+## 2026-07-18 오전~오후 세션 — 배포 운영 + web-ai 등록 플로우 개편 → [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
+
+- **`lampas-web-www` landing 페이지 전면 재디자인** — 기존 컴포넌트 제거 → `landing/` 폴더 신규 컴포넌트로
+  교체, S3+CloudFront 배포 완료(06:06~06:07 UTC).
+- **설계 문서 신설**: `docs/superpowers/specs/`에 `2026-07-17-lampas-web-www-landing-redesign-design.md`·
+  `2026-07-18-lampas-web-ai-onboarding-design.md`·`2026-07-18-lampas-www-entity-landing-design.md` 3건
+  추가 확인 — 기능 구현 전 설계 문서를 먼저 커밋하는 절차가 이 제품에도 쓰이고 있음(문서 내용 자체는
+  이 세션 소스로는 미확인).
+- **web-ai**: 새 대화 시작 2칩화(등록하기/촬영하기) + 등록하기의 "사진 우선 Gemini Vision 분류" 플로우
+  구현·배포. 상세는 [[lampas-web-ai]] 엔티티 페이지 참고.
+- 배포 중 corepack pnpm shim이 `ln -sf`로 `.bin` 심볼릭 링크를 잘못 남기는 새 함정 발견·정리 →
+  [[deploy-sandbox-pnpm-shim]].
+
+## 기타 변경 (2026-07-18, 오후 works-전체저장 세션)
 - 액터 플로우 및 gemini/actors API 확장 커밋·push. [[works-project-portfolio]] 일괄 저장 요청의 일부로,
-  변경 세부 내용은 소스에 한 줄 요약만 있어 미상. → [[2026-07-18-works-전체저장]]
+  변경 세부 내용은 소스에 한 줄 요약만 있어 미상 — 위 오전~오후 세션에서 배포까지 된 변경분을 이 시점에
+  비로소 커밋했을 가능성이 높음(정확한 대응 관계는 두 세션 소스만으론 확정 불가). → [[2026-07-18-works-전체저장]]
 
 ## 관련
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
   [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-18-works-전체저장]] ·
-  [[2026-07-17-람파스-차별화전략-용어-works저장-quick]]
+  [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
 - 토픽: [[lampas-actor-object-space-positioning]]
 - 앱: [[lampas-web-ai]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]

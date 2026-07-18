@@ -2,7 +2,7 @@
 name: deploy-sandbox-pnpm-shim
 description: 하네스 샌드박스에서 pnpm/aws/ssh를 못 찾거나 저장소 전체 install이 무관한 이슈로 실패할 때 corepack shim·부분 빌드로 우회
 created: 2026-07-09
-updated: 2026-07-16
+updated: 2026-07-19
 tags: [deploy, sandbox, pnpm, corepack, harness]
 ---
 # 샌드박스 배포 — pnpm corepack shim 우회
@@ -39,6 +39,10 @@ tags: [deploy, sandbox, pnpm, corepack, harness]
   `origin/main`도 동일). `nodeLinker: hoisted`라면 루트 `node_modules`가 이미 존재하므로, 새로 추가한
   앱/모듈만 골라 `tsc -b`/`vite build`로 직접 검증하고 "전체 install은 무관한 기존 이슈로 실패, 새 코드는
   개별 검증함"이라고 명시하면 된다 — 새 앱 스캐폴딩 시 자주 재현됨 → [[new-app-scaffold-from-slim-base]].
+- **corepack이 `ln -sf`로 `.bin/` 심볼릭 링크를 잘못 남길 수 있다**(2026-07-18 관찰) — corepack으로
+  pnpm shim을 활성화하는 과정에서 이전 shim 시도의 잔재로 `.bin` 디렉터리에 심볼릭 링크가 남는 경우가
+  있다. 배포 자체엔 지장이 없지만 정리 단계에서 `.bin` 잔재를 발견하면 어느 시도에서 생긴 것인지
+  확인 후 제거해 작업 트리를 깨끗하게 유지할 것 → [[2026-07-18-web-ai-등록플로우-사진분류-배포]].
 - **gitignore된 프로덕션 env 파일이 로컬 체크아웃에 없어 배포가 중단될 수 있다** — 예: `env/.env.production`.
   API용은 실서버에 이미 떠 있는 `.env`를 그대로 받아와 복구하고, 웹용은 이미 배포된 번들에서 확인 가능한
   값(예: `VITE_API_URL`)을 역으로 읽어 복원하면 된다. 이 파일들은 gitignore 대상이라 복구해도 커밋에는
@@ -54,4 +58,5 @@ tags: [deploy, sandbox, pnpm, corepack, harness]
 ## 출처: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] ([[lampas-studio]])
 관련 함정: [[lampas-harness]] (Stream closed, 인자 스캐너)
 갱신: [[2026-07-16-lampas-web-product-신규앱-구현]] (샌드박스 임시 디렉토리 차단·부분 install 우회 재확인),
-[[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] (dark-system 4개 앱 배포로 일반화 확인 + env 복구 함정 추가)
+[[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] (dark-system 4개 앱 배포로 일반화 확인 + env 복구 함정 추가),
+[[2026-07-18-web-ai-등록플로우-사진분류-배포]] (`.bin` 심볼릭 링크 잔재 함정 추가)
