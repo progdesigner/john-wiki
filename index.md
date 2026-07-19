@@ -84,6 +84,7 @@
 - [[2026-07-18-web-ai-등록플로우-사진분류-배포]] — 05:57~14:06 UTC 장시간 세션. web-ai 단독 배포→git pull로 최신 변경 확인→lampas-api/web-ai/web-www/app-photobooth 4앱 배포→web-ai 새 대화 시작 2칩화(등록하기/촬영하기)→등록하기를 사진 우선 Gemini Vision 분류(Actor/Object/Space 자동판별) 플로우로 재구현·배포. Space 백엔드는 배포됐으나 SDK(생성 UI)는 여전히 미배포로 추정
 - [[2026-07-17-힉스필드-크레딧-원화환산]] — "힉스필드 1000 크레딧 원화 가치?" 1왕복 quick. Top-up 팩 기준 약 6만 6천 원 어림 환산표 제시(공식 가격 대조 없는 추정). [[2026-07-17-람파스-차별화전략-용어-works저장-quick]]보다 앞선, 경쟁사 가격 감을 잡아둔 사전 조사로 추정 — 신규 엔티티 [[higgsfield]] 생성 계기
 - [[2026-07-17-fable-주간사용량-api비용환산-질문]] — "Fable 5 주간 사용량 1%당 API 환산 비용?" quick 채팅. 어시스턴트 응답 전 사용자가 턴 중지 → 답변 없이 종료. [[claude-model-pricing]]·[[sdk-claude-code-vs-api-billing]] 결합이 필요한 미해결 질문으로 기록
+- [[2026-07-17-전문직-릴스에이전시-프롬프트다듬기]] — 의사·회계사·변호사 대상 퍼스널 브랜딩 릴스 제작 에이전시 카피 초안 프롬프트 "다듬어줘" 1왕복 quick. 회사소개→서비스→강조포인트→지시사항 구조 재정리 + 실행 조건(문구 종류·톤·원본 문구) 역질문, 최종 카피는 미확인
 
 ## Entities
 
@@ -177,3 +178,4 @@
 - [[multi-repo-bulk-commit-push]] — 다중 git 저장소 일괄 "저장"(commit+push): 변경 있는 저장소만 커밋, push 거부는 pull --rebase로 해소(구조적 충돌이면 [[rebase-local-feature-onto-refactored-remote]]로 승격), [[multi-repo-safe-bulk-update]](pull 방향)의 대칭 스킬
 - [[pwa-safe-area-inset-padding]] — PWA(홈 화면 추가) 모드 상단/하단 여백을 `env(safe-area-inset-*)`로 노치/상태바 침범 없이 고정(calc() 필수, 방향별 추가/제거 구분)
 - [[vite-publicdir-manifest-icon-fix]] — Vite `root:public/`+`publicDir:false`로 PWA manifest.json·아이콘 경로가 base64/해시로 깨질 때 진단·별도 정적 디렉토리 분리로 수정
+- [[prompt-structuring-for-execution]] — 초안 프롬프트 "다듬어줘" 요청에 정보 손실 없이 표준 구조(소개→서비스→강조포인트→지시사항)로 재정리하고 누락된 실행 조건을 3가지 이내로 역질문하는 절차

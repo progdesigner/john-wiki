@@ -1,7 +1,7 @@
 ---
 tags: [topic, harness, business, usage-pattern]
 created: 2026-07-14
-updated: 2026-07-16
+updated: 2026-07-17
 ---
 # 하네스 = 업무 비서 (코딩 외 사용)
 
@@ -48,6 +48,11 @@ updated: 2026-07-16
   파이프라인의 "마케팅-상품 얼라인 판단을 혼자 한다" 고민에 6-패턴 의사결정 프레임워크
   (채점 게이트·LLM-as-judge·배치승인·피드백루프·포트폴리오배분·신호다변화)로 응답 →
   [[content-automation-decision-framework]].
+- 2026-07-17 [[2026-07-17-전문직-릴스에이전시-프롬프트다듬기]] — 사진/데이터 해석이 아니라
+  사용자가 써둔 **초안 프롬프트 자체를 다듬어달라**는 메타 요청. 의사·회계사·변호사 등 전문직
+  퍼스널 브랜딩 릴스 제작 에이전시 카피 프롬프트를 회사소개→서비스→강조포인트→지시사항 구조로
+  재정리 + 실행에 필요한 누락 정보(문구 종류·톤·원본 문구) 3가지를 역질문. 이 패턴군에서 가장
+  "프롬프트 엔지니어링"에 가까운 케이스 → [[prompt-structuring-for-execution]].
 
 ## 특징
 - **멀티모달**: 스크린샷·사진을 근거로 축약어/숫자를 해석. 단, 은행 코드처럼 비표준 표기는 추정임을 명시하고
@@ -62,6 +67,6 @@ updated: 2026-07-16
   반복 요청 자체가 답변 품질을 끌어올리는 레버가 될 수 있다는 데이터포인트.
 
 ## 관련
-- 스킬: [[business-email-consent-first]], [[bank-refund-invoice-reconciliation]]
+- 스킬: [[business-email-consent-first]], [[bank-refund-invoice-reconciliation]], [[prompt-structuring-for-execution]]
 - 배경: [[cwc-commerce]], [[cwc-lab-singapore]], [[netpeul-yeonga]], [[srkk]]
 - 토픽: [[wine-meetup-cost-reduction]], [[content-automation-decision-framework]]
