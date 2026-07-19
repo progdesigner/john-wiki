@@ -1260,3 +1260,16 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - index.md 갱신 (세션 1 추가, dark-toss-api·trading-strategy 토픽 한 줄 요약 갱신).
 - AI_CONTEXT.md 갱신 없음 — 미검증 자기 보고 상태라 40줄 예산을 쓸 만큼 확정된 핵심 사실이 아직
   아님. 코드로 확인되면 그때 반영.
+
+## [2026-07-19] ingest | 힉스필드 1000 크레딧 원화 환산 (source: quick-b0636c59-06ac-4e52-9686-638e8eeed667.md)
+- 원본: raw/conversations/2026-07-17-힉스필드-크레딧-원화환산.md (2026-07-17T12:05~12:06 UTC, 1왕복 quick).
+- 세션 페이지 신설: [[2026-07-17-힉스필드-크레딧-원화환산]] — "힉스필드 1000 크레딧 원화 가치?"
+  질문에 기준별(Top-up 팩/Pro 월간·연간/Max 연간) 달러·원화 환산표 제시. Top-up 팩 기준
+  1,000 크레딧 ≈ 6만 6천 원 어림값 결론. 공식 가격표 대조 없는 어시스턴트 단발 추정임을 명시.
+- 엔티티 신설: [[higgsfield]] — 경쟁사 페이지가 이제까지 없어 신설. 가격 정보 + 기존
+  [[lampas-actor-object-space-positioning]] 토픽의 포지셔닝 요약을 옮겨 정리.
+- 토픽 갱신: [[lampas-actor-object-space-positioning]] 관련 섹션에 [[higgsfield]] 엔티티 링크와
+  이 세션 참고 링크 추가(같은 날 사전 조사로 추정, 단정 안 함).
+- index.md 갱신 (세션 1개, 엔티티 1개 추가).
+- 스킬 추출 없음 — 단순 통화 환산 답변, 재사용 가능한 절차 아님.
+- AI_CONTEXT.md 갱신 없음 — 일회성 가격 질문, 40줄 예산을 쓸 핵심 지속 사실 아님.

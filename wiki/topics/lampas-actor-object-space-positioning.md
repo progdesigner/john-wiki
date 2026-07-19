@@ -75,5 +75,7 @@ Actor 쪽 동사가 재확인됨.
 
 ## 관련
 - [[lampas-studio]] (Actor/Object/Space 실제 구현) · [[lampas-web-ai]] · [[lampas]] · [[progdesigner]]
+- [[higgsfield]] (비교 대상 경쟁사 엔티티 페이지, 가격 정보 포함)
 - 세션: [[2026-07-17-람파스-차별화전략-용어-works저장-quick]]
 - 참고(선행 구현): [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]]
+- 참고(같은 날 사전 조사): [[2026-07-17-힉스필드-크레딧-원화환산]]
