@@ -83,6 +83,7 @@
 - [[2026-07-18-인스타그램-추천계정-알림끄기]] — 인스타그램(개인 소비자 앱) 추천 계정·게시물 알림 끄는 방법 2왕복 quick 세션. 1차 답변이 실제 앱과 안 맞아 "최신으로 다시" 재요청받아 갱신, 콘텐츠 가치 낮음
 - [[2026-07-18-web-ai-등록플로우-사진분류-배포]] — 05:57~14:06 UTC 장시간 세션. web-ai 단독 배포→git pull로 최신 변경 확인→lampas-api/web-ai/web-www/app-photobooth 4앱 배포→web-ai 새 대화 시작 2칩화(등록하기/촬영하기)→등록하기를 사진 우선 Gemini Vision 분류(Actor/Object/Space 자동판별) 플로우로 재구현·배포. Space 백엔드는 배포됐으나 SDK(생성 UI)는 여전히 미배포로 추정
 - [[2026-07-17-힉스필드-크레딧-원화환산]] — "힉스필드 1000 크레딧 원화 가치?" 1왕복 quick. Top-up 팩 기준 약 6만 6천 원 어림 환산표 제시(공식 가격 대조 없는 추정). [[2026-07-17-람파스-차별화전략-용어-works저장-quick]]보다 앞선, 경쟁사 가격 감을 잡아둔 사전 조사로 추정 — 신규 엔티티 [[higgsfield]] 생성 계기
+- [[2026-07-17-fable-주간사용량-api비용환산-질문]] — "Fable 5 주간 사용량 1%당 API 환산 비용?" quick 채팅. 어시스턴트 응답 전 사용자가 턴 중지 → 답변 없이 종료. [[claude-model-pricing]]·[[sdk-claude-code-vs-api-billing]] 결합이 필요한 미해결 질문으로 기록
 
 ## Entities
 
@@ -114,7 +115,7 @@
 ## Topics
 
 - [[model-selection]] — 하네스 요청별 모델 선택 (기본 claude-opus-4-8, Claude+OpenAI)
-- [[claude-model-pricing]] — Claude 모델 API 단가·Claude Code 시간당 코딩 비용 추정 (캐싱 중심 산정, 종량제 vs 구독)
+- [[claude-model-pricing]] — Claude 모델 API 단가·Claude Code 시간당 코딩 비용 추정 (캐싱 중심 산정, 종량제 vs 구독). 2026-07-17: "구독 주간 사용량 1%=API 비용?" 질문 미답변으로 남아 환산 기준 미해결 기록
 - [[harness-queue-vs-chat]] — 채팅(즉시 실행) vs 큐(백그라운드 적재) 두 경로 구분
 - [[instagram-reference-integration]] — Instagram 레퍼런스 이미지 통합 (소스 3종·프록시·캐러셀·폐기된 오래된순)
 - [[long-term-memory-architecture]] — LLM 장기기억: 저장≠조회, 3계층 저장 전략, 조회 연결 3방법

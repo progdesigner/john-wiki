@@ -1273,3 +1273,17 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - index.md 갱신 (세션 1개, 엔티티 1개 추가).
 - 스킬 추출 없음 — 단순 통화 환산 답변, 재사용 가능한 절차 아님.
 - AI_CONTEXT.md 갱신 없음 — 일회성 가격 질문, 40줄 예산을 쓸 핵심 지속 사실 아님.
+
+## [2026-07-19] ingest | Fable 5 주간 사용량 1%당 API 환산 비용 질문 — 미답변 (source: quick-3c3b0c09-ba81-422c-9229-8cb60b8f971c.md)
+- 원본: raw/conversations/2026-07-17-fable-주간사용량-api비용환산-질문.md (2026-07-17T07:06~07:08 UTC, quick).
+- 세션 페이지 신설: [[2026-07-17-fable-주간사용량-api비용환산-질문]] — "Fable 5를 주간 사용량이
+  1% 늘 때마다 실제 API로 썼다면 비용이 얼마냐"는 질문에 어시스턴트가 답하기 전 07:08 UTC에
+  사용자가 턴을 중지시켜 **답변 없이 종료**. 소스에 실제 계산·환산은 없음.
+- 토픽 갱신: [[claude-model-pricing]] — "미해결 — 구독 '주간 사용량 %'의 API 비용 환산" 절 신설.
+  Fable 5 API 단가는 이미 있으나 "주간 한도 100%=몇 토큰"이라는 환산 기준이 위키에 없어 계산을
+  완성할 수 없음을 기록, [[sdk-claude-code-vs-api-billing]]의 `seven_day` rate limit 훅과 연결.
+- 스킬 갱신: [[sdk-claude-code-vs-api-billing]] updated 날짜만 갱신(내용 변경 없음, 교차참조 확인).
+- index.md 갱신 (세션 1개 추가, claude-model-pricing 토픽 한 줄 요약 갱신).
+- 스킬 추출 없음 — 질문만 있고 절차·해결 없음.
+- AI_CONTEXT.md 갱신 없음 — 답변 없이 종료된 1왕복 질문, 확정된 핵심 사실이 없어 40줄 예산을
+  쓸 근거 없음.

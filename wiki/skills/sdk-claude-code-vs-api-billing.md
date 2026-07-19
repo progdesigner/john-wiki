@@ -2,7 +2,7 @@
 name: sdk-claude-code-vs-api-billing
 description: Claude Agent SDK로 실행할 때 Claude Code 구독(OAuth) 과금과 API 종량 과금 중 어느 쪽으로 도는지 판별하고, options.env로 전환하는 절차. 구독 모드 5시간/주간 사용량 한도(rate limit) 조회 API 상세 포함
 created: 2026-07-15
-updated: 2026-07-17
+updated: 2026-07-19
 tags: [claude-agent-sdk, billing, auth, oauth, env, rate-limit, lampas-harness, memory-ingest, compact]
 ---
 # Claude Agent SDK — 구독 과금 vs API 과금 판별·전환
