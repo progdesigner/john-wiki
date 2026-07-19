@@ -1364,3 +1364,21 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - index.md 갱신 (세션 1개 추가).
 - AI_CONTEXT.md 갱신 없음 — 이름 미확정·일회성 브레인스토밍, 40줄 예산을 쓸 지속 핵심 사실 아님.
 - 특이사항: 에이전시 이름 여전히 미상 — 임의 엔티티 생성하지 않음(관련 세 세션과 동일 판단).
+
+## [2026-07-19] ingest | Works 저장소 일괄 최신화(pull, 07-17) (source: 8c3faa34-5f61-48af-b8af-639c3273237f.md)
+- 세션 신설: [[2026-07-17-works-저장소-일괄최신화-pull]] — "모든 프로젝트를 최신화 해줘"(2026-07-17
+  04:36~04:38 UTC). 기존 [[multi-repo-safe-bulk-update]] 스킬을 두 번째로 재사용한 사례.
+- 결과: bokziri-system/[[cwc-system]]/[[elevino-system]](dev)/[[lampas-studio]](lampas-system) 4개
+  pull 완료. arca8-system/talk-system(=[[toktalk]])/goraesa-system/elevino-system 4개가 `dev`
+  브랜치임을 최초 확인. [[dark-system]]은 로컬 변경 1개+원격 4커밋 뒤처짐으로 보류, 처리 방식을
+  물었으나 사용자 응답 없이 소스 종료 — 미해결. [[john-wiki]]는 로컬 변경 4개·원격 뒤처짐 없어 pull
+  불필요로 확인.
+- 스킬 갱신: [[multi-repo-safe-bulk-update]] — zsh `@{u}` glob 확장 깨짐 함정 신규 추가(bash 명시+
+  선행 fetch로 해결).
+- 엔티티 갱신: [[dark-system]](보류 상세)·[[cwc-system]](pull 커밋)·[[elevino-system]](dev 브랜치+
+  pull 커밋)·[[lampas-studio]](07-15 리베이스 상태에서 07-17 깨끗한 pull로 정상화)·[[john-wiki]]
+  (Works 일괄 pull에서 매번 예외 처리되는 패턴 명시).
+- 토픽 갱신: [[works-project-portfolio]] — 저장소별 표에 07-17 상태·브랜치 정보 추가.
+- index.md 갱신 (세션 1개 추가, 07-17 세션 중 시간순 최초로 배치).
+- AI_CONTEXT.md 갱신 없음 — 운영성 세션이고 핵심 사실(스킬 존재·Works 12개 저장소)은 이미 반영돼 있음,
+  dark-system 보류는 사용자 미응답으로 미해결이라 확정 사실 아님.

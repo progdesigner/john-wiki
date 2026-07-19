@@ -5,6 +5,8 @@ created: 2026-07-16
 updated: 2026-07-19
 tags: [git, ops, bulk-update, works-portfolio]
 ---
+> **2026-07-19 추가 갱신**: [[2026-07-17-works-저장소-일괄최신화-pull]] 세션에서 이 스킬이 두 번째로
+> 재사용됨(그대로 따름) + zsh 함정 하나 신규 발견(아래 "주의사항" 항목 추가).
 # 다중 저장소 안전 일괄 업데이트
 
 ## 언제 쓰는가
@@ -24,6 +26,9 @@ tags: [git, ops, bulk-update, works-portfolio]
    붙이지 않는다.
 
 ## 주의사항 / 함정
+- **zsh에서 `@{u}`(upstream 추적 참조) 문법을 그대로 쓰면 glob 확장으로 출력이 깨진다** — 셸이 `{u}`를
+  파일 패턴으로 해석 시도. `bash -c '...'`로 명시하거나 `noglob`/따옴표 처리 후 실행하고, ahead/behind를
+  정확히 보려면 조사 전 `git fetch`를 먼저 돌린다. → [[2026-07-17-works-저장소-일괄최신화-pull]]에서 발견.
 - **미커밋 확인이 먼저다.** 저장소 개수가 많을수록 "일단 다 pull"의 유혹이 크지만, 순서를 바꾸면 로컬
   작업이 fast-forward 실패나 자동 병합 충돌로 꼬일 수 있다.
 - 미커밋 변경이 있다고 무조건 "손대지 않기"로 끝내지 말고, 원격도 앞서 있는지(뒤처진 커밋 수)까지 확인해
@@ -31,4 +36,4 @@ tags: [git, ops, bulk-update, works-portfolio]
 - 결과 요약은 저장소별 한 줄 표로 — 사람이 한눈에 스캔 가능해야 한다.
 - 보류된 저장소의 후속 처리(rebase 등)는 별도 요청·별도 스킬로 — → [[rebase-local-feature-onto-refactored-remote]]
 
-## 출처: [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]
+## 출처: [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] · [[2026-07-17-works-저장소-일괄최신화-pull]]

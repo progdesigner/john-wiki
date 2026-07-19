@@ -85,6 +85,8 @@ updated: 2026-07-19
   로컬(저장소 한정) 설정.
 - 절차 스킬 → [[rebase-local-feature-onto-refactored-remote]] · 세션 →
   [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]]
+- **2026-07-17 후속 pull**: [[2026-07-17-works-저장소-일괄최신화-pull]] 세션에서는 로컬 미커밋 변경 없이
+  깨끗하게 `main` 1커밋(배포 스크립트 추가)만 pull됨 — 07-15의 리베이스 필요 상태에서 정상화됨.
 
 ## Space(공간) 엔티티 — 신규 기능 (2026-07-15~16 세션에서 설계·구현)
 
@@ -172,7 +174,8 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 ## 관련
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
-  [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-18-works-전체저장]] ·
+  [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-17-works-저장소-일괄최신화-pull]] ·
+  [[2026-07-18-works-전체저장]] ·
   [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
 - 토픽: [[lampas-actor-object-space-positioning]]
 - 앱: [[lampas-web-ai]]

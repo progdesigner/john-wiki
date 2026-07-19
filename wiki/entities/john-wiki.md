@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, knowledge-base, long-term-memory]
 created: 2026-07-09
-updated: 2026-07-12
+updated: 2026-07-19
 ---
 # john-wiki
 
@@ -30,6 +30,10 @@ LLM이 작성·유지하고 사람은 소스를 공급·질문한다.
 - **연동 진행(2026-07-11 관찰)**: `[[lampas-harness]]` `src/config.ts`에 `wikiDir`(+`WIKI_DIR` env 오버라이드) 설정이 들어옴 → 배선이 코드 레벨에선 착수됨. 단 어시스턴트에 조회 tool은 아직 미노출. → [[2026-07-11-기억-요약-wiki-경로-확인]]
 - **⚠️ 경로 불일치**: `config.ts`의 `wikiDir` 기본값은 `~/Works/**llm-wiki**`(karpathy 원 패턴명)인데, 실제 저장소는 `~/Works/**john-wiki**`다. `WIKI_DIR` env로 새 경로를 지정하지 않으면 하네스는 없는 경로를 가리킨다.
 - **저장(ingest) 자동화(2026-07-13)**: `[[lampas-harness]]`의 대화 보관(🗄)이 `memory-ingest` 잡을 자동 큐잉하도록 개선됨 → 이제 위키로 저장하는 진입점이 셋(수동 🧠 버튼·보관 🗄 자동·야간 자동 ingest). 모두 `rememberedAt`/source 키로 중복 방지. 위키 이력 축적(저장 계층)은 자동화 진전, 능동 조회(방법 C)는 미완 유지. → [[2026-07-13-보관시-자동-기억저장]]
+- **Works 일괄 pull 대상에서 항상 예외(2026-07-15, 07-17 재확인)**: 이 저장소는 `~/Works` 일괄 최신화
+  요청 시 매번 로컬 미커밋 변경(위키 자체의 진행 중 편집)이 있는 채로 발견되지만, 원격이 앞서 있던 적은
+  없어 pull 자체가 불필요했다 → [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
+  [[2026-07-17-works-저장소-일괄최신화-pull]]. 반대 방향(commit+push)은 [[2026-07-18-works-전체저장]] 참고.
 
 ## 관련
 - 소유자·사서 소스: [[progdesigner]]

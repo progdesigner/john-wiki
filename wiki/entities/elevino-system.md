@@ -1,7 +1,7 @@
 ---
 tags: [entity, repository, cwc, nestjs, typeorm, nextjs, membership, credit]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-07-19
 ---
 # elevino-system
 
@@ -35,9 +35,11 @@ updated: 2026-07-16
 - 2026-07-14 CWC-FY Group 위스키분쟁 이메일 서명에 **"CWC ⎢ ELEMENTS ⎢ ELEVINO"**가 나란히
   표기됨 — micro.elevino.io 도메인 겹침으로 추정만 하던 [[cwc-commerce]] 계열 관계가 이메일
   서명으로 명시적으로 뒷받침됨.
+- 2026-07-17 [[2026-07-17-works-저장소-일괄최신화-pull]]: 로컬 저장소가 **`dev` 브랜치**(main 아님)에
+  있음이 처음 확인됨. 같은 pull에서 `_v2/api` 설정 파일 정리 커밋 1개 반영.
 
 ## 관련
-- 세션: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]], [[2026-07-14-clara-바바라-위스키분쟁-번역]]
+- 세션: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]], [[2026-07-14-clara-바바라-위스키분쟁-번역]], [[2026-07-17-works-저장소-일괄최신화-pull]]
 - 이식 대상: [[cwc-system]] (DB를 그대로 재사용해 멤버십 크레딧 기능 이식 중)
 - 배경 회사: [[cwc-commerce]]
 - 스킬: [[credit-ledger-balance-pattern]]
