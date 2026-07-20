@@ -53,5 +53,5 @@ updated: 2026-07-16
 
 ## 관련
 - [[lampas-harness]] · [[toktalk]] (`dbs/talk-system`) · [[work-folder-sandboxing]] ·
-  [[idempotent-message-retry]]
+  [[idempotent-message-retry]] · [[chat-archive-duplication-anomaly]]
 - 소스: `raw/conversations/2026-07-16-tts-stream-elevenlabs-구현착수.md`

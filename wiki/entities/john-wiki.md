@@ -11,7 +11,7 @@ LLM이 작성·유지하고 사람은 소스를 공급·질문한다.
 
 - 로컬 경로: `/Users/progdesigner/Works/john-wiki`
 - 구조: `raw/conversations/`(원본, 읽기전용) · `wiki/{sessions,entities,topics,skills}/` · `index.md` · `log.md`
-- 규칙: 모든 페이지 markdown + YAML frontmatter(`tags`/`created`/`updated`), 페이지 참조는 `[[위키링크]]`, 파일명 kebab-case, 세션·대화는 `YYYY-MM-DD-` 접두사. (상세는 저장소 CLAUDE.md)
+- 규칙: 모든 페이지 markdown + YAML frontmatter(`tags`/`created`/`updated`), 페이지 참조는 이중 대괄호로 감싸는 위키링크 문법(여닫는 대괄호를 두 겹씩), 파일명 kebab-case, 세션·대화는 `YYYY-MM-DD-` 접두사. (상세는 저장소 CLAUDE.md)
 
 ## 역할 (2026-07-08 설계 세션에서 명문화)
 

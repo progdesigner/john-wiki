@@ -2,7 +2,7 @@
 name: sdk-claude-code-vs-api-billing
 description: Claude Agent SDK로 실행할 때 Claude Code 구독(OAuth) 과금과 API 종량 과금 중 어느 쪽으로 도는지 판별하고, options.env로 전환하는 절차. 구독 모드 5시간/주간 사용량 한도(rate limit) 조회 API 상세 포함
 created: 2026-07-15
-updated: 2026-07-19
+updated: 2026-07-20
 tags: [claude-agent-sdk, billing, auth, oauth, env, rate-limit, lampas-harness, memory-ingest, compact]
 ---
 # Claude Agent SDK — 구독 과금 vs API 과금 판별·전환
@@ -66,7 +66,10 @@ SDK 훅이 이미 있는데도 **미구현 상태**(기술적으로는 가능, �
 ## 크레딧 소진의 파급 범위 (2026-07-15 재확인)
 API 크레딧이 부족하면 대화 자체(구독/OAuth 과금 경로)는 멀쩡해도, **API 과금 경로를 타는 다른 기능은
 같이 실패**한다. 실측 사례:
-- 대화별 "API 사용" 토글이 켜진 상태에서 `/compact`(컨텍스트 압축)가 API 키로 과금되다 크레딧 부족으로 실패.
+- `/compact`(컨텍스트 압축)가 API 키로 과금되다 크레딧 부족으로 실패 — **토글 상태와 무관하게** 발생했다
+  (아래 "세 번째 진입점" 절 참고. 처음엔 "API 사용 토글이 켜진 상태에서만"으로 기록했었으나, 2026-07-17
+  근본원인 조사에서 `compactClaudeSession` 자체가 `claudeAuthEnv()` 처리 없이 `options.env`를 아예
+  안 넘겨 토글 값과 무관하게 상속된 `ANTHROPIC_API_KEY`를 그대로 썼음이 밝혀져 이 서술을 정정한다).
 - **백그라운드 `memory-ingest`(위키 야간 자동 적재) 잡도 같은 이유로 반복 실패**("Credit balance is too
   low", 2회 재시도 모두 실패) — 이 위키(`[[john-wiki]]`) 자신의 저장 파이프라인에 영향을 준다는 점에서
   특히 주의. → [[long-term-memory-architecture]]
@@ -93,6 +96,25 @@ API 크레딧이 부족하면 대화 자체(구독/OAuth 과금 경로)는 멀�
 **크레딧 잔액이 0**이라 API 호출이 400으로 거절됨을 [[model-selection]] Auto 판정 기능 구현 중
 확인 — "크레딧 부족"이 막연한 추정이 아니라 확정 사실. → [[2026-07-15-auto모델-기능-최초구현]]
 
+### 세 번째 확인된 누락 진입점 — 컨텍스트 압축(`compactClaudeSession`) (2026-07-17)
+
+`runner.ts`(위 절)에 이어 **같은 패턴의 두 번째 실증**: `src/server.ts`의 `compactClaudeSession()`
+(`/compact` 컨텍스트 압축 처리)도 `query()` 호출에 `options.env`를 아예 안 넘겨 `process.env`를
+그대로 상속받고 있었다. `ANTHROPIC_API_KEY`가 있으면 SDK가 OAuth보다 그 키를 우선하므로, **대화별
+"API 사용" 토글 상태와 무관하게** 크레딧 0인 API 키로 압축이 시도·실패했다.
+
+대조 확인된 진입점 3곳:
+1. 채팅 라이브 세션(`server.ts` 2028-2033) — `claudeAuthEnv()` 적용됨.
+2. 큐 잡 러너(`runner.ts` 50-58) — 누락 발견·수정됨(위 2026-07-16 절).
+3. **컨텍스트 압축(`compactClaudeSession`, `server.ts` 2460-2515)** — 이번에 누락 발견·수정.
+
+수정은 동일 패턴: `env: claudeAuthEnv(session.live?.apiBilling ?? false)`. `npm run build:server`
+통과 확인, **반영은 데몬 재시작 필요**(이 턴에선 미실행, 사용자가 직접 하기로 함).
+
+**교훈 재확인**: SDK `query()` 호출부는 채팅·큐·압축처럼 서로 다른 코드 경로에 흩어지기 쉽고, 그중
+하나에 인증 처리를 적용해도 나머지엔 자동 전파되지 않는다 — 새 `query()` 호출부를 추가하거나 발견할
+때마다 `claudeAuthEnv()` 적용 여부를 개별 확인할 것. → [[2026-07-17-컨텍스트압축-api과금-수정]]
+
 ## 주의사항 / 함정
 - API 키가 있어도 목록 조회용으로만 쓰이고 실행엔 안 쓰일 수 있다 — 실행 인증은 반드시 `apiKeySource`로 확정.
 - `.env`의 주석 상태는 실제와 어긋날 수 있다(이 소스 세션에서도 "주석됨↔해제됨" 진술이 엇갈림) — 코드/`apiKeySource`로 교차검증.
@@ -101,5 +123,5 @@ API 크레딧이 부족하면 대화 자체(구독/OAuth 과금 경로)는 멀�
   먼저 "불가능"이라 답했다가, 실제 SDK 조사 후 정정한 사례가 있다. 구독/한도 관련 질문은 반드시
   `sdk.d.ts` 실물 확인 후 답할 것. → [[2026-07-15-사용량한도-rate-limit-sdk-확인]]
 
-## 출처: [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-사용량한도-rate-limit-sdk-확인]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]] · [[2026-07-16-메모리인제스트-크레딧버그-근본수정]] ([[lampas-harness]])
+## 출처: [[2026-07-15-과금모드-토글-컨텍스트표시]] · [[2026-07-15-사용량한도-rate-limit-sdk-확인]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]] · [[2026-07-16-메모리인제스트-크레딧버그-근본수정]] · [[2026-07-17-컨텍스트압축-api과금-수정]] ([[lampas-harness]])
 </content>

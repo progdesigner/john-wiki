@@ -85,7 +85,8 @@ medium→`claude-sonnet-5`(`LAMPAS_AUTO_MEDIUM`), hard→`claude-opus-4-8`(`LAMP
 **extreme 티어 설계 의도**: hard보다 명백히 상위(대규모 아키텍처 개편, 다중 시스템 교차 리팩터,
 프로덕션 장애 대응, 보안 설계)로 제한, 모호하면 hard 선택하도록 프롬프트에 명시(값비싼 모델 남용 방지).
 **휴리스틱 폴백은 hard까지만** — extreme은 실제 LLM 판정으로만 도달 가능, 판정 실패 안전망에서
-근거 없이 최상위 모델로 튀지 않게 하는 의도적 비대칭.
+근거 없이 최상위 모델로 튀지 않게 하는 의도적 비대칭. 이 3단 폴백 체인 설계 절차는
+[[llm-judge-fallback-chain]] 스킬로 일반화돼 있다.
 
 **quick.html로 확장(2026-07-16)** — 기존엔 index.html(메인 채팅)에만 있던 "Auto" 옵션을 퀵 채팅
 오버레이(`apps/web/public/quick.html`)에도 동일하게 추가. 서버 판정 로직은 공유, 클라이언트 쪽만
