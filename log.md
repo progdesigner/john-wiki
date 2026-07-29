@@ -1433,3 +1433,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   이력은 이미 wiki/sessions·wiki/entities에 있어 손실 없음). 핵심 사실(크레딧 잔액 0·구독 과금 기본·
   Space 배포 상태 등)은 모두 보존.
 - 결과: 깨진 링크 0·고아 0. 신규 엔티티/세션/스킬 없음, 엔티티 정정 1건(john-wiki).
+
+## [2026-07-19] ingest | moon run 명령어 언어스택 질문 (source: quick-e6244786-77ee-4392-abbc-d187c93307cc.md)
+- quick 채팅 1왕복(2회 질의). `moon run web:dev`(5173)/`api:dev`(8787)/`desktop:dev` 명령어를 보고
+  "언어가 뭐냐"→"node 기반이냐" 질문, 어시스턴트가 "moon 도구 자체가 Rust라 프로젝트도 Rust"라는
+  근거 약한 논리로 답변. 소스에 저장소/경로 언급 전무 — 어느 프로젝트인지 미상.
+- 검증: `~/Works` 하위 실제 저장소에 `.moon`/`moon.yml` 등 moonrepo 설정 파일 없음 확인.
+  [[lampas-harness]](TS/claude-agent-sdk, 웹 8787/API 3787)와 포트 조합도 다름 — 기존 위키가 추적
+  중인 프로젝트와 연결 근거 없음.
+- 세션 → [[2026-07-19-moon-run-언어스택-질문]]. 콘텐츠 가치 낮은 1회성 질문으로 기존 저가치 세션
+  처리 관행에 따라 엔티티/토픽 신규 생성·AI_CONTEXT.md 갱신 없이 기록만 남김.
