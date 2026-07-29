@@ -1443,3 +1443,12 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   중인 프로젝트와 연결 근거 없음.
 - 세션 → [[2026-07-19-moon-run-언어스택-질문]]. 콘텐츠 가치 낮은 1회성 질문으로 기존 저가치 세션
   처리 관행에 따라 엔티티/토픽 신규 생성·AI_CONTEXT.md 갱신 없이 기록만 남김.
+
+## [2026-07-29] ingest | 상품등록 영어표현 질문 (source: quick-ffff990b-f4bc-40a0-93d2-934fb34c4fc4.md)
+- quick 채팅 1왕복(2026-07-20 03:26 UTC). "상품을 등록하는 걸 뭐라고 하지 영어로?" 질문에
+  list/add a product, create a product listing, register a product, upload/post a product 등
+  상황별 표현 7가지 제시, "list a product"/"add a product"를 가장 일반적인 표현으로 최종 제시.
+- 소스에 프로젝트/업무 맥락 전무(어느 상품·시스템인지 근거 없음) — 순수 용어 질문.
+- 세션 → [[2026-07-20-상품등록-영어표현-질문]]. 콘텐츠 가치 낮은 1회성 질문으로 기존 저가치 세션
+  처리 관행([[2026-07-19-moon-run-언어스택-질문]] 등)에 따라 엔티티/토픽 신규 생성·AI_CONTEXT.md
+  갱신 없이 기록만 남김.
