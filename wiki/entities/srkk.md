@@ -63,3 +63,4 @@ Scott, 위스키 분쟁의 cc Scott Jeun, 등장3의 발신자 Scott Jeun이 모
 ## 관련
 - 세션: [[2026-07-14-srkk-도메인-scott-확인-princ-번역]], [[2026-07-14-은행환불-거래처매칭]], [[2026-07-14-clara-바바라-위스키분쟁-번역]], [[2026-07-15-srkk-azure-펀딩메일-번역]], [[2026-07-16-srkk-인보이스-james확인]]
 - 엔티티: [[cwc-commerce]] · [[cwc-lab-singapore]] · [[fy-group]] (Scott Jeun) · [[sylvan-korea]] (Sylvan Group 미확정 연결)
+- Scott/Clara 신원 추적 통합 페이지: [[scott-jeun-sylvan-group]]

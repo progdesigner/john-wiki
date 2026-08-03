@@ -120,6 +120,7 @@
 - [[dark-toss-api]] — dark-system 내 토스증권 API 자동매매 서비스. 기본 설정상 장시간 게이트 없음(marketHoursOnly false), manualBuy는 시간체크 경로 자체가 없음. 국장/미장 자동 장이동 시 양쪽마감 자동판단 일시정지·재개 구현됨. 2026-07-17: `decide-signal.ts` 신호 판정 로직 추가 보고(미검증)
 - [[dark-toss-web]] — dark-toss-api 대시보드 웹. 모바일 표 가로스크롤·확대방지·장마감 일시정지 배지
 - [[higgsfield]] — 이미지→영상 AI 생성 도구, [[lampas-studio]] 경쟁·비교 대상. 1,000 크레딧 ≈ 6만 6천 원 어림 환산(미검증)
+- [[scott-jeun-sylvan-group]] — Scott Jeun(`scottjeun@thesylvangroup.com`)·Clara K, The Sylvan Group(싱가포르) 신원 추적 통합 페이지 ([[srkk]]·[[fy-group]]·[[sylvan-korea]]·[[cwc-fy-group-whisky-dispute]]에 흩어져 있던 동일인 추정 근거를 2026-08-03 lint로 통합)
 
 ## Topics
 
@@ -146,6 +147,7 @@
 - [[lampas-actor-object-space-positioning]] — 람파스 Higgsfield 대비 차별화 포지셔닝 전략: Actor/Object/Space 3축 결합, 차별화 요소 6가지, 개체 등록 동사(스카우트/선정/매핑) — 상담 결과일 뿐 채택 미확정
 - [[secrets-plaintext-exposure-pattern]] — 실제 API 키/토큰이 평문 노출된 반복 사고 3건([[toktalk]] 커밋·[[cwc-system]] 프로덕션 env·이 위키 자체 ingest 중 `.env` 채팅 노출) 묶음 + 권장 대응(레닥트·재발급) 미시스템화 기록
 - [[chat-archive-duplication-anomaly]] — 채팅 아카이브 파일명 재사용·같은 사건의 이중 기록·트랜스크립트 내 메시지 반복 등 4개 세션에서 독립 관찰된 로그 무결성 이상 정황 통합 정리(2026-07-20 lint 신설, 원인 미확정)
+- [[dark-system-signal-risk-design-unverified]] — dark-system `decide-signal.ts` 신호 판정·스타일별 리스크 설계(2026-07-17 어시스턴트 자기보고, 미검증) 통합 페이지(2026-08-03 lint 신설, [[dark-toss-api]]·[[dark-upbit-api]]·[[dark-system]] 3곳 중복 기재를 여기로 정리)
 
 ## Skills
 

@@ -57,16 +57,11 @@ GitHub 계정(`progdesigner/dark-system`) 소유.
   없어 중단된 적 있음 — 실서버에서 받은 `.env`로 복구. → [[deploy-sandbox-pnpm-shim]]
 
 ## `decide-signal.ts` 신호 판정 로직 + 스타일별 리스크 설계 (2026-07-17, 미검증)
-[[2026-07-17-dark-system-신호리스크-설계-코드업데이트]] 세션에서 어시스턴트가 보고한 변경(토스와
-공통, [[dark-toss-api]] 동일 섹션 참고): 신규 `decide-signal.ts`(신호 판정), `trading.config.ts`·
-`trading.service.ts` 확대(LLM 카탈로그 연동), 웹 UI 전면 개편, 신규 엔드포인트 `/trading/status`·
-`/trading/signal`, 설계 문서 `2026-07-17-per-style-signal-risk-design.md`(스타일별 신호 리스크).
-
-**주의**: 커밋 해시·line 번호 없이 어시스턴트 자기 보고만으로 기록됨 — 다음 코드 확인 세션에서
-`decide-signal.ts` 실존 여부를 검증할 것.
+토스와 공통으로 보고된 변경(신규 `decide-signal.ts`·설정/서비스 확대·웹 UI 개편·신규 엔드포인트) —
+상세·미검증 경고는 중복 기재 대신 → [[dark-system-signal-risk-design-unverified]] 참조.
 
 ## 관련
 - [[dark-system]] · [[dark-toss-api]] · [[dark-upbit-web]] · [[progdesigner]]
 - [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]]
-- [[2026-07-17-dark-system-신호리스크-설계-코드업데이트]]
+- [[2026-07-17-dark-system-신호리스크-설계-코드업데이트]] · [[dark-system-signal-risk-design-unverified]]
 - [[trading-feature-flag-auto-exclude-manual-allow]] · [[deploy-sandbox-pnpm-shim]] · [[config-flag-gate-audit]]

@@ -56,5 +56,6 @@ updated: 2026-07-19
 - 엔티티: [[dark-toss-api]] · [[dark-upbit-api]] · [[dark-system]] · [[progdesigner]]
 - 세션: [[2026-07-16-볼린저밴드-평균회귀-트레이딩전략-질문]] · [[2026-07-14-보관-자동저장-확인-볼린저밴드]] ·
   [[2026-07-15-dark-toss-api-장전매수-코드조사]] · [[2026-07-17-dark-system-신호리스크-설계-코드업데이트]]
+- 토픽: [[dark-system-signal-risk-design-unverified]] (`decide-signal.ts` 상세·미검증 상태 통합 페이지)
 - 인접 토픽: [[korea-ipo-filing-trends-2021-2026]] (같은 계열의 개인 투자 리서치 관심사, 자동매매
   전략과는 별개)

@@ -27,3 +27,4 @@ cc되어 있어 → [[srkk]], [[fy-group]] 참조.
 - 모회사/그룹: [[cwc-commerce]] · 임대인: [[dongwon-building]]
 - 세션: [[2026-07-10-전대-동의-메일-작성]], [[2026-07-16-srkk-인보이스-james확인]]
 - 미확정 연결: [[srkk]] (Scott Jeun/Clara K, The Sylvan Group) · [[fy-group]] (Scott Jeun cc)
+- Scott Jeun/The Sylvan Group 신원 추적 통합 페이지: [[scott-jeun-sylvan-group]]

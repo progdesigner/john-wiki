@@ -39,4 +39,5 @@ updated: 2026-07-16
 ## 관련
 - 세션: [[2026-07-10-전대-동의-메일-작성]], [[2026-07-14-은행환불-거래처매칭]], [[2026-07-14-srkk-도메인-scott-확인-princ-번역]], [[2026-07-14-clara-바바라-위스키분쟁-번역]], [[2026-07-15-넷플연가-와인모임-재료비-절감]]
 - 임대인: [[dongwon-building]] · 계열사: [[sylvan-korea]], [[cwc-lab-singapore]], [[elevino-system]] · 사람: [[progdesigner]]
+- 배경 제품군: [[lampas-harness]] · [[lampas-studio]] · [[toktalk]]
 - 플랫폼: [[netpeul-yeonga]] · 토픽: [[wine-meetup-cost-reduction]], [[cwc-fy-group-whisky-dispute]] · 벤더(미확정): [[srkk]] · 거래분쟁 상대: [[fy-group]]

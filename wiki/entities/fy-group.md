@@ -29,4 +29,4 @@ updated: 2026-07-16
 - 세션: [[2026-07-14-clara-바바라-위스키분쟁-번역]]
 - 거래 상대: [[cwc-lab-singapore]] · [[cwc-commerce]] (Ryan Lee)
 - 토픽: [[cwc-fy-group-whisky-dispute]]
-- 미확정 연결: [[srkk]] (Scott Jeun 동일인 후보)
+- 미확정 연결: [[srkk]] (Scott Jeun 동일인 후보) · Scott Jeun 신원 추적 통합 페이지: [[scott-jeun-sylvan-group]]
