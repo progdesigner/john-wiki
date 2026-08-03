@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, toktalk, nestjs, react, monorepo, ai-chat]
 created: 2026-07-09
-updated: 2026-07-19
+updated: 2026-08-03
 ---
 # toktalk (TokTalk — AI 캐릭터/보이스 챗)
 
@@ -28,7 +28,7 @@ updated: 2026-07-19
 - 각 앱 로컬 env: `env:local` 스크립트가 `env/.env.local → .env` 복사.
 
 ## 배포 (README 최신화 시점)
-- API: rsync + PM2 (`micro.elevino.io`, 프로세스 `dbs-talk-api`/`dbs-talk-app-toss-api`).
+- API: rsync + PM2 (`micro.elevino.io`, 프로세스 `dbs-talk-api`/`dbs-talk-app-toss-api`). 배포 도메인이 [[elevino-system]]과 겹침(`micro.elevino.io`) — 같은 호스트 공유 정황.
 - 웹 3종: S3(`s3://toktalk.ai/*`) + CloudFront 무효화.
 - Toss 미니앱: `ait deploy`.
 - 문서: 루트 `README.md`(2026-07-08 전면 재작성), `docs/ARCHITECTURE.md`(낡은 포트·env만 수정, DB 스키마·워크플로 본문은 2026-01 기준 잔존 — studio/play 모듈 미반영).

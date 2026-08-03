@@ -1,7 +1,7 @@
 ---
 tags: [topic, business, dispute, cwc, legal]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-08-03
 ---
 # CWC Lab ↔ FY Group 위스키 선적 분쟁
 
@@ -50,6 +50,7 @@ updated: 2026-07-16
 
 ## 관련
 - 엔티티: [[fy-group]] · [[cwc-lab-singapore]] · [[cwc-commerce]] · [[elevino-system]]
+  - cc **Scott Jeun**(`scottjeun@thesylvangroup.com`) 매개로 → [[srkk]]·[[sylvan-korea]]와 연결(양 페이지가 이 위스키 스레드를 Scott Jeun 신원 근거로 인용, 정체성은 미확정 병기)
 - 세션: [[2026-07-14-clara-바바라-위스키분쟁-번역]]
 - 토픽: [[harness-as-business-assistant]]
 - 스킬: [[bank-refund-invoice-reconciliation]]

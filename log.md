@@ -1461,3 +1461,31 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - index.md 갱신 (세션1 추가). 신규 엔티티/토픽/스킬 없음 — 특정 거래·프로젝트 맥락 없는 순수
   용어 질문으로 [[2026-07-20-상품등록-영어표현-질문]]과 동일한 저가치 처리 관행 적용.
 - AI_CONTEXT.md 갱신 없음.
+
+## [2026-08-03] lint | 위키 전체 건강 점검 (3) — 교차링크 보강·정체성 각주·버전 staleness
+- **범위**: 세션 89·엔티티 24·토픽 23·스킬 39 전수 + index.md·AI_CONTEXT.md. 마지막 lint(2026-07-27)
+  이후 ingest된 저가치 quick 3건(moon-run·상품등록·연동대체)은 이미 기록만 남긴 상태로 추가 조치 불요.
+- **기계적 점검 (모두 깨끗)**: 깨진 위키링크 0(raw/ 출처 링크·`[[#피드백]]` 앵커는 정상 관례), 고아
+  페이지 0, index.md는 실제 파일과 완전 일치(세션 89·엔티티 24·토픽 23·스킬 39, 중복·유령 항목 없음),
+  프론트매터(tags/created/updated) 전 파일 완비.
+- **모순 점검**: 엔티티·토픽 전수 스캔 결과 미표기 하드 모순 0. 기존 모순들은 모두 날짜 붙은 `정정/각주/
+  ⚠️` 관례로 이미 병기되어 있어 규정 준수 확인(OAuth 과금·order 파라미터·페르소나 폐기·재요청 완성도
+  반전·decide-signal 미검증 등).
+- **정체성 각주 보강 (progdesigner.md)**: "progdesigner = 이용욱/John Lee 가능성 높다" 주장이 2026-07-16
+  [[cwc-commerce]]에 병기된 모순 관찰(SRKK WhatsApp에서 John Lee가 "대표님"에게 보고 → 둘이 다른 사람일
+  가능성)을 참조하지 않고 단정조로 남아 있던 것을 각주로 연결(단정 아님, 병기).
+- **교차링크 보강 4건**: progdesigner→[[rapid-mlx]](로컬 LLM 상주 서버), [[toktalk]]→[[elevino-system]]
+  (`micro.elevino.io` 호스트 공유), [[cwc-fy-group-whisky-dispute]]→[[srkk]]·[[sylvan-korea]](Scott Jeun
+  매개 역링크, 양 페이지가 이 스레드를 신원 근거로 인용하는데 whisky 페이지만 무링크였음),
+  [[local-llm-on-apple-silicon]]→[[rapid-mlx]](채택 런타임인데 엔티티 미링크).
+- **낡은 페이지 순방향 포인터**: [[harness-queue-vs-chat]](2026-07-07 이후 미갱신, "라이브만" 전제)에
+  2026-07-15 대화당 상주 프로세스 아키텍처 전환([[harness-background-process-lifecycle]]) 포인터 추가.
+- **staleness 정정 (AI_CONTEXT.md)**: "최신 확인 버전 v0.1.36" → 2026-07-17 세션에 v0.1.37 빌드 존재 →
+  "v0.1.37(07-17 빌드; 커밋 확인된 최신은 v0.1.36 `9e45de9`)"로 갱신.
+- **신규 페이지 생성 없음**: 4개 세션에 걸친 "전문직 릴스 에이전시" 프로젝트는 브랜드명 미확정으로 4회
+  연속 "엔티티 생성 안 함" 판단이 있었고, 세션끼리 완전 교차링크 + 핵심 발견("프롬프트를 대상화했는지가
+  메타 재구성 vs 즉시 카피 산출을 가른다")이 이미 [[prompt-structuring-for-execution]] 스킬에 반영되어
+  추적 가능 → 신규 topic 생성 기준 미충족(이전 lint 판단 유지).
+- **AI_CONTEXT.md 재증류**: 26줄(예산 40줄 내), 낡은 항목은 버전 1건뿐이라 정정만 하고 구조 유지.
+- 결과: 링크 무결성 재검증 통과(깨진 링크 0). 편집 파일 6개(progdesigner·toktalk 엔티티 2, whisky·
+  local-llm·queue-vs-chat 토픽 3, AI_CONTEXT) `updated: 2026-08-03` 갱신.

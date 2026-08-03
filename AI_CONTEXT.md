@@ -1,7 +1,7 @@
 ---
 tags: [ai-context, summary]
 created: 2026-07-12
-updated: 2026-07-27
+updated: 2026-08-03
 ---
 # AI_CONTEXT — 핵심 기억 요약
 
@@ -11,7 +11,7 @@ updated: 2026-07-27
 - [[progdesigner]] (John, bacchus.dev@gmail.com) — CWC([[cwc-commerce]]) 소속 개발자·디자이너. **응답은 항상 한국어**(도구의 사람 읽는 필드까지). 기억은 비자명한 것만 저장, 임시 스크립트는 `tools/`·운영은 `scripts/`. 네이버 블로그 `study-ai-what`에 람파스 기억 시스템 공개 연재 → 블로그/SEO 태그 요청 반복([[naver-blog-tag-seo]]).
 
 ## 진행 중 프로젝트
-- [[lampas-harness]] — Claude Agent SDK 웹 하네스. 맥미니 launchd 데몬(웹 8787/API 3787), 원격은 Tailscale 사설 VPN 권장. 기본 모델 claude-opus-4-8, "Auto"는 easy/medium/hard/extreme(Fable 5) 4단계 자동 배정([[model-selection]]) — 판정 1순위 Haiku 4.5(API)는 **`ANTHROPIC_API_KEY` 크레딧 잔액 0으로 실패 중**, [[rapid-mlx]] 로컬 LLM이 실질 판정 경로. `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출([[harness-mcp-bridge]], 예 [[naver-blog-mcp]]). 프로젝트 스킬 번들 보유(마케팅·Remotion·운영, 커밋 `ef36c5f`). 음성입력(길게누르기 GPT Realtime, 노랑→빨강 전환+진동/비프)·TTS 3중 트리거(롱프레스 자동재생·봇말풍선 클릭읽기, 모두 Web Speech API 기반 확정; ElevenLabs `tts-stream`은 착수 후 완료 여부 미확인) 구현 완료([[realtime-voice-mic-buffer-before-connect]]). 배경작업이 턴 종료로 끊기던 버그를 대화당 상주 프로세스로 근본 수정(커밋 `d20b439`) → [[harness-background-process-lifecycle]]. 최신 확인 버전 v0.1.36(커밋 `9e45de9`).
+- [[lampas-harness]] — Claude Agent SDK 웹 하네스. 맥미니 launchd 데몬(웹 8787/API 3787), 원격은 Tailscale 사설 VPN 권장. 기본 모델 claude-opus-4-8, "Auto"는 easy/medium/hard/extreme(Fable 5) 4단계 자동 배정([[model-selection]]) — 판정 1순위 Haiku 4.5(API)는 **`ANTHROPIC_API_KEY` 크레딧 잔액 0으로 실패 중**, [[rapid-mlx]] 로컬 LLM이 실질 판정 경로. `.cursor/mcp.json` 외부 MCP를 Claude 세션에 노출([[harness-mcp-bridge]], 예 [[naver-blog-mcp]]). 프로젝트 스킬 번들 보유(마케팅·Remotion·운영, 커밋 `ef36c5f`). 음성입력(길게누르기 GPT Realtime, 노랑→빨강 전환+진동/비프)·TTS 3중 트리거(롱프레스 자동재생·봇말풍선 클릭읽기, 모두 Web Speech API 기반 확정; ElevenLabs `tts-stream`은 착수 후 완료 여부 미확인) 구현 완료([[realtime-voice-mic-buffer-before-connect]]). 배경작업이 턴 종료로 끊기던 버그를 대화당 상주 프로세스로 근본 수정(커밋 `d20b439`) → [[harness-background-process-lifecycle]]. 최신 확인 버전 v0.1.37(2026-07-17 빌드; 커밋 확인된 최신은 v0.1.36 `9e45de9`).
 - [[john-wiki]] — 이 위키. 저장 진입점: 상단 "기억에 보관" 버튼(2026-07-16~ 구 "기억에 저장"에서 개명, 보관 API로 통합)·대화목록 롱프레스 보관·야간 자동 ingest — 앞 둘은 이제 동일 동작. 능동 조회(검색 tool)는 미완.
 - [[toktalk]] — 에피소드 beat 플레이·배경 전환 시스템 개발 중.
 - 코딩 외 [[harness-as-business-assistant]]: 이메일 대행·인보이스 대조·마케팅 컨설팅(사진 첨부 해석) 반복.

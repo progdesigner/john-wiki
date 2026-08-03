@@ -1,7 +1,7 @@
 ---
 tags: [entity, person, user]
 created: 2026-07-07
-updated: 2026-07-17
+updated: 2026-08-03
 ---
 # progdesigner
 
@@ -13,10 +13,14 @@ updated: 2026-07-17
     64GB 통합 메모리 / 2TB SSD**. (= Mac mini M4 Pro 구성으로 추정 — 기존 "맥미니" 서술과 일치.)
 - 홈: `/Users/progdesigner`, 작업 루트: `~/Works` (하위에 `lampas/` 등 프로젝트).
 - 네트워크: KT 회선, 공인 IP `121.167.244.88`(서울), LAN `192.168.0.x`(이중 NAT).
-- API: Anthropic 직접 API 키 + OpenAI 키 보유. 로컬 LLM `qwen3.5-35b-8bit`도 상주(비용 0 대안) → [[local-llm-on-apple-silicon]].
+- API: Anthropic 직접 API 키 + OpenAI 키 보유. 로컬 LLM `qwen3.5-35b-8bit`도 [[rapid-mlx]] 서버로 상주(비용 0 대안) → [[local-llm-on-apple-silicon]].
 - git identity가 hostname 기반 자동값이라 정식 이메일 미설정 상태.
 - 정체성 추정: 저장소명 `john-wiki`와 2026-07-10 이메일 소스(대표 이용욱/John Lee, `john@cwc.sg`)로 보아
   [[cwc-commerce]] 대표 **이용욱(John Lee)**과 동일 인물일 가능성이 높다 (단정은 보류).
+  - **단, 2026-07-16 [[cwc-commerce]]에 병기된 모순 관찰 참고**: [[2026-07-14-srkk-도메인-scott-확인-princ-번역]]
+    WhatsApp 스크린샷에서는 "John Lee"가 "대표님"에게 보고하는 발신자로 나와, 이 대화 안에서는 둘이 다른
+    사람으로 보인다 — progdesigner가 오히려 "대표님" 쪽일 가능성. 원래도 단정하지 않은 사안이라 병기만 하며,
+    향후 소스로 재확인 필요.
   - 2026-07-15 [[2026-07-15-넷플연가-와인모임-재료비-절감]] 세션: [[netpeul-yeonga]] 모임장 소개
     커리큘럼 초안에서 타이틀은 "John, 와인 마시는 IT 컨설턴트", 본문 자기소개는 "20년 경력의 IT
     컨설턴트 **제이든**입니다"로 별칭이 다르게 표기됨(원문 그대로 기록, 동일인 내 표기 불일치 원인

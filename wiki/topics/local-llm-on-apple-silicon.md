@@ -1,7 +1,7 @@
 ---
 tags: [topic, local-llm, apple-silicon, mlx, quantization, reference]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-08-03
 ---
 # Apple Silicon에서 로컬 LLM 돌리기
 
@@ -24,7 +24,7 @@ updated: 2026-07-09
   - **CPU 전용** — 느림, 대형은 비현실적.
 
 ## 런타임 옵션
-- **Rapid-MLX** — MLX 기반, OpenAI 호환 서버(`http://localhost:8000/v1`, 기본 무인증).
+- **Rapid-MLX**([[rapid-mlx]]) — MLX 기반, OpenAI 호환 서버(`http://localhost:8000/v1`, 기본 무인증).
   `curl -fsSL https://rapidmlx.com/install.sh | bash` → `rapid-mlx pull <model>` → `rapid-mlx serve <model>`.
   이 세션에서 채택(v0.10.5). → 설치 절차: [[local-llm-rapidmlx-install]]
 - **llama.cpp** — C++/GGUF, `brew install llama.cpp` 또는 소스 빌드(`cmake -DGGML_METAL=ON`).
@@ -47,5 +47,6 @@ updated: 2026-07-09
 
 ## 관련
 - 세션: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]]
+- 엔티티: [[rapid-mlx]]
 - 스킬: [[local-llm-rapidmlx-install]] · [[macos-launchd-daemon]]
 - 하네스 통합: [[model-selection]] (모델 선택기 "Local" 그룹) · [[lampas-harness]]
