@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, claude-agent-sdk, typescript]
 created: 2026-07-07
-updated: 2026-07-19
+updated: 2026-08-03
 ---
 
 # lampas-harness

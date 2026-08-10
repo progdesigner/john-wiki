@@ -1,7 +1,7 @@
 ---
 tags: [topic, finance, trading-strategy, dark-toss-api]
 created: 2026-07-17
-updated: 2026-07-19
+updated: 2026-08-03
 ---
 # 볼린저 밴드 / 평균회귀 — 트레이딩 전략 개념
 

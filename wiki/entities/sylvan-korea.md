@@ -1,7 +1,7 @@
 ---
 tags: [entity, organization, company]
 created: 2026-07-10
-updated: 2026-07-16
+updated: 2026-08-03
 ---
 # Sylvan Korea
 

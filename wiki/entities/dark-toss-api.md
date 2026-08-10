@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, trading, toss-securities, dark-system]
 created: 2026-07-16
-updated: 2026-07-19
+updated: 2026-08-03
 ---
 > 2026-07-16 갱신: [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]] 세션(21:52~22:38 UTC,
 > 아래 코드 조사 세션보다 **먼저** 있었던 세션)에서 국장/미장 자동 장이동(`autoRegionSwitch`)에
