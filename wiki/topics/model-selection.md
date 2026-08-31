@@ -16,7 +16,8 @@ updated: 2026-07-16
 ## 해결 — UI 모델 선택기
 채팅 입력창 바로 위 드롭다운. 선택값을 `localStorage`에 저장하고 매 요청에 전송.
 - 기본값: **`claude-opus-4-8`**
-- Claude 전 모델 + OpenAI 라이브 목록(`/api/models`가 계정 접근 가능 모델을 라이브로 반환).
+- Claude 전 모델 + [[openai]] 라이브 목록(`/api/models`가 계정 접근 가능 모델을 라이브로 반환). 프로바이더
+  경로 상세는 [[openai]] · [[gemini]].
 
 서버가 내려준 Claude 목록(2026-07-07 시점):
 ```

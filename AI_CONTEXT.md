@@ -1,7 +1,7 @@
 ---
 tags: [ai-context, summary]
 created: 2026-07-12
-updated: 2026-08-03
+updated: 2026-08-31
 ---
 # AI_CONTEXT — 핵심 기억 요약
 
@@ -16,7 +16,7 @@ updated: 2026-08-03
 - [[toktalk]] — 에피소드 beat 플레이·배경 전환 시스템 개발 중.
 - 코딩 외 [[harness-as-business-assistant]]: 이메일 대행·인보이스 대조·마케팅 컨설팅(사진 첨부 해석) 반복.
 - [[progdesigner]]가 네이버 DataLab API 연동 키워드 자동 글쓰기·배포 파이프라인을 이미 운영 중(별도 시스템, study-ai-what과 무관 추정) → [[content-automation-decision-framework]].
-- [[lampas-studio]] — 이미지 생성 스튜디오 제품(로컬 저장소명 `lampas-system`). `pnpm install`이 저장소 전체에서 실패(누락된 `@iileex/shared`, 기존 이슈). [[lampas-web-ai]]가 주요 앱(actorFlow.ts 단일 상태머신, ~2,658줄). Actor·Object에 이어 세 번째 엔티티 **Space**(DB+API+SDK+web-ai)와 신규 앱 **lampas-web-product**(제품 이미지→마케팅 분석, 포트 8236) 구현. 2026-07-18 기준: Space 백엔드는 배포 완료, `lampas-web-sdk`(Space 생성 UI)·`lampas-web-product`는 인프라 미발급으로 미배포. web-ai 등록하기 플로우에 사진 우선 Gemini Vision 자동분류(Actor/Object/Space) 신설·배포 완료 → [[2026-07-18-web-ai-등록플로우-사진분류-배포]].
+- [[lampas-studio]] — 이미지 생성 스튜디오 제품(로컬 저장소명 `lampas-system`). `pnpm install`이 저장소 전체에서 실패(누락된 `@iileex/shared`, 기존 이슈). [[lampas-web-ai]]가 주요 앱(actorFlow.ts 단일 거대 파일에 상태머신 다수, ~2,658줄). Actor·Object에 이어 세 번째 엔티티 **Space**(DB+API+SDK+web-ai)와 신규 앱 **lampas-web-product**(제품 이미지→마케팅 분석, 포트 8236) 구현. 2026-07-18 기준: Space 백엔드는 배포 완료, `lampas-web-sdk`(Space 생성 UI)·`lampas-web-product`는 인프라 미발급으로 미배포. web-ai 등록하기 플로우에 사진 우선 Gemini Vision 자동분류(Actor/Object/Space) 신설·배포 완료 → [[2026-07-18-web-ai-등록플로우-사진분류-배포]].
 - `~/Works` 하위 git 저장소 12개 → [[works-project-portfolio]] (다수 미조사). [[dark-system]](개인 소유)은 트레이딩 봇 4앱 확인 — [[dark-upbit-api]]/[[dark-toss-api]]+각 web. [[dark-toss-api]] 기본 설정상 장시간 게이트 없음(`marketHoursOnly:false`), 2026-07-17 `decide-signal.ts` 신호 판정 로직 추가 보고(미검증).
 - [[cwc-system]]에 [[elevino-system]] DB(원장 방식 크레딧)를 재사용해 멤버십 검색+크레딧 지급/차감 관리자 기능을 이식하는 설계 완료, **구현은 하네스 권한 장애로 미완**(재개 필요) → [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]].
 

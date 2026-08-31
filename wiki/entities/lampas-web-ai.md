@@ -20,7 +20,7 @@ updated: 2026-07-19
 ```
 src/
 ├── chat/            # 앱의 두뇌
-│   ├── actorFlow.ts   # 3개 유한 상태 머신 (2,658줄)
+│   ├── actorFlow.ts   # 유한 상태 머신 3개 + 2026-07-18 Space 등록 플로우 (2,658줄, 아래 07-18 절 참고)
 │   ├── store.tsx      # ChatContext — 세션·flow 상태 관리
 │   └── types.ts
 ├── components/      # ChatView, MessageBubble, GalleryPanel, Sidebar, LoginScreen
@@ -32,7 +32,8 @@ lampas-web-sdk와 달리 Atomic Design·variant 체계를 쓰지 않는 별도 �
 
 ## 핵심 동작 방식
 
-- `actorFlow.ts`는 `type`+`step` 문자열로 단계를 전이하는 **상태 머신 3개**:
+- `actorFlow.ts`는 `type`+`step` 문자열로 단계를 전이하는 **상태 머신 3개**(+ 2026-07-18 등록하기에서
+  Space 등록 플로우 추가 — 별도 상태머신인지 Object 사진 업로드 플로우 재사용인지는 소스로 미확정, 아래 07-18 절):
   - **액터 만들기**: 이름→성별→나이→인종→외모→확인→프로필 생성→레퍼런스 시트→등록. 이름 입력 시
     Grok(`analyze-creation-input`)이 여러 필드를 한 번에 추출해 이미 채워진 질문은 건너뜀.
   - **Object 만들기**: 제품 사진 업로드→특성 자동 분석(Gemini Vision, `/api/objects/analyze-reference`)→

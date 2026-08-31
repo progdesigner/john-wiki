@@ -121,6 +121,9 @@
 - [[dark-toss-api]] — dark-system 내 토스증권 API 자동매매 서비스. 기본 설정상 장시간 게이트 없음(marketHoursOnly false), manualBuy는 시간체크 경로 자체가 없음. 국장/미장 자동 장이동 시 양쪽마감 자동판단 일시정지·재개 구현됨. 2026-07-17: `decide-signal.ts` 신호 판정 로직 추가 보고(미검증)
 - [[dark-toss-web]] — dark-toss-api 대시보드 웹. 모바일 표 가로스크롤·확대방지·장마감 일시정지 배지
 - [[higgsfield]] — 이미지→영상 AI 생성 도구, [[lampas-studio]] 경쟁·비교 대상. 1,000 크레딧 ≈ 6만 6천 원 어림 환산(미검증)
+- [[openai]] — 외부 AI 프로바이더. 하네스 모델 경로·음성입력(Realtime `gpt-4o-transcribe`)·로컬 LLM OpenAI 호환 규격 (2026-08-31 lint 통합)
+- [[gemini]] — Google. [[lampas-studio]] 핵심 이미지·비전 엔진(생성 기본·Vision 제품분석·등록사진 분류) (2026-08-31 lint 통합)
+- [[elevenlabs]] — 외부 TTS 프로바이더. [[toktalk]] 음성 스택 + 하네스 `tts-stream`(구현 착수·완료 미확인, Web Speech API와 별개) (2026-08-31 lint 통합)
 - [[scott-jeun-sylvan-group]] — Scott Jeun(`scottjeun@thesylvangroup.com`)·Clara K, The Sylvan Group(싱가포르) 신원 추적 통합 페이지 ([[srkk]]·[[fy-group]]·[[sylvan-korea]]·[[cwc-fy-group-whisky-dispute]]에 흩어져 있던 동일인 추정 근거를 2026-08-03 lint로 통합)
 
 ## Topics

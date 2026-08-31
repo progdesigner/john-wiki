@@ -24,7 +24,7 @@ updated: 2026-08-03
 ## 기술 스택 (관찰된 범위)
 - 백엔드: NestJS 10 + Prisma 6.19(MySQL). API 도메인 `api.toktalk.ai`.
 - 프론트: React 19 + Vite. 웹앱은 JS, 어드민은 TS.
-- 실시간 채팅: Firebase. AI: OpenAI, Grok, DeepSeek, Gemini, ElevenLabs, AtlasCloud WAN. 음성/영상: Agora. 결제: Toss Payments.
+- 실시간 채팅: Firebase. AI: [[openai]], Grok, DeepSeek, [[gemini]], [[elevenlabs]], AtlasCloud WAN. 음성/영상: Agora. 결제: Toss Payments.
 - 각 앱 로컬 env: `env:local` 스크립트가 `env/.env.local → .env` 복사.
 
 ## 배포 (README 최신화 시점)
