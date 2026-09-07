@@ -1743,3 +1743,5 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   깨진 링크 0·index 불일치 0·프론트매터 결함 0·신규 모순 0·고아 변동 0.
 
 ## [2026-09-08] ingest | 웹 배포 확인 프롬프트 인젝션 거부 + 터미널 세션/SIGINT 레이스 분석 (source: 0eb660b3-f149-47b6-ab83-ba7c3fb08b68.md)
+
+## [2026-09-08] ingest | 덧셈 질문(Codex) — 실제 웹 터미널 서브시스템 경험적 확인 (source: 13d781ec-9b82-4f7e-9af3-ad239ccbeae0.md)
