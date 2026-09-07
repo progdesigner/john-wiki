@@ -1,7 +1,7 @@
 ---
 tags: [topic, prompt, security, llm-behavior, misconception]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-09-08
 ---
 # 시스템 프롬프트 복제 = 모델 흉내내기? (통념과 한계)
 
@@ -38,5 +38,5 @@ claude.ai 프로젝트 지침에 붙여넣고 아무 모델 + effort high로 두
 
 ## 관련
 - 세션: [[2026-07-09-일반-사용영역-페르소나-설정]] · [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]]
-- 토픽: [[local-llm-on-apple-silicon]] (역량은 지침이 아닌 모델에서 나온다는 근거) · [[model-selection]] · [[use-area-personas]] (이 착상이 실제로 적용된 기능)
+- 토픽: [[local-llm-on-apple-silicon]] (역량은 지침이 아닌 모델에서 나온다는 근거) · [[model-selection]] · [[use-area-personas]] (이 착상이 실제로 적용된 기능) · [[unverified-attestation-injection]] (다른 벡터의 인젝션 패턴 — 지침 이식이 아닌 미검증 사실 확인 도장 요청)
 - 엔티티: [[lampas-harness]] · [[progdesigner]]

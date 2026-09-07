@@ -2,7 +2,7 @@
 name: self-hosted-agent-server-ops
 description: 에이전트 턴 자체를 호스팅하는 서버(람파스 8787 등)를 재시작·종료·디버그할 때의 안전 규칙과 포트·빌드 함정
 created: 2026-07-13
-updated: 2026-07-16
+updated: 2026-09-08
 tags: [lampas-harness, launchd, server, port, restart, operations, self-hosting, build]
 ---
 # 자기 자신을 호스팅하는 서버의 운영 함정
@@ -57,6 +57,17 @@ tags: [lampas-harness, launchd, server, port, restart, operations, self-hosting,
     전달과 사용자 재전송 사이 레이스가 있었던 것으로 보임). 재시작 후에도 이 대화의 응답 전달은
     끊기지 않고 이어짐(launchd KeepAlive 즉시 재기동, 함정 2 서술과 일치). →
     [[2026-07-16-메모리인제스트-크레딧버그-근본수정]]
+  - **"정상 종료"도 세션 정리가 100% 보장되진 않는다 (2026-09-07 관찰, 별도 서브시스템)**: 위 항목이
+    다루는 채팅 경로와 별개로, PTY 기반 웹 터미널 서브시스템(`src/terminalSessions.ts`)에서 SIGINT/SIGTERM
+    핸들러(`src/server.ts:3453-3458`)를 file:line으로 분석한 결과, `stopAllTerminals()`의
+    `l.process.kill()`은 신호만 보내고 완료를 기다리지 않는데 그 직후 `process.exit(0)`이 동기로
+    실행됨 — 실제 정리(상태 `"exited"` 저장, `.screen` 스냅샷 쓰기)는 PTY `onExit` 콜백 안에서
+    **비동기**로 일어나므로 **kill()과 process.exit() 사이 순서가 보장되지 않는 레이스 컨디션**이
+    있다. "정상 종료"라는 이름과 달리 최악의 경우 세션 정리가 완료되기 전에 프로세스가 죽을 수 있다.
+    이건 위 "응답 전달 채널이 죽는다"는 문제와는 별개로 **세션 상태 저장 자체의 정합성**이 흔들릴 수
+    있다는 뜻 — 재시작 전 짧은 지연(예 `sleep`)을 두거나 `kill()` 완료를 `await`하는 보강이 근본
+    대응일 수 있으나 아직 코드 수정은 안 됨(관찰만). → [[lampas-harness]]
+    (신규 절 "실제 웹 터미널") · 세션: [[2026-09-07-웹배포확인-프롬프트인젝션거부-터미널세션분석]]
 
 ## 함정 3 — pkill -f가 운영 데몬까지 죽인다 (pkill-hits-prod-daemon)
 테스트 인스턴스(`PORT=8899 npx tsx src/index.ts serve`)를 `pkill -f "tsx src/index.ts serve"`로 종료하면
@@ -89,4 +100,4 @@ launchd 데몬은 소스(`src/`)가 아니라 **컴파일된 `dist/index.js`를 
   프로세스를 구분할 땐 명령줄(-f 패턴)이 아니라 **포트→PID**(`lsof -ti`)로 특정하라.
 - rapid-mlx도 같은 launchd 관리 함정을 공유 → [[rapid-mlx]].
 
-## 출처: [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]] · [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]] · [[2026-07-16-메모리인제스트-크레딧버그-근본수정]] · [[2026-07-17-harness재시작-pwa아이콘이름-manifest-vite버그수정]] ([[lampas-harness]])
+## 출처: [[2026-07-13-람파스-누적운영기억-이관]] · [[2026-07-15-gpt-realtime-음성입력-길게누르기]] · [[2026-07-15-보관메모리확인-하네스재시작-커밋푸시]] · [[2026-07-16-메모리인제스트-크레딧버그-근본수정]] · [[2026-07-17-harness재시작-pwa아이콘이름-manifest-vite버그수정]] · [[2026-09-07-웹배포확인-프롬프트인젝션거부-터미널세션분석]] ([[lampas-harness]])
