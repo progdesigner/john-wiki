@@ -124,6 +124,8 @@
 - [[openai]] — 외부 AI 프로바이더. 하네스 모델 경로·음성입력(Realtime `gpt-4o-transcribe`)·로컬 LLM OpenAI 호환 규격 (2026-08-31 lint 통합)
 - [[gemini]] — Google. [[lampas-studio]] 핵심 이미지·비전 엔진(생성 기본·Vision 제품분석·등록사진 분류) (2026-08-31 lint 통합)
 - [[elevenlabs]] — 외부 TTS 프로바이더. [[toktalk]] 음성 스택 + 하네스 `tts-stream`(구현 착수·완료 미확인, Web Speech API와 별개) (2026-08-31 lint 통합)
+- [[atlas-cloud]] — 외부 이미지/영상 생성 대행 서비스. [[lampas-studio]] Actor/Actor+Object 촬영·레퍼런스 시트에서 [[gemini]]와 동일 시그니처로 분기(gpt-image-2·nano-banana-2·grok-imagine·wan-2.7 라우팅) (2026-09-07 lint 신설)
+- [[grok]] — xAI 텍스트 분석 모델. [[lampas-studio]] 레퍼런스 분석 1순위(Gemini 폴백)·[[lampas-web-ai]] 필드 추출, dark-system 모델필터 예시명과는 무관 (2026-09-07 lint 신설)
 - [[scott-jeun-sylvan-group]] — Scott Jeun(`scottjeun@thesylvangroup.com`)·Clara K, The Sylvan Group(싱가포르) 신원 추적 통합 페이지 ([[srkk]]·[[fy-group]]·[[sylvan-korea]]·[[cwc-fy-group-whisky-dispute]]에 흩어져 있던 동일인 추정 근거를 2026-08-03 lint로 통합)
 
 ## Topics

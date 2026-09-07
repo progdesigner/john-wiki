@@ -1,7 +1,7 @@
 ---
 tags: [entity, ai-provider, elevenlabs, tts, external]
 created: 2026-08-31
-updated: 2026-08-31
+updated: 2026-09-07
 ---
 # ElevenLabs
 
@@ -10,7 +10,7 @@ updated: 2026-08-31
 
 ## 어디에 쓰이는가
 
-- **[[toktalk]] 스택** — AI 음성 계층에 OpenAI·Grok·DeepSeek·[[gemini]] 등과 함께 포함(음성/영상은
+- **[[toktalk]] 스택** — AI 음성 계층에 OpenAI·[[grok]]·DeepSeek·[[gemini]] 등과 함께 포함(음성/영상은
   별도로 Agora).
 - **[[lampas-harness]] 음성 입력(STT) 자격** — `.env`에 `ELEVENLABS_API_KEY` 존재. 기존 코드의
   `mintVoiceSecret`은 **STT(음성 입력)용**이었다(현행 STT 실경로는 [[openai]] Realtime `gpt-4o-transcribe`).

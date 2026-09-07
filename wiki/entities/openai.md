@@ -1,7 +1,7 @@
 ---
 tags: [entity, ai-provider, openai, external]
 created: 2026-08-31
-updated: 2026-08-31
+updated: 2026-09-07
 ---
 # OpenAI
 
@@ -20,8 +20,8 @@ updated: 2026-08-31
 - **로컬 LLM 규격** — [[rapid-mlx]]가 **OpenAI 호환 API**(`http://localhost:8000/v1`)를 제공해 하네스의
   "Local" 프로바이더로 붙는다 → [[local-llm-on-apple-silicon]]. 하네스의 모델 주입 경로도 "Claude Code
   SDK / 로컬·OpenAI 호환 / Gemini" 3갈래로 구분된다([[use-area-personas]]).
-- **이미지 생성(간접)** — [[lampas-studio]]가 Atlas Cloud 경유로 `gpt-image-2`를 생성 옵션에 포함.
-- **[[toktalk]] 스택** — OpenAI가 Grok·DeepSeek·[[gemini]]·[[elevenlabs]]와 함께 AI 계층에 포함.
+- **이미지 생성(간접)** — [[lampas-studio]]가 [[atlas-cloud]] 경유로 `gpt-image-2`를 생성 옵션에 포함.
+- **[[toktalk]] 스택** — OpenAI가 [[grok]]·DeepSeek·[[gemini]]·[[elevenlabs]]와 함께 AI 계층에 포함.
 
 ## 자격증명
 

@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights]
 created: 2026-07-09
-updated: 2026-07-19
+updated: 2026-09-07
 ---
 # lampas-studio (Lampas 이미지 생성 스튜디오)
 
@@ -38,8 +38,8 @@ updated: 2026-07-19
 
 ## 이미지 모델 (관찰된 값)
 
-- **생성**: Gemini(기본, 멀티 이미지 그리드 직접 생성) / Atlas Cloud 경유 — `gpt-image-2`, `nano-banana-2`, `grok-imagine`, `wan-2.7`. Gemini/Atlas가 동일 `generateImage` 시그니처라 선택값으로 서비스만 분기.
-- **분석**: Grok / Gemini.
+- **생성**: [[gemini]](기본, 멀티 이미지 그리드 직접 생성) / [[atlas-cloud]] 경유 — `gpt-image-2`, `nano-banana-2`, `grok-imagine`, `wan-2.7`. Gemini/Atlas가 동일 `generateImage` 시그니처라 선택값으로 서비스만 분기.
+- **분석**: [[grok]] / Gemini.
 - 갤러리 편집 기본 이미지 모델: `google/nano-banana-2/edit`.
 - UI 선택은 localStorage로 기억(`lampas_gallery_edit_image_model`, `lampas_studio_analyze_model`). → `[[localstorage-ui-preference-persistence]]`
 - **주의 — CLAUDE.md 요약과 실제 경로가 다름** (2026-07-15 세션 확인): 제품 CLAUDE.md엔 "스튜디오 합성=Atlas
@@ -182,6 +182,7 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
 - 토픽: [[lampas-actor-object-space-positioning]]
 - 앱: [[lampas-web-ai]]
+- 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
 - 포트폴리오 배경: [[works-project-portfolio]]

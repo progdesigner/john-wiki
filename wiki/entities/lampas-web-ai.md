@@ -1,7 +1,7 @@
 ---
 tags: [entity, app, lampas-studio, react, chat, ai]
 created: 2026-07-16
-updated: 2026-07-19
+updated: 2026-09-07
 ---
 # lampas-web-ai ("Lampas AI", 대화형 AI 스튜디오)
 
@@ -14,6 +14,9 @@ updated: 2026-07-19
 - 규모는 작음(소스 16개 파일, 약 4,900줄)이지만 로직 밀도가 높고, 핵심의 절반 이상이 `src/chat/actorFlow.ts`
   한 파일(2,658줄)에 있음 — **단일 거대 파일이라 플로우 추가·수정 시 충돌 위험**. 기능이 계속 늘어나면
   플로우별 파일 분리 검토 필요(2026-07-15 세션 권고, 미해결).
+  **⚠️ 이 파일·라인 수치는 2026-07-15 세션 시점 측정값** — 그 뒤 2026-07-18에 같은 `actorFlow.ts`에
+  Space 등록 플로우가 추가됐는데(아래 구조·핵심 동작 절 참고) 수치를 재측정한 소스가 없어, 실제 현재
+  줄 수는 이보다 클 가능성이 높다(2026-09-07 lint에서 발견, 재측정 필요).
 
 ## 구조
 
@@ -35,7 +38,7 @@ lampas-web-sdk와 달리 Atomic Design·variant 체계를 쓰지 않는 별도 �
 - `actorFlow.ts`는 `type`+`step` 문자열로 단계를 전이하는 **상태 머신 3개**(+ 2026-07-18 등록하기에서
   Space 등록 플로우 추가 — 별도 상태머신인지 Object 사진 업로드 플로우 재사용인지는 소스로 미확정, 아래 07-18 절):
   - **액터 만들기**: 이름→성별→나이→인종→외모→확인→프로필 생성→레퍼런스 시트→등록. 이름 입력 시
-    Grok(`analyze-creation-input`)이 여러 필드를 한 번에 추출해 이미 채워진 질문은 건너뜀.
+    [[grok]](`analyze-creation-input`)이 여러 필드를 한 번에 추출해 이미 채워진 질문은 건너뜀.
   - **Object 만들기**: 제품 사진 업로드→특성 자동 분석(Gemini Vision, `/api/objects/analyze-reference`)→
     이름→확인→프로필. `ObjectFlowState.data`에 SDK와 동일한 6필드(category/material/primaryColor/style/
     background/description).
@@ -80,7 +83,7 @@ lampas-web-sdk와 달리 Atomic Design·variant 체계를 쓰지 않는 별도 �
    2026-07-18T14:04~14:06 UTC에 API→web-ai 순으로 배포 완료.
 
 ## 관련
-- [[lampas-studio]] (상위 제품) · [[deploy-sandbox-pnpm-shim]]
+- [[lampas-studio]] (상위 제품) · [[deploy-sandbox-pnpm-shim]] · [[grok]] · [[gemini]]
 - 세션: [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-16-lampas-web-product-신규앱-구현]](슬림 베이스로 재사용) ·
   [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
 - [[progdesigner]] · [[lampas]] on [[lampas-harness]]
