@@ -2,6 +2,7 @@
 name: clone-sibling-entity-pipeline
 description: 기존 엔티티(Actor/Object)와 같은 형태의 새 엔티티(Space)를 추가할 때 DB→API→SDK UI→채팅 플로우를 계층별로 그대로 복제해 빠르게 배선
 created: 2026-07-16
+updated: 2026-07-16
 tags: [architecture, nestjs, prisma, react, cloning, feature-build]
 ---
 # 형제 엔티티 파이프라인 복제

@@ -2,6 +2,7 @@
 name: credit-ledger-balance-pattern
 description: 잔액 컬럼 없이 원장(ledger) 방식으로 크레딧/포인트를 지급·차감하는 기존 시스템을 다른 저장소로 이식할 때 확인·보강할 것들
 created: 2026-07-16
+updated: 2026-07-16
 tags: [ledger, credit, balance, concurrency, migration, typeorm, prisma, nestjs]
 ---
 # 원장(ledger) 방식 크레딧 잔액 시스템 이식

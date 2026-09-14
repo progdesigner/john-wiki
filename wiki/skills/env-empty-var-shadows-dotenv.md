@@ -2,6 +2,7 @@
 name: env-empty-var-shadows-dotenv
 description: 새 API 키/설정을 .env에 넣었는데 기능·목록에 안 나타날 때 — 셸의 빈 env 변수가 .env 값을 가리는지 진단·수정
 created: 2026-07-13
+updated: 2026-07-13
 tags: [dotenv, env, config, nodejs, lampas-harness, debugging]
 ---
 # 빈 env 변수가 .env의 진짜 값을 가리는 함정

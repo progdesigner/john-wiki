@@ -2,6 +2,7 @@
 name: naver-blog-mcp-posting
 description: naver-blog-mcp로 네이버 블로그에 글을 발행할 때 — 순수 텍스트 본문·세션(SRT) 만료 갱신·서버 버그 대응
 created: 2026-07-13
+updated: 2026-07-13
 tags: [naver, blog, mcp, playwright, publishing, session, lampas-harness]
 ---
 # 네이버 블로그 MCP 발행 절차

@@ -2,6 +2,7 @@
 name: idempotent-message-retry
 description: 네트워크 오류로 요청이 날아가지 않게 msgId 멱등성 + 클라이언트 자동 재전송을 구축
 created: 2026-07-07
+updated: 2026-07-07
 tags: [reliability, retry, idempotency, network]
 ---
 # 멱등 메시지 재시도 (network error로 요청 소실 방지)

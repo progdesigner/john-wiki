@@ -1,7 +1,7 @@
 ---
 tags: [entity, organization, company]
 created: 2026-07-14
-updated: 2026-07-14
+updated: 2026-09-14
 ---
 # CWC LAB PTE. LTD (Singapore)
 
@@ -24,5 +24,7 @@ updated: 2026-07-14
 
 ## 관련
 - 세션: [[2026-07-14-은행환불-거래처매칭]], [[2026-07-14-clara-바바라-위스키분쟁-번역]]
-- 모기업/계열: [[cwc-commerce]] · 대표: [[progdesigner]]
+- 모기업/계열: [[cwc-commerce]] · 대표: 이용욱/John Lee ([[progdesigner]]와의 동일인 여부는 [[progdesigner]]·[[cwc-commerce]] 참고, 단정 보류)[^1]
 - 토픽: [[cwc-fy-group-whisky-dispute]] · 거래처(분쟁 상대): [[fy-group]]
+
+[^1]: 2026-09-14 lint에서 수정 — 기존엔 "대표: [[progdesigner]]"로 단정 표기돼 있었으나, [[progdesigner]]가 CWC 대표(이용욱/John Lee)와 동일인인지는 [[progdesigner]]·[[cwc-commerce]] 페이지가 반례(WhatsApp상 John Lee가 "대표님"에게 보고하는 별개 인물로 보임)까지 병기하며 단정을 보류한 미확정 사안이다. 이 페이지 상단(line 9)은 이미 "대표 이용욱/John Lee"로 정확히 기술하고 있었는데, 관련 링크 섹션만 다르게 서술돼 있던 자기모순을 정정.

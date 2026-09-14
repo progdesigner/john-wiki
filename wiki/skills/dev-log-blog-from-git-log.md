@@ -2,6 +2,7 @@
 name: dev-log-blog-from-git-log
 description: "이번 주 진행한 것 정리해서 블로그 글 써줘"처럼 원문 없이 요청받았을 때 git 커밋 로그로 개발일지 초안을 작성
 created: 2026-07-16
+updated: 2026-07-16
 tags: [naver-blog, dev-log, git, content, marketing]
 ---
 # 커밋 로그 기반 개발일지 블로그 초안 작성

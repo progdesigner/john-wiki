@@ -2,6 +2,7 @@
 name: work-folder-sandboxing
 description: Claude Agent SDK 작업을 특정 작업 폴더 안으로 제한(폴더 밖 파일 접근 차단)
 created: 2026-07-07
+updated: 2026-07-07
 tags: [claude-agent-sdk, security, sandbox, permission]
 ---
 # 작업 폴더 샌드박싱 (에이전트를 폴더 밖으로 못 나가게)

@@ -2,6 +2,7 @@
 name: nginx-aws-scanner-hardening
 description: nginx access 로그에 자동 취약점 스캐너 정찰이 찍혔을 때 IP 오인 없이 방어를 계층화하는 절차
 created: 2026-07-17
+updated: 2026-07-17
 tags: [security, nginx, aws, waf, infra]
 ---
 # nginx + AWS 스캐너 방어 절차 (nginx-aws-scanner-hardening)

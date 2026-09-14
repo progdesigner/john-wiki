@@ -2,6 +2,7 @@
 name: session-independent-scheduler
 description: 에이전트가 세션/턴이 끝난 뒤에도 "N초/N분 뒤 능동 메시지"를 신뢰성 있게 보내야 할 때
 created: 2026-07-09
+updated: 2026-07-09
 tags: [scheduler, lampas-harness, claude-agent-sdk, persistence, proactive]
 ---
 # 세션 독립 예약 메시지 스케줄러

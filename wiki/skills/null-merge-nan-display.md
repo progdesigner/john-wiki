@@ -2,6 +2,7 @@
 name: null-merge-nan-display
 description: 숫자 표시 UI가 "NaN"으로 뜰 때 — null을 Object.assign/스프레드로 병합하면 필드가 undefined로 남는지 의심하고 방어적 기본값을 넣는다
 created: 2026-07-16
+updated: 2026-07-16
 tags: [debugging, frontend, javascript, null-handling, nan]
 ---
 # null 병합 → NaN 표시 버그

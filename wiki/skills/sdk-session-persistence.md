@@ -2,6 +2,7 @@
 name: sdk-session-persistence
 description: Claude Agent SDK 서버가 죽어도 대화 맥락(resume)이 이어지도록 sessionId를 디스크에 영속화
 created: 2026-07-07
+updated: 2026-07-07
 tags: [claude-agent-sdk, persistence, session, resume]
 ---
 # Claude Agent SDK 세션 영속화 (크래시 후 resume 복구)

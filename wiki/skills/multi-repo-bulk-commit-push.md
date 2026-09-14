@@ -2,6 +2,7 @@
 name: multi-repo-bulk-commit-push
 description: 여러 git 저장소를 한 번에 "저장"(commit+push)해달라는 요청을 받았을 때, 변경 있는 저장소만 골라 커밋·푸시하고 push 거부는 rebase로 해소하는 절차
 created: 2026-07-19
+updated: 2026-07-19
 tags: [git, ops, bulk-update, works-portfolio]
 ---
 # 다중 저장소 일괄 커밋·푸시

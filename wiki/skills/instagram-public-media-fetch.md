@@ -2,6 +2,7 @@
 name: instagram-public-media-fetch
 description: 토큰·앱 심사 없이 서버에서 Instagram 공개 게시물(캐러셀 포함) 이미지를 가져올 때
 created: 2026-07-09
+updated: 2026-07-09
 tags: [instagram, scraping, crawler, image, no-auth]
 ---
 # Instagram 공개 게시물 이미지 서버 사이드 조회

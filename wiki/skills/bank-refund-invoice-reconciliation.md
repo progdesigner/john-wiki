@@ -2,6 +2,7 @@
 name: bank-refund-invoice-reconciliation
 description: 애매한 은행 거래내역(환입/입금)이 어느 인보이스·결제건인지 대조·검증하고 거래처 회신을 잡을 때
 created: 2026-07-14
+updated: 2026-07-14
 tags: [finance, reconciliation, business-assistant, multimodal]
 ---
 # 은행 환불/입금 ↔ 인보이스 매칭

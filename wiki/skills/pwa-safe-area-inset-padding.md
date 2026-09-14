@@ -2,6 +2,7 @@
 name: pwa-safe-area-inset-padding
 description: PWA(홈 화면 추가) 모드에서 상단/하단 여백이 브라우저 탭과 다르게 보일 때 env(safe-area-inset-*)로 노치/상태바 영역을 침범하지 않게 고정
 created: 2026-07-19
+updated: 2026-07-19
 tags: [pwa, css, safe-area, mobile, ios]
 ---
 # pwa-safe-area-inset-padding

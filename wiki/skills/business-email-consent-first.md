@@ -2,6 +2,7 @@
 name: business-email-consent-first
 description: 상대가 서류/절차 요구만 반복할 때, 원칙적 "가부(동의 여부)"를 먼저 확정하도록 요청하는 정중한 회신 메일 작성
 created: 2026-07-10
+updated: 2026-07-10
 tags: [email, communication, negotiation, korean-business]
 ---
 # 원칙적 동의 여부를 먼저 확정하는 회신 메일

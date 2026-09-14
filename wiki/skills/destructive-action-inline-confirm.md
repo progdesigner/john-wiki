@@ -2,6 +2,7 @@
 name: destructive-action-inline-confirm
 description: 되돌리기 어렵거나 오조작이 잦은 버튼(중지·삭제·보관)에 모달 없이 인라인 확인 단계를 넣을 때
 created: 2026-07-16
+updated: 2026-07-16
 tags: [frontend, ux, confirm-pattern, safety]
 ---
 # 실수 방지 인라인 확인 (destructive-action-inline-confirm)

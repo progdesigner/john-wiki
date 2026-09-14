@@ -2,6 +2,7 @@
 name: new-app-scaffold-from-slim-base
 description: 모노레포에 "이미지/데이터 올리면 AI가 처리" 형태의 새 프론트 앱+백엔드 모듈을 추가할 때 기존 앱들을 비교해 슬림한 쪽을 복사 베이스로 고르고 독립 공개 모듈로 배선하는 절차
 created: 2026-07-16
+updated: 2026-07-16
 tags: [architecture, scaffolding, nestjs, vite, react, new-feature, deploy]
 ---
 # 슬림 베이스 복사로 새 앱 스캐폴딩

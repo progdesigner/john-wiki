@@ -1745,3 +1745,34 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 ## [2026-09-08] ingest | 웹 배포 확인 프롬프트 인젝션 거부 + 터미널 세션/SIGINT 레이스 분석 (source: 0eb660b3-f149-47b6-ab83-ba7c3fb08b68.md)
 
 ## [2026-09-08] ingest | 덧셈 질문(Codex) — 실제 웹 터미널 서브시스템 경험적 확인 (source: 13d781ec-9b82-4f7e-9af3-ad239ccbeae0.md)
+
+## [2026-09-14] lint | 위키 전체 건강 점검 (11) — frontmatter updated 결측 28건 수정 + cwc-lab-singapore 자기모순 정정
+- **범위**: 세션 92·엔티티 30·토픽 25·스킬 39(직전 09-07 lint 이후 09-08 ingest 2건만 순증, 둘 다 이미
+  적절히 통합 확인됨 — 아래 참고) + index.md·AI_CONTEXT.md. 스크립트 기반 전수 재검증(위키링크 2,797건,
+  전체 186개 페이지 basename 대조).
+- **기계적 점검(모두 클린)**: 깨진 `[[위키링크]]` 0건(`[[#피드백]]`은 [[2026-07-17-컨텍스트압축-api과금-수정]]
+  내 같은 문서 앵커·정상). 인바운드 0인 순수 고아 페이지 0건(정책적 저가치 세션 [[2026-07-16-needtovent-io-서비스-추측]]·
+  [[2026-08-03-민방위-연차소진-질문]]은 index.md 인바운드 1건씩 유지, 기존 lint 관행대로 결함 아님으로 유지).
+  index.md ↔ 실제 파일 4카테고리 완전 일치(186=186, 양방향 누락 0).
+- **발견·수정 1 — frontmatter `updated` 필드 결측 28건**: `wiki/skills/*.md` 39개 중 28개가 CLAUDE.md의
+  스킬 템플릿(name/description/created/tags)만 따르고 일반 페이지 규칙("모든 페이지는 tags·created·updated")의
+  `updated`를 누락하고 있었음 — 과거 8회 lint의 "프론트매터 결함 0" 판정이 이 항목을 스킬 템플릿과
+  혼동해 놓친 것으로 보임. 27개(`idempotent-message-retry`·`sdk-session-persistence`·`work-folder-sandboxing`
+  등)에 `updated: created와 동일값`으로 보강(생성 후 실질 수정 이력 없어 created=updated로 채움). 나머지 11개
+  스킬(`macos-launchd-daemon` 등)은 이미 `updated` 보유 확인.
+- **발견·수정 2 — [[cwc-lab-singapore]] 자기모순**: "관련" 섹션이 "대표: [[progdesigner]]"로 단정했으나,
+  같은 페이지 본문(line 9)은 이미 "대표 이용욱/John Lee"로 정확히 기술 중이었고, [[progdesigner]]·
+  [[cwc-commerce]] 페이지는 이 동일인 여부를 반례(WhatsApp상 John Lee가 "대표님"에게 보고하는 별개
+  인물로 보임)까지 병기하며 단정 보류 중인 사안 — 링크 섹션만 어긋나 있던 것을 각주로 정정
+  (동일인 여부 미확정 명시, 서명 각주 추가). `updated` 07-14→09-14.
+- **모순 재점검(엔티티30+토픽25 전수, 서브에이전트 위임)**: 위 1건 외 신규 미각주 모순 0건 — 09-07/09-08
+  신규 세션 2건이 [[lampas-harness]]·[[self-hosted-agent-server-ops]]·[[unverified-attestation-injection]]에
+  반영한 크로스링크 검증 결과 결함 없음(주장대로 정확히 반영됨).
+- **반복개념 재조사**: `bokziri`/`goraesa`/`arca8`/`ai-labs-notes`(각 4건, [[works-project-portfolio]]가
+  이미 "미문서화·임의 엔티티 생성 안 함"으로 명시적 판단 완료 — 재제안 안 함), `Ryan Lee`/`Keira Zhang`
+  (각 4~5건이나 단일 분쟁 내 인물로 이미 해당 엔티티에 흡수됨), 인프라 범용어(pnpm·Vite·Prisma 등,
+  프로젝트별 자체 페이지가 이미 다룸) 모두 신규 페이지 기준 미충족으로 재확인. 신규 후보 0건.
+- **AI_CONTEXT.md**: 36줄(<40 준수), `updated: 2026-08-31` 유지 — 09-07/09-08 신규 내용(보안 세션·터미널
+  서브시스템 세부)은 상세 페이지 수준 정보로 판단(09-07 lint와 동일 기준), 재증류 불필요·내용 변경 없음.
+- 결과: 깨진 링크 0·고아 0(정책적 2 유지)·index 완전 일치·**frontmatter 결측 28건 수정**·**자기모순 1건 수정**·
+  신규 반복개념 0.

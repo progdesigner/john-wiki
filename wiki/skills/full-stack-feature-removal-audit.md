@@ -2,6 +2,7 @@
 name: full-stack-feature-removal-audit
 description: 여러 프론트/백엔드 표면에 걸쳐 흩어진 기능을 잔재 없이 완전히 제거할 때 쓰는 조사→삭제→검증 절차
 created: 2026-07-16
+updated: 2026-07-16
 tags: [refactor, deprecation, audit, grep, cleanup]
 ---
 # 기능 전면 제거 감사 (full-stack feature removal audit)

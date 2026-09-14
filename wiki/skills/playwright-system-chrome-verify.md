@@ -2,6 +2,7 @@
 name: playwright-system-chrome-verify
 description: Playwright 브라우저 바이너리 미설치 환경에서 macOS 시스템 Chrome으로 UI 변경을 실브라우저 종단 검증
 created: 2026-07-16
+updated: 2026-07-16
 tags: [playwright, verify, testing, chrome, headless]
 ---
 # Playwright + 시스템 Chrome 폴백 검증

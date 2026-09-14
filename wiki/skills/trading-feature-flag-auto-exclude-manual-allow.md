@@ -2,6 +2,7 @@
 name: trading-feature-flag-auto-exclude-manual-allow
 description: "자동으로는 안 되지만 수동으로는 되게 해줘" 요청에서 전면 차단 플래그를 자동-전용 제외 플래그로 바꾸고, 재활성화돼도 위험 경로(예 LLM 호출)가 구조적으로 막히게 설계하는 절차
 created: 2026-07-16
+updated: 2026-07-16
 tags: [feature-flag, config, trading, llm, design-pattern]
 ---
 # 자동 제외 vs 수동 허용 플래그 설계

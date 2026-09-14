@@ -2,6 +2,7 @@
 name: icon-source-of-truth-before-replace
 description: "A 아이콘을 B에 맞춰라" 류 요청에서 어느 쪽이 유지될 원본인지 파이프라인 구조가 아닌 요청 문장으로 먼저 확정하는 절차
 created: 2026-07-19
+updated: 2026-07-19
 tags: [icon, branding, desktop, web, ux, mistake-recovery]
 ---
 # icon-source-of-truth-before-replace

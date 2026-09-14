@@ -2,6 +2,7 @@
 name: loading-state-key-mismatch
 description: "버튼/액션이 '작동 안 함'처럼 보이지만 요청은 실제로 처리될 때 — 로딩(busy) 상태 키가 생성 측과 조회 측에서 어긋났는지 의심하고 맞춘다"
 created: 2026-07-09
+updated: 2026-07-09
 tags: [debugging, frontend, react, loading-state, ux]
 ---
 # 로딩 상태 키 불일치

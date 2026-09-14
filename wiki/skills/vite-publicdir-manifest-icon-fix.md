@@ -2,6 +2,7 @@
 name: vite-publicdir-manifest-icon-fix
 description: Vite root가 public/이고 publicDir:false일 때 PWA manifest.json·아이콘 경로가 base64/해시로 깨지는 문제 진단·수정
 created: 2026-07-19
+updated: 2026-07-19
 tags: [vite, pwa, manifest, build, static-assets, lampas-harness]
 ---
 # vite-publicdir-manifest-icon-fix

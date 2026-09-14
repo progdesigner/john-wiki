@@ -2,6 +2,7 @@
 name: localstorage-ui-preference-persistence
 description: 마지막 선택한 UI 값(모델·정렬 등)을 새로고침·전환에도 유지하도록 localStorage에 저장할 때
 created: 2026-07-09
+updated: 2026-07-09
 tags: [frontend, localstorage, ux, persistence]
 ---
 # localStorage UI 선택 기억

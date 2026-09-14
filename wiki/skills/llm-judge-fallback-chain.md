@@ -2,6 +2,7 @@
 name: llm-judge-fallback-chain
 description: LLM으로 분류·라우팅(난이도 판정 등)을 구현할 때, 유료 API가 실패해도 턴이 안 막히도록 로컬 LLM→휴리스틱 순으로 저하되는 판정 체인을 설계·검증하는 절차
 created: 2026-07-16
+updated: 2026-07-16
 tags: [llm-as-judge, fallback, routing, local-llm, prompt-engineering, lampas-harness]
 ---
 # LLM 판정기 폴백 체인 설계

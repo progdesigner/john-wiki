@@ -2,6 +2,7 @@
 name: config-flag-gate-audit
 description: "시스템이 특정 조건에서 특정 동작을 막는지/허용하는지" 질문에 코드 근거로 답할 때 쓰는 추적 절차
 created: 2026-07-16
+updated: 2026-07-16
 tags: [code-audit, debugging, verification, trading]
 ---
 # 설정 플래그 게이트 감사 (config-flag-gate-audit)

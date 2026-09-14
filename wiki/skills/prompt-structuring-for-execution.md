@@ -2,6 +2,7 @@
 name: prompt-structuring-for-execution
 description: 사용자가 대충 쓴 초안 프롬프트를 "다듬어줘"라고 할 때, 정보 손실 없이 실행 가능한 구조로 재정리하고 누락된 실행 조건을 되묻는 절차
 created: 2026-07-17
+updated: 2026-07-17
 tags: [prompt-engineering, marketing, copywriting]
 ---
 # 프롬프트를 실행 가능한 구조로 다듬기
