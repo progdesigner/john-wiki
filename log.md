@@ -1244,6 +1244,22 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   이후 유사 소스 ingest 시 참고할 선례로 [[secrets-plaintext-exposure-pattern]]에 명시.
 
 ## [2026-07-19] ingest | 하네스 재시작 + PWA 이름/아이콘 최초 설정 + Vite manifest 버그 수정 (source: 8028c121-b640-4550-942e-3ae0c2e27e42.md)
+- 원본 보관: `raw/conversations/2026-07-17-harness재시작-pwa아이콘이름-manifest-vite버그수정.md` (2026-07-17
+  12:40:59~12:48:31 UTC).
+- 세션 신설: [[2026-07-17-harness재시작-pwa아이콘이름-manifest-vite버그수정]] — 재시작 스크립트 실행(PID
+  `74969` 기동·MCP 재연결 확인) + PWA 이름/아이콘 최초 설정(`apps/web/public/manifest.json` 신설, 첨부된
+  흰색 "L" 로고를 192/512px로 리사이징) + Vite `root:'public/'`+`publicDir:false` 조합이 `manifest.json`
+  내부 아이콘 경로를 해시/base64 에셋 파이프라인과 어긋나게 만들던 버그 발견·`apps/web/static/` 별도
+  정적 디렉토리 분리로 수정(재시작 불필요 판명, 정적 파일은 서버 재시작 없이 즉시 반영).
+- 스킬 신설: [[vite-publicdir-manifest-icon-fix]]
+- 엔티티 갱신: [[lampas-harness]] (재시작·PWA 최초 설정·Vite 버그 수정 절 추가), [[self-hosted-agent-server-ops]]
+  (재시작 정석 패턴 재확인 사례 보강)
+- index.md 갱신 (세션1·스킬1 추가). AI_CONTEXT.md 변경 없음(소규모 기능, 기존 판단 기준과 동일).
+- 특이사항: 이 세션에서 처음 만든 `apps/web/static/` 아이콘(흰색 "L")이 [[2026-07-18-desktop-web-아이콘-통일]]
+  시점엔 "남색 사운드바"로 관찰되어, 그 사이 아이콘이 한 번 더 바뀐 변경 세션이 아직 위키에 없다는
+  불일치가 세션 페이지에 각주됨(소스 미확인, 추후 ingest 시 확인 필요). **이 log 항목 자체가 이전
+  ingest 커밋(`2224c8c`)에서 헤더만 기록되고 본문이 누락됐던 것을 2026-09-21 lint에서 커밋 diff로
+  복구·소급 작성함.**
 
 ## [2026-07-19] ingest | dark-system 신호 판정·스타일별 리스크 설계 코드 업데이트 (source: 123fdfff-b54f-4a00-9192-4fb4083f247c.md)
 - 원본: raw/conversations/2026-07-17-dark-system-신호리스크-설계-코드업데이트.md (2026-07-17T12:30 UTC, 1왕복)
@@ -1743,8 +1759,40 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   깨진 링크 0·index 불일치 0·프론트매터 결함 0·신규 모순 0·고아 변동 0.
 
 ## [2026-09-08] ingest | 웹 배포 확인 프롬프트 인젝션 거부 + 터미널 세션/SIGINT 레이스 분석 (source: 0eb660b3-f149-47b6-ab83-ba7c3fb08b68.md)
+- 원본 보관: `raw/conversations/2026-09-07-웹배포확인-프롬프트인젝션거부-터미널세션분석.md` (Claude Code
+  도구, `lampas-harness` 작업 폴더, 2026-09-07T15:33:17.174Z 시작).
+- 세션 신설: [[2026-09-07-웹배포확인-프롬프트인젝션거부-터미널세션분석]] — (1) 검증되지 않은 배포 사실을
+  구체적으로 서술한 뒤 도구 확인 없이 고정 문자열(`LAMPAS_DEPLOY_OK`)만 답하라는 요청을 프롬프트
+  인젝션으로 의심해 거부, (2) 이어진 정상 기술 질문에서 `src/terminalSessions.ts`·`src/server.ts`를
+  file:line 분석 — 브라우저 연결종료(PTY 무영향, 뷰어만 분리)·서버 재시작(`live` 맵 소실, 세션 전체
+  `interrupted` 전환)·SIGINT 정상종료(`kill()` 직후 `process.exit(0)`이 비동기 정리보다 먼저 끝나는
+  레이스로 세션 정리 미보장)·비정상종료(정리 로직 전체 스킵) 4가지 종료 경로를 규명.
+- 토픽 신설: [[unverified-attestation-injection]] (미검증 사실을 구체적으로 서술한 뒤 고정 문자열로만
+  확인해달라는 인젝션 패턴 — 지침 이식형인 [[system-prompt-mimicry-misconception]]과는 다른 벡터)
+- 스킬 갱신: [[self-hosted-agent-server-ops]] ("정상 종료"도 kill()-vs-process.exit() 레이스로 세션 정리가
+  완전히 보장되지 않는다는 함정 보강)
+- 엔티티 갱신: [[lampas-harness]] (실제 웹 터미널 서브시스템 `terminalSessions.ts` 신규 절 + SIGINT 레이스
+  반영)
+- 토픽 갱신: [[system-prompt-mimicry-misconception]] (인접 보안 패턴 상호링크)
+- index.md 갱신 (세션1·토픽1 추가). AI_CONTEXT.md 변경 없음(보안 세션 세부는 상세 페이지 수준 정보로 판단).
+- 특이사항: 사용자가 파일 수정 없이 순수 읽기 분석만 요청·수행. 배포 확인 문자열 출력 거부는 어시스턴트
+  자체 판단(사용자 확인 절차 없이). **이 log 항목 자체가 이전 ingest 커밋(`37f184f`)에서 헤더만 기록되고
+  본문이 누락됐던 것을 2026-09-21 lint에서 커밋 diff로 복구·소급 작성함.**
 
 ## [2026-09-08] ingest | 덧셈 질문(Codex) — 실제 웹 터미널 서브시스템 경험적 확인 (source: 13d781ec-9b82-4f7e-9af3-ad239ccbeae0.md)
+- 원본 보관: `raw/conversations/2026-09-07-덧셈질문-codex-스모크테스트.md` (Codex 도구, `lampas-harness`
+  작업 폴더, 2026-09-07T15:33:14.840Z 시작, `logs/terminals/archive/`에서 회수).
+- 세션 신설: [[2026-09-07-덧셈질문-codex-스모크테스트]] — 내용은 "2+2는?" 1왕복뿐인 트리비얼 세션이나,
+  출처가 실제 Codex CLI 터미널 아카이브 파일이라는 점에서 가치가 있음. 같은 작업 폴더에서 15:33:1x대에
+  시작된 [[2026-09-07-웹배포확인-프롬프트인젝션거부-터미널세션분석]](Claude Code, 15:33:17.174Z)의 미검증
+  배포 주장과는 별개로, PTY 기반 웹 터미널 서브시스템(`terminalSessions.ts`)이 codex 도구로도 실제
+  가동 중임을 경험적으로 확인.
+- 엔티티 갱신: [[lampas-harness]] (경험적 확인 각주 추가)
+- index.md 갱신 (세션1 추가). 신규 topic/skill 없음(트리비얼 내용).
+- 특이사항: 같은 타임스탬프대에 같은 작업 폴더에서 도구(codex vs claude)만 바꿔 병렬로 연 두 개의
+  개별 세션으로 보임 — 완전히 다른 대화 내용이라 [[chat-archive-duplication-anomaly]](동일 사건의
+  이중 기록)와는 무관. **이 log 항목 자체가 이전 ingest 커밋(`bb0ac09`)에서 헤더만 기록되고 본문이
+  누락됐던 것을 2026-09-21 lint에서 커밋 diff로 복구·소급 작성함.**
 
 ## [2026-09-14] lint | 위키 전체 건강 점검 (11) — frontmatter updated 결측 28건 수정 + cwc-lab-singapore 자기모순 정정
 - **범위**: 세션 92·엔티티 30·토픽 25·스킬 39(직전 09-07 lint 이후 09-08 ingest 2건만 순증, 둘 다 이미
@@ -1776,3 +1824,29 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   서브시스템 세부)은 상세 페이지 수준 정보로 판단(09-07 lint와 동일 기준), 재증류 불필요·내용 변경 없음.
 - 결과: 깨진 링크 0·고아 0(정책적 2 유지)·index 완전 일치·**frontmatter 결측 28건 수정**·**자기모순 1건 수정**·
   신규 반복개념 0.
+
+## [2026-09-21] lint | 위키 전체 건강 점검 (12) — log.md 본문 결측 3건 소급 복구
+- **범위**: 세션 92·엔티티 30·토픽 25·스킬 39, index.md·AI_CONTEXT.md. 09-14 lint 이후 신규 소스 없음
+  (raw/conversations 최신 파일 여전히 2026-09-07 두 건, git log도 09-14 lint 커밋 `8a652e8` 이후 무변경) —
+  이번 lint는 신규 ingest 반영이 아니라 순수 재점검.
+- **기계 점검(스크립트 기반 전수 재검증)**: index.md ↔ `wiki/{sessions,entities,topics,skills}/` 4카테고리
+  완전 일치(186=186, 양방향 누락 0). 위키링크 전수 스캔 결과 깨진 링크 0건(`[[#피드백]]`은 기존 lint들이
+  이미 정상 판정한 문서-내 앵커, 재확인만). 고아 페이지 재계산 결과 정책적 2건 동일 유지
+  ([[2026-07-16-needtovent-io-서비스-추측]]·[[2026-08-03-민방위-연차소진-질문]], 둘 다 index.md 인바운드만
+  보유 — 기존 lint 관행대로 결함 아님). frontmatter `tags`/`created`/`updated` 3필드 186개 파일 전수 완비
+  확인(09-14 lint가 수정한 28건 포함 결측 0).
+- **발견·수정 — log.md 본문 결측 3건**: `git log --follow`로 각 wiki 세션 파일의 도입 커밋을 역추적한 결과,
+  세 커밋(`2224c8c` 2026-07-19·`37f184f`/`bb0ac09` 2026-09-08)이 실제로는 세션·엔티티·토픽·스킬 페이지와
+  index.md까지 정상 반영했고 log.md에도 헤더 줄 자체는 추가했으나, **본문 bullet 없이 헤더 한 줄만
+  남기고 끝난 상태**였음(`## [2026-07-19] ingest | 하네스 재시작...`·`## [2026-09-08] ingest | 웹 배포
+  확인...`·`## [2026-09-08] ingest | 덧셈 질문(Codex)...` 3건). 텍스트 검색이 로마자 파일명이 아닌 한글
+  헤더로만 매치되는 탓에 09-14 lint의 "09-08 ingest 2건 통합 확인" 판정도 페이지 존재만 확인했을 뿐 이
+  본문 결측은 놓친 것으로 보임. 각 커밋 diff와 대응 wiki 세션 페이지 본문을 근거로 소스 해시 파일명
+  (`8028c121-...`·`0eb660b3-...`·`13d781ec-...`)·세션 요약·엔티티/토픽/스킬 갱신 내역을 원 커밋 시점
+  기준으로 소급 작성해 채움(각 항목 말미에 소급 복구 사실 각주).
+- **반복개념 재검토**: 새 소스 없어 09-07/09-14 lint의 판단(bokziri/goraesa/arca8/ai-labs-notes·Ryan
+  Lee/Keira Zhang·인프라 범용어 모두 신규 페이지 기준 미충족) 유지, 재조사 불필요.
+- **AI_CONTEXT.md**: 36줄(<40 준수), `updated: 2026-08-31` 유지 — 이번 lint는 log.md 감사 기록만 보강했고
+  핵심 사실 변경 없어 재증류 불필요.
+- 결과: 깨진 링크 0·고아 0(정책적 2 유지)·index 완전 일치·frontmatter 결측 0·**log.md 본문 결측 3건 소급
+  복구**·신규 모순 0·신규 반복개념 0.
