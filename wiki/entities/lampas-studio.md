@@ -228,11 +228,14 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 - **`lampas-api`의 `sports-wiki` 모듈** — 선수/구단 페이지에 이 세션에서 **"경기(game)" 엔티티**가
   추가됨(LLM 없이 결정적 저장 + 짧은 서사 요약만 LLM). 진단·설계·구현 전체 → [[lampas-agent]] ·
   [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · 패턴: [[deterministic-extraction-vs-llm-rewrite]]
-- **`lampas-web-copy`("Copy")** · **`lampas-web-reels`("Reels")** · **`lampas-web-status`**
-  (`status.lampas.io`, 2026-09-25 첫 배포) — 각각 카피 생성, 클립 편집/페르소나 선택, 시스템 상태 표시.
-  상세는 [[lampas-agent]] "관련 앱" 절 참고. 이 앱들은 위 `AGENTS.md` 목록(Lampas 9/Dalar 6/Talk 9/
-  Iileex 1)에 없어 두 소스(코드 스냅샷 vs 실제 세션 관찰)가 서로 다른 앱 부분집합만 비추고 있음을
-  시사 — `AGENTS.md`가 전체 앱을 다 열거하지 않거나, 클립 파이프라인이 별도 워크스페이스일 가능성 병기.
+- **`lampas-web-copy`("Copy")** · **`lampas-web-reels`("Reels")** · **[[lampas-web-status]]**
+  (`status.lampas.io`, 2026-09-25 status.claude.com 형태로 처음부터 구현·운영 배포 완료 —
+  컴포넌트 40개 60초 프로브·자동 인시던트·90일 업타임 바) — 각각 카피 생성, 클립 편집/페르소나 선택,
+  시스템 상태 표시. Copy·Reels 상세는 [[lampas-agent]] "관련 앱" 절, status 전체 구현·배포 절차는
+  [[lampas-web-status]] 엔티티 · [[2026-09-25-status-서비스-구축-배포]] 세션 참고. 이 앱들은 위
+  `AGENTS.md` 목록(Lampas 9/Dalar 6/Talk 9/Iileex 1)에 없어 두 소스(코드 스냅샷 vs 실제 세션 관찰)가
+  서로 다른 앱 부분집합만 비추고 있음을 시사 — `AGENTS.md`가 전체 앱을 다 열거하지 않거나, 클립
+  파이프라인이 별도 워크스페이스일 가능성 병기.
 - **배포 동시성 함정**: 같은 저장소를 두 세션이 몇 분 간격으로 배포하면 상대 세션의 미완료 중간 상태가
   빌드에 섞일 수 있음(Threads 탭 오노출 사례) → [[lampas-agent]] 참고.
 

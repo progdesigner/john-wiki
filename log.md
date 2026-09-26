@@ -1934,3 +1934,23 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   다루는 LLM tool 조회(방법 C, 여전히 미구현)를 혼동하지 않도록 구분 메모 추가.
 - `AI_CONTEXT.md` 갱신: john-wiki 항목에 apps/wiki 연결 사실 한 줄 추가(36줄, 40줄 이내 유지).
 - `index.md` Sessions·Entities(john-wiki·lampas-harness·lampas-agent 한 줄 갱신) 반영.
+
+## [2026-09-26] ingest | status 서비스 구축·운영 배포 (source: f2343edc-36c4-46ef-9e10-ceab0eccca71.md)
+- 원본 보관: `raw/conversations/2026-09-25-status-서비스-구축-배포.md`
+- 세션 신설: [[2026-09-25-status-서비스-구축-배포]] — "status.claude.com 처럼 만들어줘" 요청으로
+  `[[lampas-web-status]]`(status.lampas.io)를 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속
+  실패/정상 자동 인시던트 구조로 처음부터 구현하고, 같은 세션에서 운영 배포까지 완료.
+- 엔티티 신설: [[lampas-web-status]] (구조·API·배포 절차·신규 컴포넌트 등록 방법 전체 정리)
+- 스킬 신설: [[prod-ddl-before-deploy-with-drift-check]] — 운영 DDL 선적용→작업본 전체 드리프트
+  검사(무관해 보이는 다른 미커밋 기능의 스키마까지)→무관한 테스트 실패는 재현 확인 후 게이트 통과→
+  커밋 범위는 반영된 스키마만 분리하는 절차. 배포 중 드리프트 검사로 [[lampas-agent]]의
+  `sports_wiki_games` 테이블이 운영에 없던 사실을 함께 발견·DDL 적용한 사례가 근거.
+- 엔티티 갱신: [[lampas-studio]](스포츠 클립 파이프라인 절의 Status 앱 서술을 신규 엔티티 링크로
+  교체·상세화), [[lampas-agent]](관련 앱 절의 status 서술에 배포 완료·드리프트 발견 사실 추가)
+- `AI_CONTEXT.md` 갱신: lampas-studio 줄에 status.lampas.io 구현·배포 완료 사실 + 신설 스킬 링크
+  추가(36줄, 40줄 이내 유지).
+- `index.md` Sessions·Entities·Skills 반영(세션1·엔티티1·스킬1 추가).
+- 특이사항: 이 세션(대화 시작 2026-09-25 22:04 UTC)은 자정을 넘겨 종료됐을 가능성이 있으나, 세션
+  파일명·날짜 접두사는 시작 시각 기준 2026-09-25로 통일(기존 컨벤션과 동일). sports-wiki spec 9건
+  실패는 진짜 회귀가 아니라 동시 실행 중 생긴 일시적 실패였음을 단독 재실행으로 재현 확인 — 이 세션이
+  스스로 검증한 것이므로 위키도 "미검증"이 아닌 "재현 확인됨"으로 기록.
