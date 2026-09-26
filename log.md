@@ -2630,3 +2630,14 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/entities/lampas-harness.md 갱신 — 09-14 "8443 추가" 절 앞에 하루 전 이 세션이 하네스 Funnel을 lampas-agent-clips의 임시 우회 경로로 빌려줬다가 원복한 전례를 교차링크로 명시(같은 포트 번호·같은 노드가 다른 시점에 다른 목적으로 반복 등장해 혼동 방지)
 - index.md 갱신 (세션 1건 신설, 스킬 1건 신설)
 - AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태이고, 이 세션의 핵심 사실(주소 확정 경위)은 엔티티·스킬 페이지로 충분히 커버됨
+
+## [2026-09-26] ingest | 돌잔치 AI 기능 보완 — 장면 12구조화·TTS 빌드/제거·admin 3탭 개편 (source: b6bd0ef2-c436-4526-8c9a-bc6590a19ee5.md)
+- raw/conversations/2026-09-14-돌잔치-ai-기능-보완-장면구조화-tts빌드제거-어드민개편.md 보관 (원본 세션 2026-09-14T09:15:30Z 시작, `Tool: claude`, `logs/terminals/archive/b6bd0ef2-...md`에서 회수, 내용상 09-20 이전 며칠에 걸친 장기 세션으로 추정, 뒤늦게 ingest)
+- wiki/sessions/2026-09-14-돌잔치-ai-기능-보완-장면구조화-tts빌드제거-어드민개편.md 신설 — 23단계 시간순 요약: 장면 수 6→12 구조적 확장(개요+씬별 독립 LLM 호출), 결제 딥링크, 아스펙트비율 9:16+Seedance 2.5 전환 중 텍스트/파라미터 불일치 버그 발견·수정, admin.first.dalar.ai 서브도메인(IAM 권한 이슈), 50,000크레딧 정액과 벤더비용 완전분리 확인, TTS 나레이션 파이프라인 빌드 후 lampas-web-scenario와 동시 전면 제거, 대표 음성 도입·제거, 레퍼런스 일관성 강화, 원가 절감(480p)+AtlasCloud 잔액부족 실사고, 배경 사진기반 재구성, 대본 재배분+30초 상한, admin 3탭(users/orders/cs) 개편+1회차 이후 수동 편집 모드, 회차별 제작시간+이전영상 보관, CloudFront 캐시 버그
+- wiki/entities/dalar-web-first.md 대폭 갱신 — 기존 "원래 형태 → 09-20 세션 이전"(약 1주일 공백 구간) 플레이스홀더를 이 세션의 실제 상세로 채움: 신규 절 11개(장면수 구조화·아스펙트비율버그·admin서브도메인·과금구조확인·TTS빌드제거·원가절감/잔액사고·배경수정·대본재배분/30초상한·admin3탭개편·회차시간/영상보관/CDN버그), "여성 인터뷰어 음성 버그" 절에 TTS 제거 전제 명시 주석 추가, 관련 절 링크 확장
+- wiki/entities/lampas-web-scenario.md 갱신 — "보이스/TTS 기능 전면 제거" 절 신설(2026-09-14 이후, dalar-web-first 작업 중 파생), 09-13 세션이 추가한 오디오구동 아바타 모델 4종도 이번에 함께 제거됐음을 명시(모순 아님, 후속 제거로 정리)
+- wiki/skills/llm-per-item-generation-budget.md 신설 — 배치 LLM 생성에서 뒤 항목일수록 토큰예산이 줄어드는 문제를 개요+항목별 독립호출로 구조적 해결하는 절차 (이 세션 원 사례)
+- wiki/skills/cdn-versioned-key-per-render.md 신설 — 같은 S3 키를 재렌더마다 덮어써 CloudFront가 옛 버전을 계속 서빙하는 문제를 렌더마다 새 키 발급으로 해결하는 절차 (이 세션 원 사례)
+- wiki/skills/resumable-worker-checkpoint-resume.md 갱신 — "중간 지점 — 자동 재시도 도입(2026-09-14)" 절 추가, 09-20 세션이 발견한 "재시도 카운터 초기화 여지"가 가리키는 카운터가 바로 이 세션에서 도입된 것임을 시간순으로 정리
+- index.md 갱신 (세션 1건 신설, 엔티티 2건(dalar-web-first·lampas-web-scenario) 갱신, 스킬 2건 신설)
+- AI_CONTEXT.md 갱신 보류 — 이미 40줄 한도에 근접해 있고, 이 세션의 핵심 사실(고정 12장면 중간 상태·TTS 빌드/제거)은 이미 최신 상태(4·6·8·12장면 선택, 배포완료)로 대체된 과거 이력이라 엔티티·세션 페이지로 충분히 커버됨
