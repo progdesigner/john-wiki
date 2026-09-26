@@ -1996,3 +1996,23 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: 이 세션과 [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]은 같은 날 같은
   재시작 대기 상태를 공유 — 두 세션이 만든 기능(브라우징 세션 + apps/wiki)이 같은 재시작 한 번으로
   함께 반영될 예정이었음. 재시작 이후 실제 반영 여부는 이 세션 소스에 없어 **다음 ingest에서 확인 필요**.
+
+## [2026-09-26] ingest | virtual.toktalk.ai: Tavus 사진 아바타 실시간 영상통화 구축 (source: 24600966-b31b-4121-84e6-2c31e6c57301.md)
+- 원본 보관: `raw/conversations/2026-09-26-virtual-toktalk-tavus-아바타-구축.md`
+- 세션 신설: [[2026-09-26-virtual-toktalk-tavus-아바타-구축]] — `[[toktalk]]` 신규 서브앱 `virtual.toktalk.ai`
+  구축 전 과정. 오픈소스(GPU 자가호스팅) 리서치 → API 경로 선회 → `[[tavus]]` 채택 → 당일 구축·배포,
+  캐릭터 "하루"→"한소연" 교체, 학습상태 감지 버그 수정, 하루 통화한도·통화시간·워터마크 3건 원인
+  진단(자체 설정 vs Tavus 제약), 메모리·웹검색 등 Tavus 기능 확장까지 포함.
+- 엔티티 신설: [[tavus]] — CVI·Phoenix-4/4.5·Raven·메모리 등 컴포넌트, 확인된 제약(사진 아바타 결제
+  게이트 402, 통화 최대시간 요금제 자동 축소), HeyGen LiveAvatar 비교.
+- 엔티티 갱신: [[toktalk]] — 2026-09-25 세션이 추측했던 `talk-web-virtual`/`talk-api-virtual`이 이
+  세션으로 실사 구축·배포 확정됐음을 반영, `[[tavus]]`·관련 세션·스킬 크로스링크 추가.
+- 토픽 신설: [[realtime-photo-avatar-voice-ai-landscape]] — 사진 아바타+음성 대화 AI 오픈소스·API
+  비교 조사 결과(OpenAvatarChat·SoulX-FlashHead·MiniCPM-o·Qwen3-Omni·Qwen3-TTS·LiveTalking·MuseTalk
+  vs Tavus·HeyGen LiveAvatar).
+- 스킬 신설: [[self-imposed-vs-provider-limit-diagnosis]] — 외부 API 연동 서비스에서 자체 설정 제한과
+  외부 제공자 실제 제약을 분리 진단하는 절차(이 세션에서 3회 반복 관찰).
+- `AI_CONTEXT.md` 갱신: toktalk 줄에 virtual.toktalk.ai 구축 완료·Tavus·자체 설정 유의사항 추가
+  (39줄, 40줄 이내 유지).
+- `index.md` Sessions·Entities·Topics·Skills 반영(세션1 신설·엔티티1 신설·엔티티1 갱신·토픽1 신설·
+  스킬1 신설).

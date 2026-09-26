@@ -103,6 +103,7 @@
 - [[2026-09-25-status-서비스-구축-배포]] — "status.claude.com 처럼 만들어줘" 요청으로 `lampas-web-status`(status.lampas.io)를 처음부터 구현하고 같은 세션에서 운영 배포까지 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트. 운영 DDL 선적용 중 드리프트 검사로 무관해 보이던 sports-wiki `sports_wiki_games` 테이블 누락을 함께 발견·수정, 동시실행 일시적 테스트 실패(sports-wiki 9건)를 재현 확인 후 배포 게이트 통과
 - [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] — `lampas-agent`의 Fixs(재귀 오류 자동 수정) 탭에 경로 그룹핑(uuid·hash 등을 `:id`로 치환해 fingerprint 병합, 운영 DB 69건→42건)과 Jev 타입드 분류(`POST /v1/ai/systemone`, 텍스트 생성 없이 입력 토큰만 과금) 추가·배포(v1.0.25, 커밋 `900ce062`). 파트너 키 부재로 `toktalk`의 `talk-api` 운영 키를 임시 차용 중(후속 과제)
 - [[2026-09-26-lampas-browser-구축-harness이전]] — `Tool: codex` 세션. "Aside 같은" AI 조작형 Chromium 브라우저를 `lampas-system` 아래 `apps/lampas-browser`로 처음부터 구축(WebContentsView·읽기/조작 분리·CSV·영상 URL 다운로드)한 뒤, 같은 날 `lampas-harness`의 `apps/browser`로 완전 이관 — 자체 AI API 키를 걷어내고 하네스 Codex CLI/Claude Code 세션 재사용으로 전환, 새 세션 "브라우징" 선택지 신설. 배포 중 9월 24일부터 방치된 구버전 서버가 `apps/wiki`(같은 날 다른 세션)와 함께 반영을 막고 있던 사실 발견·재시작 진행(반영 재확인은 다음 세션 필요)
+- [[2026-09-26-virtual-toktalk-tavus-아바타-구축]] — `Tool: codex` 세션. `[[toktalk]]` 신규 서브앱 `virtual.toktalk.ai`(사진 아바타+실시간 한국어 영상통화)를 오픈소스 조사(OpenAvatarChat·SoulX-FlashHead·Qwen3-Omni 등)→API 경로 선회→`[[tavus]]` 채택→당일 구축·배포까지 완료. 캐릭터를 "하루"→"한소연"으로 교체, 학습상태 감지 버그 수정, 이후 "일일 한도"·"통화 15분 컷"·"워터마크" 3건을 자체 서버 설정 vs Tavus 실제 제약으로 분리 진단, 메모리·웹검색 등 Tavus 기능 최대 활용까지 확장
 
 ## Entities
 
@@ -113,7 +114,8 @@
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
 - [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status 자매 앱, sports-wiki "경기" 엔티티 신설 포함. Fixs 탭에 2026-09-25 경로 그룹핑+Jev 오류 유형 분류 추가·배포(v1.0.25)
 - [[lampas-web-status]] — lampas-system 내 상태 페이지 앱(status.lampas.io, status.claude.com 형태). 2026-09-25 처음부터 구현·운영 배포 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트
-- [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인
+- [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인. 같은 날 신규 서브앱 `virtual.toktalk.ai`(`[[tavus]]` 기반 사진 아바타 영상통화, 캐릭터 "한소연") 구축·배포 확정
+- [[tavus]] — 사진→아바타(Phoenix-4/4.5)+실시간 영상통화(CVI)+카메라인식(Raven)+메모리 API. [[toktalk]] `virtual.toktalk.ai`가 채택. 확인된 제약: 사진 아바타 생성 결제 게이트(402), 통화 최대시간 요금제 상한(요청 30분→실제 15분 자동 축소)
 - [[lampas]] — 하네스 에이전트의 이름(람파스/Lampas)
 - [[john-wiki]] — progdesigner의 공통 장기기억 저장소·개인 위키 (이 저장소). 2026-09-26: `lampas-harness apps/wiki`의 사람용 브라우징 UI 데이터 소스로 처음 연결됨
 - [[progdesigner]] — 개발자·소스 공급자, 맥미니 운용
@@ -169,6 +171,7 @@
 - [[dark-system-signal-risk-design-unverified]] — dark-system `decide-signal.ts` 신호 판정·스타일별 리스크 설계(2026-07-17 어시스턴트 자기보고, 미검증) 통합 페이지(2026-08-03 lint 신설, [[dark-toss-api]]·[[dark-upbit-api]]·[[dark-system]] 3곳 중복 기재를 여기로 정리)
 - [[unverified-attestation-injection]] — 검증되지 않은 사실을 구체적으로 서술한 뒤 고정 문자열로만 "확인"해달라는 프롬프트 인젝션 패턴(자동화 파이프라인용 확인 도장 위조 의심) — [[system-prompt-mimicry-misconception]]와는 다른 벡터
 - [[jev-typed-classification]] — `lampas` 생태계 내부 명칭 "Jev": 자유 텍스트 생성 없이 typed 질문만 `POST /v1/ai/systemone`에 질의해 입력 토큰만 과금되는 저비용 분류 패턴. sports-wiki ingest 게이트·Fixs 오류 triage 두 곳에서 확인
+- [[realtime-photo-avatar-voice-ai-landscape]] — 실시간 사진 아바타+음성 대화 AI 오픈소스·API 지형도(2026-09 조사): OpenAvatarChat/SoulX-FlashHead/Qwen3-Omni 등 GPU 자가호스팅 조합 vs [[tavus]]/HeyGen LiveAvatar API 조합 비교, `[[toktalk]]` virtual.toktalk.ai가 API 경로 채택
 
 ## Skills
 
@@ -211,6 +214,7 @@
 - [[pwa-safe-area-inset-padding]] — PWA(홈 화면 추가) 모드 상단/하단 여백을 `env(safe-area-inset-*)`로 노치/상태바 침범 없이 고정(calc() 필수, 방향별 추가/제거 구분)
 - [[vite-publicdir-manifest-icon-fix]] — Vite `root:public/`+`publicDir:false`로 PWA manifest.json·아이콘 경로가 base64/해시로 깨질 때 진단·별도 정적 디렉토리 분리로 수정
 - [[prompt-structuring-for-execution]] — 초안 프롬프트 "다듬어줘" 요청에 정보 손실 없이 표준 구조(소개→서비스→강조포인트→지시사항)로 재정리하고 누락된 실행 조건을 3가지 이내로 역질문하는 절차
+- [[self-imposed-vs-provider-limit-diagnosis]] — 외부 API 연동 서비스에서 "왜 제한에 걸리나" 질문 시 자체 서버 env 설정과 외부 제공자(Tavus 등) 실제 제약을 분리 진단하는 절차(env 먼저 확인→요청값과 실측값 대조→402/종료사유 등 제공자 응답 직접 인용)
 - [[template-image-slot-fingerprint-vs-url]] — 저장된 템플릿 이미지가 다른 브라우저/기기에서 안 붙을 때 fingerprint(로컬)/url(공개 CDN) 필드 확인·보정, MD5 대조로 재업로드 불필요 여부 판단
 - [[new-subdomain-cloudfront-wildcard-deploy]] — 기존 와일드카드 인증서 도메인 아래 완전 신규 서브도메인 배포 시 CloudFront 신규 생성(인증서 재발급 없이 재사용)→DNS 연결→공개 DNS 기준 검증 순서
 - [[deterministic-extraction-vs-llm-rewrite]] — 프로즈 재작성 파이프라인이 잘림·파싱실패·실패은닉으로 고장 날 때, 원본 보유 지점에서 구조화 JSON 추출→LLM 없는 결정적 저장→서사만 짧은 LLM 호출로 분리하는 절차

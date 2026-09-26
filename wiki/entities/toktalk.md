@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, toktalk, nestjs, react, monorepo, ai-chat]
+tags: [entity, project, product, toktalk, nestjs, react, monorepo, ai-chat, avatar]
 created: 2026-07-09
 updated: 2026-09-26
 ---
@@ -62,6 +62,11 @@ updated: 2026-09-26
   대화) · `talk-api-virtual`(포트 3247, Tavus 영상 대화 전용 독립 Node 서버) — 이 페이지의 기존 7앱
   목록에 없던 기능. 관련 문서·스크립트·디자인은 `docs/talk/`·`scripts/talk/`·`design/talk/`에,
   배포 미러·CLI 도구는 `deploy/talk/`·`tools/talk/`(비추적)에 위치한다고 명시.
+  **✅ 2026-09-26 확정**: 이 추측이 그대로 실사 구축·배포로 확인됨 → `[[2026-09-26-virtual-toktalk-tavus-아바타-구축]]`.
+  `[[tavus]]` CVI(사진→아바타 Phoenix-4/4.5 + 실시간 한국어 영상통화 + 카메라 인식 Raven + 메모리)
+  기반. 기본 캐릭터는 "하루"에서 "한소연"으로 교체(정면·배경제거 편집), 시작 화면은 한소연 단일
+  선택으로 축소. 계정당/사이트 전체 일일 통화 횟수, 최대 통화 시간(요금제 상한 15분)은 **Tavus가
+  아니라 이 서비스 자체 서버 env**로 제한 → `[[self-imposed-vs-provider-limit-diagnosis]]`.
 - **개명 추정**: 기존 `apps/toss-mina`·`apps/toss-brainrot`이 `talk-app-toss-samantha`·
   `talk-app-toss-brainrot`으로 이름이 바뀐 것으로 보임(포트 8245/8246 동일 유지) — 확정은 아님.
 - Prisma는 `pnpm prisma:generate:talk` 등 `:talk` 접미 스크립트를 쓴다고 명시 — 별도 스키마 유지
@@ -75,8 +80,9 @@ updated: 2026-09-26
 
 ## 관련
 - 세션: [[2026-07-08-toktalk-에피소드-배경전환-플레이]] · [[2026-07-16-tts-stream-elevenlabs-구현착수]](참고 예시로 지목, 접근 실패) ·
-  [[2026-09-25-lampas-web-fit-구축-배포]](저장소 편입 모순 발견)
-- 토픽: [[episode-beat-play-system]] / 스킬: [[loading-state-key-mismatch]]
+  [[2026-09-25-lampas-web-fit-구축-배포]](저장소 편입 모순 발견) · [[2026-09-26-virtual-toktalk-tavus-아바타-구축]](virtual.toktalk.ai 구축)
+- 토픽: [[episode-beat-play-system]] · [[realtime-photo-avatar-voice-ai-landscape]] / 스킬: [[loading-state-key-mismatch]] · [[self-imposed-vs-provider-limit-diagnosis]]
+- 외부 AI 프로바이더(virtual): [[tavus]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]] · 공급자: [[progdesigner]]
 - 자매 제품(2026-07 기준 별개 코드베이스로 기록, 2026-09-26 `lampas-system` 편입 정황과 모순 —
   위 절 참고): [[lampas-studio]]
