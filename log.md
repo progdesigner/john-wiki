@@ -2176,3 +2176,31 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   요약 삽입(기존 물리 라인 재사용, 39줄 유지·40줄 이내).
 - `index.md` Sessions 1신설·Entities(lampas-agent·lampas-studio 갱신)·Topics(self-healing-error-
   pipeline-design 신설) 반영.
+
+## [2026-09-26] ingest | First(dalar-web-first) 장면선택·가격체계·서버워커복구·가상인물샘플·초대코드쿠폰 (source: a7429896-4558-4ff0-861b-4921a54ff0af.md)
+- 원본을 `raw/conversations/2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드.md`로 보관.
+- 세션 요약 신설: [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] — `Tool: codex` 세션
+  (2026-09-20~24, 4일). `[[dalar]]` 제품 라인의 실사용 소비자 앱 `[[dalar-web-first]]`("First" AI
+  돌잔치 인터뷰 영상, `first.dalar.ai`)를 이 위키에 처음 상세 노출. 16단계로 진행: 고정 12장면→
+  4·6·8·12장면 선택+관리자 대본 편집, 가격체계 3단계 재조정(제작비→VAT포함→정수화), "닫아도
+  계속된다" 안내와 실제 불일치를 서버 워커 체크포인트 재개로 근본수정, Jev를 재시도/대기/관리자확인
+  판단에 도입, 장면 간 톤 드리프트를 기준장면+직전장면 레퍼런스 고정으로 해결, 한국인 가상 아기
+  4명으로 샘플 영상 4편 제작(여성 인터뷰어 음성 버그 발견·수정 포함), First Collection 커버플로우
+  복원+샘플 UX 반복 수정, OG 공유 메타·이미지, 초대코드 상호 50% 쿠폰 시스템, Pay 페이지를 크레딧
+  전용/First 전용으로 분리.
+- 엔티티 신설: [[dalar-web-first]] — 이 세션 전체를 기준으로 한 상세 엔티티 페이지(장면·가격·서버
+  워커·톤 일관성·가상 샘플·음성버그·초대코드·Package 연동·Pay 분리·데이터보존 규율 절 구성).
+- 엔티티 갱신: [[dalar]] — "2026-09-26 최초 노출(스텁)" 기록에 시점 정정 추가: 실제로는 6일 앞선
+  이 세션에서 실사용 소비자 제품(`dalar-web-first`)이 이미 대규모로 개발·배포됐음이 뒤늦게
+  ingest됨. 앱 목록 6→7개로 갱신. 이 세션 `AGENTS.md`(2026-09-20)에 Dalar 앱이 전혀 없어 하루 뒤
+  [[2026-09-21-lampas-agent-fixs-신설]] 세션의 `AGENTS.md`(Dalar 6앱 포함)와 모순되는 정황 기록.
+- 토픽 갱신: [[jev-typed-classification]] — sports-wiki ingest 게이트·Fixs 오류 triage에 이은
+  **세 번째 사용처**로 `dalar-web-first` 제작 워커의 재시도/대기/관리자확인 판단 추가.
+- 스킬 신설: [[resumable-worker-checkpoint-resume]](서버 워커 진행정보 덮어쓰기·재시도 초기화
+  문제를 저장된 완료 단계 기준 순차 재개로 수정) · [[scene-reference-lock-visual-consistency]]
+  (순차 이미지 생성 톤 드리프트를 기준장면+직전장면 레퍼런스 고정으로 방지) ·
+  [[mutual-referral-coupon-pattern]](양방향 초대 쿠폰 발급·어뷰징 방지·기간/상품 제약 절차).
+- `AI_CONTEXT.md` 갱신: 진행 중 프로젝트 절에 [[dalar]]/[[dalar-web-first]] 확정 사실 반영(40줄
+  이내 유지).
+- `index.md` Sessions 1신설·Entities([[dalar]] 갱신·[[dalar-web-first]] 신설)·Topics
+  ([[jev-typed-classification]] 갱신)·Skills(3개 신설) 반영.
