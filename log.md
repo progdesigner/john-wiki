@@ -2316,3 +2316,22 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   소비처 2번째로 Package 추가).
 - 스킬 신설: [[persona-prompt-default-override-audit]] — 페르소나/설정 무시 버그 진단 절차.
 - `AI_CONTEXT.md`는 39/40줄 예산 소진 상태라 변경하지 않음(직전 09-26 lint 세션과 동일 판단).
+
+## [2026-09-26] ingest | lampas-agent: Clips 재생목록 다중선택, Pulse 로그인기반 수집, 훅점수 상대순위 (source: b6c770e3-2dae-4d12-87f9-8f88e7780b58.md)
+- `Tool: claude` 세션(2026-09-19 시작, 뒤늦게 ingest — 위키에 확인된 [[lampas-agent]] 관련 세션 중
+  가장 이른 날짜). Clips에 유튜브 재생목록 다중선택 임포트 최초 구현. Pulse 스케줄 수집이
+  pulse.lampas.io에서 안 보이는 문제를 4라운드에 걸쳐 진단: 결과조회 401 오판정→로컬/운영 토글
+  제거·운영 고정→미션 소유자를 env 폴백 대신 Google 로그인 계정으로 전환→재발 원인이 "배포 직후
+  열린 옛 탭(옛 번들)+데몬의 조용한 env 폴백" 조합임을 규명해 계정 없는 요청 명시적 거부로 근본
+  수정(+SPA 자동 새로고침). 훅 점수가 실행마다 흔들리고 단독 재채점 시 낮아지는 문제를 temperature
+  미지정·앵커 부재·필드순서·배치 대비효과로 진단 → 절대 점수를 버리고 텍스트 기반 상대 순위
+  (`rank-hooks`, 40개씩 조각비교+백분위)로 전환·배포. 위키(sports-wiki) JSON 파싱 실패도 응답 토큰
+  상한 4000→16000으로 함께 수정.
+- 세션 신설: [[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]].
+- 엔티티 갱신: [[lampas-agent]] — 최초 노출 시점 정정(09-20→09-19) + Clips 재생목록·Pulse 로그인
+  전환·훅 상대순위 3개 절 신설.
+- 스킬 신설: [[llm-relative-ranking-vs-absolute-scoring]] — LLM 절대점수 재현성 문제를 상대순위로
+  전환하는 절차. [[stale-tab-silent-fallback-vs-explicit-reject]] — 배포 직후 옛 탭+조용한 폴백
+  조합 진단 절차.
+- `AI_CONTEXT.md`는 39/40줄 예산 소진 상태라 변경하지 않음(이 세션의 핵심 사실은 이후 세션들의
+  기록에 이미 흡수돼 있어 현재 상태 이해에 영향 없음).

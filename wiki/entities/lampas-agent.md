@@ -18,6 +18,10 @@ updated: 2026-09-26
 ## 관찰된 구조
 - **탭 UI**: Clips · Pulse · Threads · Fixs (2026-09-25 세션 시점, 버전 1.0.28). Threads는 다른 세션이
   같은 날 밤 작업 중이던 기능으로 한때 실수로 함께 빌드됐다가 제거됨(아래 "배포 동시성 함정" 참고).
+  **2026-09-26 뒤늦게 ingest — 위키 최초 노출 시점 정정**: 이전엔 최초 노출을 2026-09-20
+  [[2026-09-20-lampas-flow-만들기]]로 기록했으나, 실제로는 하루 앞선 **2026-09-19** 세션에
+  [[lampas-agent]]가 Clips·Pulse 탭과 함께 이미 등장한다 → 아래 "Clips — 유튜브 재생목록 다중선택"·
+  "Pulse — 스케줄 수집 소유자 계정" 절 참고.
 - **파이프라인**: 라벨링(비전 모델 호출) → (이 세션 이전) 위키 ingest 텍스트 생성·전송 →
   (이 세션 이후) 같은 라벨링 배치에서 경기(game) 구조화 JSON도 함께 추출 → 업로드 뒤 소스 id와 함께
   `lampas-api`의 `sports-wiki` 모듈에 반영.
@@ -62,6 +66,41 @@ updated: 2026-09-26
   [[execution-run-scoped-status-vs-stale-notification]]
 - 버전 이력: 1.0.16(2026-09-20 전사 지연 개선 배포)→…→1.0.27(2026-09-25 07:40 배포, 경기 엔티티
   반영)→1.0.28(같은 날 07:5x경, Threads 탭 제거).
+
+## Clips — 유튜브 재생목록 다중선택 임포트 (2026-09-19 최초 구현)
+유튜브 재생목록 URL을 붙여넣으면 영상 목록이 체크박스로 뜨고, 선택한 영상들이 재생목록 순서대로
+각각 별도 작업으로 큐에 들어간다(운영 뱅크 확인 대화상자는 배치 전체에 한 번만). 재생목록만 가리키는
+URL은 상단 「가져오기」 버튼이 비활성화되지만 `watch?v=…&list=…`처럼 영상 id가 함께 있으면 단일
+가져오기는 그대로 동작. 첫 배포 후 "재생목록을 추가하는 화면이 없는데?" 피드백을 받아 입력창
+플레이스홀더와 안내 문구를 추가하는 재배포가 한 번 더 있었음 — 기능은 있었지만 진입점 안내가
+없어서 안 보인 사례. 상세 → [[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]].
+
+## Pulse — 스케줄 수집 소유자 계정 로그인 전환 (2026-09-19, 4라운드)
+스케줄 수집 결과가 pulse.lampas.io에서 안 보인다는 제보가 반복돼 네 번에 걸쳐 원인이 좁혀졌다:
+① 결과 카드 조회(`listSelections`)가 로그인 전용 401로 막혀 저장은 성공했는데도 런 전체가 FAILED로
+찍힘 → ingest 토큰 조회 경로 추가 + 결과 조회 실패는 런 실패로 안 침. ② 스케줄·진행 패널의 로컬/운영
+토글 제거, "저장 운영"으로 고정. ③ 미션 소유자가 로그인 계정이 아니라 env `PULSE_OWNER_EMAIL` 폴백
+고정값이었던 근본 구조 확인·수정(Google 로그인 계정을 소유자로 전송, 로그인 전 버튼 잠금). ④ 그래도
+재발 — 배포 직후 **열려 있던 옛 탭이 배포 전 번들로 계정 없이 요청**했고 데몬이 조용히 env로 폴백한
+조합이 원인이었음이 드러나 데몬이 계정 없는 요청을 명시적으로 거부하도록 근본 수정 + SPA 버전 불일치
+시 자동 새로고침 추가(에이전트 1.0.11). 이 "옛 탭+조용한 폴백" 진단 절차는 일반화해 별도 스킬로
+추출 → [[stale-tab-silent-fallback-vs-explicit-reject]]. env 이메일 폴백은 이후 CLI 전용으로만 남음.
+상세 → [[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]] (아래 09-21 항목보다
+시점상 앞선 최초 로그인 세션 단위 전환).
+
+## 훅 점수 — 절대 점수에서 상대 순위로 전환 (2026-09-19)
+"종합적으로 후킹한 영상을 찾는다"는 목표에서 비전 라벨링이 매 실행마다 다른 훅 점수(0~100)를 내고
+단독 재채점 시 낮게 나오는 문제를 진단·해결. 원인은 temperature 미지정, 점수 기준선(anchor) 부재,
+점수를 이유보다 먼저 쓰는 JSON 순서, 배치 내 상대 비교로 인한 대비 효과(단독 채점 시 비교 대상이
+없어 저평가) 등 다섯 가지였다. 목적이 절대값이 아니라 순위이므로, 1단계(에이전트 1.0.12)에서 비전
+라벨 프롬프트의 훅·4축 점수를 제거하고 temperature 0으로 고정, 2단계(API 0.1.108)에서 새 엔드포인트
+`POST /v1/clip-intelligence/rank-hooks`가 설명·발화·전사 **텍스트만으로**(이미지 0장) 클립을 40개씩
+조각 비교→상위군 재비교해 소스 내 백분위를 `Clip.hookScore`에 되쓰도록 구현·배포. 클립 100개 기준
+호출 3~5회·1분 안에 완료. 뱅크의 4축 미니 바는 이후 라벨링이 아니라 reels의 AI 선별(`analyze`)이
+채움. 이 "상대 순위 vs 절대 점수" 진단·전환 절차는 일반화해 스킬로 추출 →
+[[llm-relative-ranking-vs-absolute-scoring]]. 이미 올라간 소스의 순위 재계산은 세션 종료 시점까지
+web-clips에 버튼이 없어 소스 id로 직접 호출해야 하는 상태로 남음. 상세 →
+[[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]].
 
 ## 스포츠 위키 — "경기(game)" 엔티티 (2026-09-25 설계·구현)
 `lampas-api`의 `sports-wiki` 모듈은 원래 `player | team` 두 페이지 타입뿐이라 "어떤 선수가 어떤 경기에서
@@ -168,7 +207,8 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
 ## 관련
 - 상위 제품: [[lampas-studio]] (같은 저장소 `lampas-system`)
 - 이름 충돌 대상(별개): [[lampas]] · [[lampas-harness]]
-- 세션: [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
+- 세션: [[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]](가장 이른 노출) ·
+  [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
   [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] ·
   [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] · [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
@@ -177,7 +217,8 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
 - 스킬: [[deterministic-extraction-vs-llm-rewrite]] · [[full-stack-feature-removal-audit]] ·
   [[error-fingerprint-path-grouping]] · [[tailscale-funnel-large-payload-bypass]] ·
   [[cross-subdomain-session-handoff]] · [[execution-run-scoped-status-vs-stale-notification]] ·
-  [[accept-then-poll-for-slow-ai-jobs]]
+  [[accept-then-poll-for-slow-ai-jobs]] · [[llm-relative-ranking-vs-absolute-scoring]] ·
+  [[stale-tab-silent-fallback-vs-explicit-reject]]
 - 토픽: [[jev-typed-classification]] · [[self-healing-error-pipeline-design]]
 - 외부 AI 프로바이더: [[gemini]](비전 라벨링, `gemini-3.5-flash` 언급)
 - 연관 저장소: [[john-wiki]] (Threads 데이터 소스로 잠깐 연결됐다가 기능 취소로 분리) · [[toktalk]]
