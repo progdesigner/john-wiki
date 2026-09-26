@@ -2535,3 +2535,17 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/skills/template-image-slot-fingerprint-vs-url.md 갱신 — 폴백 3단계("원본 자동 백업") 인프라의 실제 출처가 09-13 세션임을 교차 정정
 - index.md 갱신 (세션 1건 신설, 엔티티 2건 갱신, 스킬 2건 신설+1건 갱신)
 - AI_CONTEXT.md 갱신 — lampas-web-edit 서술에 실제 최초 관찰 시점(09-13) 정정 한 문장 추가(줄 수 불변, 기존 줄에 이어붙임)
+
+## [2026-09-26] ingest | Copy 페르소나·Clips 분야/카테고리·스포츠 위키·deploy-agent.sh 최초 구축 (source: 0298a056-61cb-45eb-bf5b-7241e46ad4e3.md)
+- raw/conversations/2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축.md 보관 (원본 세션 2026-09-12T01:44Z 시작~09-13, 뒤늦게 ingest)
+- wiki/sessions/2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축.md 신설 — 16개 절, 위키에 확인된 lampas-studio/lampas-agent/lampas-web-copy/lampas-web-clips 관련 세션 중 가장 이른 시점(기존 09-18 기록보다 6일 앞섬)
+- wiki/entities/lampas-web-copy.md 갱신 — **시점 재정정**: 클립→페르소나(4개 자동제안)→카피 4단계 플로우 최초 구현 절 추가(이후 09-19 Pulse 이관으로 전면 대체됨을 교차 표기), ALB 504 최초 발현+킵얼라이브 수정, URL 상태 경쟁(race) 버그 발견·수정 기록
+- wiki/entities/lampas-web-clips.md 갱신 — **시점 재정정**: 분야(domain)/`ClipCategory`/`sports-wiki` 모듈/훅 블렌드 슬라이더/소스 분야이동/하드삭제→소프트삭제 전환의 실제 최초 구현이 이 세션임을 명시(기존 09-18 "5축 점수" 절보다 6일 앞섬)
+- wiki/entities/lampas-agent.md 갱신 — **최초 노출 시점 재재정정**: `lampas-agent-clips` 독립 앱 시절(09-18 병합 6일 전)의 wiki 스테이지·라벨링 504 근본원인 규명·YouTube 재생목록 단일선택+URL히스토리·`deploy-agent.sh` 원출처 절 추가
+- wiki/entities/lampas-web-reels.md 갱신 — 옛 SetBoard 위저드 UI 시절 "지워진 클립 복구"(따로 불러오기 버튼) 절 추가, 이후 09-18 UI 재편으로 대체됐을 가능성 미확인 주석
+- wiki/entities/lampas-web-edit.md 갱신 — `replaceClipMedia`("클립 교체") 구현·테스트 완료했으나 09-13 이미지트랙 세션과의 배포 게이트 충돌로 미배포 상태로 세션 종료된 절 추가(상호 교차 확인)
+- wiki/entities/lampas-studio.md 갱신 — 스포츠 클립 파이프라인 전체의 실제 기원이 이 세션임을 명시하는 교차 확인 문단 추가
+- wiki/skills/lb-idle-timeout-keepalive-streaming.md 신설 — AWS ALB 등 로드밸런서 유휴 타임아웃 진단(오진 함정 주의)→인프라 레이어 특정→킵얼라이브 스트리밍 우회+배치/동시성 축소 절차, 킵얼라이브가 숨은 URL 상태 경쟁 버그를 드러낼 수 있다는 함정까지 문서화
+- wiki/skills/macos-launchd-daemon.md 갱신 — `bootstrap` 직후 오류 5 재발 사례에 스크립트 자체 3회 재시도 루프 자동화 사례 추가
+- index.md 갱신 (세션 1건 신설, 엔티티 6건 갱신, 스킬 1건 신설+1건 갱신)
+- AI_CONTEXT.md 갱신 보류 — 이 세션의 핵심 사실(시점 재정정, 근본원인 규명)은 위키 엔티티 페이지에 이미 상세 반영됐고 lampas-studio 서술 대비 현재 상태를 바꾸는 내용이 아니라 상시 주입 가치가 낮다고 판단

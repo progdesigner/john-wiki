@@ -2,7 +2,7 @@
 name: macos-launchd-daemon
 description: macOS에서 서비스(백그라운드 데몬·GUI Electron 앱 포함)를 launchd로 등록하고 명령어로 재시작하는 절차
 created: 2026-07-07
-updated: 2026-07-13
+updated: 2026-09-26
 tags: [macos, launchd, daemon, devops, electron, gui]
 ---
 # macOS launchd 데몬화 + 제어 스크립트
@@ -40,6 +40,12 @@ macOS에서 pm2/tmux/nohup보다 정석(자동 시작·자동 재시작·부팅 
 - **bootout 직후 bootstrap하면 오류 5** — 재배포(plist 교체) 시 `bootout` 직후 곧바로 `bootstrap`하면
   `Bootstrap failed: 5: Input/output error`가 난다. **몇 초 대기 후 재시도**. (2026-07-11 `[[rapid-mlx]]`
   `--host` 인자 변경 재배포에서 겪음.)
+  - **재발 사례 + 자동화 수정** (2026-09-12, `apps/lampas-agent-clips/scripts/install-launchd.sh`,
+    맥미니 상시 서빙 에이전트 신규 배포 경로 `deploy-agent.sh` 구축 중): 수동 재시도로는 배포
+    스크립트를 돌릴 때마다 사람이 지켜봐야 하는 문제가 남는다 — `bootstrap` 호출을 **3회·1초 대기
+    루프로 감싸 스크립트 자체에 자동 재시도를 박아 넣는 것**으로 해결. 이후 같은 배포 스크립트를
+    재실행했을 때 재시도 루프가 실제로 한 번 자동 작동해 무인 복구를 검증했고, 다음 실행부터는
+    첫 시도에 바로 성공했다. → [[2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축]]
 
 ## GUI / Electron 앱을 launchd로 상주시킬 때 (2026-07-11 추가)
 백그라운드 데몬과 달리 **GUI 앱(Electron 등)은 추가 함정**이 있다:
@@ -53,4 +59,5 @@ macOS에서 pm2/tmux/nohup보다 정석(자동 시작·자동 재시작·부팅 
 - **상태 출력 스크립트 주의**: 재시작 스크립트가 GUI 앱 실행 여부를 `pgrep`으로 판별할 때 프로세스명/도메인이
   틀리면 "항상 중지됨"으로 오표시된다(2026-07-11 `restart-lampas.sh` 버그로 원복).
 
-## 출처: [[2026-07-06-lampas-harness-구축]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] ([[lampas-harness]])
+## 출처: [[2026-07-06-lampas-harness-구축]] · [[2026-07-11-desktop-퀵채팅-설치-스크립트]] · [[2026-07-13-람파스-누적운영기억-이관]] ([[lampas-harness]]) ·
+[[2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축]] ([[lampas-agent]]/`deploy-agent.sh`, 자동 재시도)

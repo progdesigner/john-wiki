@@ -84,6 +84,40 @@ fast-forward로 받는 과정에 **`lampas-agent-clips` + `lampas-agent-pulse`(�
 루프·접근 토큰 게이트는 이후 09-19·09-20 세션 요약에 언급이 없어 **존속 여부가 미확인** 상태다 —
 상세·구현 내용 전체 → [[2026-09-18-lampas-agent-omnara분석-durable-run구현]].
 
+## 최초 노출 시점 재재정정 — 2026-09-12, `lampas-agent-clips` 독립 앱 시절 (2026-09-26 뒤늦게 ingest)
+위 절이 확인한 병합(09-18) **6일 전**, `lampas-agent-clips`가 아직 독립 앱이던 시점의 세션
+([[2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축]])이 이 위키가 확인한 가장 이른
+지점이다. 이 세션이 `lampas-agent-clips`에 처음 구현한 것:
+- **분야/카테고리 인제스트**: `DomainCategoryPicker`(인제스트 전 일반/스포츠 선택), 스포츠 선택 시
+  라벨링 프롬프트에 [[lampas-web-clips]] "최초 구현" 절의 `sports-wiki` 기존 선수/구단 이름을
+  알려주고 `playerScore`/`momentScore`/`playerRefs`를 요구.
+- **`wiki` 파이프라인 스테이지 신설**(라벨링→업로드 사이): 스포츠 잡이면 `playerRefs`가 있는 클립을
+  모아 요약문을 만들어 `POST /v1/sports-wiki/ingest`를 자동 호출. `stage()` 헬퍼가 실패를 그대로
+  재throw하는 구조라 **위키 실패가 업로드를 막지 않도록** 내부에서 자체 에러를 삼키게 구현,
+  `IngestJobCheckpoint.wikiDone`으로 재시도 추적("다시 라벨링"은 초기화·"다시 업로드"는 보존).
+- **라벨링 504 근본 원인 규명·수정**(같은 근본 원인이 이 세션 안에서 두 번 발현): AWS ALB
+  (`elb-lampas-prod`) 기본 60초 유휴 타임아웃이 `AiService.chatCompletions()`의 "전부 끝난 뒤 한 번에
+  응답" 구조와 부딪혀 무거운 비전 라벨링 배치(8클립=이미지24장)가 정확히 60.05초에 504. 배치 크기
+  8→4(이미지 12장, 11.9초로 5배 여유 확인) + `LABEL_CONCURRENCY` 기본 6→1(순차 실행, 가정용 업로드
+  대역폭을 여러 요청이 나눠 쓰면서 개별 요청이 길어지는 문제까지 함께 해소)로 수정. 절차 일반화 →
+  [[lb-idle-timeout-keepalive-streaming]].
+- **YouTube 재생목록 다중선택 + URL 입력 히스토리**: `flatPlaylist`+`dumpSingleJson`(yt-dlp 빠른
+  메타데이터 모드) 기반 `GET /clips/sources/youtube/playlist` 신설, 사용자 실제 MLB 재생목록으로
+  엔드투엔드 검증. URL 입력창 포커스 시 최근 히스토리(localStorage, 최대 20개) 드롭다운 표시 —
+  이 localStorage 패턴(`domainCategory.ts` 컨벤션 재사용)이 이후 09-19 세션의 재생목록 **체크박스
+  다중선택 임포트**(재생목록 순서대로 각각 별도 작업 큐잉)로 확장됨 → 위 "Clips — 유튜브 재생목록
+  다중선택" 절 참고. 이 세션의 구현은 "고르면 URL 필드가 채워지는" 단일선택 피커였고, 다중선택
+  자체는 09-19가 최초.
+- **`deploy-agent.sh` 신설**: 맥미니 등 로컬 상시 서빙 에이전트 전용 4번째 배포 경로(SSH/rsync 없이
+  로컬에서 테스트→빌드→launchd 재기동). `install-launchd.sh`의 `bootstrap` 실패(오류 5)에 3회 재시도
+  루프를 자동화로 추가 → [[macos-launchd-daemon]].
+- **소스 분야 이동**: `POST /v1/clips/sources/:id/domain`로 클립 일괄 재분류(상세는
+  [[lampas-web-clips]]) — 에이전트 쪽은 다운로드만 로컬 고정 유지, 전사·라벨링·크레딧 조회는
+  `bankApi`(기본 운영)로 전환해 "맥미니에서도 운영 크레딧 사용" 요청에 대응.
+- 세션 전체 → [[2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축]] — 09-19 세션이
+  "2026-09-13에 배치 8개·병렬에서 ALB 60초 타임아웃이 나서 절반·순차로 낮춘 값"이라고 짧게 인용한
+  과거 결정의 원출처가 바로 이 세션이다.
+
 ## Clips — 유튜브 재생목록 다중선택 임포트 (2026-09-19 최초 구현)
 유튜브 재생목록 URL을 붙여넣으면 영상 목록이 체크박스로 뜨고, 선택한 영상들이 재생목록 순서대로
 각각 별도 작업으로 큐에 들어간다(운영 뱅크 확인 대화상자는 배치 전체에 한 번만). 재생목록만 가리키는
@@ -236,8 +270,10 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
 - 상위 제품: [[lampas-studio]] (같은 저장소 `lampas-system`)
 - 이름 충돌 대상(별개): [[lampas]] · [[lampas-harness]]
 - 토픽: [[lampas-clip-intelligence]]
-- 세션: [[2026-09-18-lampas-agent-omnara분석-durable-run구현]](**가장 이른 노출, 09-26 뒤늦게 ingest** —
-  `lampas-agent-clips`+`lampas-agent-pulse` 병합 직후 상태) ·
+- 세션: [[2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축]](**가장 이른 노출, 09-26
+  뒤늦게 ingest** — `lampas-agent-clips` 독립 앱 시절, 분야/카테고리/sports-wiki/ALB타임아웃/
+  재생목록/deploy-agent.sh 원출처) ·
+  [[2026-09-18-lampas-agent-omnara분석-durable-run구현]](`lampas-agent-clips`+`lampas-agent-pulse` 병합 직후 상태) ·
   [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]](4축 라벨링·단어 타임스탬프 보존을
   처음 추가 — 아래 09-19 세션에서 4축은 하루 만에 되돌려짐) ·
   [[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]] ·
@@ -252,7 +288,8 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
   [[error-fingerprint-path-grouping]] · [[tailscale-funnel-large-payload-bypass]] ·
   [[cross-subdomain-session-handoff]] · [[execution-run-scoped-status-vs-stale-notification]] ·
   [[accept-then-poll-for-slow-ai-jobs]] · [[llm-relative-ranking-vs-absolute-scoring]] ·
-  [[stale-tab-silent-fallback-vs-explicit-reject]] · [[durable-agent-runtime-design-patterns]]
+  [[stale-tab-silent-fallback-vs-explicit-reject]] · [[durable-agent-runtime-design-patterns]] ·
+  [[lb-idle-timeout-keepalive-streaming]] · [[macos-launchd-daemon]]
 - 토픽: [[jev-typed-classification]] · [[self-healing-error-pipeline-design]] ·
   [[lampas-system-ai-call-architecture-audit]]
 - 외부 AI 프로바이더: [[gemini]](비전 라벨링, `gemini-3.5-flash` 언급)

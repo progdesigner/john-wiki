@@ -11,6 +11,24 @@ SNS 카피·페르소나를 생성하는 웹. `[[lampas-agent]]`(스포츠 클�
 `AGENTS.md`(3라인 앱 목록: Lampas/Dalar/Talk)에는 등장하지 않는 앱이다(자세한 불일치는
 `[[lampas-studio]]` "스포츠 클립 파이프라인" 절 참고).
 
+## 최초 구현 — 클립→페르소나→카피 4단계 플로우 (2026-09-12, 2026-09-26 뒤늦게 ingest)
+이 앱에서 "페르소나"가 처음 등장한 지점은 아래 09-19 이관 절보다 **7일 앞선**
+[[2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축]] 세션이다. 클립 선택 →
+`POST /v1/copy/personas`(클립 1개당 페르소나 후보 4개: name/description/target/reason 자동 생성) →
+`PersonaPicker`로 선택 → 그 목소리로 카피 생성(`personaSnapshot` 컬럼에 스냅샷 저장) → 결과는 카드마다
+반복 없이 "클립 X + 페르소나 Y 기반" 한 줄 요약 → 채점 프롬프트가 "무엇이 이 점수를 만들었는지/무엇을
+올리면 좋을지" 두 문장 근거를 요구하도록 강화("이 점수인 이유" 라벨)가 이 세션의 최초 구현이다.
+이후 같은 세션에서 훅 점수 필터(reels의 `filterHookClips` 이식)·페르소나 localStorage 캐싱·
+`copy_persona_sets` 테이블 DB 영속화까지 연속 추가됐으나, **이 페르소나 생성 인프라 전체가 아래
+"페르소나 생성 이관" 절이 기록한 2026-09-19 세션에서 Pulse로 이관되며 폐기**됐다(`suggestPersonas`/
+`fetchLatestPersonaSet`/`/v1/copy/personas*`/`copy_persona_sets`/`copy_field_personas` 전부 삭제).
+카피·채점 자체(4영역 채점, 점수 근거 두 문장 요구)만 이후로도 발전을 이어간다. 이 세션은 또한 Copy에
+**ALB 60초 유휴 타임아웃으로 인한 504**가 처음 발현·수정된 지점이기도 하다(카피 생성/채점이 상세
+페르소나·톤·힌트로 60초를 넘기면 발생 → 15초 주기 킵얼라이브 스트리밍으로 수정, 항상 200+
+`{ok,data}` 봉투로 전환) → [[lb-idle-timeout-keepalive-streaming]]. 그 직후 "결과가 나왔는데 화면에
+안 보인다"는 URL 상태 경쟁(race) 버그도 같은 세션에서 발견·수정됨(`?run=` 세팅이 별개의 복원
+이펙트를 재트리거해 아직 `suggested` 상태인 런을 `score_failed`로 잘못 덮어쓰던 문제).
+
 ## 관찰된 기능
 - **2026-09-26 뒤늦게 발견된 선행 시도**: 아래 "페르소나 생성 이관"보다 8시간 앞선 같은 날 세션
   ([[2026-09-19-pulse-분야별mlb페르소나-copy4단계개편-최초구현]], `Tool: codex`)이 이미 Copy를
@@ -76,10 +94,12 @@ Reels UI 단순화(→ [[lampas-web-reels]] "Copy 앱 딥링크" 절)와 함께 
   단일 출처) · [[lampas-web-reels]](클립 편집·페르소나 선택, `?clip=` 딥링크 발신처) ·
   [[lampas-web-status]](시스템 상태) · [[lampas-web-flow]](오케스트레이션·트렌드 분석 Work)
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
-- 세션: [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]](`?clip=` 딥링크·추가지시/톤
-  프리셋 신설) ·
+- 세션: [[2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축]](**최초 구현**, 09-26
+  뒤늦게 ingest — 이 앱의 실제 기원) · [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]]
+  (`?clip=` 딥링크·추가지시/톤 프리셋 신설) ·
   [[2026-09-19-pulse-분야별mlb페르소나-copy4단계개편-최초구현]](같은 날 8시간 앞선 선행
   4단계 개편, 대체됨) · [[2026-09-19-pulse-페르소나-단일출처-계정이관-신뢰도개선]](페르소나 생성
   이관·신뢰도 표시 도입) · [[2026-09-20-lampas-flow-만들기]] ·
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · [[2026-09-24-pulse-페르소나-카피점수-구조화-개선]]
+- 스킬: [[lb-idle-timeout-keepalive-streaming]](카피 생성·채점 504 → 킵얼라이브 스트리밍 수정)
