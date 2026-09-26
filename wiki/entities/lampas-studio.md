@@ -218,6 +218,24 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   **내장 오리지널 비트** 사용(라이선스 미확인 회피). 배포는 기존 `deploy-web.sh` 경로 + `fit.lampas.io`
   전용 CloudFront 신규 생성 + 기존 Lampas 와일드카드 인증서로 HTTPS 적용. → [[2026-09-25-lampas-web-fit-구축-배포]]
 
+## 스포츠 클립 파이프라인 — 에이전트·위키·Copy·Reels·Status (2026-09-25 세션에서 첫 노출)
+
+`AGENTS.md` 2026-09-26 스냅샷 절(위)의 3라인 목록엔 등장하지 않는 앱들이 같은 저장소 `lampas-system`에
+따로 확인됨 — 스포츠 경기 영상을 클립화·라벨링·SNS 카피까지 만드는 별도 콘텐츠 파이프라인:
+
+- **`lampas-agent`** — 맥미니 로컬 데몬, 스포츠 클립 라벨링·업로드(Clips·Pulse·Threads·Fixs 탭). 상세·
+  이름 충돌 주의(`[[lampas]]` 하네스 에이전트와 무관) → [[lampas-agent]]
+- **`lampas-api`의 `sports-wiki` 모듈** — 선수/구단 페이지에 이 세션에서 **"경기(game)" 엔티티**가
+  추가됨(LLM 없이 결정적 저장 + 짧은 서사 요약만 LLM). 진단·설계·구현 전체 → [[lampas-agent]] ·
+  [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · 패턴: [[deterministic-extraction-vs-llm-rewrite]]
+- **`lampas-web-copy`("Copy")** · **`lampas-web-reels`("Reels")** · **`lampas-web-status`**
+  (`status.lampas.io`, 2026-09-25 첫 배포) — 각각 카피 생성, 클립 편집/페르소나 선택, 시스템 상태 표시.
+  상세는 [[lampas-agent]] "관련 앱" 절 참고. 이 앱들은 위 `AGENTS.md` 목록(Lampas 9/Dalar 6/Talk 9/
+  Iileex 1)에 없어 두 소스(코드 스냅샷 vs 실제 세션 관찰)가 서로 다른 앱 부분집합만 비추고 있음을
+  시사 — `AGENTS.md`가 전체 앱을 다 열거하지 않거나, 클립 파이프라인이 별도 워크스페이스일 가능성 병기.
+- **배포 동시성 함정**: 같은 저장소를 두 세션이 몇 분 간격으로 배포하면 상대 세션의 미완료 중간 상태가
+  빌드에 섞일 수 있음(Threads 탭 오노출 사례) → [[lampas-agent]] 참고.
+
 ## 관련
 - 세션: [[2026-09-25-lampas-web-fit-구축-배포]] ·
   [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
@@ -225,9 +243,9 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-17-works-저장소-일괄최신화-pull]] ·
   [[2026-07-18-works-전체저장]] ·
   [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[2026-07-18-web-ai-등록플로우-사진분류-배포]] ·
-  [[2026-09-25-edit-템플릿-이미지-s3-url-수정]]
+  [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]]
 - 토픽: [[lampas-actor-object-space-positioning]]
-- 앱: [[lampas-web-ai]]
+- 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]

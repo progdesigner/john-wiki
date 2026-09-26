@@ -1,7 +1,7 @@
 ---
 tags: [entity, agent, persona]
 created: 2026-07-07
-updated: 2026-07-13
+updated: 2026-09-26
 ---
 # 람파스 (Lampas)
 
@@ -18,6 +18,12 @@ updated: 2026-07-13
 localStorage `harness_*` 키, 저장소명 `lampas-harness`)는 호환성 때문에 그대로 둔다.
 (즉 코드·저장소는 harness, 사람에게 보이는 이름만 람파스.)
 
+## ⚠️ 이름 충돌 (2026-09-26 확인)
+`[[lampas-studio]]` 저장소(`lampas-system`) 안에 `apps/lampas-agent`라는 **전혀 다른 앱**이 있다 —
+스포츠 클립을 라벨링·업로드하는 맥미니 로컬 데몬으로, 대화형 어시스턴트가 아니다. 소스 대화에서
+"에이전트"라는 말이 이 둘을 가리키며 섞여 쓰이므로 문맥으로 구분할 것. → [[lampas-agent]]
+
 ## 관련
 - 프로젝트: [[lampas-harness]]
+- 이름 충돌 대상(별개 앱): [[lampas-agent]]
 - 세션: [[2026-07-06-lampas-harness-구축]] · [[2026-07-13-람파스-누적운영기억-이관]]

@@ -1897,3 +1897,23 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `AI_CONTEXT.md` 갱신: lampas-studio 항목을 2026-09-26 스냅샷·모순·lampas-web-fit 배포로 재작성
   (36줄, 40줄 이내 유지).
 - `index.md` Sessions·Entities(lampas-studio·toktalk 갱신, dalar 신설)·Skills 섹션 반영.
+
+## [2026-09-26] ingest | 스포츠 위키 경기 엔티티 설계·구현 (source: ed7b86c3-1789-4d53-b430-beea80f8f0bf.md)
+- 원본 보관: `raw/conversations/2026-09-25-위키개선-스포츠경기엔티티-설계.md`
+- 세션 신설: [[2026-09-25-스포츠위키-경기엔티티-설계구현]] — "클립 만들어도 위키가 왜 안 쌓이나" 진단
+  (실패 은닉·`categoryKey` undefined 스킵·"경기" 페이지 타입 부재) → "위키를 어디에 둘까" 대신 "역할을
+  분리하자"(추출은 에이전트, 결정적 저장은 API, LLM은 서사만) 설계 채택·구현·운영 배포까지 완결. 이어진
+  두 후속 요청("배포해줘", "재시작 안된건가?")까지 같은 파일에 포함.
+- 엔티티 신설: [[lampas-agent]] — `lampas-system` 저장소의 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·
+  Pulse·Threads·Fixs 탭). **`[[lampas]]`(하네스 에이전트)와 이름만 겹치는 별개 앱** — disambiguation
+  절 신설.
+- 엔티티 갱신: [[lampas-studio]](스포츠 클립 파이프라인 절 신설 — `lampas-agent`·sports-wiki 게임
+  엔티티·Copy/Reels/Status 앱이 09-26 AGENTS.md 스냅샷 목록엔 없던 별도 앱군임을 병기, 배포 동시성
+  함정), [[lampas]](이름 충돌 경고절 신설)
+- 스킬 신설: [[deterministic-extraction-vs-llm-rewrite]] — 프로즈 재작성 파이프라인이 잘림·파싱실패·
+  실패은닉으로 반복 고장 날 때 구조화 추출/결정적 저장/서사 LLM 호출을 분리하는 절차.
+- `index.md` Sessions·Entities(lampas-agent 신설)·Skills 반영. `AI_CONTEXT.md`에 스포츠 클립 파이프라인
+  신규 노출 + 이름 충돌 경고 한 줄 추가(36줄, 40줄 이내 유지).
+- 특이사항: 같은 밤 별도 세션(`raw/conversations/2026-09-25-reels-페르소나-카드스트립-점수정렬.md`,
+  Copy/Reels/Pulse 신뢰도 점수 관련)이 아직 wiki/sessions로 정식 ingest되지 않은 채 발견됨 — 이번
+  ingest에서 참고만 하고 정식 세션 페이지 생성은 다음 ingest로 미룸(원본은 이미 raw/에 존재).
