@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding, lampas-web-cs, lampas-web-admin]
 created: 2026-07-09
 updated: 2026-09-26
 ---
@@ -411,6 +411,20 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 `[[lampas-web-tools]]`의 `music-gen` 툴은 이 배포 이후에도 여전히 2.6 — 자매 앱 간 버전 불일치가
 남음. 상세·엔티티 → [[lampas-web-music]] · 세션 → [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]]
 
+## `lampas-web-cs`·`lampas-web-admin` 첫 상세 노출 — CS 배경음악 어시스턴트 제거 + 관리자 조회 신설 (2026-09-13 세션)
+
+Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admin`)이 이 세션에서 처음 상세히
+드러남. 사용자가 CS 채팅 화면 스크린샷으로 배경음악 위젯 영역을 가리키며 제거를 요청 — 조사해보니
+`cs-music-assistant.service.ts`가 채팅 인텐트를 파싱해 [[lampas-web-music]]의 `MusicService.publish`
+(`source:'CS_CHAT'`)를 트리거하는 소비자였고, 프론트 위젯은 `MusicPlayer.tsx` 하나뿐이라 결합이
+약해 제거가 쉬웠다([[full-stack-feature-removal-audit]] 절차). 동시에 요청받은
+"`lampas-web-admin`에서 CS 문의를 볼 수 있게" 작업에서는, CS 관리자 API가 이미 있었지만 web-admin
+로그인 인증(`AdminGuard`)이 아닌 CS 전용 `CS_ADMIN_TOKEN` 가드로 막혀 있던 것을 이미 통합돼 있던
+`music` 모듈(`admin-music.controller.ts`, `AdminGuard`)의 선례를 그대로 따라 `admin/cs/*` 신규
+컨트롤러로 해결 → [[admin-guard-precedent-reuse]] 스킬로 추출. `lampas-api`→`lampas-web-cs`→
+`lampas-web-admin` 순 배포 완료. 엔티티·세션 → [[lampas-web-cs]] · [[lampas-web-admin]] ·
+[[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]].
+
 ## Edit 모델 2종·멀티이미지 영상·WAN 3.0·Qwen Edit 추가 + 영상 오류 반복 근본수정 (2026-09-21 세션)
 
 `Tool: codex` 세션. 한 세션 안에서 이미지 편집 모델 추가 → 영상 멀티이미지 연결 → 영상 생성 오류
@@ -453,7 +467,8 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] · [[2026-09-19-lampas-trends-고도화]] ·
-  [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]]
+  [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]] ·
+  [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
@@ -462,7 +477,7 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[lampas-web-reels]] · [[lampas-web-clips]] · [[lampas-web-edit]](`edit.lampas.io`) · [[lampas-web-package]](`package.lampas.io`) ·
   [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`) ·
-  [[lampas-web-trends]](`trends.lampas.io`)
+  [[lampas-web-trends]](`trends.lampas.io`) · [[lampas-web-cs]](`cs.lampas.io`) · [[lampas-web-admin]](`admin.lampas.io`)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
@@ -471,4 +486,5 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[tailscale-funnel-large-payload-bypass]] · [[cross-subdomain-session-handoff]] ·
   [[execution-run-scoped-status-vs-stale-notification]] · [[accept-then-poll-for-slow-ai-jobs]] ·
   [[proxy-body-limit-413-appears-as-network-error]] · [[llm-batch-inference-timeout-tuning]] ·
-  [[parallel-survey-before-feature-gap-analysis]] · [[asr-long-audio-silent-truncation]]
+  [[parallel-survey-before-feature-gap-analysis]] · [[asr-long-audio-silent-truncation]] ·
+  [[full-stack-feature-removal-audit]] · [[admin-guard-precedent-reuse]]

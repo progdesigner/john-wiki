@@ -2500,3 +2500,15 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   - [[resumable-worker-checkpoint-resume]] — 이 세션이 실제 최초 구현이며 자체 재시작 테스트를 통과했었다는 참고 절 추가(09-20 세션이 발견한 더 미묘한 결함과 시간차 병기)
 - index.md 갱신 (세션 1건 추가, dalar·dalar-web-first·lampas-studio 엔티티 줄 갱신, 스킬 2건 줄 갱신)
 - AI_CONTEXT.md 갱신 보류 — 타임라인 정정은 상세 이력이라 wiki 페이지로 충분, 40줄 한도 내 상시 주입 가치는 낮다고 판단
+
+## [2026-09-26] ingest | CS 배경음악 어시스턴트 제거 + lampas-web-admin CS 조회 화면 신설 (source: 02e30983-77b0-4373-aa0e-332e9bb41a56.md)
+- raw/conversations/2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설.md 보관 (원본 세션 날짜 2026-09-13, 뒤늦게 ingest)
+- wiki/sessions/2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설.md 신설
+- wiki/entities/lampas-web-cs.md 신설 — CS 채팅 위젯(`cs.lampas.io`), 배경음악 어시스턴트 제거 상세
+- wiki/entities/lampas-web-admin.md 신설 — 관리자 콘솔 인증/라우팅/템플릿 패턴, CS 조회 화면 신설
+- wiki/entities/lampas-web-music.md 갱신 — CS 소비 경로(`source:'CS_CHAT'`) 제거 사실 추가
+- wiki/entities/lampas-studio.md 갱신 — 신규 절 추가 + 관련 링크(엔티티·세션·스킬) 갱신
+- wiki/skills/admin-guard-precedent-reuse.md 신설 — 도메인 전용 관리자 토큰 가드를 자매 모듈의 AdminGuard 선례로 교체하는 절차
+- wiki/skills/full-stack-feature-removal-audit.md 갱신 — 이 세션을 두 번째 사례로 추가
+- index.md 갱신 (세션 1건, 엔티티 3건, 스킬 1건 추가/갱신)
+- AI_CONTEXT.md 갱신 보류 — 완료된 단일 세션의 기능 제거/추가라 일회성 사건에 해당, wiki 페이지로 충분

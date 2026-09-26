@@ -32,8 +32,19 @@ updated: 2026-09-26
 - `.env.smoke` 부재로 배포 후 스모크 테스트는 건너뜀 — 검증은 운영 API 모델 목록 확인·배포 번들
   직접 확인으로 대체.
 
+## 소비자 — CS 채팅 배경음악 어시스턴트 (신설 후 2026-09-13 제거됨)
+[[lampas-web-cs]]에 한때 `cs-music-assistant.service.ts`가 있어 채팅 메시지의 인텐트를 파싱해
+`MusicService.publish()`를 `source:'CS_CHAT'`으로 호출(`source:'MUSIC_WEB'`과 구분 저장)하던
+소비 경로가 있었다. 2026-09-13 세션에서 이 어시스턴트·프론트 위젯(`MusicPlayer.tsx`)이 사용자
+요청으로 전면 제거됐다 — `music` 모듈 자체(`GET /music/tracks` 공개 API, `MusicService.publish`)는
+CS와 결합이 약해 영향 없이 계속 운영됨. 관리자 화면 패턴(`admin-music.controller.ts`의
+`AdminGuard`)은 오히려 이 세션에서 CS 관리자 화면의 선례로 재사용됨 →
+[[admin-guard-precedent-reuse]] · [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]].
+
 ## 관련
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
 - 자매 앱: [[lampas-web-tools]] (`music-gen` 툴, 여전히 2.6 — 버전 불일치)
+- 자매 앱(소비자, 2026-09-13 소비 경로 제거됨): [[lampas-web-cs]]
 - 외부 의존: [[atlas-cloud]] (minimax 음악 모델 라우팅)
-- 세션: [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]]
+- 세션: [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] ·
+  [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]]

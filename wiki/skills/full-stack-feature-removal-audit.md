@@ -2,7 +2,7 @@
 name: full-stack-feature-removal-audit
 description: 여러 프론트/백엔드 표면에 걸쳐 흩어진 기능을 잔재 없이 완전히 제거할 때 쓰는 조사→삭제→검증 절차
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-09-26
 tags: [refactor, deprecation, audit, grep, cleanup]
 ---
 # 기능 전면 제거 감사 (full-stack feature removal audit)
@@ -49,3 +49,11 @@ tags: [refactor, deprecation, audit, grep, cleanup]
 
 ## 출처: [[2026-07-16-사용영역-페르소나-폐기]] (lampas-harness "사용 영역 페르소나" 기능 전면
 제거 — 프론트 이중 파일·백엔드 3경로·API 라우트·저장소 파일까지 전부 제거한 사례)
+
+## 추가 사례: [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]]
+`lampas-web-cs`의 배경음악 어시스턴트 제거 — 이 절차와 정확히 같은 순서(프론트 위젯 삭제→백엔드
+서비스/컨트롤러 호출 제거→서비스 메서드 정리→타입 필드(`musicGenre`/`musicGenCount`) 정리)로
+진행됐고, 인접 모듈(`music`)과의 결합이 약해 "어디까지 지울지" 판단이 쉬웠던 사례. 같은 세션에서
+반대 방향 작업(신규 관리자 화면 통합)도 함께 있었는데 그건 이 스킬이 아니라
+[[admin-guard-precedent-reuse]] 절차를 따랐다 — 제거와 통합을 같은 세션에서 하더라도 절차는
+분리해서 판단할 것.
