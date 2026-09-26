@@ -276,12 +276,16 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 `AGENTS.md` 2026-09-26 스냅샷 절(위)의 3라인 목록엔 등장하지 않는 앱들이 같은 저장소 `lampas-system`에
 따로 확인됨 — 스포츠 경기 영상을 클립화·라벨링·SNS 카피까지 만드는 별도 콘텐츠 파이프라인:
 
-- **`lampas-agent`** — 맥미니 로컬 데몬, 스포츠 클립 라벨링·업로드(Clips·Pulse·Threads·Fixs 탭). 상세·
-  이름 충돌 주의(`[[lampas]]` 하네스 에이전트와 무관) → [[lampas-agent]]
+- **`lampas-agent`** — 맥미니 로컬 데몬, 스포츠 클립 라벨링·업로드(Clips·Pulse·Threads·Fixs 탭), 유튜브
+  영상 수집. 상세·이름 충돌 주의(`[[lampas]]` 하네스 에이전트와 무관) → [[lampas-agent]]
 - **`lampas-api`의 `sports-wiki` 모듈** — 선수/구단 페이지에 이 세션에서 **"경기(game)" 엔티티**가
   추가됨(LLM 없이 결정적 저장 + 짧은 서사 요약만 LLM). 진단·설계·구현 전체 → [[lampas-agent]] ·
   [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · 패턴: [[deterministic-extraction-vs-llm-rewrite]]
-- **[[lampas-web-copy]]**("Copy") · **`lampas-web-reels`("Reels")** · **[[lampas-web-status]]**
+- **[[lampas-web-flow]]**("Flow", `flow.lampas.io`, 2026-09-20 세션에서 첫 노출) — 위 파이프라인
+  전체(영상 수집→Clips→Copy→Reels→Edit→Package)를 "Work" 노드 그래프로 연결하는 오케스트레이션 허브.
+  Jev 기반 노드 자동화, Tailscale Funnel 대역폭 병목 우회(S3 직접 전송), 서브도메인 간 계정 이어받기
+  (SSO)까지 이 세션에서 구현·배포됨 → [[2026-09-20-lampas-flow-만들기]]
+- **[[lampas-web-copy]]**("Copy") · **[[lampas-web-reels]]("Reels")** · **[[lampas-web-status]]**
   (`status.lampas.io`, 2026-09-25 status.claude.com 형태로 처음부터 구현·운영 배포 완료 —
   컴포넌트 40개 60초 프로브·자동 인시던트·90일 업타임 바) · **[[lampas-web-tools]]**(`tools.lampas.io`,
   AI 생성 도구 13개) — 각각 카피 생성, 클립 편집/페르소나 선택, 시스템 상태 표시, 범용 AI 생성 도구
@@ -328,7 +332,7 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   기존 이슈).
 
 ## 관련
-- 세션: [[2026-09-21-lampas-agent-fixs-신설]] ·
+- 세션: [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
   [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] ·
   [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
   [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] ·
@@ -340,11 +344,14 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]]
-- 토픽: [[lampas-actor-object-space-positioning]]
-- 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] · [[lampas-web-tools]] ·
+- 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]]
+- 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] ·
+  [[lampas-web-reels]] · [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
 - 포트폴리오 배경: [[works-project-portfolio]]
-- 스킬: [[selective-hunk-commit-shared-file]] · [[nominatim-batch-geocode-progressive-rollout]]
+- 스킬: [[selective-hunk-commit-shared-file]] · [[nominatim-batch-geocode-progressive-rollout]] ·
+  [[tailscale-funnel-large-payload-bypass]] · [[cross-subdomain-session-handoff]] ·
+  [[execution-run-scoped-status-vs-stale-notification]] · [[accept-then-poll-for-slow-ai-jobs]]

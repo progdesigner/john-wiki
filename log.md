@@ -2204,3 +2204,25 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   이내 유지).
 - `index.md` Sessions 1신설·Entities([[dalar]] 갱신·[[dalar-web-first]] 신설)·Topics
   ([[jev-typed-classification]] 갱신)·Skills(3개 신설) 반영.
+
+## [2026-09-26] ingest | Lampas Flow 구축·배포 + Agent 전송병목·SSO·Jev자동화·Pulse개선 (source: 4405c9ce-4969-4c8b-ad68-84d7c434016a.md)
+`Tool: codex` 세션(2026-09-20~25, 하나의 터미널이 이어짐). 스포츠 클립 파이프라인 오케스트레이션
+허브 `lampas-web-flow`(flow.lampas.io)를 영상수집([[lampas-agent]])→Clips→Copy→Reels→Edit→Package
+"Work" 노드 그래프로 신설·배포. 맥미니→브라우저 전송이 공개 Tailscale Funnel 대역폭 제한에 걸리던
+병목(유튜브 다운로드+전사 엔진 로딩)을 S3 직접 전송으로 우회, 서브도메인 간 일회용 코드로 계정
+이어받기(SSO), Jev로 노드 자동화(추천클립3개→한국어카피→9:16릴스1개→패키지), Flow의 30초
+타임아웃을 즉시접수+폴링 구조로 제거하고 "Harness에 개선요청" 버튼 추가. Pulse 트렌디 페르소나
+부진을 게시일+조회속도 반영으로 근본수정(기존 위키의 2026-09-24 채점 루브릭 세션보다 하루 앞선
+선행 수정으로 정정), 키워드 기반 "트렌드 분석" Work(페르소나·카피 실험+평가 반영 루프) 신설.
+- 세션 신설: [[2026-09-20-lampas-flow-만들기]]
+- 엔티티 신설: [[lampas-web-flow]] · [[lampas-web-reels]](이전엔 코드체 언급만 있던 앱 최초 정식화)
+- 엔티티 갱신: [[lampas-agent]](Pulse 09-21 선행 수정·유튜브 전송병목·"확인 필요" 버그·버전이력
+  1.0.16 추가, 관련 앱·스킬·세션 링크 보강) · [[lampas-web-copy]](트렌드 분석 Work 절 추가) ·
+  [[lampas-studio]](스포츠 클립 파이프라인 절에 Flow·Reels 반영)
+- 토픽 갱신: [[jev-typed-classification]] — Flow 노드 자동화(클립·페르소나·템플릿 선택)를 네 번째
+  사용처로 추가.
+- 스킬 신설: [[tailscale-funnel-large-payload-bypass]] · [[cross-subdomain-session-handoff]] ·
+  [[execution-run-scoped-status-vs-stale-notification]] · [[accept-then-poll-for-slow-ai-jobs]]
+- `AI_CONTEXT.md` 갱신: lampas-studio 절에 Flow 신설·배포, 대역폭 병목 우회, SSO, Pulse 선행수정
+  시점 정정 반영(40줄 이내 유지).
+- `index.md` Sessions 1신설·Entities 2신설+3갱신·Topics 1갱신·Skills 4신설 반영.

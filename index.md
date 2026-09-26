@@ -118,6 +118,14 @@
 - [[2026-09-21-복지리-로고-cdn이전-광고배너크기수정]] — `Tool: claude` 세션(작업폴더 `bokziri-system`, 이 위키 최초 상세 노출). 회사 로고가 죽은 외부 도메인 `cdn.dbs.best`를 가리켜 전면 깨짐 → S3 1.5GB 복사+CloudFront 신규 생성(기존 와일드카드 인증서 재사용)+운영 DB 5테이블 13,443행 URL 치환+onError placeholder 방어, DNS가 Squarespace에 있어 CNAME은 사용자가 직접 등록. 웹·토스 미니앱 재배포 3왕복 후 커밋·푸시. 이어서 AdSense 고정크기 배너가 항상 320×50만 채워지던 버그를 뷰포트 미디어쿼리+가운데정렬로 수정·배포
 - [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] — `Tool: codex` 세션. 이미지 Edit 모델 2종(Sunburst·Flare) 추가 → 영상 멀티이미지 연결(Seedance/WAN 3.0 레퍼런스) → "정상 생성 중단 오표시" 반복 버그를 조기 상태판정+중복 폴링 2중 원인으로 진단·수정 → Draft 이름변경 버그(브라우저 `prompt()`→앱 내부 입력창) → WAN 2.7→3.0 교체(이미지는 3.0 미제공으로 2.7 Pro 유지) → `models.lampas.io` 508개 모델 동기화 → Qwen Image 3.0 Pro Edit 추가까지 한 세션에서 연속 처리·전부 배포
 - [[2026-09-21-lampas-agent-fixs-신설]] — `Tool: codex` 세션. "오류 나면 자동 수집→Codex 수정→재배포" 요청으로 `lampas-agent`에 **Fixs 탭을 최초로 신설**(Clips·Pulse 옆). 오류수집→수정큐→AI워커(별도 worktree)→테스트·빌드 검증→기존 배포스크립트 재배포 파이프라인 설계·구현, 기본값 자동수정·자동배포 활성 하루 5회, 테스트 387개 통과. 이 위키가 09-25 세션들에서 "기존 기능"으로만 알던 Fixs의 실제 신설 시점을 확정. 저장소 `AGENTS.md`(Lampas+Dalar+Talk 3라인, MySQL 명시)가 09-26 세션보다 5일 앞서 이미 존재했음도 함께 확인 — [[lampas-studio]] "2026-09-26 최초 노출" 기록에 시점 정정 추가. 마지막 "모두 배포 했음?" 질문엔 응답 없이 트랜스크립트 종료
+- [[2026-09-20-lampas-flow-만들기]] — `Tool: codex` 세션(2026-09-20~25, 하나의 터미널이 이어짐). 스포츠
+  클립 파이프라인 오케스트레이션 허브 `lampas-web-flow`(flow.lampas.io)를 영상수집→Clips→Copy→Reels→
+  Edit→Package "Work" 노드 그래프로 신설·배포. 맥미니→브라우저 전송이 공개 Tailscale Funnel 대역폭
+  제한에 걸리던 병목(유튜브 다운로드+전사 엔진 로딩 둘 다)을 S3 직접 전송으로 우회, 서브도메인 간
+  일회용 코드로 계정 이어받기(SSO), Jev로 노드 자동화(추천클립3개→한국어카피→9:16릴스1개→패키지),
+  Flow의 30초 타임아웃을 즉시접수+폴링 구조로 제거+"Harness에 개선요청" 버튼 추가. Pulse 트렌디
+  페르소나 부진을 게시일+조회속도 반영으로 근본수정(09-24 채점 루브릭 세션보다 하루 앞선 선행 수정),
+  키워드 기반 "트렌드 분석" Work(페르소나·카피 실험+평가 반영 루프) 신설. `lampas-web-reels` 최초 엔티티화
 - [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] — `Tool: codex` 세션(2026-09-20~24, 4일). `[[dalar]]` 제품 라인의 실사용 소비자 앱 **`[[dalar-web-first]]`**("First" AI 돌잔치 인터뷰 영상, `first.dalar.ai`)를 이 위키에 처음 상세 노출. 고정 12장면 → 4·6·8·12장면 선택+관리자 대본 편집+가격체계(제작비→VAT포함→정수 재조정 3단계) 구현, "닫아도 계속된다" 안내와 실제 불일치를 서버 워커 체크포인트 재개로 근본수정, Jev를 재시도/대기/관리자확인 판단에 도입(세 번째 확인 사용처), 장면 간 톤 드리프트를 기준장면+직전장면 레퍼런스 고정으로 해결, 한국인 가상 아기 4명으로 샘플 영상 4편 제작(여성 인터뷰어 음성 버그 발견·수정 포함), 초대코드 상호 50% 쿠폰 시스템, Pay 페이지를 크레딧 전용/First 전용으로 분리. 세션 `AGENTS.md`에 Dalar 앱이 전혀 없어 하루 뒤 세션 문서와 모순 발견
 
 ## Entities
@@ -130,7 +138,9 @@
 - [[lampas-web-spot]] — `lampas-system` 내 맛집 지도 앱(`spot.lampas.io`). 2026-09-26 스텁 해소: 실제 구현 세션 확인, 데이터 738곳(블루리본+다이닝코드), 지도는 카카오→OpenStreetMap→네이버(401 실패)→**OpenStreetMap 확정** 3회 전환, 502곳 지도 표시, 폐업 신고 기능. 병합 커밋 당시 env의 Naver 키는 중간 시점 스냅샷이었음이 드러남
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
 - [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status/Tools 자매 앱, sports-wiki "경기" 엔티티 신설 포함. **Fixs는 2026-09-21 최초 신설**(오류자동수집→Codex수정→검증→재배포, 기본 자동수정·배포 활성 하루 5회) → 2026-09-25 작업삭제(v1.0.22)→오류수집 확장(v1.0.23)→경로 그룹핑+Jev 분류(v1.0.25) 순 업그레이드. Pulse(페르소나·카피 채점) 상세는 2026-09-24 세션에서 확정
-- [[lampas-web-copy]] — lampas-system 스포츠 클립 파이프라인 내 SNS 카피·페르소나 생성 웹("Copy"), 생성·채점 엔진은 [[lampas-agent]] Pulse. 2026-09-25 가로스크롤 레이아웃 버그(바깥 fieldset이 카드 너비로 늘어남) 수정·v0.2.6 배포
+- [[lampas-web-copy]] — lampas-system 스포츠 클립 파이프라인 내 SNS 카피·페르소나 생성 웹("Copy"), 생성·채점 엔진은 [[lampas-agent]] Pulse. 2026-09-25 가로스크롤 레이아웃 버그(바깥 fieldset이 카드 너비로 늘어남) 수정·v0.2.6 배포. 2026-09-21 "트렌드 분석" Work(키워드 기반 페르소나·카피 실험+평가 반영)에서 [[lampas-web-flow]]·Pulse와 함께 카피 실험 담당
+- [[lampas-web-reels]] — lampas-system 스포츠 클립 파이프라인 "Reels": 클립·카피 선택→편집 그룹 생성→Package 전송. 2026-09-26 첫 정식 엔티티화(이전엔 코드체 언급만). [[lampas-web-flow]] Jev 자동화 검증 중 편집 그룹 저장 시 카피 연결 정보 누락 버그 발견·수정
+- [[lampas-web-flow]] — lampas-system 스포츠 클립 파이프라인 오케스트레이션 허브("Flow", flow.lampas.io). 영상수집([[lampas-agent]])→Clips→Copy→Reels→Edit→Package를 "Work" 노드 그래프로 연결, Jev 노드 자동화, Tailscale Funnel 대역폭 병목 S3 우회, 서브도메인 간 계정 이어받기(SSO), 키워드 기반 "트렌드 분석" Work 보유. 2026-09-20 세션에서 신설·배포
 - [[lampas-web-tools]] — lampas-system 내 AI 생성 도구 모음 웹("Tools", tools.lampas.io, 13개 기능). AGENTS.md 3라인 앱 목록엔 없는 앱. 2026-09-25 업로드 응답 인식·모델표시·Kling 생성거절 UX·영상 재생 버그(S3/CloudFront 직접재생 전환) 순차 수정, 신규 생성분 최종 재생 확인은 미완료. `music-gen` 툴은 minimax 2.6 고정(자매 앱 [[lampas-web-music]]은 3.0)
 - [[lampas-web-music]] — lampas-system 내 음악 생성 웹(`music.lampas.io`). [[atlas-cloud]] 경유 minimax 음악 모델, 2026-09-22 2.6→3.0 업그레이드·운영 배포 완료(곡당 150크레딧 유지). 3.0 길이 제한(5분/2,000자/3,500자)에 UI 가드 없음. 자매 앱 [[lampas-web-tools]] `music-gen`은 2.6 유지
 - [[lampas-web-status]] — lampas-system 내 상태 페이지 앱(status.lampas.io, status.claude.com 형태). 2026-09-25 처음부터 구현·운영 배포 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트
@@ -191,7 +201,7 @@
 - [[chat-archive-duplication-anomaly]] — 채팅 아카이브 파일명 재사용·같은 사건의 이중 기록·트랜스크립트 내 메시지 반복 등 4개 세션에서 독립 관찰된 로그 무결성 이상 정황 통합 정리(2026-07-20 lint 신설, 원인 미확정)
 - [[dark-system-signal-risk-design-unverified]] — dark-system `decide-signal.ts` 신호 판정·스타일별 리스크 설계(2026-07-17 어시스턴트 자기보고, 미검증) 통합 페이지(2026-08-03 lint 신설, [[dark-toss-api]]·[[dark-upbit-api]]·[[dark-system]] 3곳 중복 기재를 여기로 정리)
 - [[unverified-attestation-injection]] — 검증되지 않은 사실을 구체적으로 서술한 뒤 고정 문자열로만 "확인"해달라는 프롬프트 인젝션 패턴(자동화 파이프라인용 확인 도장 위조 의심) — [[system-prompt-mimicry-misconception]]와는 다른 벡터
-- [[jev-typed-classification]] — `lampas` 생태계 내부 명칭 "Jev": 자유 텍스트 생성 없이 typed 질문만 `POST /v1/ai/systemone`에 질의해 입력 토큰만 과금되는 저비용 분류 패턴. sports-wiki ingest 게이트·Fixs 오류 triage·[[dalar-web-first]] 제작 워커 재시도판단 세 곳에서 확인
+- [[jev-typed-classification]] — `lampas` 생태계 내부 명칭 "Jev": 자유 텍스트 생성 없이 typed 질문만 `POST /v1/ai/systemone`에 질의해 입력 토큰만 과금되는 저비용 분류 패턴. sports-wiki ingest 게이트·Fixs 오류 triage·[[dalar-web-first]] 제작 워커 재시도판단·[[lampas-web-flow]] 노드 자동화(클립·페르소나·템플릿 선택) 네 곳에서 확인
 - [[realtime-photo-avatar-voice-ai-landscape]] — 실시간 사진 아바타+음성 대화 AI 오픈소스·API 지형도(2026-09 조사): OpenAvatarChat/SoulX-FlashHead/Qwen3-Omni 등 GPU 자가호스팅 조합 vs [[tavus]]/HeyGen LiveAvatar API 조합 비교, `[[toktalk]]` virtual.toktalk.ai가 API 경로 채택
 - [[self-healing-error-pipeline-design]] — 자동 오류수집→AI 수정→검증→재배포 파이프라인 설계 원칙(자동수정/배포 분리, worktree 격리+충돌시 중단, 오류로그 비신뢰, fingerprint 병합, 하루 실행한도). [[lampas-agent]] Fixs 탭(2026-09-21 최초 신설) 실제 구현 근거
 
@@ -251,3 +261,7 @@
 - [[resumable-worker-checkpoint-resume]] — "닫아도 계속된다"는 서버 워커가 실제론 진행정보를 덮어쓰거나 재시도횟수가 초기화될 때: 저장된 완료 단계 기준 순차 재개, 관리자 트리거 작업도 동일 워커 경로로 통합, 접수 불확실 시 중복과금 방지 위해 관리자 확인으로 에스컬레이션
 - [[scene-reference-lock-visual-consistency]] — 순차 이미지 생성에서 컷마다 톤·소품·구도가 흔들릴 때: 원본사진=인물확인용/첫 장면=촬영기준 역할 분리, 재발 시 참고 레퍼런스를 기준장면+직전장면 두 개로 축소해 충돌 제거
 - [[mutual-referral-coupon-pattern]] — 개인 초대코드로 초대자·피초대자 양쪽에 기간·상품 한정 쿠폰을 발급하는 상호 추천 시스템: 자기추천/중복등록 차단, 결제 승인 재시도 시 멱등 처리, 관리자·고객 조회 화면 분리
+- [[tailscale-funnel-large-payload-bypass]] — 공개 Tailscale Funnel로 대용량 파일을 옮기면 대역폭 제한으로 느려질 때: 작은 파일로 경로별 시간 측정→S3 직접 업로드/다운로드로 우회→재시도는 결과 재사용(원 작업 재시작 금지)
+- [[cross-subdomain-session-handoff]] — 로그인 저장소가 분리된 여러 서브도메인 이동 시 일회용 교환 코드로 현재 로그인 계정을 이어받기: 토큰 대신 짧게 만료되는 코드, 대상의 다른 계정은 강제 전환, 교환 후 URL에서 코드 제거
+- [[execution-run-scoped-status-vs-stale-notification]] — 취소 후 재시작 시 이전 실행의 늦은 알림이 새 상태를 덮어쓸 때: 상태 갱신에 실행(run) ID를 붙여 활성 run과 불일치하는 알림은 무시
+- [[accept-then-poll-for-slow-ai-jobs]] — 게이트웨이 타임아웃보다 오래 걸리는 AI 작업을 동기 대기 대신 즉시 접수응답+별도 폴링으로 바꿔 타임아웃을 근본 제거, 반복 폴링이 작업을 중복 실행하지 않도록 멱등 처리
