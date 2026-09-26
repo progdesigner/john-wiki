@@ -147,6 +147,11 @@ Dalar 앱**이다.
 소속 미상)으로 보내 등록하는 버튼 추가. 영상·제목을 미리 채우고 릴스 채널을 선택하도록 연결,
 실제 등록까지 확인(테스트 패키지는 초안 저장, 외부 게시는 하지 않음).
 
+**2026-09-26 ingest 정정**: 위 "소속 미상"은 이 세션 소스만으로는 확인 불가했던 것이고,
+2026-09-20 별도 세션([[2026-09-20-lampas-package-pulse페르소나-릴스자동작성-톤선택]])에서
+Package 앱이 같은 `lampas-system` 저장소 소속이며 `package.lampas.io`에 배포돼 있음이
+확인됨 → 정식 엔티티 [[lampas-web-package]] 참고.
+
 ## Pay 분리(`lampas-web-pay`)
 
 기존엔 `pay.lampas.io` 기본 진입 화면에 First 상품까지 섞여 나왔다. 요청("`pay.lampas.io`로
@@ -182,4 +187,4 @@ First 로고 + 밝은 크림 배경으로 **1200×630 공유 이미지** 제작,
 - 토픽: [[jev-typed-classification]](세 번째 사용처)
 - 스킬: [[scene-reference-lock-visual-consistency]] · [[mutual-referral-coupon-pattern]] ·
   [[resumable-worker-checkpoint-resume]]
-- 연동: `lampas-web-pay`(`pay.lampas.io`, 결제 공유), Package 앱(소속 미상, 콘텐츠 게시)
+- 연동: `lampas-web-pay`(`pay.lampas.io`, 결제 공유), [[lampas-web-package]](콘텐츠 등록·게시)

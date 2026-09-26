@@ -2299,3 +2299,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 토픽 갱신: [[jev-typed-classification]] (같은 날 다른 저장소의 별개 TypeSafe 통합 각주 추가,
   사용처 번호에는 안 넣음) · [[self-imposed-vs-provider-limit-diagnosis]] (동시성 상한 진단 사례 각주).
 - `AI_CONTEXT.md`는 40줄 예산 소진 상태라 변경하지 않음(운영/버그수정 상세는 위 페이지들로 충분).
+
+## [2026-09-26] ingest | Lampas Package: Pulse 페르소나 릴스 자동작성·톤선택 (source: ea7c5e91-2124-4ae3-b563-489852ba5728.md)
+- `Tool: codex` 세션(2026-09-20 KST, `lampas-system`). `[[lampas-web-package]]`("새 패키지" 화면,
+  `package.lampas.io`) 최초 정식 엔티티화 — 이전엔 `[[dalar-web-first]]`·`[[lampas-web-reels]]`에
+  "소속 미상"으로만 기록돼 있던 걸 이 세션이 정체 확인.
+- 기능: `[[lampas-agent]]` Pulse 페르소나로 릴스 제목·본문 자동작성 + 해시태그 전용 입력(최대 5개,
+  세 화면·API 일관 적용) 구현·배포. 이어 페르소나 무시 버그(미선택 시 강제되던 1인칭 캡션 기본
+  프롬프트 + 다른 영상 제목·댓글 혼입) 진단·수정 → API 재배포. 마지막으로 페르소나(관점·타겟)와
+  분리된 문체 톤 5종(전문 채널답게 기본값·친근하게·생동감있게·담백하게·페르소나 그대로) 신설,
+  실제 AI로 비교 검증 후 웹·API 배포.
+- 세션 신설: [[2026-09-20-lampas-package-pulse페르소나-릴스자동작성-톤선택]].
+- 엔티티 신설: [[lampas-web-package]].
+- 엔티티 갱신: [[lampas-web-reels]](Package 링크) · [[dalar-web-first]]("소속 미상" 정정) ·
+  [[lampas-studio]](스포츠 클립 파이프라인 앱 목록에 Package 추가) · [[lampas-agent]](Pulse
+  소비처 2번째로 Package 추가).
+- 스킬 신설: [[persona-prompt-default-override-audit]] — 페르소나/설정 무시 버그 진단 절차.
+- `AI_CONTEXT.md`는 39/40줄 예산 소진 상태라 변경하지 않음(직전 09-26 lint 세션과 동일 판단).

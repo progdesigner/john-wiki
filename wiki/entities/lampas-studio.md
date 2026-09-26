@@ -307,12 +307,16 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   전체(영상 수집→Clips→Copy→Reels→Edit→Package)를 "Work" 노드 그래프로 연결하는 오케스트레이션 허브.
   Jev 기반 노드 자동화, Tailscale Funnel 대역폭 병목 우회(S3 직접 전송), 서브도메인 간 계정 이어받기
   (SSO)까지 이 세션에서 구현·배포됨 → [[2026-09-20-lampas-flow-만들기]]
-- **[[lampas-web-copy]]**("Copy") · **[[lampas-web-reels]]("Reels")** · **[[lampas-web-status]]**
+- **[[lampas-web-copy]]**("Copy") · **[[lampas-web-reels]]("Reels")** · **[[lampas-web-package]]**
+  ("Package", `package.lampas.io`, 2026-09-20 세션에서 정식 엔티티화 — 이전엔 다른 페이지에서
+  "소속 미상"으로만 언급) · **[[lampas-web-status]]**
   (`status.lampas.io`, 2026-09-25 status.claude.com 형태로 처음부터 구현·운영 배포 완료 —
   컴포넌트 40개 60초 프로브·자동 인시던트·90일 업타임 바) · **[[lampas-web-tools]]**(`tools.lampas.io`,
-  AI 생성 도구 13개) — 각각 카피 생성, 클립 편집/페르소나 선택, 시스템 상태 표시, 범용 AI 생성 도구
-  모음. Copy·Tools·Fixs 삭제기능 상세는 [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]]
-  세션, status 전체 구현·배포 절차는 [[lampas-web-status]] 엔티티 · [[2026-09-25-status-서비스-구축-배포]]
+  AI 생성 도구 13개) — 각각 카피 생성, 클립 편집/페르소나 선택, 완성 영상 등록·SNS 게시 준비,
+  시스템 상태 표시, 범용 AI 생성 도구 모음. Copy·Tools·Fixs 삭제기능 상세는
+  [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] 세션, Package의 Pulse 페르소나
+  자동작성·톤 5종은 [[2026-09-20-lampas-package-pulse페르소나-릴스자동작성-톤선택]] 세션, status
+  전체 구현·배포 절차는 [[lampas-web-status]] 엔티티 · [[2026-09-25-status-서비스-구축-배포]]
   세션 참고. 이 앱들은 위 `AGENTS.md` 목록(Lampas 9/Dalar 6/Talk 9/Iileex 1)에 없어 두 소스(코드
   스냅샷 vs 실제 세션 관찰)가 서로 다른 앱 부분집합만 비추고 있음을 시사 — `AGENTS.md`가 전체 앱을
   다 열거하지 않거나, 클립 파이프라인이 별도 워크스페이스일 가능성 병기.
@@ -371,7 +375,8 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
   [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]]
 - 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] ·
-  [[lampas-web-reels]] · [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
+  [[lampas-web-reels]] · [[lampas-web-package]](`package.lampas.io`) ·
+  [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
