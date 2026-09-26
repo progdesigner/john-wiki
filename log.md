@@ -2128,3 +2128,17 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `AI_CONTEXT.md` 갱신: lampas-studio 줄 끝에 lampas-web-music 모델 업그레이드 요약 추가(기존 물리
   라인 재사용, 40줄 이내 유지).
 - `index.md` Sessions 1신설·Entities(lampas-web-music 신설, lampas-web-tools·atlas-cloud 갱신) 반영.
+
+## [2026-09-26] ingest | 복지리 로고 CDN 이전·광고배너 크기 수정 (source: 17dd0686-4787-44b1-b034-af317fa9c11b.md)
+- 원본을 `raw/conversations/2026-09-21-복지리-로고-cdn이전-광고배너크기수정.md`로 보관.
+- 세션 요약 신설: [[2026-09-21-복지리-로고-cdn이전-광고배너크기수정]].
+- 엔티티 신설: [[bokziri-system]] — 이 위키 최초 상세 노출(`~/Works/bokziri/bokziri-system`, "복지"
+  정보 서비스, 웹+토스 미니앱+API 3구성). [[works-project-portfolio]] "미문서화" 목록에서 제외 반영.
+- 스킬 신설: [[dead-external-cdn-domain-migration]] — 죽은 외부 CDN 도메인(`cdn.dbs.best`)에서 자사
+  S3+CloudFront(`cdn.bokziri.com`)로 이전하는 절차(S3 복사+DB URL 치환+3rd-party DNS 병목+onError
+  방어). 기존 [[new-subdomain-cloudfront-wildcard-deploy]]와 와일드카드 인증서 재사용 원칙은 공유하나
+  시나리오가 달라 분리, 양쪽에 상호 링크 추가.
+- `AI_CONTEXT.md`는 갱신하지 않음 — 일회성 인프라 유지보수 세션으로 판단(진행 중 프로젝트 상태 변화나
+  확정된 결정에 해당하지 않음), 이미 39줄로 한도에 근접.
+- `index.md` Sessions 1신설·Entities(bokziri-system 신설)·Topics(works-project-portfolio 설명 유지)·
+  Skills(dead-external-cdn-domain-migration 신설) 반영.

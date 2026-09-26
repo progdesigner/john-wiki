@@ -1,8 +1,12 @@
 ---
 tags: [topic, works, portfolio, git, ops]
 created: 2026-07-16
-updated: 2026-07-19
+updated: 2026-09-26
 ---
+> **2026-09-26 추가 갱신**: `bokziri-system`이 "미문서화" 목록에서 제외됨 — 2026-09-21
+> [[2026-09-21-복지리-로고-cdn이전-광고배너크기수정]] 세션에서 처음 상세 조사되어 [[bokziri-system]]
+> 엔티티 생성(웹+토스 미니앱+API 3구성, 회사 로고/커뮤니티/자료 도메인 모델).
+>
 > **2026-07-19 추가 갱신 (2)**: [[2026-07-17-works-저장소-일괄최신화-pull]] 세션(2026-07-17 04:36 UTC,
 > 아래 07-18 세션보다 하루 앞섬) — "모든 프로젝트를 최신화 해줘"(pull 방향, [[multi-repo-safe-bulk-update]]
 > 두 번째 재사용). `bokziri-system`·`cwc-system`·`elevino-system`(dev)·`lampas-system`(=[[lampas-studio]])
@@ -48,7 +52,7 @@ updated: 2026-07-19
 | `cwc/elevino-operator` | (미문서화) | 이미 최신 (07-15·07-17 모두) |
 | `cwc/cwc-system` | [[cwc-system]] | 07-15: 이미 최신(06:42 클론 직후). 07-17: `main`에서 1커밋 pull(주간 매출 리포트 도구 추가) |
 | `goraesa/goraesa-system` | (미문서화) | 07-15: 업데이트됨(360파일, +45만 라인 — 대형 변경). 07-17: 이미 최신, **`dev` 브랜치** 확인 |
-| `bokziri/bokziri-system` | (미문서화) | 07-15: 업데이트됨(281파일). 07-17: `main`에서 3커밋 pull(35파일, +562/−520) |
+| `bokziri/bokziri-system` | [[bokziri-system]] | 07-15: 업데이트됨(281파일). 07-17: `main`에서 3커밋 pull(35파일, +562/−520). 09-21: CDN 도메인 이전+광고배너 수정으로 상세 조사됨 |
 | `ai-labs/ai-labs-notes` | (미문서화) | 이미 최신 (07-15·07-17 모두) |
 | `dark/dark-system` | [[dark-system]] | 07-15: 이미 최신(클론 직후). 07-17: **보류** — 로컬 변경 1개 + `main` 원격 4커밋 뒤처짐, 사용자 미응답으로 미해결 종료 |
 | `arca8/arca8-system` | (미문서화) | 07-15: 이미 최신. 07-17: 이미 최신, **`dev` 브랜치** 확인 |
@@ -56,14 +60,14 @@ updated: 2026-07-19
 
 ## 미문서화 저장소 — 주의
 
-`elevino-operator`, `goraesa-system`, `bokziri-system`, `ai-labs-notes`, `arca8-system`은
+`elevino-operator`, `goraesa-system`, `ai-labs-notes`, `arca8-system`은
 2026-07-15 최신화 세션에서 **이름과 변경 규모(파일 수·라인 수)만** 확인됐고 내용(제품 성격·스택·목적)은
 전혀 조사되지 않았다. 임의로 성격을 추정해 엔티티를 만들지 않았다 — 실제로 다뤄지는 세션이 생기면 그때
-전용 엔티티 페이지를 만들 것. (`elevino-system`·`cwc-system`·`dark-system`은 같은 날 후속 세션에서
-조사되어 엔티티가 생겼다 — 위 표 참고. `dark-system`도 모노레포 내 앱 전체가 확인된 건 아니고
-`apps/dark-toss-api` 하나만 조사됨 → [[dark-system]] 참고.)
+전용 엔티티 페이지를 만들 것. (`elevino-system`·`cwc-system`·`dark-system`은 같은 날 후속 세션에서,
+`bokziri-system`은 2026-09-21 세션에서 조사되어 엔티티가 생겼다 — 위 표 참고. `dark-system`도 모노레포
+내 앱 전체가 확인된 건 아니고 `apps/dark-toss-api` 하나만 조사됨 → [[dark-system]] 참고.)
 
 ## 관련
-- 세션: [[2026-07-15-dark-system-저장소-클론]], [[2026-07-15-cwc-system-저장소-클론]], [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]], [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]], [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]], [[2026-07-15-dark-toss-api-장전매수-코드조사]], [[2026-07-17-works-저장소-일괄최신화-pull]], [[2026-07-18-works-전체저장]]
-- 스킬: [[multi-repo-safe-bulk-update]], [[multi-repo-bulk-commit-push]], [[credit-ledger-balance-pattern]], [[config-flag-gate-audit]], [[trading-feature-flag-auto-exclude-manual-allow]], [[deploy-sandbox-pnpm-shim]]
-- 알려진 저장소 엔티티: [[lampas-harness]] · [[lampas-studio]] · [[toktalk]] · [[john-wiki]] · [[cwc-system]] · [[elevino-system]] · [[dark-system]] · [[dark-upbit-api]] · [[dark-upbit-web]] · [[dark-toss-api]] · [[dark-toss-web]]
+- 세션: [[2026-07-15-dark-system-저장소-클론]], [[2026-07-15-cwc-system-저장소-클론]], [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]], [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]], [[2026-07-15-dark-upbit-toss-트레이딩앱-기능개발-배포]], [[2026-07-15-dark-toss-api-장전매수-코드조사]], [[2026-07-17-works-저장소-일괄최신화-pull]], [[2026-07-18-works-전체저장]], [[2026-09-21-복지리-로고-cdn이전-광고배너크기수정]]
+- 스킬: [[multi-repo-safe-bulk-update]], [[multi-repo-bulk-commit-push]], [[credit-ledger-balance-pattern]], [[config-flag-gate-audit]], [[trading-feature-flag-auto-exclude-manual-allow]], [[deploy-sandbox-pnpm-shim]], [[dead-external-cdn-domain-migration]]
+- 알려진 저장소 엔티티: [[lampas-harness]] · [[lampas-studio]] · [[toktalk]] · [[john-wiki]] · [[cwc-system]] · [[elevino-system]] · [[dark-system]] · [[dark-upbit-api]] · [[dark-upbit-web]] · [[dark-toss-api]] · [[dark-toss-web]] · [[bokziri-system]]

@@ -115,6 +115,7 @@
 - [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] — `Tool: codex` 세션(2026-09-24~25로 이어짐). 블루리본 맛집 지도 `spot.lampas.io` 구축. bluer.co.kr 스크래핑 403 차단 → 첨부 엑셀 579곳 → 구글 시트 반영 738곳(블루리본+다이닝코드, 중복 5건 병합)까지 데이터 2단계 확장. 지도 프로바이더 카카오→OpenStreetMap+Nominatim 지오코딩→네이버(401 인증 실패)→**OpenStreetMap 확정** 3회 전환, 최종 502곳 지도 표시. 폐업/정보 신고 기능(개인 숨김+운영자 검토 후 전체 제외) 추가. [[lampas-web-spot]] 스텁 해소
 - [[2026-09-24-pulse-페르소나-카피점수-구조화-개선]] — `Tool: codex` 세션(2026-09-24 시작, 2026-09-26까지 이어진 장기 세션). [[lampas-agent]]의 Pulse 하위 시스템(페르소나·카피 생성·채점) 최초 상세 확인. "페르소나가 유아틱, 카피 점수는 높은데 일반적" 문제 제기 → 4영역 8세부항목 채점 구조 도입·범용문구 69점 상한 배포 → 사용자가 "일반적인 제목이 더 좋아보이는데?"라고 반박 → 익숙한 표현과 근거없는 과장을 구분하도록 정정, 상한 철회 후 재배포(API 1,152개·웹 36개 테스트 통과). 마지막 reels 카드 스트립 요청 3건은 응답 없이 트랜스크립트 종료(다른 도구 세션에서 별도 완료 추정, 미확인)
 - [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] — `Tool: claude` 세션. `lampas-web-music`(`music.lampas.io`)의 [[atlas-cloud]] 경유 minimax 음악 생성 모델을 2.6→3.0으로 교체(요청 필드 동일해 호출 코드 무변경, 곡당 150크레딧 유지), lampas-api+web-music 운영 배포까지 완료. `tools.lampas.io`의 `music-gen` 툴은 범위 밖이라 2.6 유지 — 자매 앱 버전 불일치 발생. 이 위키에 `lampas-web-music` 최초 상세 노출. 배포에 다른 미커밋 변경(dalar·flow-works·pulse 등)이 함께 실려 커밋은 미완료로 남음
+- [[2026-09-21-복지리-로고-cdn이전-광고배너크기수정]] — `Tool: claude` 세션(작업폴더 `bokziri-system`, 이 위키 최초 상세 노출). 회사 로고가 죽은 외부 도메인 `cdn.dbs.best`를 가리켜 전면 깨짐 → S3 1.5GB 복사+CloudFront 신규 생성(기존 와일드카드 인증서 재사용)+운영 DB 5테이블 13,443행 URL 치환+onError placeholder 방어, DNS가 Squarespace에 있어 CNAME은 사용자가 직접 등록. 웹·토스 미니앱 재배포 3왕복 후 커밋·푸시. 이어서 AdSense 고정크기 배너가 항상 320×50만 채워지던 버그를 뷰포트 미디어쿼리+가운데정렬로 수정·배포
 
 ## Entities
 
@@ -156,6 +157,7 @@
 - [[elevenlabs]] — 외부 TTS 프로바이더. [[toktalk]] 음성 스택 + 하네스 `tts-stream`(구현 착수·완료 미확인, Web Speech API와 별개) (2026-08-31 lint 통합)
 - [[atlas-cloud]] — 외부 이미지/영상/음악 생성 대행 서비스. [[lampas-studio]] Actor/Actor+Object 촬영·레퍼런스 시트에서 [[gemini]]와 동일 시그니처로 분기(gpt-image-2·nano-banana-2·grok-imagine·wan-2.7 라우팅), [[lampas-web-music]]의 minimax 음악 생성도 경유 (2026-09-07 lint 신설, 2026-09-22 음악 라우팅 확인)
 - [[grok]] — xAI 텍스트 분석 모델. [[lampas-studio]] 레퍼런스 분석 1순위(Gemini 폴백)·[[lampas-web-ai]] 필드 추출, dark-system 모델필터 예시명과는 무관 (2026-09-07 lint 신설)
+- [[bokziri-system]] — `~/Works/bokziri/bokziri-system`, "복지"(직장 복지) 정보 서비스로 추정. 웹(`bokziri-web-www`)+토스 미니앱(`ait deploy`)+API 3구성. 2026-09-21: 죽은 외부 CDN 도메인(`cdn.dbs.best`)에서 `cdn.bokziri.com`(자사 S3+CloudFront)로 전면 이전, AdSense 배너 고정크기 버그 수정
 - [[scott-jeun-sylvan-group]] — Scott Jeun(`scottjeun@thesylvangroup.com`)·Clara K, The Sylvan Group(싱가포르) 신원 추적 통합 페이지 ([[srkk]]·[[fy-group]]·[[sylvan-korea]]·[[cwc-fy-group-whisky-dispute]]에 흩어져 있던 동일인 추정 근거를 2026-08-03 lint로 통합)
 
 ## Topics
@@ -239,3 +241,4 @@
 - [[selective-hunk-commit-shared-file]] — 같은 파일에 이번 작업 변경분과 다른 미커밋 변경분이 섞였을 때 헝크(git add -p) 단위로 이번 작업분만 골라 커밋, 분리 불가능하면 배포 상태로 포함 타당성 확인 후 함께 커밋
 - [[nominatim-batch-geocode-progressive-rollout]] — 지도 키 없이 대량 주소를 핀으로 표시할 때: OpenStreetMap+Nominatim(초당 1회 제한·캐싱)으로 지오코딩, 건물번호 일치만 인정하는 신뢰도 필터로 오표시 방지, 확인 건수 늘 때마다 단계적 배포
 - [[copy-rubric-familiar-vs-filler]] — 마케팅 카피 채점 루브릭에서 "익숙한 표현"과 "근거 없는 빈말/과장"을 구분: 실제 좋은 제목 예시로 룰 먼저 시험→소재를 바꿔도 성립하면 빈말·안 하면 유효한 훅→기계적 점수 상한은 구분이 끝난 축에만 적용→항목 분해로 사람이 반박 가능하게
+- [[dead-external-cdn-domain-migration]] — 죽은 외부 CDN 도메인을 자사 S3+CloudFront로 이전: 원인 확정(도메인 죽음 vs 파일 없음)→S3 서버사이드 복사+키대조→CloudFront 신규(와일드카드 인증서 재사용)→DB URL 백업 후 두 형태 모두 치환(이미 깨진 값은 제외)→onError 방어→3rd-party DNS면 사용자 등록 필수 안내→공개 리졸버로 전파 확인

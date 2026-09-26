@@ -34,4 +34,9 @@ tags: [deploy, cloudfront, dns, aws, lampas-studio]
 - 배포는 반드시 저장소의 `./scripts/deploy-*.sh`로만 한다(수동 S3/CloudFront 개별 명령 금지) —
   이 원칙은 [[lampas-studio]] 제품 CLAUDE.md/AGENTS.md에 명문화되어 있다.
 
+## 관련
+- [[dead-external-cdn-domain-migration]] — 같은 "와일드카드 인증서 재사용" 원칙을 공유하지만, 신규
+  앱 공개가 아니라 죽은 외부 도메인에서 기존 자산을 이전하는 시나리오(S3 복사+DB URL 치환+3rd-party
+  DNS 병목 포함)라 별도 스킬로 분리됨.
+
 ## 출처: [[2026-09-25-lampas-web-fit-구축-배포]]
