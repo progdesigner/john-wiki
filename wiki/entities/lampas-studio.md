@@ -271,6 +271,14 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   **내장 오리지널 비트** 사용(라이선스 미확인 회피). 배포는 기존 `deploy-web.sh` 경로 + `fit.lampas.io`
   전용 CloudFront 신규 생성 + 기존 Lampas 와일드카드 인증서로 HTTPS 적용. → [[2026-09-25-lampas-web-fit-구축-배포]]
 
+## Jev(TypeSafe) 도입 검토 — 미채택 자문 (2026-09-20 세션)
+
+`[[progdesigner]]`의 요청으로 [[lampas]]가 `lampas-api`의 `references`·`orchestration`·`trends`·
+`product-insights` 모듈을 훑어 `[[jev-typed-classification]]`(typed 질문 기반 저비용 판정) 적용처를
+추천만 한 자문 세션 — **코드 수정 없음**. 우선순위 1위는 레퍼런스 탐색 결과 재정렬
+(`reference-explore.service.ts:217`)이었으나 최종 결론은 "전면 도입 보류"였다. 상세 →
+[[jev-typed-classification]] "미채택 후보 5개" 절 · [[2026-09-20-jev-활용처-추천-lampas-system]].
+
 ## 스포츠 클립 파이프라인 — 에이전트·위키·Copy·Reels·Status·Tools (2026-09-25 세션에서 첫 노출)
 
 `AGENTS.md` 2026-09-26 스냅샷 절(위)의 3라인 목록엔 등장하지 않는 앱들이 같은 저장소 `lampas-system`에
@@ -345,6 +353,7 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]]
+- 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]]
 - 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] ·
   [[lampas-web-reels]] · [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`)

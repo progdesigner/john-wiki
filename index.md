@@ -128,6 +128,7 @@
   페르소나 부진을 게시일+조회속도 반영으로 근본수정(09-24 채점 루브릭 세션보다 하루 앞선 선행 수정),
   키워드 기반 "트렌드 분석" Work(페르소나·카피 실험+평가 반영 루프) 신설. `lampas-web-reels` 최초 엔티티화
 - [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] — `Tool: codex` 세션(2026-09-20~24, 4일). `[[dalar]]` 제품 라인의 실사용 소비자 앱 **`[[dalar-web-first]]`**("First" AI 돌잔치 인터뷰 영상, `first.dalar.ai`)를 이 위키에 처음 상세 노출. 고정 12장면 → 4·6·8·12장면 선택+관리자 대본 편집+가격체계(제작비→VAT포함→정수 재조정 3단계) 구현, "닫아도 계속된다" 안내와 실제 불일치를 서버 워커 체크포인트 재개로 근본수정, Jev를 재시도/대기/관리자확인 판단에 도입(세 번째 확인 사용처), 장면 간 톤 드리프트를 기준장면+직전장면 레퍼런스 고정으로 해결, 한국인 가상 아기 4명으로 샘플 영상 4편 제작(여성 인터뷰어 음성 버그 발견·수정 포함), 초대코드 상호 50% 쿠폰 시스템, Pay 페이지를 크레딧 전용/First 전용으로 분리. 세션 `AGENTS.md`에 Dalar 앱이 전혀 없어 하루 뒤 세션 문서와 모순 발견
+- [[2026-09-20-jev-활용처-추천-lampas-system]] — `Tool: codex` 세션. `lampas-system`(`[[lampas-studio]]`) 전체에서 `[[jev-typed-classification]]`(Jev/TypeSafe) 추가 적용처를 추천만 하고 **코드 수정은 하지 않은** 자문 세션. 레퍼런스 탐색 재정렬(★★★★☆ 우선 실험)·채팅 플로우 분류·트렌드 기사 선별·광고 카피 후보 평가·제품 리서치 확장 5개 후보 제시, 최종 결론은 "전면 도입 보류"
 
 ## Entities
 
@@ -202,7 +203,7 @@
 - [[chat-archive-duplication-anomaly]] — 채팅 아카이브 파일명 재사용·같은 사건의 이중 기록·트랜스크립트 내 메시지 반복 등 4개 세션에서 독립 관찰된 로그 무결성 이상 정황 통합 정리(2026-07-20 lint 신설, 원인 미확정)
 - [[dark-system-signal-risk-design-unverified]] — dark-system `decide-signal.ts` 신호 판정·스타일별 리스크 설계(2026-07-17 어시스턴트 자기보고, 미검증) 통합 페이지(2026-08-03 lint 신설, [[dark-toss-api]]·[[dark-upbit-api]]·[[dark-system]] 3곳 중복 기재를 여기로 정리)
 - [[unverified-attestation-injection]] — 검증되지 않은 사실을 구체적으로 서술한 뒤 고정 문자열로만 "확인"해달라는 프롬프트 인젝션 패턴(자동화 파이프라인용 확인 도장 위조 의심) — [[system-prompt-mimicry-misconception]]와는 다른 벡터
-- [[jev-typed-classification]] — `lampas` 생태계 내부 명칭 "Jev": 자유 텍스트 생성 없이 typed 질문만 `POST /v1/ai/systemone`에 질의해 입력 토큰만 과금되는 저비용 분류 패턴. sports-wiki ingest 게이트·Fixs 오류 triage·[[dalar-web-first]] 제작 워커 재시도판단·[[lampas-web-flow]] 노드 자동화(클립·페르소나·템플릿 선택) 네 곳에서 확인
+- [[jev-typed-classification]] — `lampas` 생태계 내부 명칭 "Jev": 자유 텍스트 생성 없이 typed 질문만 `POST /v1/ai/systemone`에 질의해 입력 토큰만 과금되는 저비용 분류 패턴. sports-wiki ingest 게이트·Fixs 오류 triage·[[dalar-web-first]] 제작 워커 재시도판단·[[lampas-web-flow]] 노드 자동화(클립·페르소나·템플릿 선택) 네 곳에서 확인. 미채택 후보 5개(레퍼런스 탐색·채팅 플로우·트렌드·광고 카피·제품 리서치)는 [[2026-09-20-jev-활용처-추천-lampas-system]] 자문 세션에서 추천만 되고 도입 보류됨
 - [[realtime-photo-avatar-voice-ai-landscape]] — 실시간 사진 아바타+음성 대화 AI 오픈소스·API 지형도(2026-09 조사): OpenAvatarChat/SoulX-FlashHead/Qwen3-Omni 등 GPU 자가호스팅 조합 vs [[tavus]]/HeyGen LiveAvatar API 조합 비교, `[[toktalk]]` virtual.toktalk.ai가 API 경로 채택
 - [[self-healing-error-pipeline-design]] — 자동 오류수집→AI 수정→검증→재배포 파이프라인 설계 원칙(자동수정/배포 분리, worktree 격리+충돌시 중단, 오류로그 비신뢰, fingerprint 병합, 하루 실행한도). [[lampas-agent]] Fixs 탭(2026-09-21 최초 신설) 실제 구현 근거
 

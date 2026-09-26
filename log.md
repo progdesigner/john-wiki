@@ -2237,3 +2237,16 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `AI_CONTEXT.md` 갱신: [[toktalk]] 줄에 2026-09-20~21 사실 추가(39줄, <40 준수)
 - `index.md` 갱신 (Sessions 1신설·Entities 1갱신·Topics 1갱신·Skills 1신설)
 - 특이사항: 트랜스크립트 중간에 `<environment_context>`로 날짜가 2026-09-20→2026-09-21로 바뀌어 다일(多日) 세션임을 확인. NSFW 거부는 요청을 진행하지 않은 사실의 기록일 뿐 새로운 생성물 제작 아님. 삭제 전 사용자에게 범위(UI 제외 vs 데이터 삭제)를 직접 되물은 절차는 되돌리기 어려운 작업의 모범 사례로 세션에 남김(별도 스킬 미추출 — 일반 원칙이라 페이지화 불필요로 판단).
+
+## [2026-09-26] ingest | Jev(TypeSafe) 활용처 추천 lampas-system 전체 (source: e9eeca3d-365c-45cb-ba18-83b8f4a013bb.md)
+- 원본: `raw/conversations/2026-09-20-jev-활용처-추천-lampas-system.md`
+- 세션 신설: [[2026-09-20-jev-활용처-추천-lampas-system]] — `lampas-system`(lampas-api) 전체를 훑어
+  Jev 적용처 5개(레퍼런스 탐색 재정렬·채팅 플로우 분류·트렌드 기사 선별·광고 카피 후보 평가·제품
+  리서치 확장)를 추천만 하고 **코드 수정은 하지 않은** 자문 세션. 최종 결론은 "전면 도입 보류",
+  레퍼런스 재정렬만 소규모 실험 권장.
+- 토픽 갱신: [[jev-typed-classification]] — "미채택 후보 5개" 절 신설. 기존 4개 실제 구현 사용처
+  (sports-wiki·Fixs·dalar-web-first·lampas-web-flow)와 구분해 병기.
+- 엔티티 갱신: [[lampas-studio]] — "Jev(TypeSafe) 도입 검토 — 미채택 자문" 절 신설, 관련 링크 추가.
+- `index.md` 갱신 (Sessions 1신설·Topics 1갱신 라인 반영).
+- 특이사항: 소스 파일명이 "Lampas Agent 개선"이지만 실제 내용은 스포츠 클립 데몬 `[[lampas-agent]]`가
+  아니라 `lampas-system` 저장소(`[[lampas-studio]]`) 전체 대상 — 세션 페이지에 명시적으로 정정 기록.

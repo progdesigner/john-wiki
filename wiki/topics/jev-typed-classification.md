@@ -34,6 +34,20 @@ updated: 2026-09-26
    "TypeSafe"라 확인됨(이 토픽 제목의 근거). → [[2026-09-20-lampas-flow-만들기]] "Jev 노드 자동화" 절 ·
    [[lampas-web-flow]]
 
+## 미채택 후보 5개 (2026-09-20 자문 세션, 코드 수정 없음)
+위 네 사용처와 별개로, `[[lampas]]`가 `[[lampas-studio]]`(`lampas-system`) 전체 기능을 훑어 Jev를
+추가 적용할 만한 곳을 추천만 하고 **작업은 하지 않은** 세션이 있다. 우선순위·별점:
+
+1. **레퍼런스 탐색 결과 재정렬** (`reference-explore.service.ts:217`) — ★★★★☆ 우선 실험 권장
+2. **채팅 플로우 progress/clarify/cancel 분류** (`orchestration.service.ts:487` `analyzeFlowTurn`) — ★★★☆☆
+3. **트렌드 기사·키워드 관련도 판정** (`trends-search.lib.ts`, `trends.service.ts:160`) — ★★★☆☆
+4. **광고 카피 후보 기준별 평가**(Composite Scoring) (`product-insights.service.ts:189`) — ★★☆☆☆
+5. **제품 리서치 외부 근거 추가**(jev-search 패턴 응용) (`product-insights.service.ts:139`) — ★★☆☆☆
+
+최종 결론은 **전면 도입 보류** — 레퍼런스 재정렬만 필요시 소규모 비교 실험. 텍스트 입력만 지원(이미지
+분위기 평가 불가), 가격은 입력 100만 토큰당 $0.042(출력 무료), 한국어 등 CJK는 자체 검증 필요(영어가
+가장 정확). → [[2026-09-20-jev-활용처-추천-lampas-system]]
+
 ## 관찰된 함정
 - 운영 API가 순간적으로 nginx HTML 404를 반환하는 경우가 있어, 이런 비정상 응답은 **재시도 대상**으로
   분류해 처리해야 한다(Fixs 세션에서 세 건 관찰·수정).
@@ -47,5 +61,8 @@ updated: 2026-09-26
   오류 재시도/대기/관리자 확인 판단) · [[lampas-web-flow]] (노드 자동화 클립·페르소나·템플릿 선택)
 - [[deterministic-extraction-vs-llm-rewrite]] — Jev와 마찬가지로 "LLM은 판정/짧은 요약만, 저장은
   결정적 코드"라는 같은 계열의 비용·신뢰성 절충 패턴
+- 미채택 후보(자문만, 미구현): [[lampas-studio]] 레퍼런스 탐색·채팅 플로우·트렌드·광고 카피·제품
+  리서치 → [[2026-09-20-jev-활용처-추천-lampas-system]]
 - 세션: [[2026-09-20-lampas-flow-만들기]] · [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] ·
-  [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]]
+  [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] ·
+  [[2026-09-20-jev-활용처-추천-lampas-system]]
