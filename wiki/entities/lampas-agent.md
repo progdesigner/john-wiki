@@ -64,8 +64,25 @@ updated: 2026-09-26
 - **"확인 필요" 오표시**(2026-09-20): [[lampas-web-flow]]가 재시작된 작업에 이전 실행의 늦은 취소
   알림을 새 상태로 잘못 표시하던 버그 — 실행(run)별 상태 구분으로 수정. 절차 →
   [[execution-run-scoped-status-vs-stale-notification]]
-- 버전 이력: 1.0.16(2026-09-20 전사 지연 개선 배포)→…→1.0.27(2026-09-25 07:40 배포, 경기 엔티티
-  반영)→1.0.28(같은 날 07:5x경, Threads 탭 제거).
+- 버전 이력: **1.0.1(2026-09-18, 두 앱 병합 직후 durable-run 구현 배포 — 위 "최초 노출 시점 재정정"
+  절, 2026-09-26 뒤늦게 ingest)** →…→1.0.16(2026-09-20 전사 지연 개선 배포)→…→1.0.27(2026-09-25
+  07:40 배포, 경기 엔티티 반영)→1.0.28(같은 날 07:5x경, Threads 탭 제거).
+
+## 최초 노출 시점 재정정 — 2026-09-18 (2026-09-26 뒤늦게 ingest)
+위 "관찰된 구조" 절이 기록한 최초 노출 시점(09-20→09-19로 한 차례 정정됨)이 다시 하루 당겨진다.
+2026-09-18 세션([[2026-09-18-lampas-agent-omnara분석-durable-run구현]])에서 원격 12개 커밋을
+fast-forward로 받는 과정에 **`lampas-agent-clips` + `lampas-agent-pulse`(별도 두 앱) →
+`apps/lampas-agent`(단일 앱) 병합**이 확인됐다 — 즉 `apps/lampas-agent`는 이 세션 시점 **직전까지
+두 개로 분리된 앱**이었다가 막 하나로 합쳐진 상태였다. launchd 라벨도 이때 `io.lampas.agent.daemon`으로
+바뀌었다. 같은 세션에서 daemon이 **v1.0.1**로 재배포됐다는 기록이 있어, 아래 "버전 이력"의 최초 확인
+버전 1.0.16보다 앞선 최초 버전 지점을 채운다.
+
+이 세션은 [[omnara]](외부 durable-agent 런타임)와의 비교 분석을 근거로 SQLite 잡 원장·워커 루프·
+`/pulse/ws` 접근 토큰 게이트·AI 결정 단계(`pulse/ai/gateway.ts`의 `AiBudget`)를 구현·배포했다 —
+`AiBudget`은 이틀 뒤 [[lampas-system-ai-call-architecture-audit]](09-20)가 "저장소 전체에서 유일하게
+잘 짜인 AI 클라이언트"로 지목한 바로 그 모듈이라 생존이 교차 확인된다. 반면 SQLite 잡 원장·워커
+루프·접근 토큰 게이트는 이후 09-19·09-20 세션 요약에 언급이 없어 **존속 여부가 미확인** 상태다 —
+상세·구현 내용 전체 → [[2026-09-18-lampas-agent-omnara분석-durable-run구현]].
 
 ## Clips — 유튜브 재생목록 다중선택 임포트 (2026-09-19 최초 구현)
 유튜브 재생목록 URL을 붙여넣으면 영상 목록이 체크박스로 뜨고, 선택한 영상들이 재생목록 순서대로
@@ -219,22 +236,25 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
 - 상위 제품: [[lampas-studio]] (같은 저장소 `lampas-system`)
 - 이름 충돌 대상(별개): [[lampas]] · [[lampas-harness]]
 - 토픽: [[lampas-clip-intelligence]]
-- 세션: [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]](4축 라벨링·단어 타임스탬프 보존을
+- 세션: [[2026-09-18-lampas-agent-omnara분석-durable-run구현]](**가장 이른 노출, 09-26 뒤늦게 ingest** —
+  `lampas-agent-clips`+`lampas-agent-pulse` 병합 직후 상태) ·
+  [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]](4축 라벨링·단어 타임스탬프 보존을
   처음 추가 — 아래 09-19 세션에서 4축은 하루 만에 되돌려짐) ·
-  [[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]](가장 이른 노출) ·
+  [[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]] ·
   [[2026-09-19-pulse-페르소나-단일출처-계정이관-신뢰도개선]](같은 날 병행, Pulse 아키텍처 개편 원출처) ·
   [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
   [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] ·
   [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] · [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-pulse-페르소나-카피점수-구조화-개선]]
-- 엔티티: [[lampas-web-pulse]] · [[lampas-web-copy]] · [[lampas-web-tools]] · [[lampas-web-reels]] · [[lampas-web-flow]]
+- 엔티티: [[lampas-web-pulse]] · [[lampas-web-copy]] · [[lampas-web-tools]] · [[lampas-web-reels]] · [[lampas-web-flow]] · [[omnara]](외부 레퍼런스)
 - 스킬: [[deterministic-extraction-vs-llm-rewrite]] · [[full-stack-feature-removal-audit]] ·
   [[error-fingerprint-path-grouping]] · [[tailscale-funnel-large-payload-bypass]] ·
   [[cross-subdomain-session-handoff]] · [[execution-run-scoped-status-vs-stale-notification]] ·
   [[accept-then-poll-for-slow-ai-jobs]] · [[llm-relative-ranking-vs-absolute-scoring]] ·
-  [[stale-tab-silent-fallback-vs-explicit-reject]]
-- 토픽: [[jev-typed-classification]] · [[self-healing-error-pipeline-design]]
+  [[stale-tab-silent-fallback-vs-explicit-reject]] · [[durable-agent-runtime-design-patterns]]
+- 토픽: [[jev-typed-classification]] · [[self-healing-error-pipeline-design]] ·
+  [[lampas-system-ai-call-architecture-audit]]
 - 외부 AI 프로바이더: [[gemini]](비전 라벨링, `gemini-3.5-flash` 언급)
 - 연관 저장소: [[john-wiki]] (Threads 데이터 소스로 잠깐 연결됐다가 기능 취소로 분리) · [[toktalk]]
   (`talk-api` 운영 키를 Fixs가 임시로 차용)

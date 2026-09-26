@@ -50,7 +50,10 @@ output(`json_schema`)은 전무.
 10. **딱 하나 예외** — `lampas-agent/src/server/pulse/ai/gateway.ts`의 `AiBudget`(미션당 호출 한도+
     토큰 원장+타입드 `AgentError`+`withRetry` 정책)은 이 저장소에서 유일하게 잘 짜인 클라이언트지만,
     다른 어디에도 없다. lampas-api엔 호출 예산·타입드 오류 분류·요청당 사용량 원장이 크레딧 과금 외엔
-    없다.
+    없다. **이 모듈의 출처가 2026-09-26 뒤늦은 ingest로 확인됨**: 이틀 앞선
+    [[2026-09-18-lampas-agent-omnara분석-durable-run구현]] 세션이 [[omnara]](외부 durable-agent
+    런타임) 분석을 근거로 처음 구현한 "AI 결정 단계" 모듈이 바로 이것 — 이 감사 시점(09-20)까지
+    생존했다는 교차 확인이 된다. → [[durable-agent-runtime-design-patterns]]
 
 ## 왜 이게 중요한가
 [[jev-typed-classification]] 도입은 이 목록 중 "판정만 하는" 호출부를 걷어내며 1·2·3·4번 고통을
@@ -59,6 +62,7 @@ output(`json_schema`)은 전무.
 앱 간 포크 해소, tool-calling 도입, 스트리밍 정상화)은 Jev와 무관하게 별도로 정리해야 한다.
 
 ## 관련
-- 세션: [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]]
-- 토픽: [[jev-typed-classification]]
-- 엔티티: [[lampas-studio]] · [[dalar]] · [[lampas-agent]]
+- 세션: [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]] ·
+  [[2026-09-18-lampas-agent-omnara분석-durable-run구현]](10번 항목 `AiBudget`의 실제 출처)
+- 토픽: [[jev-typed-classification]] · [[durable-agent-runtime-design-patterns]]
+- 엔티티: [[lampas-studio]] · [[dalar]] · [[lampas-agent]] · [[omnara]]

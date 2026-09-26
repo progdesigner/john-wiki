@@ -2416,3 +2416,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 스킬 신설: [[parallel-survey-before-feature-gap-analysis]](큰 기능요청 전 병렬 서베이로 갭 확정) · [[asr-long-audio-silent-truncation]](긴 오디오 ASR 통짜전송 시 뒷부분 조용히 잘림 → 청크 분할+리샘플)
 - 모순/시점 정정: `lampas-web-reels`의 페르소나 선택 UI·`editGroup.ts`가 이 세션(09-18)의 산물임을 확인 — 기존 페이지는 이를 09-25 "카드스트립" 세션의 산물처럼 서술했으나 실제로는 09-18에 골격이 먼저 생기고 09-25 세션이 디자인만 다듬은 것. `lampas-agent`의 "훅 점수 절대→상대 순위 전환"(09-19)이 되돌린 "4축 점수"의 최초 도입 시점이 이 ingest로 처음 확정됨(이전엔 출처 미상으로 기록돼 있었음)
 - index.md·AI_CONTEXT.md 갱신 (AI_CONTEXT는 39/40줄 유지)
+
+## [2026-09-26] ingest | lampas-agent 고도화 — omnara 비교분석 + durable run 구현 (source: 81e5186a-9adc-4ea3-ae60-2d50fc174ca0.md)
+- 원본: 2026-09-18T08:23 세션(2026-09-26 뒤늦게 ingest). `raw/conversations/2026-09-18-lampas-agent-omnara분석-durable-run구현.md`로 보관(접근 토큰 1개 레닥트 — [[secrets-plaintext-exposure-pattern]] 정책 적용)
+- 신규 세션 페이지: [[2026-09-18-lampas-agent-omnara분석-durable-run구현]]
+- 신규 엔티티: [[omnara]](외부 레퍼런스 durable-agent 런타임, DB 상태 머신 설계)
+- 신규 스킬: [[durable-agent-runtime-design-patterns]](omnara 분석에서 역추출한 10가지 재사용 패턴)
+- 엔티티 갱신: [[lampas-agent]](최초 노출 시점 09-19→09-18 재정정 — `lampas-agent-clips`+`lampas-agent-pulse` 병합 확인, daemon v1.0.1 버전이력 보강, durable-run 구현 절 추가)
+- 토픽 갱신: [[lampas-system-ai-call-architecture-audit]](10번 항목 `AiBudget`의 실제 출처 세션 교차 확인 추가) · [[secrets-plaintext-exposure-pattern]](4번째 사례 추가 — 접근 토큰 env 파일 방치 + 1회용 토큰 URL 평문 노출, "3회 이상"→"4회 이상"으로 수정)
+- 모순/미확인 사항 기록: 이 세션이 구현한 SQLite 잡 원장·워커 루프·`/pulse/ws` 접근 토큰 게이트의 존속 여부가 이후 09-19·09-20 세션 요약에 언급 없어 **미확인**으로 명시(덮어쓰지 않고 병기)
+- index.md·log.md 갱신 (AI_CONTEXT.md는 39/40줄 한도로 이번엔 갱신 보류 — 존속 여부 불확실한 과거 세션 상세는 위키 페이지로 충분)
