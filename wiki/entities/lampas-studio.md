@@ -194,12 +194,16 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 
 ## "Edit" 템플릿 에디터 — 앱 `[[lampas-web-edit]]`(edit.lampas.io)
 
-> **2026-09-26 ingest 시 시점 정정**: 이 절을 처음 "2026-09-25 세션에서 신규 노출"로 기록했으나,
-> [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]] 세션(같은 저장소, **6일 앞선** `Tool: claude`
-> 세션)에서 이 앱 전체(자막·큐 편집·트랙·레이아웃 템플릿 등 20개 이상 기능)가 처음부터 구현·배포된
-> 것이 뒤늦게 확인됐다. 09-25 세션은 그 계정별 템플릿 데이터의 후속 버그(아래)만 다룬 것이지 앱의
-> 최초 등장이 아니다 — "최초 노출"은 이 위키가 그 세션을 먼저 읽은 관찰 순서일 뿐. 앱 상세는 이제
-> 독립 엔티티 [[lampas-web-edit]] 참고, 이 절은 계정별 템플릿 데이터 버그만 남긴다.
+> **2026-09-26 ingest 시 시점 정정(두 번째)**: 이 절을 처음 "2026-09-25 세션에서 신규 노출"로
+> 기록했다가, [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]] 세션(같은 저장소, 6일 앞선
+> `Tool: claude` 세션)에서 이 앱 전체(자막·큐 편집·트랙·레이아웃 템플릿 등 20개 이상 기능)가
+> 처음부터 구현·배포된 것으로 한 차례 정정했다. **그마저도 더 앞선다** —
+> [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]] 세션(09-19보다 6일, 09-25보다
+> 12일 앞선 06:10Z 시작)이 이미지 미디어/이미지 트랙/트랙 순서 스왑/텍스트 자간·장평·기울임/로그인
+> 계정 원본 자동 S3 백업(`EditSessionAsset`)을 도입한 실제 더 이른 관찰 지점이다. 09-25 세션은 그
+> 계정별 템플릿 데이터의 후속 버그(아래)만 다룬 것이지 앱의 최초 등장이 아니다 — "최초 노출"은 이
+> 위키가 각 세션을 읽은 순서일 뿐. 앱 상세는 이제 독립 엔티티 [[lampas-web-edit]] 참고, 이 절은
+> 계정별 템플릿 데이터 버그만 남긴다.
 
 사용자가 이미지 위에 템플릿(로고 등 이미지 슬롯 포함)을 골라 적용하는 에디터로, 템플릿은
 **계정별로 서버에 저장**된다(예: SPOTV 템플릿이 `progdesigner7`·`rallycap.official` 두 계정에
@@ -480,7 +484,8 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] · [[2026-09-19-lampas-trends-고도화]] ·
   [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]] ·
   [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]] ·
-  [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]]
+  [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]] ·
+  [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
@@ -500,4 +505,6 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   [[execution-run-scoped-status-vs-stale-notification]] · [[accept-then-poll-for-slow-ai-jobs]] ·
   [[proxy-body-limit-413-appears-as-network-error]] · [[llm-batch-inference-timeout-tuning]] ·
   [[parallel-survey-before-feature-gap-analysis]] · [[asr-long-audio-silent-truncation]] ·
-  [[full-stack-feature-removal-audit]] · [[admin-guard-precedent-reuse]]
+  [[full-stack-feature-removal-audit]] · [[admin-guard-precedent-reuse]] ·
+  [[tailwind-preflight-img-maxwidth-overrides-inline-scale]] ·
+  [[local-asset-fingerprint-s3-backup-recovery]] · [[prod-ddl-before-deploy-with-drift-check]]

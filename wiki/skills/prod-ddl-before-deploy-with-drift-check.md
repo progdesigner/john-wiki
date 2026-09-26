@@ -46,6 +46,23 @@ tags: [deploy, database, migration, prisma, ddl, drift, lampas-studio]
 ## 출처: [[2026-09-25-status-서비스-구축-배포]] ([[lampas-studio]] `lampas-web-status` 운영 배포)
 관련: [[new-subdomain-cloudfront-wildcard-deploy]](같은 배포에서 신규 서브도메인이 필요한 경우)
 
+## 변형: 다른 세션의 미커밋 드리프트가 파괴적(컬럼 삭제)일 때 — 전체 push 대신 신규분만 SQL로
+[[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]]([[lampas-web-edit]] `EditSessionAsset`
+테이블 신설)에서는 배포 시점 `schema.prisma`에 **다른 미커밋 작업이 `scopeArea` 컬럼(실데이터 있는
+`clip_sources`·`clips`·`reel_exports`)을 지우려는 상태**로 남아 있었다. 이럴 때 통상적인
+`prisma db push`(또는 `--accept-data-loss`)를 쓰면 이번 작업과 무관한 그 컬럼의 실데이터가 함께
+삭제될 뻔했다.
+
+- **회피**: 전체 스키마 동기화 대신 `prisma migrate diff`를 오프라인으로 돌려 **이번에 실제로 배포할
+  신규 테이블/컬럼만** 골라낸 SQL을 생성하고, 그 SQL만 운영 DB에 직접 적용한다. 다른 세션의 드리프트
+  자체는 건드리지 않는다(존중도, 파괴도 하지 않고 그대로 둔다).
+- **보고 의무**: 이 드리프트는 이번 작업이 만든 게 아니고 이번 작업이 해소한 것도 아니다 — 배포
+  보고에 "다른 진행 중인 작업이 `scopeArea` 컬럼을 지우려는 상태로 커밋 안 된 채 남아 있고, 그 작업을
+  하는 사람이 이후 `--accept-data-loss` 없이 안전하게 처리해야 한다"고 명시적으로 남긴다. 조용히
+  넘기면 다음에 그 드리프트를 `db push`로 무심코 적용하는 사람이 데이터를 잃는다.
+- 위 "본 절차"의 3번(무관한 미커밋 변경도 검사 범위에 포함)과 같은 원칙의 파괴적 버전이다 — 여기선
+  "빠뜨리면 크래시"가 아니라 "한꺼번에 밀면 데이터 손실"이라는 반대 방향 위험이라는 점이 다르다.
+
 ## 변형: 구 테이블을 DROP하는 파괴적 DDL
 [[2026-09-19-pulse-페르소나-단일출처-계정이관-신뢰도개선]]([[lampas-web-pulse]] 아키텍처 개편)은
 같은 "DDL 먼저" 순서를 지키되, DDL 자체가 **구 페르소나·리서치 테이블을 DROP**하는 파괴적

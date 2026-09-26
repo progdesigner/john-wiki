@@ -2523,3 +2523,15 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/skills/parallel-survey-before-feature-gap-analysis.md 갱신 — "카탈로그 설명 문장 vs 실제 요청 스키마" 주의사항 추가, 이 세션을 두 번째 출처로 추가
 - index.md 갱신 (세션 1건, 엔티티 2건 신설/갱신, 스킬 1건 갱신)
 - AI_CONTEXT.md 갱신 보류 — 이미 광범위한 lampas-studio 서술 대비 단일 세션의 단일 앱 기능 추가라 위키 페이지로 충분, 40줄 한도 내 상시 주입 가치는 낮다고 판단
+
+## [2026-09-26] ingest | Lampas Edit 이미지 미디어/트랙·텍스트 자간·원본 S3 백업 최초 구현 (source: c8f4e60e-2728-4d07-b392-8e032dd9608f.md)
+- raw/conversations/2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현.md 보관 (원본 세션 날짜 2026-09-13T06:10Z, 뒤늦게 ingest)
+- wiki/sessions/2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현.md 신설
+- wiki/entities/lampas-web-edit.md 갱신 — **시점 재정정**: "09-19 세션에서 최초 상세 노출"을 6일 더 당김. 이미지 미디어/이미지 트랙/트랙 순서 스왑, 이미지 위치·스케일 텍스트오버레이화, 텍스트 자간·장평·기울임, 로그인계정 원본 자동 S3 백업(`EditSessionAsset`) 신규 절 추가, 기존 절들에 정확한 도입 시점(09-13/09-18/09-19) 교차 표기
+- wiki/entities/lampas-studio.md 갱신 — "Edit" 템플릿 에디터 절의 시점 정정 주석을 두 번째로 갱신(09-25→09-19→09-13 순으로 기원이 계속 당겨짐), 관련 세션·스킬 링크 추가
+- wiki/skills/tailwind-preflight-img-maxwidth-overrides-inline-scale.md 신설 — Tailwind Preflight `img{max-width:100%}`가 인라인 스케일업 이미지의 위치 계산과 어긋나는 문제 절차화
+- wiki/skills/local-asset-fingerprint-s3-backup-recovery.md 신설 — 브라우저 로컬 전용 파일을 fingerprint 기준 S3 백업·자동복구하는 Hermes형 절차 추출
+- wiki/skills/prod-ddl-before-deploy-with-drift-check.md 갱신 — "다른 세션의 미커밋 드리프트가 파괴적(컬럼 삭제)일 때 전체 push 대신 신규분만 SQL로" 변형 절 추가
+- wiki/skills/template-image-slot-fingerprint-vs-url.md 갱신 — 폴백 3단계("원본 자동 백업") 인프라의 실제 출처가 09-13 세션임을 교차 정정
+- index.md 갱신 (세션 1건 신설, 엔티티 2건 갱신, 스킬 2건 신설+1건 갱신)
+- AI_CONTEXT.md 갱신 — lampas-web-edit 서술에 실제 최초 관찰 시점(09-13) 정정 한 문장 추가(줄 수 불변, 기존 줄에 이어붙임)
