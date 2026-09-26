@@ -75,6 +75,14 @@ URL은 상단 「가져오기」 버튼이 비활성화되지만 `watch?v=…&li
 플레이스홀더와 안내 문구를 추가하는 재배포가 한 번 더 있었음 — 기능은 있었지만 진입점 안내가
 없어서 안 보인 사례. 상세 → [[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]].
 
+## Pulse — 아키텍처 개편의 원출처 (2026-09-19, 병행 세션)
+같은 날 11:14 시작된 별도 세션([[2026-09-19-pulse-페르소나-단일출처-계정이관-신뢰도개선]], jsonl
+`1c9a5cb2-...`)이 Pulse owner_email/로그인 세션 아키텍처 자체를 설계·구현·배포했다 — 아래 4라운드
+절이 전제로 삼는 "그날 로그인 세션 단위로 바뀐" 변경의 실제 출처다. 그 세션에서 페르소나 생성이
+Copy에서 `[[lampas-web-pulse]]`(pulse.lampas.io, 별도 신규 정식화된 웹 앱)로 이관되고, 에이전트에
+`PULSE_OWNER_EMAIL` env가 이때 처음 추가됐다(agent 1.0.3→1.0.5). 상세는 [[lampas-web-pulse]] 엔티티와
+해당 세션 참고.
+
 ## Pulse — 스케줄 수집 소유자 계정 로그인 전환 (2026-09-19, 4라운드)
 스케줄 수집 결과가 pulse.lampas.io에서 안 보인다는 제보가 반복돼 네 번에 걸쳐 원인이 좁혀졌다:
 ① 결과 카드 조회(`listSelections`)가 로그인 전용 401로 막혀 저장은 성공했는데도 런 전체가 FAILED로
@@ -208,12 +216,13 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
 - 상위 제품: [[lampas-studio]] (같은 저장소 `lampas-system`)
 - 이름 충돌 대상(별개): [[lampas]] · [[lampas-harness]]
 - 세션: [[2026-09-19-lampas-agent-clips재생목록-pulse로그인수집-훅점수상대순위]](가장 이른 노출) ·
+  [[2026-09-19-pulse-페르소나-단일출처-계정이관-신뢰도개선]](같은 날 병행, Pulse 아키텍처 개편 원출처) ·
   [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
   [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] ·
   [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] · [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-pulse-페르소나-카피점수-구조화-개선]]
-- 엔티티: [[lampas-web-copy]] · [[lampas-web-tools]] · [[lampas-web-reels]] · [[lampas-web-flow]]
+- 엔티티: [[lampas-web-pulse]] · [[lampas-web-copy]] · [[lampas-web-tools]] · [[lampas-web-reels]] · [[lampas-web-flow]]
 - 스킬: [[deterministic-extraction-vs-llm-rewrite]] · [[full-stack-feature-removal-audit]] ·
   [[error-fingerprint-path-grouping]] · [[tailscale-funnel-large-payload-bypass]] ·
   [[cross-subdomain-session-handoff]] · [[execution-run-scoped-status-vs-stale-notification]] ·

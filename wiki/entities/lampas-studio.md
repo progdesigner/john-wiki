@@ -307,6 +307,9 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   전체(영상 수집→Clips→Copy→Reels→Edit→Package)를 "Work" 노드 그래프로 연결하는 오케스트레이션 허브.
   Jev 기반 노드 자동화, Tailscale Funnel 대역폭 병목 우회(S3 직접 전송), 서브도메인 간 계정 이어받기
   (SSO)까지 이 세션에서 구현·배포됨 → [[2026-09-20-lampas-flow-만들기]]
+- **[[lampas-web-pulse]]**("Pulse", `pulse.lampas.io`, 2026-09-19 세션에서 전면 개편·정식 엔티티화) —
+  Google 로그인 세션 단위로 미션을 열람하고 **페르소나를 만드는 단일 출처**(이전엔 Copy가 생성했음).
+  계정간 미션 보내기 기능도 이 세션에서 함께 구현.
 - **[[lampas-web-copy]]**("Copy") · **[[lampas-web-reels]]("Reels")** · **[[lampas-web-package]]**
   ("Package", `package.lampas.io`, 2026-09-20 세션에서 정식 엔티티화 — 이전엔 다른 페이지에서
   "소속 미상"으로만 언급) · **[[lampas-web-status]]**
@@ -374,7 +377,7 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[lampas-system-ai-call-architecture-audit]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
   [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]]
-- 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] ·
+- 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-pulse]] · [[lampas-web-copy]] ·
   [[lampas-web-reels]] · [[lampas-web-package]](`package.lampas.io`) ·
   [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`)
