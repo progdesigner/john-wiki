@@ -2035,3 +2035,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `AI_CONTEXT.md` 갱신: lampas-studio 줄의 Fixs 버전 흐름·Copy/Tools 신규 노출·영상재생 미해결 상태
   추가(39줄, 40줄 이내 유지).
 - `index.md` Sessions·Entities 반영(세션1 신설·엔티티2 신설·엔티티2 갱신).
+
+## [2026-09-26] ingest | 엘레비노 예약취소·크레딧환불 구현 및 프로덕션 배포장애 복구 (source: 9336710b-4c9e-4f0a-9fa6-78cdfddff6b9.md)
+- 원본 보관: `raw/conversations/2026-09-25-엘레비노-예약취소-크레딧환불-배포장애.md`
+- 세션 신설: [[2026-09-25-엘레비노-예약취소-크레딧환불-배포장애]] — `Tool: claude` 세션. 어드민 모임예약
+  취소·크레딧환불 기능(`CREDIT_REFUND` 신규 트랜잭션 타입) 구현 → 개발/프로덕션 순차 배포 → 프로덕션
+  API 다운(오래된 `ServiceLoader` 결함) → 롤백도 실패 → 조사 끝에 프로덕션이 8월 3일부터 형제 저장소
+  `cwc-system`의 `apps/elevino-*`에서 수동 배포되고 있었음을 발견 → 공통 조상 기준 3-way 머지로 두
+  저장소 통합·재배포해 복구(다운타임 23분).
+- 엔티티 갱신: [[elevino-system]] — 신규 기능 상세·배포 소스 이중화 발견 절 추가. [[cwc-system]] —
+  2026-07-15 조사(4개 앱)와 모순되는 `apps/elevino-*` 존재를 "모순 기록" 절로 명시(원본 조사 시점·
+  이번 발견 시점 병기).
+- 스킬 신설: [[prod-rollback-source-of-truth-verify]] — 프로덕션 롤백이 안 먹힐 때 git 히스토리가
+  실제 배포본과 다를 가능성(로컬 수동 빌드·형제 저장소 병행 배포)부터 의심하는 절차. [[credit-ledger-balance-pattern]]
+  스킬은 이번 세션에서 실제 이식·활용된 사례로 세션 페이지에 교차링크만 추가(내용 변경 없음).
+- `AI_CONTEXT.md` 갱신: 기존 cwc-system 멤버십 크레딧 이식 줄에 이번 장애·발견·복구 요약 추가
+  (39줄, 40줄 이내 유지).
+- `index.md` Sessions·Entities·Skills 반영(세션1 신설·엔티티2 갱신·스킬1 신설).

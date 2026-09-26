@@ -105,6 +105,7 @@
 - [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] — `Tool: codex` 세션(같은 날 저녁 fixs-업그레이드 세션보다 이른 시각). Copy 앱 가로스크롤 레이아웃 버그 수정(v0.2.6) → Fixs 작업삭제 기능 추가(v1.0.22) → Tools(`tools.lampas.io`) 업로드 응답 인식 수정(v0.1.2)·13개 기능 모델표시+Kling 생성거절 UX+오류수집 400대 확장(v0.1.3, Fixs 에이전트 v1.0.23, 웹 36개 반영) → 영상 재생 버그를 2단계 오진 끝에 S3/CloudFront 직접재생으로 근본 수정, 단 신규 생성분의 최종 재생 확인은 세션 종료 시점까지 미완료. `lampas-web-copy`·`lampas-web-tools` 앱 신규 노출
 - [[2026-09-26-lampas-browser-구축-harness이전]] — `Tool: codex` 세션. "Aside 같은" AI 조작형 Chromium 브라우저를 `lampas-system` 아래 `apps/lampas-browser`로 처음부터 구축(WebContentsView·읽기/조작 분리·CSV·영상 URL 다운로드)한 뒤, 같은 날 `lampas-harness`의 `apps/browser`로 완전 이관 — 자체 AI API 키를 걷어내고 하네스 Codex CLI/Claude Code 세션 재사용으로 전환, 새 세션 "브라우징" 선택지 신설. 배포 중 9월 24일부터 방치된 구버전 서버가 `apps/wiki`(같은 날 다른 세션)와 함께 반영을 막고 있던 사실 발견·재시작 진행(반영 재확인은 다음 세션 필요)
 - [[2026-09-26-virtual-toktalk-tavus-아바타-구축]] — `Tool: codex` 세션. `[[toktalk]]` 신규 서브앱 `virtual.toktalk.ai`(사진 아바타+실시간 한국어 영상통화)를 오픈소스 조사(OpenAvatarChat·SoulX-FlashHead·Qwen3-Omni 등)→API 경로 선회→`[[tavus]]` 채택→당일 구축·배포까지 완료. 캐릭터를 "하루"→"한소연"으로 교체, 학습상태 감지 버그 수정, 이후 "일일 한도"·"통화 15분 컷"·"워터마크" 3건을 자체 서버 설정 vs Tavus 실제 제약으로 분리 진단, 메모리·웹검색 등 Tavus 기능 최대 활용까지 확장
+- [[2026-09-25-엘레비노-예약취소-크레딧환불-배포장애]] — `Tool: claude` 세션. `[[elevino-system]]` 어드민에 모임 예약 취소·크레딧 환불 기능(`CREDIT_REFUND` 트랜잭션 타입) 구현·개발배포 후 반복된 "배포해줘" 요청으로 프로덕션까지 진행 — API가 오래된 `ServiceLoader` 결함(문자열 아닌 provider 이름에서 TypeError)으로 다운, 롤백도 실패. 조사 끝에 프로덕션이 8월 3일부터 형제 저장소 `[[cwc-system]]`의 `apps/elevino-*`에서 수동 배포되고 있었음을 발견 — 공통 조상 기준 3-way 머지로 두 저장소를 통합·재배포해 복구(다운타임 23분). `[[prod-rollback-source-of-truth-verify]]` 스킬 추출 계기
 
 ## Entities
 
@@ -128,8 +129,8 @@
 - [[dongwon-building]] — 동원빌딩/동원리소스 서울지점, 엘레망 광화문 사무실 임대인·관리 주체
 - [[rapid-mlx]] — Apple Silicon 로컬 LLM 서버(vllm-mlx), 하네스 "Local" 프로바이더. launchd `io.lampas.rapidmlx` KeepAlive 상주
 - [[naver-blog-mcp]] — 네이버 블로그 자동 발행 MCP(Playwright). 본문 순수 텍스트만·SRT 쿠키 ~24h 만료
-- [[cwc-system]] — CWC ERP 분석/관리 pnpm 모노레포 (cwc-api NestJS+Prisma, cwc-web-admin React+Vite)
-- [[elevino-system]] — CWC 계열 서비스 저장소 (elevino-api NestJS+TypeORM, elevino-admin Next.js). 원장 방식 크레딧 시스템 보유
+- [[cwc-system]] — CWC ERP 분석/관리 pnpm 모노레포 (cwc-api NestJS+Prisma, cwc-web-admin React+Vite). 2026-09-25: `apps/elevino-*`가 elevino-system 프로덕션의 실제 수동 배포 소스였음이 드러남(2026-07-15 조사와 모순 기록)
+- [[elevino-system]] — CWC 계열 서비스 저장소 (elevino-api NestJS+TypeORM, elevino-admin Next.js). 원장 방식 크레딧 시스템 보유. 2026-09-25: 어드민 모임예약 취소·크레딧환불 기능 구현·배포, 프로덕션 장애를 계기로 `[[cwc-system]] apps/elevino-*`와의 배포 소스 이중화 발견·복구
 - [[netpeul-yeonga]] — 소셜/취미 정기 모임 플랫폼(넷플연가). progdesigner가 엘레망 와인샵 기반 블라인드 테이스팅 모임 모임장으로 참여
 - [[srkk]] — SRKK Consulting Pte Ltd(도메인/Microsoft 계정·인보이스 건, 등장1·3은 사실상 동일 확정) vs SRKK Group(Azure 펀딩 영업메일, 등장2)의 동일성은 여전히 미확정
 - [[fy-group]] — FY Group Pte Ltd(싱가포르), CEO Keira Zhang. cwc-lab-singapore에 이탈리아 위스키를 공급하다 선적 지연 분쟁의 상대방이 됨
@@ -218,6 +219,7 @@
 - [[vite-publicdir-manifest-icon-fix]] — Vite `root:public/`+`publicDir:false`로 PWA manifest.json·아이콘 경로가 base64/해시로 깨질 때 진단·별도 정적 디렉토리 분리로 수정
 - [[prompt-structuring-for-execution]] — 초안 프롬프트 "다듬어줘" 요청에 정보 손실 없이 표준 구조(소개→서비스→강조포인트→지시사항)로 재정리하고 누락된 실행 조건을 3가지 이내로 역질문하는 절차
 - [[self-imposed-vs-provider-limit-diagnosis]] — 외부 API 연동 서비스에서 "왜 제한에 걸리나" 질문 시 자체 서버 env 설정과 외부 제공자(Tavus 등) 실제 제약을 분리 진단하는 절차(env 먼저 확인→요청값과 실측값 대조→402/종료사유 등 제공자 응답 직접 인용)
+- [[prod-rollback-source-of-truth-verify]] — 프로덕션 롤백이 안 먹힐 때 git 히스토리가 실제 배포본과 다를 가능성(로컬 수동 빌드·형제 저장소 병행 배포)부터 의심하고 공통 조상 기준 3-way 머지로 복구하는 절차
 - [[template-image-slot-fingerprint-vs-url]] — 저장된 템플릿 이미지가 다른 브라우저/기기에서 안 붙을 때 fingerprint(로컬)/url(공개 CDN) 필드 확인·보정, MD5 대조로 재업로드 불필요 여부 판단
 - [[new-subdomain-cloudfront-wildcard-deploy]] — 기존 와일드카드 인증서 도메인 아래 완전 신규 서브도메인 배포 시 CloudFront 신규 생성(인증서 재발급 없이 재사용)→DNS 연결→공개 DNS 기준 검증 순서
 - [[deterministic-extraction-vs-llm-rewrite]] — 프로즈 재작성 파이프라인이 잘림·파싱실패·실패은닉으로 고장 날 때, 원본 보유 지점에서 구조화 JSON 추출→LLM 없는 결정적 저장→서사만 짧은 LLM 호출로 분리하는 절차
