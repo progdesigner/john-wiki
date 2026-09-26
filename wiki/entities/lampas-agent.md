@@ -118,6 +118,28 @@ fast-forward로 받는 과정에 **`lampas-agent-clips` + `lampas-agent-pulse`(�
   "2026-09-13에 배치 8개·병렬에서 ALB 60초 타임아웃이 나서 절반·순차로 낮춘 값"이라고 짧게 인용한
   과거 결정의 원출처가 바로 이 세션이다.
 
+## 접속 주소 origin story — Tailscale Funnel 마라톤 (2026-09-13~15)
+위 절이 다루는 시기 바로 다음날, `lampas-agent-clips`(당시 독립 앱, 로컬 포트 7452)를 여러 Tailscale
+주소로 옮겨 다니며 최종 주소를 확정한 사흘짜리 세션이 있었다 — 지금까지 위키 여러 곳에 "접속 주소
+`https://lampas-system.tail0e32ab.ts.net`"으로만 인용되던 것의 **유래**가 이 세션이다.
+
+- 시작 주소 `progdesigner-mac-mini.tail43b73a.ts.net:8443`이 실은 **노드 자체가 테일넷에서 삭제된
+  상태**(`404 node not found`)라 로컬 설정과 무관하게 접속 불가였음 — "연결됐습니다"라고 먼저
+  보고했다가 로컬 확인만으로 판단한 오답임을 뒤늦게 정정한 사례.
+- `lampas.dev@` 계정(하네스와 같은 테일넷, 접미사 `tail0e32ab`)으로 노드명 `lampas-system` 신규
+  등록 → 포트를 17452(`실제포트+10000`)→443(포트 없는 Funnel)까지 여러 차례 재구성.
+- 접속 불가가 장시간 지속되자 **하네스 노드(`lampas-harness.tail0e32ab.ts.net`)에 `:8443→7452`를
+  임시로 얹어** 즉시 공개 접속을 확보했다가, 사용자 요청으로 곧바로 원복.
+- 근본 원인은 Tailscale 컨트롤이 이 **머신 키**에 대해 Funnel 인그레스를 게시하지 않는 상태였던
+  것 — logout/login·콘솔에서 머신 삭제 후 재등록은 모두 노드 키만 바꿔 효과가 없었고,
+  `~/.local/state/tailscaled` 상태 디렉터리 자체를 새로 만들어(머신 키까지 교체) 15초 만에
+  해결됨. 절차 → [[tailscale-funnel-ingress-unregistered-statedir-reset]] (이 세션에서 신설).
+- 마지막 남은 지연은 KT DNS(168.126.63.1/.2)의 네거티브 캐시뿐이었다 — [[dns-propagation-stale-resolver-diagnosis]]
+  스킬이 다른 시점·다른 노드(하네스)에서 정립한 것과 동일한 패턴의 재확인.
+- 매 주소 변경마다 **Google OAuth 승인된 JavaScript 원본**과 **S3 `lampas.io` CORS AllowedOrigins**
+  를 함께 갱신해야 했다 — 이후 반복될 패턴의 첫 관찰.
+- 상세 → [[2026-09-13-lampas-agent-clips-tailscale-주소변경]].
+
 ## Clips — 유튜브 재생목록 다중선택 임포트 (2026-09-19 최초 구현)
 유튜브 재생목록 URL을 붙여넣으면 영상 목록이 체크박스로 뜨고, 선택한 영상들이 재생목록 순서대로
 각각 별도 작업으로 큐에 들어간다(운영 뱅크 확인 대화상자는 배치 전체에 한 번만). 재생목록만 가리키는
@@ -273,6 +295,8 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
 - 세션: [[2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축]](**가장 이른 노출, 09-26
   뒤늦게 ingest** — `lampas-agent-clips` 독립 앱 시절, 분야/카테고리/sports-wiki/ALB타임아웃/
   재생목록/deploy-agent.sh 원출처) ·
+  [[2026-09-13-lampas-agent-clips-tailscale-주소변경]](바로 다음날, 접속 주소
+  `lampas-system.tail0e32ab.ts.net` 확정 경위) ·
   [[2026-09-18-lampas-agent-omnara분석-durable-run구현]](`lampas-agent-clips`+`lampas-agent-pulse` 병합 직후 상태) ·
   [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]](4축 라벨링·단어 타임스탬프 보존을
   처음 추가 — 아래 09-19 세션에서 4축은 하루 만에 되돌려짐) ·
@@ -289,7 +313,8 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
   [[cross-subdomain-session-handoff]] · [[execution-run-scoped-status-vs-stale-notification]] ·
   [[accept-then-poll-for-slow-ai-jobs]] · [[llm-relative-ranking-vs-absolute-scoring]] ·
   [[stale-tab-silent-fallback-vs-explicit-reject]] · [[durable-agent-runtime-design-patterns]] ·
-  [[lb-idle-timeout-keepalive-streaming]] · [[macos-launchd-daemon]]
+  [[lb-idle-timeout-keepalive-streaming]] · [[macos-launchd-daemon]] ·
+  [[tailscale-funnel-ingress-unregistered-statedir-reset]] · [[dns-propagation-stale-resolver-diagnosis]]
 - 토픽: [[jev-typed-classification]] · [[self-healing-error-pipeline-design]] ·
   [[lampas-system-ai-call-architecture-audit]]
 - 외부 AI 프로바이더: [[gemini]](비전 라벨링, `gemini-3.5-flash` 언급)

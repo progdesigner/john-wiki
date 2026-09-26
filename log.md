@@ -2620,3 +2620,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/skills/user-facing-error-admin-detail-split.md 신설 — 같은 실패 상태를 고객 화면(일시적/영구적 두 범주, 오류 원문 비노출)과 관리자 화면(상태·실패단계·재시도횟수·오류원문 상세)으로 분리 표시하는 절차
 - index.md 갱신 (세션 1건 신설, dalar-web-first 엔티티 항목 갱신, 스킬 1건 신설)
 - AI_CONTEXT.md 갱신 보류 — dalar-web-first 위키 페이지로 충분히 커버되는 초기 운영 안정화 세부사항이고, 40줄 예산 대비 상시 주입 가치가 낮음
+
+## [2026-09-26] ingest | lampas-agent-clips Tailscale 주소변경 마라톤 — Funnel 인그레스 미등록·statedir 교체로 해결 (source: 971bcdce-fe1b-4685-986c-8aef7fcb7f1d.md)
+- raw/conversations/2026-09-13-lampas-agent-clips-tailscale-주소변경.md 보관 (원본 세션 2026-09-13T15:30:59.209Z 시작, 내용상 09-15까지 이어짐, `logs/terminals/archive/971bcdce-...md`에서 회수, 뒤늦게 ingest, `Tool: claude`)
+- wiki/sessions/2026-09-13-lampas-agent-clips-tailscale-주소변경.md 신설 — 당시 독립 앱이던 `lampas-agent-clips`(포트 7452)를 여러 Tailscale 주소로 옮겨 다닌 사흘짜리 세션 16단계 정리: 삭제된 노드에 "연결됐습니다" 오답(로컬 확인만으로 판단), `lampas-system` 신규 노드 등록·포트 실험(17452→443), 하네스 노드에 8443 임시 우회 후 원복, "인그레스 문제" 설명, 새 노드 신원 재등록도 소용없다가 tailscaled 상태 디렉터리 전체 교체(머신 키 재발급)로 15초 만에 인그레스·DNS 등록, 마지막 남은 지연은 KT DNS 네거티브 캐시
+- wiki/skills/tailscale-funnel-ingress-unregistered-statedir-reset.md 신설 — Funnel IngressEnabled=true인데 공개 인그레스·DNS가 안 뜰 때 logout/login은 노드 키만 바꿔 효과 없음을 먼저 배제하고 tailscaled 상태 디렉터리 자체를 교체(머신 키 재발급)하는 절차, 이 세션에서 추출
+- wiki/skills/dns-propagation-stale-resolver-diagnosis.md 갱신 — "권한 서버 자체에 레코드가 없는 경우"는 이 스킬이 아니라 신설 스킬로 넘어가라는 분기 추가 + 이 세션의 KT DNS 캐싱 재확인을 "출처" 절에 교차 링크로 추가
+- wiki/entities/lampas-agent.md 갱신 — "접속 주소 origin story — Tailscale Funnel 마라톤 (2026-09-13~15)" 절 신설(09-12 최초노출 절 바로 다음), 위키 여러 곳에 인용되던 `lampas-system.tail0e32ab.ts.net` 주소의 유래를 규명, 관련 세션·스킬 링크 추가
+- wiki/entities/lampas-harness.md 갱신 — 09-14 "8443 추가" 절 앞에 하루 전 이 세션이 하네스 Funnel을 lampas-agent-clips의 임시 우회 경로로 빌려줬다가 원복한 전례를 교차링크로 명시(같은 포트 번호·같은 노드가 다른 시점에 다른 목적으로 반복 등장해 혼동 방지)
+- index.md 갱신 (세션 1건 신설, 스킬 1건 신설)
+- AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태이고, 이 세션의 핵심 사실(주소 확정 경위)은 엔티티·스킬 페이지로 충분히 커버됨
