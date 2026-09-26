@@ -2388,3 +2388,11 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   [[tailscale-funnel-large-payload-bypass]](교차링크만 추가).
 - `AI_CONTEXT.md`(39/40줄 예산)에 `[[lampas-web-edit]]` 한 문장 추가(lampas-studio 항목에 append,
   줄 수 증가 없음).
+
+## [2026-09-26] ingest | Pulse 분야별 MLB 페르소나·Copy 4단계 개편, 2026-09-19 03:16 (같은 날 대체된 선행 세션) (source: 331ac97f-f672-47f3-8f2a-a3749a650a3c.md)
+- 소스: raw/conversations/2026-09-19-pulse-분야별mlb페르소나-copy4단계개편-최초구현.md (원본 331ac97f-f672-47f3-8f2a-a3749a650a3c.md 복사)
+- 세션 신설: [[2026-09-19-pulse-분야별mlb페르소나-copy4단계개편-최초구현]]
+- 엔티티 갱신: [[lampas-web-pulse]](이 세션의 "분야별 리서치" 테이블·MLB 영상 20개가 같은 날 11:14 세션 배포 DDL로 DROP됐음을 발견·기록) · [[lampas-web-copy]](같은 취지의 선행 4단계 개편이 대체됐음을 기록)
+- 세션 갱신: [[2026-09-19-pulse-페르소나-단일출처-계정이관-신뢰도개선]](8시간 앞선 선행 세션 존재·대체 관계 추가)
+- index.md 갱신 (Sessions·Entities 반영)
+- 발견: 운영에 배포된 기능(MLB 영상 수집 파이프라인)이 같은 날 8시간 만에 다른 세션의 DDL로 통째로 폐기된 사례 — 두 세션 모두 목표는 동일("분야별 재사용 페르소나+Copy 개편")하나 메커니즘이 달라 대체된 것으로 추정(인과관계는 소스로 미확인)
