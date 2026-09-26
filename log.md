@@ -2283,3 +2283,19 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   sports-wiki Jev 게이트를 "2026-09-25 신규"로 알고 있던 기록이 실제로는 5일 앞선 구현의 뒤늦은
   재확인이었음이 드러남. `AI_CONTEXT.md`는 40줄 예산이 이미 소진 상태라 변경하지 않음(상세는 위
   두 토픽·두 엔티티 페이지에 있고 기존 요약 문장에서 이미 [[jev-typed-classification]]로 링크됨).
+
+## [2026-09-26] ingest | 하네스 터미널 Jev검색연동·질문선택UI·세션제한·보관종료버그·파일첨부 (source: 92b53a0b-90a9-4da4-a0a0-e265a1e4e6cb.md)
+- `Tool: codex` 터미널 세션(2026-09-20~24, 한 터미널이 나흘간 이어짐). `[[lampas-harness]]`의 PTY
+  터미널 서브시스템(2026-09-07 최초 확인) 대상 첫 기능확장·버그수정 다발.
+- jev-search 참고 구현(TypeSafe 관련성평가+Search1API) 검색 연동, Codex 질문 선택 UI(클릭 응답,
+  중복/변경질문 차단), "새 세션 안 열림" 문의를 동시 세션 상한 12개(대기세션 포함)로 진단.
+- 대화 보관→세션종료 연동 버그: 09-20 1차 수정(종료신호만 보내고 즉시 커밋)이 완료를 안 기다려
+  09-24 재발 → 종료 확인 후에만 보관 커밋하는 근본 수정. **2026-09-07 세션이 코드 분석만으로
+  예측한 `kill()`-vs-`process.exit()` 레이스가 실제 버그로 재현·해소된 사례** — 신규 스킬
+  [[verify-effect-before-state-commit]] 추출, [[self-hosted-agent-server-ops]] 함정 2 갱신.
+- 파일 첨부 확장(이미지+파일 4개·10MB, 원본 그대로 작업폴더 저장), Shift+Enter/Alt+↑ 모바일 버튼.
+- 세션 신설: [[2026-09-20-하네스터미널-jev검색연동-질문선택ui-보관세션종료-파일첨부]].
+- 엔티티 갱신: [[lampas-harness]] (터미널 서브시스템 신규 절).
+- 토픽 갱신: [[jev-typed-classification]] (같은 날 다른 저장소의 별개 TypeSafe 통합 각주 추가,
+  사용처 번호에는 안 넣음) · [[self-imposed-vs-provider-limit-diagnosis]] (동시성 상한 진단 사례 각주).
+- `AI_CONTEXT.md`는 40줄 예산 소진 상태라 변경하지 않음(운영/버그수정 상세는 위 페이지들로 충분).
