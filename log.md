@@ -2557,3 +2557,10 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/entities/cwc-system.md 갱신 — 변경 이력에 09-11 세션의 소급 확인 사실 추가
 - index.md 갱신 (세션 1건 신설, 엔티티 2건 갱신)
 - AI_CONTEXT.md 갱신 보류 — 09-25 기록된 사실(cwc-system이 elevino 프로덕션 배포 소스)의 시점을 소급 뒷받침할 뿐 현재 상태·결정을 바꾸지 않아 상시 주입 가치 낮음
+
+## [2026-09-26] ingest | 원격 메시지 전송 검증(Codex, 이미지 첨부) (source: 128cc0eb-b838-4efb-b931-2a6e5ec77edc.md)
+- raw/conversations/2026-09-07-원격메시지전송검증-codex-스모크테스트.md 보관 (원본 세션 2026-09-07T16:52:05.951Z 시작, `logs/terminals/archive/128cc0eb-...md`에서 회수, 뒤늦게 ingest)
+- wiki/sessions/2026-09-07-원격메시지전송검증-codex-스모크테스트.md 신설 — "전송 테스트입니다" + `.lampas-attachments/` 이미지 첨부 경로 포함 메시지로 2+2/3+3 왕복뿐인 트리비얼 세션. 같은 날 79분 앞선 [[2026-09-07-덧셈질문-codex-스모크테스트]]의 자매 세션. 이미지가 실제로 codex 세션에 전달·인식됐는지는 소스만으로 미확인
+- wiki/entities/lampas-harness.md 갱신 — "신규 서브시스템 — 실제 웹 터미널" 절에 "여섯 번째 사례"로 추가(PTY 웹 터미널이 codex 도구로 같은 날 두 번째로 별도 가동됐다는 추가 독립 확인), 세션 링크 목록에도 추가
+- index.md 갱신 (세션 1건 신설)
+- AI_CONTEXT.md 갱신 보류 — 콘텐츠 자체가 트리비얼 스모크테스트이고 기존 "PTY 웹 터미널 가동 확인"이라는 상태를 보강할 뿐 새 결정·상태 변화가 없어 상시 주입 가치 낮음
