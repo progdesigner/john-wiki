@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, toktalk, nestjs, react, monorepo, ai-chat]
 created: 2026-07-09
-updated: 2026-09-07
+updated: 2026-09-26
 ---
 # toktalk (TokTalk — AI 캐릭터/보이스 챗)
 
@@ -45,6 +45,28 @@ updated: 2026-09-07
 - `.env`(실제 API 키)와 Firebase 서비스 계정 JSON(`apps/talk-app-toss-api/config/toktalk-*-firebase-adminsdk-*.json`)이 **git 추적 중**이며 원격에 푸시됨(커밋 `0664ea9`, 이전 `b7fdf05` 패턴). 노출 상태 기록만.
   → 반복 패턴으로 묶임: [[secrets-plaintext-exposure-pattern]]
 
+## 2026-09-26 모순 — `lampas-system` 저장소 편입 정황 (미확인)
+
+`lampas-web-fit` 구축 세션([[2026-09-25-lampas-web-fit-구축-배포]], `Tool: codex`)의 시스템
+프롬프트로 주입된 `[[lampas-studio]]` 저장소(`lampas-system`) 루트 `AGENTS.md`가 `apps/talk-api`,
+`talk-app-toss-api`, `talk-app-toss-samantha`, `talk-app-toss-brainrot`, `talk-web-www`,
+`talk-web-app`, `talk-web-admin`을 **`lampas-system`의 앱 목록 하위 항목**으로 열거하고,
+`talk-api`엔 **"구 dbs/talk-system"** 주석이 달려 있다. 이 페이지가 2026-07 기준 기록한
+"`[[lampas-studio]]`와 **별개의 제품 코드베이스**"라는 서술과 정면으로 모순된다.
+
+- **미확인 사항**: 이 세션은 `lampas-system`의 `AGENTS.md` 문서를 그대로 인용받았을 뿐, 실제로
+  두 저장소가 병합됐는지·`AGENTS.md`가 단순히 인접 작업 편의상 두 저장소를 함께 문서화한 것뿐인지는
+  검증되지 않았다. 포트 번호(`talk-api` 3241 등)는 이 페이지의 기존 기록과 동일해 최소한 **런타임
+  분리는 유지**되는 것으로 보인다.
+- **신규 앱 2종 노출**: `talk-web-virtual`(포트 8247, `virtual.toktalk.ai` — 사진 아바타·실시간 영상
+  대화) · `talk-api-virtual`(포트 3247, Tavus 영상 대화 전용 독립 Node 서버) — 이 페이지의 기존 7앱
+  목록에 없던 기능. 관련 문서·스크립트·디자인은 `docs/talk/`·`scripts/talk/`·`design/talk/`에,
+  배포 미러·CLI 도구는 `deploy/talk/`·`tools/talk/`(비추적)에 위치한다고 명시.
+- **개명 추정**: 기존 `apps/toss-mina`·`apps/toss-brainrot`이 `talk-app-toss-samantha`·
+  `talk-app-toss-brainrot`으로 이름이 바뀐 것으로 보임(포트 8245/8246 동일 유지) — 확정은 아님.
+- Prisma는 `pnpm prisma:generate:talk` 등 `:talk` 접미 스크립트를 쓴다고 명시 — 별도 스키마 유지
+  정황(완전 병합이 아닐 가능성을 뒷받침).
+
 ## 참고 예시로 지목됐으나 미확인 (2026-07-16)
 - `[[lampas-harness]]`에 ElevenLabs 실시간 TTS(`tts-stream`) 기능을 만들며 사용자가 `dbs/talk-system`
   (이 프로젝트)의 기존 구현을 참고 예시로 지목했으나, **작업 폴더 밖이라 하네스가 읽기조차 차단**해
@@ -52,7 +74,9 @@ updated: 2026-09-07
   [[2026-07-16-tts-stream-elevenlabs-구현착수]]
 
 ## 관련
-- 세션: [[2026-07-08-toktalk-에피소드-배경전환-플레이]] · [[2026-07-16-tts-stream-elevenlabs-구현착수]](참고 예시로 지목, 접근 실패)
+- 세션: [[2026-07-08-toktalk-에피소드-배경전환-플레이]] · [[2026-07-16-tts-stream-elevenlabs-구현착수]](참고 예시로 지목, 접근 실패) ·
+  [[2026-09-25-lampas-web-fit-구축-배포]](저장소 편입 모순 발견)
 - 토픽: [[episode-beat-play-system]] / 스킬: [[loading-state-key-mismatch]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]] · 공급자: [[progdesigner]]
-- 자매 제품(별개 코드베이스): [[lampas-studio]]
+- 자매 제품(2026-07 기준 별개 코드베이스로 기록, 2026-09-26 `lampas-system` 편입 정황과 모순 —
+  위 절 참고): [[lampas-studio]]

@@ -1864,3 +1864,36 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   공용 로고 자산 경로 `cdn/production/edit-templates/logos/`).
 - `AI_CONTEXT.md` 갱신: lampas-studio 항목에 Edit 템플릿 에디터 한 줄 추가(36줄, 40줄 이내 유지).
 - `index.md` Sessions·Skills 섹션에 각 1건 반영.
+
+## [2026-09-26] ingest | lampas-web-fit 구축·배포 (source: 48bc1d48-38ee-4542-8241-34a50295e5c8.md)
+- 세션 신설: [[2026-09-25-lampas-web-fit-구축-배포]] — `Tool: codex`(PTY 웹 터미널) 세션. 유튜브 쇼츠를
+  예시로 든 "음악 박자에 맞춰 운동하고 다음 동작을 미리 카운팅해주는 서비스" 요청 → 신규 앱
+  `lampas-web-fit`을 처음부터 구현(운동 타이머·음악 공유 오디오 시계, 다음 동작 8박 전 예고+마지막
+  4박 음성 카운트, 루틴 3종·BPM·라운드 설정, 내장 오리지널 비트, 모바일 지원)하고 빌드·타이밍 테스트
+  6개·실제 세션 재생까지 검증한 뒤, 같은 세션에서 사용자 요청으로 `fit.lampas.io`에 신규 CloudFront+
+  기존 Lampas 와일드카드 인증서로 배포까지 완료.
+- 스킬 신설: [[new-subdomain-cloudfront-wildcard-deploy]] — 같은 루트 도메인에 완전 신규 서브도메인을
+  배포할 때 인증서 재발급 없이 기존 와일드카드 인증서 재사용 + 공개 DNS 기준 검증 절차.
+- 엔티티 갱신: [[lampas-studio]] — "2026-09-26 저장소 구조 스냅샷" 절 신설. 세션에 주입된 저장소
+  `AGENTS.md` 전문을 통해, 2026-07 기준 기록과 크게 다른 2026-09-26 시점 구조를 확인(코드 직접 조사는
+  아님, 문서 인용):
+  - `lampas-system`이 Lampas 9앱 + **Dalar 6앱**(이 위키 최초 노출 → [[dalar]] 신설) +
+    Talk 9앱(**"구 dbs/talk-system"** 주석 — [[toktalk]] 모순, 아래 참고) + Iileex 1앱으로 확장.
+  - `lampas-web-sdk`가 `lampas-web-studio`로 개명된 것으로 추정, `lampas-web-ai`·`lampas-web-product`·
+    `iileex-api`·`iileex-web-admin`은 목록에서 사라짐(폐기·통합 여부 미확인).
+  - Node Studio SoT가 `apps/dalar-web-app`으로 이동, `pnpm sync:studio`로 동기화된다고 명시.
+  - **DB 모순**: AGENTS.md는 MySQL 명시, 이 페이지 기존 기록(2026-07-15 코드 확인)은 PostgreSQL —
+    양쪽 병기, 미해결.
+  - 신규 앱 lampas-web-fit(포트 8462, fit.lampas.io) 등재.
+- 엔티티 갱신: [[toktalk]] — "2026-09-26 모순" 절 신설. talk-* 앱이 `lampas-system` AGENTS.md 앱 목록에
+  열거되고 "구 dbs/talk-system" 주석이 달려, 이 페이지의 "별개 코드베이스" 기존 서술과 모순됨을 명시
+  (실제 저장소 병합 여부는 미확인). 신규 노출 앱 `talk-web-virtual`/`talk-api-virtual`(Tavus 영상
+  대화) 기록, `toss-mina`/`toss-brainrot` → `talk-app-toss-samantha`/`talk-app-toss-brainrot` 개명
+  추정 기록.
+- 엔티티 신설: [[dalar]] — 스텁 페이지. 2026-09-26 AGENTS.md에서만 확인된 6앱 제품 라인, 검증 필요
+  표시.
+- 엔티티 갱신: [[lampas-harness]] — codex PTY 서브시스템 절에 세 번째 증거(2026-09-07 스모크테스트를
+  넘어 실제 신규 앱 구현·배포까지 codex 경로로 완결) 추가.
+- `AI_CONTEXT.md` 갱신: lampas-studio 항목을 2026-09-26 스냅샷·모순·lampas-web-fit 배포로 재작성
+  (36줄, 40줄 이내 유지).
+- `index.md` Sessions·Entities(lampas-studio·toktalk 갱신, dalar 신설)·Skills 섹션 반영.

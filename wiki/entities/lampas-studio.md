@@ -1,7 +1,7 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar]
 created: 2026-07-09
-updated: 2026-09-25
+updated: 2026-09-26
 ---
 # lampas-studio (Lampas 이미지 생성 스튜디오)
 
@@ -187,8 +187,40 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 - 공용 로고 자산은 S3 `cdn/production/edit-templates/logos/`에 보관.
 - 절차 스킬 → [[template-image-slot-fingerprint-vs-url]] · 세션 → [[2026-09-25-edit-템플릿-이미지-s3-url-수정]]
 
+## 2026-09-26 저장소 구조 스냅샷 (`AGENTS.md`) — 이전 기록과 모순 다수
+
+`lampas-web-fit` 구축 세션(`Tool: codex`, 작업 폴더 `lampas-system`)의 시스템 프롬프트에 저장소
+루트 `AGENTS.md` 전문이 포함되어, 이 위키가 마지막으로 기록한 2026-07-15/18 구조와 크게 달라진
+2026-09-26 시점 상태가 드러남. **이 세션 자체는 구조를 조사한 것이 아니라 문서를 그대로 인용받은
+것**이므로, 아래는 `AGENTS.md` 서술 기준이며 실제 코드 확인은 아님 — 다음 조사 시 검증 필요.
+
+- **앱 목록이 3개 제품 라인으로 확장**: Lampas 9개(`lampas-web-www`/`-pay`/`-cs`/`-studio`/
+  `-music`/`-admin`/`photobooth-app-toss`/`lampas-api`/`lampas-api-mcp` + `lampas-web-trends`·
+  `lampas-trends-collector`) + **Dalar 6개(이 세션에서 최초 노출, 위키에 전무했던 형제 제품 라인)**
+  → [[dalar]] + Talk 9개(**"구 dbs/talk-system"** 주석 — [[toktalk]]을 "별개 코드베이스"로 기록한
+  기존 페이지와 모순, 아래 [[toktalk]] 절 참고) + Iileex 1개(`iileex-web-www`만 등재).
+- **`lampas-web-sdk` → `lampas-web-studio`로 개명된 것으로 보임**(2026-07 기록엔 `lampas-web-sdk`,
+  이번 `AGENTS.md`엔 동일 역할·포트 위치에 `lampas-web-studio`만 존재) — 리네이밍 확정은 아니고
+  이름 변화만 관찰.
+- **`lampas-web-ai`(2026-07-15부터 주요 앱으로 승격 기록됨) · `lampas-web-product`(2026-07-16 신규
+  기록됨) · `iileex-api`/`iileex-web-admin`이 이번 앱 목록에서 빠짐** — 폐기·통합 여부 미확인, 단순
+  `AGENTS.md` 요약 누락일 가능성도 있음.
+- **Node Studio SoT가 `apps/dalar-web-app`으로 이동**했다고 명시 — `lampas-web-studio` 반영은
+  `pnpm sync:studio`(`scripts/sync-studio-from-dalar.mjs`)로 동기화. 이 페이지의 기존 "스튜디오 구조" 절이
+  기술하는 `lampas-web-sdk` 자체 구현 서술과 배치되므로, 이후 세션에서 실제 소스 위치 재확인 필요.
+- **DB 모순**: `AGENTS.md`는 "NestJS + Prisma + **MySQL**"이라 명시. 이 페이지의 기존 서술(2026-07-15
+  rebase 세션에서 코드로 직접 확인한 **PostgreSQL**, 위 절 참고)과 정면으로 다름 — 어느 쪽이 최신·
+  정확한지 이 세션 소스만으론 판별 불가, 다음 코드 접근 시 재확인 요망.
+- **신규 앱 `lampas-web-fit`**(포트 **8462**, 도메인 `fit.lampas.io`) — 이번 세션에서 처음부터 구현·
+  배포까지 완료. 음악 박자에 맞춘 운동 가이드 앱: 운동 타이머·음악이 같은 오디오 시계 공유(일시정지·
+  탭 이탈 시 동반 정지), 다음 동작 8박 전 예고 + 마지막 4박 음성 카운트, 루틴 3종 + BPM·라운드·음악
+  설정, 운동 기록 저장, 모바일 지원. 음악은 참고 영상(유튜브 쇼츠 "1분 플랭크 챌린지") 음원 대신
+  **내장 오리지널 비트** 사용(라이선스 미확인 회피). 배포는 기존 `deploy-web.sh` 경로 + `fit.lampas.io`
+  전용 CloudFront 신규 생성 + 기존 Lampas 와일드카드 인증서로 HTTPS 적용. → [[2026-09-25-lampas-web-fit-구축-배포]]
+
 ## 관련
-- 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
+- 세션: [[2026-09-25-lampas-web-fit-구축-배포]] ·
+  [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
   [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-17-works-저장소-일괄최신화-pull]] ·
   [[2026-07-18-works-전체저장]] ·
