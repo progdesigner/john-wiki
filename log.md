@@ -2016,3 +2016,22 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   (39줄, 40줄 이내 유지).
 - `index.md` Sessions·Entities·Topics·Skills 반영(세션1 신설·엔티티1 신설·엔티티1 갱신·토픽1 신설·
   스킬1 신설).
+
+## [2026-09-26] ingest | Copy 스크롤·Fixs 작업삭제·Tools 모델표시·영상재생버그 (source: 43827d71-217a-4477-8e45-d446a494c769.md)
+- 원본 보관: `raw/conversations/2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그.md`
+- 세션 신설: [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] — `Tool: codex` 세션(같은
+  날 저녁 [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]]보다 이른 시각). `[[lampas-web-copy]]` 가로
+  스크롤 레이아웃 버그 수정(v0.2.6) → `[[lampas-agent]]` Fixs 작업삭제 기능 추가(v1.0.22) →
+  `[[lampas-web-tools]]` 업로드 응답 인식(v0.1.2)·13개 기능 모델표시+Kling 생성거절 UX+오류수집 400대
+  확장(v0.1.3, Fixs 에이전트 v1.0.23, 웹 36개 반영) → 영상 재생 버그를 2단계 오진(잘못된 프록시
+  주소 → 재발) 끝에 사용자 지시로 S3/CloudFront 직접재생으로 전환, 신규 생성분의 최종 재생 확인은
+  세션 종료 시점까지 미완료로 명시.
+- 엔티티 신설: [[lampas-web-copy]] · [[lampas-web-tools]] — `lampas-agent`가 이미 언급만 하고 있던
+  스포츠 클립 파이프라인 자매 앱 2종을 정식 엔티티 페이지로 승격.
+- 엔티티 갱신: [[lampas-agent]] Fixs 절에 2026-09-25 배포 버전 흐름(v1.0.22→v1.0.23→v1.0.25) 정리,
+  "관련 앱" 절에 Copy·Tools 상세 추가. [[lampas-studio]] "스포츠 클립 파이프라인" 절에 Tools 추가.
+  [[lampas-harness]] codex PTY 서브시스템 절에 다섯 번째 사례로 추가(같은 저장소를 codex/claude 두
+  도구가 같은 날 각각 건드린 사례로 교차 링크).
+- `AI_CONTEXT.md` 갱신: lampas-studio 줄의 Fixs 버전 흐름·Copy/Tools 신규 노출·영상재생 미해결 상태
+  추가(39줄, 40줄 이내 유지).
+- `index.md` Sessions·Entities 반영(세션1 신설·엔티티2 신설·엔티티2 갱신).
