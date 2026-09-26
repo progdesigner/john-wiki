@@ -236,6 +236,13 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 2026-09-26 시점 상태가 드러남. **이 세션 자체는 구조를 조사한 것이 아니라 문서를 그대로 인용받은
 것**이므로, 아래는 `AGENTS.md` 서술 기준이며 실제 코드 확인은 아님 — 다음 조사 시 검증 필요.
 
+> **2026-09-26 ingest 시 시점 정정**: 아래 내용을 "2026-09-26 최초 노출"로 기록해뒀으나,
+> [[2026-09-21-lampas-agent-fixs-신설]] 세션(같은 저장소, 5일 앞선 `Tool: codex` 세션)의 시스템
+> 프롬프트에도 **동일한 `AGENTS.md` 전문**(Lampas 9앱+Dalar 6앱+Talk 7앱+Iileex 1앱 구조, MySQL 명시
+> 포함)이 이미 포함돼 있었다. 즉 이 구조 자체는 최소 2026-09-21부터 존재했고, "최초 노출"은 위키가
+> *이 세션에서 처음 관찰*했다는 뜻일 뿐 저장소 구조가 09-26에 바뀌었다는 뜻이 아니다 — 아래 소절
+> 제목·서술은 그대로 두되 이 점을 참고할 것.
+
 - **앱 목록이 3개 제품 라인으로 확장**: Lampas 9개(`lampas-web-www`/`-pay`/`-cs`/`-studio`/
   `-music`/`-admin`/`photobooth-app-toss`/`lampas-api`/`lampas-api-mcp` + `lampas-web-trends`·
   `lampas-trends-collector`) + **Dalar 6개(이 세션에서 최초 노출, 위키에 전무했던 형제 제품 라인)**
@@ -321,7 +328,8 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   기존 이슈).
 
 ## 관련
-- 세션: [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] ·
+- 세션: [[2026-09-21-lampas-agent-fixs-신설]] ·
+  [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] ·
   [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
   [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] ·
   [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·

@@ -2153,3 +2153,26 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   오표시될 때 조기 상태판정+중복 폴링 2중 원인을 구간별로 진단하는 절차.
 - `AI_CONTEXT.md` 갱신: lampas-studio 줄 끝에 이 세션 요약 추가(39줄, 40줄 이내 유지).
 - `index.md` Sessions 1신설·Entities(lampas-studio·atlas-cloud 갱신)·Skills 1신설 반영.
+
+## [2026-09-26] ingest | lampas-agent "Fixs" 탭 최초 신설 — 오류자동수집→Codex수정→재배포 (source: 8b9b59c4-80a8-40cf-9be6-f32c00c93370.md)
+- 원본을 `raw/conversations/2026-09-21-lampas-agent-fixs-신설.md`로 보관.
+- 세션 요약 신설: [[2026-09-21-lampas-agent-fixs-신설]] — `Tool: codex` 세션. "apps 오류가 나면 자동
+  수집→Codex 수정→개선"을 요청 → `lampas-agent`(스포츠 클립 데몬) 웹의 Clips·Pulse 옆에 **Fixs 탭을
+  이 세션에서 최초로 신설**. 오류수집→민감정보 제거·중복 통합→수정 큐→AI 워커(별도 worktree, 원본
+  충돌 시 중단)→테스트·빌드 검증→기존 배포스크립트 재배포 파이프라인 설계·구현. 기본값: 자동 수정·
+  자동 배포 모두 활성화, 하루 최대 5회. 테스트 387개 통과, 실제 Codex 수정→테스트→빌드→배포 전 과정
+  실증. 마지막 사용자 질문("모두 배포 했음?")엔 응답 없이 트랜스크립트 종료.
+- 엔티티 갱신: [[lampas-agent]] — 기존에 "이미 존재하는 기능"으로만 기록됐던 Fixs 탭의 최초 신설
+  시점·기본 설정을 확정하는 절 추가(2026-09-25 업그레이드 절 앞에 배치). [[lampas-studio]] — 이 세션의
+  시스템 프롬프트에 포함된 저장소 `AGENTS.md` 전문(Lampas 9앱+Dalar 6앱+Talk 7앱+Iileex 1앱, MySQL
+  명시)이 기존에 "2026-09-26 lampas-web-fit 세션에서 최초 노출"로 기록된 것과 동일 내용임을 확인 —
+  실제로는 5일 앞선 이 세션에도 이미 존재했다는 시점 정정을 해당 절에 인용구로 추가(모순 은폐 없이
+  두 세션 다 남김).
+- 토픽 신설: [[self-healing-error-pipeline-design]] — 오류 자동수집→AI 수정→검증→재배포 파이프라인을
+  설계할 때 반복 적용 가능한 8가지 원칙(자동수정/배포 on-off 분리, worktree 격리+충돌시 중단, 검증
+  실패시 완료처리 금지, 외부장애 별도분류, 오류로그 비신뢰, fingerprint 병합, 하루 실행한도, SoT 규칙
+  준수) 정리 — 소스의 설계 논의가 이 프로젝트 특유가 아니라 일반화 가치가 있다고 판단해 분리.
+- `AI_CONTEXT.md` 갱신: lampas-studio 줄의 Fixs 언급 앞에 "2026-09-21 최초 신설" 사실과 기본 설정
+  요약 삽입(기존 물리 라인 재사용, 39줄 유지·40줄 이내).
+- `index.md` Sessions 1신설·Entities(lampas-agent·lampas-studio 갱신)·Topics(self-healing-error-
+  pipeline-design 신설) 반영.

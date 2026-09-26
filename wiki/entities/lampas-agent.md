@@ -50,10 +50,21 @@ updated: 2026-09-26
   `categoryKey` 없는 스포츠 잡은 큐 진입 자체를 차단(`DomainCategoryPicker.tsx`의 카테고리 목록 로드 전
   선택 시 `undefined`가 되어 조용히 skip되던 버그의 재발 방지).
 
+## Fixs 탭 — 최초 신설 (2026-09-21)
+Clips·Pulse 옆에 **Fixs**를 신설해달라는 요청으로 시작됨: "apps에서 나는 오류를 자동 수집→Codex가
+수정→테스트·빌드 검증→기존 배포 스크립트로 재배포"까지 잇는 구조. 설계 원칙(자동수정/배포 on-off
+분리, 별도 worktree 격리+원본 충돌 시 중단, 외부 API 장애는 별도 분류, 오류 로그도 비신뢰 입력으로
+취급, 동일 오류 fingerprint 병합으로 무한 재시도 방지, 하루 실행 한도)은 이 앱에 국한되지 않는 일반
+패턴이라 별도 정리 → [[self-healing-error-pipeline-design]]. **최초 배포 시 기본값: 자동 수정·자동
+배포 모두 활성화, 하루 최대 5회. 테스트 387개 통과.** 기존 앱들의 오류 수집은 이 배포 시점부터
+"각 앱의 다음 배포"부터 소급 없이 적용됨. 세션 종료 시점 마지막 질문("모두 배포 했음?")엔 응답 없이
+트랜스크립트가 끊겨 실제 최종 배포 확인은 이 소스만으론 불가(후속 세션들이 Fixs를 정상 전제로 다루는
+정황으로 볼 때 배포됐을 가능성 높음). → [[2026-09-21-lampas-agent-fixs-신설]]
+
 ## Fixs 탭 — 재귀 오류 자동 수집·수정 (2026-09-25 업그레이드)
-Fixs는 오류를 수집해 재귀로 자동 수정하는 기존 기능. 2026-09-25 하루에만 **서로 다른 세션 2개**가
-이 탭을 건드려 v1.0.22 → v1.0.23 → v1.0.25 순으로 배포됐다 — 코딩 도구도 `codex`(오전, 아래 ①②)와
-`claude`(저녁, 아래 ③)로 갈렸다.
+Fixs는 오류를 수집해 재귀로 자동 수정하는 기능(위 2026-09-21 세션에서 신설). 2026-09-25 하루에만
+**서로 다른 세션 2개**가 이 탭을 건드려 v1.0.22 → v1.0.23 → v1.0.25 순으로 배포됐다 — 코딩 도구도
+`codex`(오전, 아래 ①②)와 `claude`(저녁, 아래 ③)로 갈렸다.
 
 ① **작업 삭제 기능**(v1.0.22, `Tool: codex`) — 대기·완료·실패한 작업은 바로 삭제, **실행 중인 작업은
 취소 완료 후에만** 삭제 가능하도록 "작업 삭제" 버튼 추가. 삭제 API 인증·실행 중 삭제 차단·대기열
@@ -127,13 +138,14 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
 ## 관련
 - 상위 제품: [[lampas-studio]] (같은 저장소 `lampas-system`)
 - 이름 충돌 대상(별개): [[lampas]] · [[lampas-harness]]
-- 세션: [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] ·
+- 세션: [[2026-09-21-lampas-agent-fixs-신설]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
+  [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] ·
   [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] · [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-pulse-페르소나-카피점수-구조화-개선]]
 - 엔티티: [[lampas-web-copy]] · [[lampas-web-tools]]
 - 스킬: [[deterministic-extraction-vs-llm-rewrite]] · [[full-stack-feature-removal-audit]] ·
   [[error-fingerprint-path-grouping]]
-- 토픽: [[jev-typed-classification]]
+- 토픽: [[jev-typed-classification]] · [[self-healing-error-pipeline-design]]
 - 외부 AI 프로바이더: [[gemini]](비전 라벨링, `gemini-3.5-flash` 언급)
 - 연관 저장소: [[john-wiki]] (Threads 데이터 소스로 잠깐 연결됐다가 기능 취소로 분리) · [[toktalk]]
   (`talk-api` 운영 키를 Fixs가 임시로 차용)
