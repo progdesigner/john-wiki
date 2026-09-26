@@ -46,12 +46,39 @@ SNS 카피·페르소나를 생성하는 웹. `[[lampas-agent]]`(스포츠 클�
   사용자 평점·수정 의견을 다음 생성 프롬프트에 반영하는 "평가 반영 · 다음 실험 생성" 반복 실행을
   이 앱이 Flow·Pulse와 함께 담당. 회차(실험)별 결과·평가가 남아 비교 가능.
 
+## `?clip=<id>` 딥링크 (2026-09-18 세션)
+Reels UI 단순화(→ [[lampas-web-reels]] "Copy 앱 딥링크" 절)와 함께 추가됨. `?clip=<id>`로 진입하면
+그 클립을 1단계에서 미리 고른 상태로 시작(페르소나 후보 자동 로드까지 이어짐). `?run=`이 함께 있으면
+기존 run 복원이 우선이고, 클립을 못 찾으면 안내 토스트. 이 세션 시점엔 Copy가 아직 자체
+`suggestPersonas`로 페르소나를 만들고 있었다(아래 "Pulse 이관" 절의 이관은 다음날).
+
+## 추가 지시사항·톤 프리셋 — 서버 저장 + 분야·카테고리별 마지막 선택 기억 (2026-09-18 세션)
+"다른 브라우저로 가면 추가 지시사항이 사라진다" + "분야/카테고리별로 마지막 선택을 기억해달라"는
+요청으로 신설된 독립 API 모듈 `copy-hints`(`/v1/copy-hints`, `copy` 모듈과 무관):
+- 테이블 `copy_hint_presets`·`copy_hint_selections`. 범위 키 = 클립의 분야+카테고리(예 `sports:12`,
+  `general:none`). `GET /`(프리셋 목록+범위별 마지막 선택), `POST /`(대소문자·공백 무시 중복 병합),
+  `PUT /selection {scopeKey, text}`(비우면 해제, 프리셋 사용 횟수 증가), `DELETE /:id`(soft delete).
+- 웹: 추가 지시 입력이 "저장된 지시 선택" 셀렉트 + 직접 입력 textarea로 바뀌고 "이 지시 저장"/"저장
+  삭제" 버튼 추가. 카피를 만들면 그 클립의 분야+카테고리에 자동 기억, 같은 범위 클립을 고르면 자동
+  적용. 순수 로직 `lib/hintScope.ts`.
+- **배포가 한 차례 보류됨**: 같은 작업 트리에서 다른 세션(Pulse 이관 세션)이 `copy-api.ts`에서
+  `fetchCopyFields` 등을 이미 제거했는데 `StudioPage.tsx`가 아직 import해 컴파일이 깨진 상태였고,
+  API를 먼저 배포하면 운영이 의존하는 `/v1/copy/fields`가 사라져 함께 깨질 상황이었기 때문. 그
+  세션이 끝나 컴파일이 복구된 뒤 정상 배포됨.
+- **후속(같은 세션 §2)**: 사용자가 "톤도 추가지시처럼 저장·선택 삭제되게" 요청 → 프리셋에
+  `kind`(`hint`|`tone`) 필드 추가, 선택 유니크를 `(userId, kind, scopeKey)`로, 웹은 공용
+  `PresetSelect` 컴포넌트로 통합(저장된 프리셋 셀렉트+직접 입력, "이 톤/지시 저장", "선택 삭제"). 이
+  배포에 Pulse 이관분(아래 절)도 함께 실려나감.
+- 상세 → [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]] §7.
+
 ## 관련
 - 상위 파이프라인: [[lampas-agent]](추출·라벨링) · [[lampas-web-pulse]](페르소나 생성·라이브러리
-  단일 출처) · [[lampas-web-reels]](클립 편집·페르소나 선택) · [[lampas-web-status]](시스템 상태) ·
-  [[lampas-web-flow]](오케스트레이션·트렌드 분석 Work)
+  단일 출처) · [[lampas-web-reels]](클립 편집·페르소나 선택, `?clip=` 딥링크 발신처) ·
+  [[lampas-web-status]](시스템 상태) · [[lampas-web-flow]](오케스트레이션·트렌드 분석 Work)
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
-- 세션: [[2026-09-19-pulse-분야별mlb페르소나-copy4단계개편-최초구현]](같은 날 8시간 앞선 선행
+- 세션: [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]](`?clip=` 딥링크·추가지시/톤
+  프리셋 신설) ·
+  [[2026-09-19-pulse-분야별mlb페르소나-copy4단계개편-최초구현]](같은 날 8시간 앞선 선행
   4단계 개편, 대체됨) · [[2026-09-19-pulse-페르소나-단일출처-계정이관-신뢰도개선]](페르소나 생성
   이관·신뢰도 표시 도입) · [[2026-09-20-lampas-flow-만들기]] ·
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·

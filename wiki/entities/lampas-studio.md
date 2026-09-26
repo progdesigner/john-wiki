@@ -348,6 +348,26 @@ X·Threads 공식 API 소스 추가) → 배포 → 배치 크기·타임아웃 
 - **배포 동시성 함정**: 같은 저장소를 두 세션이 몇 분 간격으로 배포하면 상대 세션의 미완료 중간 상태가
   빌드에 섞일 수 있음(Threads 탭 오노출 사례) → [[lampas-agent]] 참고.
 
+## AI Clip Intelligence + Brand Kit — 숏폼 자동 제작 요구사항 대응 (2026-09-18 세션)
+
+사용자가 "긴 영상→AI 숏폼 자동 제작" 제품 기획서를 붙여넣고 스포츠 클립 파이프라인에 없는 기능을
+채워달라 요청. 구현 전 clips/에디터/AI 게이트웨이·ASR/reels·copy·packaging 4개 영역을 병렬 서베이해
+갭을 확정(절차 → [[parallel-survey-before-feature-gap-analysis]], 갭 분석표 → [[lampas-clip-intelligence]]).
+`lampas-api`에 신규 `clip-intelligence`(5축 클립 점수·시간 미겹침 상위 N 선택·15/30/60/90초 트림·
+스타일별 훅 문구) + `brand-kits`(로고·폰트·자막 스타일·팔레트·CTA·워터마크 계정 프리셋) 모듈을
+신설하고, `[[lampas-web-edit]]`에 단어 강조 자막·9:16 Auto Reframe(모션 무게중심 팬, 이후 수동
+키프레임 조정·Contain 모드 버그 수정까지 3회 후속)·브랜드 킷 자동 적용을, `[[lampas-web-reels]]`에
+AI 선별 패널을 추가했다가 곧바로 "UI/UX 복잡" 피드백으로 페르소나/카피 생성 UI 전체를 걷어내고 현재의
+6단계 편집 그룹 보드로 재편, `[[lampas-web-clips]]`에 5축 점수 표시·정렬을 추가했다. 부수적으로
+에디터 자막 생성이 긴 구간에서 중간에 끊기던 버그(청크 미분할)를 수정 → [[asr-long-audio-silent-truncation]],
+`lampas-web-copy`에 추가 지시사항·톤 서버 프리셋(`copy-hints` 모듈)과 `?clip=` 딥링크를 추가했다.
+**5축 점수·페르소나 기반 클립 선택은 오래가지 못했다** — 다음 날([[lampas-agent]] "훅 점수" 절)
+비전 라벨링의 축 점수가 배치 대비 효과로 불안정하다는 게 드러나 텍스트 기반 상대 순위 방식으로
+대체됐고, 릴스의 페르소나 UI도 같은 세션 안에서 이미 단순화됐다 — 상세 비교는
+[[lampas-clip-intelligence]] "실제 구현 결과 — 원안과의 차이" 절 참고.
+전체 배포(운영 DB DDL 선적용→API→에이전트→웹 3종)까지 완료. 세션 →
+[[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]].
+
 ## `lampas-web-music`(`music.lampas.io`) — 모델 업그레이드 (2026-09-22 세션)
 
 Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[atlas-cloud]] 경유 minimax 음악 모델을
@@ -383,7 +403,8 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   기존 이슈).
 
 ## 관련
-- 세션: [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]] · [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
+- 세션: [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]] ·
+  [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]] · [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
   [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] ·
   [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
   [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] ·
@@ -396,11 +417,11 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] · [[2026-09-19-lampas-trends-고도화]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
-  [[lampas-system-ai-call-architecture-audit]]
+  [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
   [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]]
 - 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-pulse]] · [[lampas-web-copy]] ·
-  [[lampas-web-reels]] · [[lampas-web-edit]](`edit.lampas.io`) · [[lampas-web-package]](`package.lampas.io`) ·
+  [[lampas-web-reels]] · [[lampas-web-clips]] · [[lampas-web-edit]](`edit.lampas.io`) · [[lampas-web-package]](`package.lampas.io`) ·
   [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`) ·
   [[lampas-web-trends]](`trends.lampas.io`)
@@ -411,4 +432,5 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 - 스킬: [[selective-hunk-commit-shared-file]] · [[nominatim-batch-geocode-progressive-rollout]] ·
   [[tailscale-funnel-large-payload-bypass]] · [[cross-subdomain-session-handoff]] ·
   [[execution-run-scoped-status-vs-stale-notification]] · [[accept-then-poll-for-slow-ai-jobs]] ·
-  [[proxy-body-limit-413-appears-as-network-error]] · [[llm-batch-inference-timeout-tuning]]
+  [[proxy-body-limit-413-appears-as-network-error]] · [[llm-batch-inference-timeout-tuning]] ·
+  [[parallel-survey-before-feature-gap-analysis]] · [[asr-long-audio-silent-truncation]]

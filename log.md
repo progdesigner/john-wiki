@@ -2406,3 +2406,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - index.md 갱신 (Sessions·Entities·Skills 반영)
 - AI_CONTEXT.md 갱신 (lampas-studio 항목에 09-19 트렌드 앱 한 문장 추가, 39/40줄 유지)
 - 발견: 운영 첫 배포 시점에만 드러나는 실패 패턴 — 로컬은 Atlas 키 부재로 규칙 폴백만 타 배치 호출 경로 자체가 검증되지 않았고, 운영에서 처음 실제 모델 배치가 켜지며 타임아웃이 드러남
+
+## [2026-09-26] ingest | Lampas 숏폼 자동제작 파이프라인 대량 고도화 — AI Clip Intelligence·Brand Kit (source: c02d56db-9299-4c9e-8ec3-c482a3345f99.md)
+- 원본: `raw/conversations/2026-09-18-lampas-clip-intelligence-brand-kit-대량구현.md` (세션 시작 2026-09-18T11:14Z, 위키에 09-26 뒤늦게 ingest — 09-19 세션들보다 하루 앞선 병렬 작업으로 확인됨)
+- 세션 요약: [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]] — "긴 영상→AI 숏폼 자동제작" 요구사항 문서 대응. 4개 병렬 서베이(clips/에디터/AI게이트웨이+ASR/reels+copy+packaging)로 갭 분석 후 `lampas-api` `clip-intelligence`(5축 클립 점수)·`brand-kits` 모듈 신설, `[[lampas-web-edit]]` Auto Reframe(모션 무게중심 팬)·단어강조 자막·브랜드킷 자동적용·ASR 청크분할 버그수정, `[[lampas-web-reels]]` AI 선별 패널 신설→"UI 복잡" 피드백으로 페르소나/카피 UI 전체 제거 후 6단계 편집그룹 보드 재편+Copy `?clip=` 딥링크, `[[lampas-web-clips]]`(신규 엔티티) 5축 점수 표시·정렬+폴더 인라인 이름변경, `[[lampas-web-copy]]` copy-hints 모듈(추가지시·톤 서버 프리셋) 신설. 전체 운영 배포까지 완료
+- 신규 토픽: [[lampas-clip-intelligence]] (요구사항 원안 vs 실제 구현 결과 비교표 — 5축 점수·페르소나 기반 클립 선택은 다음날 롤백, 성과 피드백 루프·B2B 요소는 미착수)
+- 신규 엔티티: [[lampas-web-clips]] (클립 뱅크 UI, 이 저장소에서 처음 정식 엔티티화)
+- 엔티티 갱신: [[lampas-studio]](신규 절 추가) · [[lampas-web-edit]](Auto Reframe·브랜드킷·ASR청크분할 절 추가) · [[lampas-web-reels]](AI선별→편집그룹보드 재편 출처 명시) · [[lampas-web-copy]](딥링크·copy-hints 절 추가) · [[lampas-agent]](4축 라벨링이 이 세션에서 처음 추가돼 다음날 되돌려진 사실 교차링크)
+- 스킬 신설: [[parallel-survey-before-feature-gap-analysis]](큰 기능요청 전 병렬 서베이로 갭 확정) · [[asr-long-audio-silent-truncation]](긴 오디오 ASR 통짜전송 시 뒷부분 조용히 잘림 → 청크 분할+리샘플)
+- 모순/시점 정정: `lampas-web-reels`의 페르소나 선택 UI·`editGroup.ts`가 이 세션(09-18)의 산물임을 확인 — 기존 페이지는 이를 09-25 "카드스트립" 세션의 산물처럼 서술했으나 실제로는 09-18에 골격이 먼저 생기고 09-25 세션이 디자인만 다듬은 것. `lampas-agent`의 "훅 점수 절대→상대 순위 전환"(09-19)이 되돌린 "4축 점수"의 최초 도입 시점이 이 ingest로 처음 확정됨(이전엔 출처 미상으로 기록돼 있었음)
+- index.md·AI_CONTEXT.md 갱신 (AI_CONTEXT는 39/40줄 유지)
