@@ -2602,3 +2602,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/skills/cross-subdomain-session-handoff.md 갱신 — "대비 사례" 절 신설, 이 세션이 5일 앞서 같은 문제(서브도메인 간 세션 이어받기)를 교환 코드가 아닌 토큰-in-URL 방식으로 더 단순·약하게 풀었음을 교차기록
 - index.md 갱신 (세션 1건 신설, dalar-web-first·lampas-web-edit·selective-hunk-commit-shared-file·cross-subdomain-session-handoff 항목 갱신)
 - AI_CONTEXT.md 갱신 보류 — 이미 충분히 상세한 dalar-web-first/lampas-web-edit 위키 페이지로 커버되는 중간 시점 기능 추가이고, 40줄 예산 대비 상시 주입 가치가 낮음
+
+## [2026-09-26] ingest | lampas-web-trends 최초 구축 (스포츠·예능→뷰티→AI, 커밋·푸시) (source: ac1acb4b-761e-43f1-a8fc-6b86615071de.md)
+- raw/conversations/2026-09-15-lampas-web-trends-최초구축-스포츠예능뷰티ai.md 보관 (원본 세션 2026-09-15T03:09:16.636Z = 12:09 KST 시작, `logs/terminals/archive/ac1acb4b-...md`에서 회수, 뒤늦게 ingest, `Tool: codex`, 작업폴더 `lampas-system`)
+- wiki/sessions/2026-09-15-lampas-web-trends-최초구축-스포츠예능뷰티ai.md 신설 — `[[lampas-web-trends]]`를 스포츠·예능 분야로 무에서 구축(Google Trends·Google 뉴스·연합·조선 7피드, JTBC는 갱신정지로 제외, 5분 주기 자동수집, AWS Lambda 권한 부재로 API 서버 별도 프로세스 폴백)하고 `trends.lampas.io` 배포, 같은 날 뷰티 탭(18개 키워드)·AI 탭(모델명 한글·영문 동시집계) 순차 추가·배포 후 트렌드 관련 변경만 커밋해 `main` 푸시(`25877772`)
+- **시점 재정정**: 이 세션(12:09 KST 시작)이 `lampas-web-trends`의 진짜 최초 구축으로 확인됨 — 기존 위키는 같은 날 저녁 세션([[2026-09-15-lampas-web-trends-실시간검색-구현]], 21:33 KST 시작)을 "최초 상세 노출"로 기록했으나, 그 세션은 이미 이 세션이 배포한 수집기(`collector.py`) 위에 실시간 검색만 얹은 것이었음. 순서: 09-15 오전(이 세션, 최초 구축) → 09-15 저녁(실시간 검색) → 09-19(토픽 재구축 등 고도화)
+- wiki/entities/lampas-web-trends.md 갱신 — "최초 구축 (2026-09-15 오전)" 절 신설(맨 위), 시점 정정 문단 갱신, 관련 세션 목록에 이 세션 추가
+- wiki/entities/lampas-studio.md 갱신 — `lampas-web-trends` 절의 "09-19 첫 상세 노출" 기록에 재정정 주석 추가(진짜 최초 구축은 09-15)
+- wiki/skills/aws-permission-gap-fallback-to-existing-server-process.md 신설 — Lambda+스케줄러 생성 권한이 없을 때 기존 API 서버 별도 프로세스로 폴백하는 절차(승인 대기 없이 먼저 배포, 최소 두 주기 관찰로 검증)
+- index.md 갱신 (세션 1건 신설, lampas-web-trends 엔티티 항목 갱신, 스킬 1건 신설)
+- AI_CONTEXT.md 갱신 — 09-15 lampas-web-trends 문장을 "최초 구축(오전)→뷰티·AI·커밋→실시간검색(저녁)" 순서로 재작성
