@@ -2115,3 +2115,16 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `AI_CONTEXT.md` 갱신: lampas-studio 줄 끝에 Pulse 채점 구조 확정·69점 상한 철회 요약 추가(39줄,
   40줄 이내 유지).
 - `index.md` Sessions 세션1 신설·Entities(lampas-agent·lampas-web-copy) 갱신·Skills 1신설 반영.
+
+## [2026-09-26] ingest | music.lampas.io minimax 2.6→3.0 업그레이드·배포 (source: 2b5ed18c-f701-43ba-8bdb-56b96e319f16.md)
+- 원본을 `raw/conversations/2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포.md`로 보관.
+- 세션 요약 신설: [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]].
+- 엔티티 신설: [[lampas-web-music]](`music.lampas.io`) — 이 위키에 첫 상세 노출, [[atlas-cloud]] 경유
+  minimax 음악 모델 2.6→3.0 업그레이드·운영 배포 완료 기록.
+- 엔티티 갱신: [[lampas-studio]](신규 앱 절 추가) · [[atlas-cloud]](음악 생성 라우팅 첫 확인 추가) ·
+  [[lampas-web-tools]](`music-gen` 툴 2.6 고정, 자매 앱과 버전 불일치 기록).
+- 새 스킬 없음 — 배포 전 스키마 드리프트 확인은 기존 [[prod-ddl-before-deploy-with-drift-check]]
+  절차를 재사용한 사례로만 세션 페이지에 링크(새 DB 테이블이 없어 그 스킬의 전형적 적용 사례는 아님).
+- `AI_CONTEXT.md` 갱신: lampas-studio 줄 끝에 lampas-web-music 모델 업그레이드 요약 추가(기존 물리
+  라인 재사용, 40줄 이내 유지).
+- `index.md` Sessions 1신설·Entities(lampas-web-music 신설, lampas-web-tools·atlas-cloud 갱신) 반영.

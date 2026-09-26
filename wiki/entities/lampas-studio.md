@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music]
 created: 2026-07-09
 updated: 2026-09-26
 ---
@@ -286,8 +286,16 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 - **배포 동시성 함정**: 같은 저장소를 두 세션이 몇 분 간격으로 배포하면 상대 세션의 미완료 중간 상태가
   빌드에 섞일 수 있음(Threads 탭 오노출 사례) → [[lampas-agent]] 참고.
 
+## `lampas-web-music`(`music.lampas.io`) — 모델 업그레이드 (2026-09-22 세션)
+
+Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[atlas-cloud]] 경유 minimax 음악 모델을
+2.6 → **3.0**으로 업그레이드·운영 배포 완료(요청 필드 동일해 호출 코드 무변경, 곡당 150크레딧 유지).
+`[[lampas-web-tools]]`의 `music-gen` 툴은 이 배포 이후에도 여전히 2.6 — 자매 앱 간 버전 불일치가
+남음. 상세·엔티티 → [[lampas-web-music]] · 세션 → [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]]
+
 ## 관련
 - 세션: [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
+  [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] ·
   [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
   [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-17-works-저장소-일괄최신화-pull]] ·
@@ -298,7 +306,7 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]]
 - 토픽: [[lampas-actor-object-space-positioning]]
 - 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] · [[lampas-web-tools]] ·
-  [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정)
+  [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]

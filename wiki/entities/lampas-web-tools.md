@@ -19,6 +19,8 @@ updated: 2026-09-26
   사용 확인. 콘텐츠 심사 거절 시 응답에 `Failure to pass the risk control system`만 오고 구체적 사유는
   없음 — 클라이언트에서 거절 자체를 해제할 수는 없어, 거절 사유를 사라지는 토스트 대신 **결과 영역에
   유지**하고 실패 상태·재시도·[[lampas-agent]] Fixs 보고 처리를 개선(v0.1.3).
+- **`music-gen` 툴은 minimax 2.6 고정** — 자매 앱 [[lampas-web-music]]이 2026-09-22 3.0으로 업그레이드
+  됐을 때 요청 범위가 music.lampas.io로 한정돼 이 툴은 손대지 않음, 버전 불일치 상태로 남아 있음.
 
 ## 알려진 버그·수정 이력 (2026-09-25, 한 세션 내 4단계)
 1. **업로드 응답 인식 실패**(v0.1.2) — 서버가 반환하는 `download_url` 필드 형식을 프론트가 인식 못해
@@ -44,4 +46,5 @@ updated: 2026-09-26
 ## 관련
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
 - Fixs 연동: [[lampas-agent]]
+- 자매 앱: [[lampas-web-music]] (`music-gen` 툴 버전 불일치 — 2.6 vs 3.0)
 - 세션: [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]]

@@ -18,6 +18,10 @@ updated: 2026-09-07
 - **레퍼런스 시트 생성** — 시트 생성 모델 선택지도 Gemini 기본 / Atlas Cloud 대안 구조 동일.
 - **Actor / Actor+Object 합성 촬영** — 기존 `background` 레퍼런스 슬롯을 그대로 재사용하는 경로.
   Space 기능(2026-07-15~16 신설)도 이 경로를 거의 무개조로 재사용.
+- **음악 생성 — `[[lampas-web-music]]`** — minimax 음악 모델을 Atlas Cloud 경유로 호출(2026-09-22
+  세션에서 첫 확인). 2.6→3.0 업그레이드 시 Atlas 스키마의 요청 필드가 두 버전 간 동일함을 먼저
+  확인하고 모델 식별자만 교체 — 이미지·영상뿐 아니라 오디오/음악 생성도 이 애그리게이터를 거친다는
+  근거.
 - **CLAUDE.md 요약과 실제 라우팅 불일치** (2026-07-15 세션 확인, [[lampas-studio]]에 상세) — 제품
   CLAUDE.md엔 "스튜디오 합성=Atlas Cloud"로 뭉뚱그려 있지만, **Object 단독 촬영은 실제로 Gemini
   직접 경로**(`objects.service.ts:794`)다. Atlas Cloud는 Actor/Actor+Object 촬영 쪽에만 해당.
@@ -31,6 +35,7 @@ updated: 2026-09-07
   Atlas Cloud가 다중 모델 애그리게이터 역할을 한다는 근거.
 
 ## 관련
-- [[openai]] · [[gemini]] · [[grok]] (Atlas Cloud가 라우팅하는 개별 모델 제공사)
-- [[lampas-studio]] · [[toktalk]]
-- 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]]
+- [[openai]] · [[gemini]] · [[grok]] · minimax(음악, [[lampas-web-music]] 경유) (Atlas Cloud가 라우팅하는 개별 모델 제공사)
+- [[lampas-studio]] · [[toktalk]] · [[lampas-web-music]]
+- 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
+  [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]]

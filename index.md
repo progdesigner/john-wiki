@@ -114,6 +114,7 @@
   `talk-app-toss-samantha`([[toktalk]]) 버전 충돌은 원격(0.1.7) 채택. 선택적 헝크 커밋 절차 신규 확인
 - [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] — `Tool: codex` 세션(2026-09-24~25로 이어짐). 블루리본 맛집 지도 `spot.lampas.io` 구축. bluer.co.kr 스크래핑 403 차단 → 첨부 엑셀 579곳 → 구글 시트 반영 738곳(블루리본+다이닝코드, 중복 5건 병합)까지 데이터 2단계 확장. 지도 프로바이더 카카오→OpenStreetMap+Nominatim 지오코딩→네이버(401 인증 실패)→**OpenStreetMap 확정** 3회 전환, 최종 502곳 지도 표시. 폐업/정보 신고 기능(개인 숨김+운영자 검토 후 전체 제외) 추가. [[lampas-web-spot]] 스텁 해소
 - [[2026-09-24-pulse-페르소나-카피점수-구조화-개선]] — `Tool: codex` 세션(2026-09-24 시작, 2026-09-26까지 이어진 장기 세션). [[lampas-agent]]의 Pulse 하위 시스템(페르소나·카피 생성·채점) 최초 상세 확인. "페르소나가 유아틱, 카피 점수는 높은데 일반적" 문제 제기 → 4영역 8세부항목 채점 구조 도입·범용문구 69점 상한 배포 → 사용자가 "일반적인 제목이 더 좋아보이는데?"라고 반박 → 익숙한 표현과 근거없는 과장을 구분하도록 정정, 상한 철회 후 재배포(API 1,152개·웹 36개 테스트 통과). 마지막 reels 카드 스트립 요청 3건은 응답 없이 트랜스크립트 종료(다른 도구 세션에서 별도 완료 추정, 미확인)
+- [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] — `Tool: claude` 세션. `lampas-web-music`(`music.lampas.io`)의 [[atlas-cloud]] 경유 minimax 음악 생성 모델을 2.6→3.0으로 교체(요청 필드 동일해 호출 코드 무변경, 곡당 150크레딧 유지), lampas-api+web-music 운영 배포까지 완료. `tools.lampas.io`의 `music-gen` 툴은 범위 밖이라 2.6 유지 — 자매 앱 버전 불일치 발생. 이 위키에 `lampas-web-music` 최초 상세 노출. 배포에 다른 미커밋 변경(dalar·flow-works·pulse 등)이 함께 실려 커밋은 미완료로 남음
 
 ## Entities
 
@@ -125,7 +126,8 @@
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
 - [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status/Tools 자매 앱, sports-wiki "경기" 엔티티 신설 포함. Fixs 탭에 2026-09-25 작업삭제(v1.0.22)→오류수집 확장(v1.0.23)→경로 그룹핑+Jev 분류(v1.0.25) 순 배포. Pulse(페르소나·카피 채점) 상세는 2026-09-24 세션에서 확정
 - [[lampas-web-copy]] — lampas-system 스포츠 클립 파이프라인 내 SNS 카피·페르소나 생성 웹("Copy"), 생성·채점 엔진은 [[lampas-agent]] Pulse. 2026-09-25 가로스크롤 레이아웃 버그(바깥 fieldset이 카드 너비로 늘어남) 수정·v0.2.6 배포
-- [[lampas-web-tools]] — lampas-system 내 AI 생성 도구 모음 웹("Tools", tools.lampas.io, 13개 기능). AGENTS.md 3라인 앱 목록엔 없는 앱. 2026-09-25 업로드 응답 인식·모델표시·Kling 생성거절 UX·영상 재생 버그(S3/CloudFront 직접재생 전환) 순차 수정, 신규 생성분 최종 재생 확인은 미완료
+- [[lampas-web-tools]] — lampas-system 내 AI 생성 도구 모음 웹("Tools", tools.lampas.io, 13개 기능). AGENTS.md 3라인 앱 목록엔 없는 앱. 2026-09-25 업로드 응답 인식·모델표시·Kling 생성거절 UX·영상 재생 버그(S3/CloudFront 직접재생 전환) 순차 수정, 신규 생성분 최종 재생 확인은 미완료. `music-gen` 툴은 minimax 2.6 고정(자매 앱 [[lampas-web-music]]은 3.0)
+- [[lampas-web-music]] — lampas-system 내 음악 생성 웹(`music.lampas.io`). [[atlas-cloud]] 경유 minimax 음악 모델, 2026-09-22 2.6→3.0 업그레이드·운영 배포 완료(곡당 150크레딧 유지). 3.0 길이 제한(5분/2,000자/3,500자)에 UI 가드 없음. 자매 앱 [[lampas-web-tools]] `music-gen`은 2.6 유지
 - [[lampas-web-status]] — lampas-system 내 상태 페이지 앱(status.lampas.io, status.claude.com 형태). 2026-09-25 처음부터 구현·운영 배포 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트
 - [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인. 같은 날 신규 서브앱 `virtual.toktalk.ai`(`[[tavus]]` 기반 사진 아바타 영상통화, 캐릭터 "한소연") 구축·배포 확정. 2026-09-24: `talk-app-toss-samantha`(0.1.7) 존재가 git 병합 충돌로 두 번째 독립 확인됨
 - [[tavus]] — 사진→아바타(Phoenix-4/4.5)+실시간 영상통화(CVI)+카메라인식(Raven)+메모리 API. [[toktalk]] `virtual.toktalk.ai`가 채택. 확인된 제약: 사진 아바타 생성 결제 게이트(402), 통화 최대시간 요금제 상한(요청 30분→실제 15분 자동 축소)
@@ -152,7 +154,7 @@
 - [[openai]] — 외부 AI 프로바이더. 하네스 모델 경로·음성입력(Realtime `gpt-4o-transcribe`)·로컬 LLM OpenAI 호환 규격 (2026-08-31 lint 통합)
 - [[gemini]] — Google. [[lampas-studio]] 핵심 이미지·비전 엔진(생성 기본·Vision 제품분석·등록사진 분류) (2026-08-31 lint 통합)
 - [[elevenlabs]] — 외부 TTS 프로바이더. [[toktalk]] 음성 스택 + 하네스 `tts-stream`(구현 착수·완료 미확인, Web Speech API와 별개) (2026-08-31 lint 통합)
-- [[atlas-cloud]] — 외부 이미지/영상 생성 대행 서비스. [[lampas-studio]] Actor/Actor+Object 촬영·레퍼런스 시트에서 [[gemini]]와 동일 시그니처로 분기(gpt-image-2·nano-banana-2·grok-imagine·wan-2.7 라우팅) (2026-09-07 lint 신설)
+- [[atlas-cloud]] — 외부 이미지/영상/음악 생성 대행 서비스. [[lampas-studio]] Actor/Actor+Object 촬영·레퍼런스 시트에서 [[gemini]]와 동일 시그니처로 분기(gpt-image-2·nano-banana-2·grok-imagine·wan-2.7 라우팅), [[lampas-web-music]]의 minimax 음악 생성도 경유 (2026-09-07 lint 신설, 2026-09-22 음악 라우팅 확인)
 - [[grok]] — xAI 텍스트 분석 모델. [[lampas-studio]] 레퍼런스 분석 1순위(Gemini 폴백)·[[lampas-web-ai]] 필드 추출, dark-system 모델필터 예시명과는 무관 (2026-09-07 lint 신설)
 - [[scott-jeun-sylvan-group]] — Scott Jeun(`scottjeun@thesylvangroup.com`)·Clara K, The Sylvan Group(싱가포르) 신원 추적 통합 페이지 ([[srkk]]·[[fy-group]]·[[sylvan-korea]]·[[cwc-fy-group-whisky-dispute]]에 흩어져 있던 동일인 추정 근거를 2026-08-03 lint로 통합)
 
