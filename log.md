@@ -2426,3 +2426,10 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 토픽 갱신: [[lampas-system-ai-call-architecture-audit]](10번 항목 `AiBudget`의 실제 출처 세션 교차 확인 추가) · [[secrets-plaintext-exposure-pattern]](4번째 사례 추가 — 접근 토큰 env 파일 방치 + 1회용 토큰 URL 평문 노출, "3회 이상"→"4회 이상"으로 수정)
 - 모순/미확인 사항 기록: 이 세션이 구현한 SQLite 잡 원장·워커 루프·`/pulse/ws` 접근 토큰 게이트의 존속 여부가 이후 09-19·09-20 세션 요약에 언급 없어 **미확인**으로 명시(덮어쓰지 않고 병기)
 - index.md·log.md 갱신 (AI_CONTEXT.md는 39/40줄 한도로 이번엔 갱신 보류 — 존속 여부 불확실한 과거 세션 상세는 위키 페이지로 충분)
+
+## [2026-09-26] ingest | lampas-web-trends 실시간 세부 키워드 검색 최초 구현 (source: 7da906f9-9831-421a-bb43-5229b0ad3942.md)
+- 원본: 2026-09-15T12:33 세션(2026-09-26 뒤늦게 ingest). `raw/conversations/2026-09-15-lampas-web-trends-실시간검색-구현.md`로 보관
+- 신규 세션 페이지: [[2026-09-15-lampas-web-trends-실시간검색-구현]] — 분야+세부 키워드 검색 시 즉시 RSS 수집(`GET /v1/trends/search`, 2분 캐시·IP 분당20회 제한) 구현·검증(jest/vitest/tsc 통과), 배포는 하지 않고 종료
+- 엔티티 갱신: [[lampas-web-trends]](실시간 검색 기원 절 신설, `trends-search.lib.ts`/`collector.py` 결합 지점 명시)
+- 시점 정정: `lampas-web-trends`의 "이 위키에 첫 상세 노출" 세션이 기존 기록 [[2026-09-19-lampas-trends-고도화]]에서 나흘 앞선 이 09-15 세션으로 정정됨(뒤늦은 ingest 순서상 09-19가 먼저 들어와 생긴 오기록) — [[2026-09-19-lampas-trends-고도화]]는 후속 고도화로 재규정
+- index.md·AI_CONTEXT.md 갱신(39/40줄 유지, "09-19 첫 상세 노출" 문구를 "09-15 첫 상세 노출 + 09-19 후속 고도화"로 정정)
