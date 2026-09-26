@@ -2142,3 +2142,14 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   확정된 결정에 해당하지 않음), 이미 39줄로 한도에 근접.
 - `index.md` Sessions 1신설·Entities(bokziri-system 신설)·Topics(works-project-portfolio 설명 유지)·
   Skills(dead-external-cdn-domain-migration 신설) 반영.
+
+## [2026-09-26] ingest | Lampas Studio Edit 모델·WAN 3.0·멀티이미지 영상·오류반복 수정 (source: 4c4f7af1-51a9-416f-92e9-b900e7236cb2.md)
+- 원본을 `raw/conversations/2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상.md`로 보관.
+- 세션 요약 신설: [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]].
+- 엔티티 갱신: [[lampas-studio]](신규 절 추가 — Sunburst·Flare Edit·Qwen Image 3.0 Pro Edit 추가,
+  영상 WAN 2.7→3.0 교체+멀티이미지 레퍼런스, "생성 중단 오표시" 근본수정, models.lampas.io 508개
+  모델 동기화) · [[atlas-cloud]](모델 카탈로그 업데이트 절 신설).
+- 스킬 신설: [[false-abort-premature-status-check]] — 비동기 생성이 정상인데 "중단됨"으로 반복
+  오표시될 때 조기 상태판정+중복 폴링 2중 원인을 구간별로 진단하는 절차.
+- `AI_CONTEXT.md` 갱신: lampas-studio 줄 끝에 이 세션 요약 추가(39줄, 40줄 이내 유지).
+- `index.md` Sessions 1신설·Entities(lampas-studio·atlas-cloud 갱신)·Skills 1신설 반영.

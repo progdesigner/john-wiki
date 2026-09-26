@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation]
 created: 2026-07-09
 updated: 2026-09-26
 ---
@@ -293,8 +293,36 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 `[[lampas-web-tools]]`의 `music-gen` 툴은 이 배포 이후에도 여전히 2.6 — 자매 앱 간 버전 불일치가
 남음. 상세·엔티티 → [[lampas-web-music]] · 세션 → [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]]
 
+## Edit 모델 2종·멀티이미지 영상·WAN 3.0·Qwen Edit 추가 + 영상 오류 반복 근본수정 (2026-09-21 세션)
+
+`Tool: codex` 세션. 한 세션 안에서 이미지 편집 모델 추가 → 영상 멀티이미지 연결 → 영상 생성 오류
+반복 진단·수정 → Draft 이름변경 버그 → WAN 3.0 교체 → 카탈로그 갱신 → Qwen Edit 추가까지 연속
+진행·전부 배포. → [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]]
+
+- **이미지 편집 모델 추가**: **GPT Image 2.5 Sunburst Edit**·**Flare Edit** — 촬영·보정에 추가, 이후
+  `models.lampas.io` 정식 카탈로그 등록(각 6cr/장, 이전엔 "카탈로그 외 모델"로 임시가격).
+- **영상 멀티이미지 입력**: 기존엔 연결된 이미지 중 **첫 장만 서버 전송**하던 제약을 확인, Seedance/
+  WAN 3.0 레퍼런스 모델로 다중 이미지 입력 지원 추가.
+- **영상 생성 "오류 반복" 근본 원인 2가지**(실행 자체는 문제 없었음): ① 서버 작업 ID가 아직 없는
+  로딩 노드를 "중단된 생성"으로 오판하는 로직, ② 작업 ID 획득 후 **실행 중 폴링 + 복구용 폴링이
+  동시에 붙어** 일시적 상태 조회 실패 한 번에도 실패 알림이 뜨는 구조. 둘 다 수정 → 절차 스킬
+  [[false-abort-premature-status-check]].
+- **Draft Work 이름 변경 불가 버그**: 브라우저 기본 `prompt()` 사용 부분을 앱 내부 입력창으로 교체,
+  저장 실패도 그 입력창에서 확인 가능하도록 수정.
+- **WAN 2.7 → 3.0**: Atlas 카탈로그에 WAN 3.0은 **영상 모델로만** 존재(이미지 3.0 없음) — **영상만
+  3.0 교체**(50cr/초, 다중 이미지·오디오 지원, `models.lampas.io` 확정가), 기존 저장된 2.7 선택도
+  실행 시 3.0으로 자동 승계. **이미지용 WAN은 2.7 Pro 유지**(3.0 미제공, 반복 확인된 제약).
+- **`models.lampas.io` 카탈로그 508개 모델 동기화** — 스튜디오 모델 선택창 가격 표시가 이제 이
+  카탈로그를 **유일한 소스**로 조회(이전엔 별도 하드코딩 가능성 시사).
+- **Qwen Image 3.0 Pro Edit 추가**: 이미지 촬영·보정·Transform에 추가, 레퍼런스 최대 3장, 40cr/장,
+  Pro 모델 ID가 그대로 호출되는지(기존 Qwen으로 안 바뀌는지) 별도 테스트.
+- 검증: 스튜디오 테스트 225→231개, 모델 요청 테스트 6개, 전체 테스트 1,081개, 두 웹앱 빌드, Lampas
+  API 타입검사 통과. Dalar API 전체 타입 검사는 기존 Prisma 타입 불일치로 제한(이 세션 이전부터의
+  기존 이슈).
+
 ## 관련
-- 세션: [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
+- 세션: [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] ·
+  [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
   [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] ·
   [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·

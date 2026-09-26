@@ -1,7 +1,7 @@
 ---
-tags: [entity, ai-provider, image-generation, video-generation, external]
+tags: [entity, ai-provider, image-generation, video-generation, external, wan, qwen, seedance]
 created: 2026-09-07
-updated: 2026-09-07
+updated: 2026-09-26
 ---
 # Atlas Cloud
 
@@ -25,6 +25,18 @@ updated: 2026-09-07
 - **CLAUDE.md 요약과 실제 라우팅 불일치** (2026-07-15 세션 확인, [[lampas-studio]]에 상세) — 제품
   CLAUDE.md엔 "스튜디오 합성=Atlas Cloud"로 뭉뚱그려 있지만, **Object 단독 촬영은 실제로 Gemini
   직접 경로**(`objects.service.ts:794`)다. Atlas Cloud는 Actor/Actor+Object 촬영 쪽에만 해당.
+
+## 모델 카탈로그 업데이트 (2026-09-21 세션)
+
+- **WAN 3.0** — 영상 모델로만 카탈로그에 존재(이미지 생성·편집용 3.0은 미제공). [[lampas-studio]]가
+  일반 WAN 영상을 2.7→3.0으로 전량 교체(50cr/초, 다중 이미지 레퍼런스·오디오 지원), 이미지용 WAN은
+  2.7 Pro 유지.
+- **Qwen Image 3.0 Pro Edit**(`qwen-image-3.0-pro/edit`) 신규 — 레퍼런스 최대 3장, 40cr/장.
+- **GPT Image 2.5 Sunburst Edit · Flare Edit** 신규 — 이미지 편집, 각 6cr/장.
+- **Seedance 레퍼런스 모델** — 영상 생성 시 다중 이미지 입력을 지원하는 경로로 확인(기존엔 첫 장만
+  전송하던 제약이 있었음).
+- `models.lampas.io` 카탈로그가 **508개 모델**로 동기화, 스튜디오 모델 선택창 가격이 이 카탈로그를
+  유일한 소스로 조회하도록 재연결. → [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]]
 
 ## 다른 제품에서의 언급
 

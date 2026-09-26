@@ -116,12 +116,13 @@
 - [[2026-09-24-pulse-페르소나-카피점수-구조화-개선]] — `Tool: codex` 세션(2026-09-24 시작, 2026-09-26까지 이어진 장기 세션). [[lampas-agent]]의 Pulse 하위 시스템(페르소나·카피 생성·채점) 최초 상세 확인. "페르소나가 유아틱, 카피 점수는 높은데 일반적" 문제 제기 → 4영역 8세부항목 채점 구조 도입·범용문구 69점 상한 배포 → 사용자가 "일반적인 제목이 더 좋아보이는데?"라고 반박 → 익숙한 표현과 근거없는 과장을 구분하도록 정정, 상한 철회 후 재배포(API 1,152개·웹 36개 테스트 통과). 마지막 reels 카드 스트립 요청 3건은 응답 없이 트랜스크립트 종료(다른 도구 세션에서 별도 완료 추정, 미확인)
 - [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] — `Tool: claude` 세션. `lampas-web-music`(`music.lampas.io`)의 [[atlas-cloud]] 경유 minimax 음악 생성 모델을 2.6→3.0으로 교체(요청 필드 동일해 호출 코드 무변경, 곡당 150크레딧 유지), lampas-api+web-music 운영 배포까지 완료. `tools.lampas.io`의 `music-gen` 툴은 범위 밖이라 2.6 유지 — 자매 앱 버전 불일치 발생. 이 위키에 `lampas-web-music` 최초 상세 노출. 배포에 다른 미커밋 변경(dalar·flow-works·pulse 등)이 함께 실려 커밋은 미완료로 남음
 - [[2026-09-21-복지리-로고-cdn이전-광고배너크기수정]] — `Tool: claude` 세션(작업폴더 `bokziri-system`, 이 위키 최초 상세 노출). 회사 로고가 죽은 외부 도메인 `cdn.dbs.best`를 가리켜 전면 깨짐 → S3 1.5GB 복사+CloudFront 신규 생성(기존 와일드카드 인증서 재사용)+운영 DB 5테이블 13,443행 URL 치환+onError placeholder 방어, DNS가 Squarespace에 있어 CNAME은 사용자가 직접 등록. 웹·토스 미니앱 재배포 3왕복 후 커밋·푸시. 이어서 AdSense 고정크기 배너가 항상 320×50만 채워지던 버그를 뷰포트 미디어쿼리+가운데정렬로 수정·배포
+- [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] — `Tool: codex` 세션. 이미지 Edit 모델 2종(Sunburst·Flare) 추가 → 영상 멀티이미지 연결(Seedance/WAN 3.0 레퍼런스) → "정상 생성 중단 오표시" 반복 버그를 조기 상태판정+중복 폴링 2중 원인으로 진단·수정 → Draft 이름변경 버그(브라우저 `prompt()`→앱 내부 입력창) → WAN 2.7→3.0 교체(이미지는 3.0 미제공으로 2.7 Pro 유지) → `models.lampas.io` 508개 모델 동기화 → Qwen Image 3.0 Pro Edit 추가까지 한 세션에서 연속 처리·전부 배포
 
 ## Entities
 
 - [[lampas-harness]] — Claude Agent SDK 기반 웹 하네스 (맥미니 데몬, 큐, 채팅 UI). 2026-09-26: `apps/wiki`(wiki.html) 신설 — john-wiki를 사람이 브라우징하는 읽기전용 위키 뷰어, 설정>위키 버튼. 같은 날 `apps/browser`(Lampas Browser 이관) 신설 — 새 세션 "브라우징" 선택지
 - [[lampas-browser]] — AI가 읽고 조작하는 Chromium 기반 Electron 브라우저(WebContentsView). `lampas-system`에서 기획·1차 구축 후 같은 날(2026-09-26) `lampas-harness apps/browser`로 완전 이관, AI는 하네스 CLI 세션 재사용
-- [[lampas-studio]] — Lampas AI 이미지 생성 스튜디오 제품 (lampas-api + lampas-web-sdk/lampas-web-studio + lampas-web-product, sdk.lampas.io). 2026-09-26: `lampas-system` 저장소가 Lampas+Dalar+Talk 3개 라인으로 확장된 정황, 신규 앱 lampas-web-fit(fit.lampas.io). 2026-09-24: 동영상 생성에 Seedance 2.0 Mini 추가+노드 캔버스 좌우 버튼 UX 개선 배포, Dalar SoT 관계를 `pnpm sync:studio` 실행으로 실증
+- [[lampas-studio]] — Lampas AI 이미지 생성 스튜디오 제품 (lampas-api + lampas-web-sdk/lampas-web-studio + lampas-web-product, sdk.lampas.io). 2026-09-26: `lampas-system` 저장소가 Lampas+Dalar+Talk 3개 라인으로 확장된 정황, 신규 앱 lampas-web-fit(fit.lampas.io). 2026-09-24: 동영상 생성에 Seedance 2.0 Mini 추가+노드 캔버스 좌우 버튼 UX 개선 배포, Dalar SoT 관계를 `pnpm sync:studio` 실행으로 실증. 2026-09-21: 이미지 Edit 모델 2종(Sunburst·Flare)+Qwen Image 3.0 Pro Edit 추가, 영상 WAN 2.7→3.0(이미지는 2.7 Pro 유지)+멀티이미지 레퍼런스, `models.lampas.io` 508개 모델 동기화, "생성 중단 오표시" 반복 버그 근본수정
 - [[dalar]] — 2026-09-26 최초 노출된 제품 라인(스텁). `lampas-system` 모노레포 내 6앱, Node Studio SoT가 여기 위치해 lampas-web-studio로 동기화. 2026-09-24: SoT 관계가 문서 인용을 넘어 실제 sync 실행·드리프트 0으로 확인됨
 - [[lampas-web-spot]] — `lampas-system` 내 맛집 지도 앱(`spot.lampas.io`). 2026-09-26 스텁 해소: 실제 구현 세션 확인, 데이터 738곳(블루리본+다이닝코드), 지도는 카카오→OpenStreetMap→네이버(401 실패)→**OpenStreetMap 확정** 3회 전환, 502곳 지도 표시, 폐업 신고 기능. 병합 커밋 당시 env의 Naver 키는 중간 시점 스냅샷이었음이 드러남
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
@@ -155,7 +156,7 @@
 - [[openai]] — 외부 AI 프로바이더. 하네스 모델 경로·음성입력(Realtime `gpt-4o-transcribe`)·로컬 LLM OpenAI 호환 규격 (2026-08-31 lint 통합)
 - [[gemini]] — Google. [[lampas-studio]] 핵심 이미지·비전 엔진(생성 기본·Vision 제품분석·등록사진 분류) (2026-08-31 lint 통합)
 - [[elevenlabs]] — 외부 TTS 프로바이더. [[toktalk]] 음성 스택 + 하네스 `tts-stream`(구현 착수·완료 미확인, Web Speech API와 별개) (2026-08-31 lint 통합)
-- [[atlas-cloud]] — 외부 이미지/영상/음악 생성 대행 서비스. [[lampas-studio]] Actor/Actor+Object 촬영·레퍼런스 시트에서 [[gemini]]와 동일 시그니처로 분기(gpt-image-2·nano-banana-2·grok-imagine·wan-2.7 라우팅), [[lampas-web-music]]의 minimax 음악 생성도 경유 (2026-09-07 lint 신설, 2026-09-22 음악 라우팅 확인)
+- [[atlas-cloud]] — 외부 이미지/영상/음악 생성 대행 서비스. [[lampas-studio]] Actor/Actor+Object 촬영·레퍼런스 시트에서 [[gemini]]와 동일 시그니처로 분기(gpt-image-2·nano-banana-2·grok-imagine·wan 라우팅), [[lampas-web-music]]의 minimax 음악 생성도 경유 (2026-09-07 lint 신설, 2026-09-22 음악 라우팅 확인). 2026-09-21: WAN 영상 2.7→3.0(이미지는 3.0 미제공으로 2.7 Pro 유지)·Qwen Image 3.0 Pro Edit·Sunburst/Flare Edit 신규, 카탈로그 508개 모델 동기화
 - [[grok]] — xAI 텍스트 분석 모델. [[lampas-studio]] 레퍼런스 분석 1순위(Gemini 폴백)·[[lampas-web-ai]] 필드 추출, dark-system 모델필터 예시명과는 무관 (2026-09-07 lint 신설)
 - [[bokziri-system]] — `~/Works/bokziri/bokziri-system`, "복지"(직장 복지) 정보 서비스로 추정. 웹(`bokziri-web-www`)+토스 미니앱(`ait deploy`)+API 3구성. 2026-09-21: 죽은 외부 CDN 도메인(`cdn.dbs.best`)에서 `cdn.bokziri.com`(자사 S3+CloudFront)로 전면 이전, AdSense 배너 고정크기 버그 수정
 - [[scott-jeun-sylvan-group]] — Scott Jeun(`scottjeun@thesylvangroup.com`)·Clara K, The Sylvan Group(싱가포르) 신원 추적 통합 페이지 ([[srkk]]·[[fy-group]]·[[sylvan-korea]]·[[cwc-fy-group-whisky-dispute]]에 흩어져 있던 동일인 추정 근거를 2026-08-03 lint로 통합)
@@ -242,3 +243,4 @@
 - [[nominatim-batch-geocode-progressive-rollout]] — 지도 키 없이 대량 주소를 핀으로 표시할 때: OpenStreetMap+Nominatim(초당 1회 제한·캐싱)으로 지오코딩, 건물번호 일치만 인정하는 신뢰도 필터로 오표시 방지, 확인 건수 늘 때마다 단계적 배포
 - [[copy-rubric-familiar-vs-filler]] — 마케팅 카피 채점 루브릭에서 "익숙한 표현"과 "근거 없는 빈말/과장"을 구분: 실제 좋은 제목 예시로 룰 먼저 시험→소재를 바꿔도 성립하면 빈말·안 하면 유효한 훅→기계적 점수 상한은 구분이 끝난 축에만 적용→항목 분해로 사람이 반박 가능하게
 - [[dead-external-cdn-domain-migration]] — 죽은 외부 CDN 도메인을 자사 S3+CloudFront로 이전: 원인 확정(도메인 죽음 vs 파일 없음)→S3 서버사이드 복사+키대조→CloudFront 신규(와일드카드 인증서 재사용)→DB URL 백업 후 두 형태 모두 치환(이미 깨진 값은 제외)→onError 방어→3rd-party DNS면 사용자 등록 필수 안내→공개 리졸버로 전파 확인
+- [[false-abort-premature-status-check]] — 비동기 생성(영상 등)이 정상 실행 중인데 "중단됨"으로 반복 오표시될 때: 작업ID 없는 초기 로딩을 중단으로 오판하는 조건 + 실행중/복구용 폴링 중복 부착 2가지 원인을 구간별로 나눠 진단
