@@ -364,6 +364,20 @@ codex`, KST 02:22 시작) — 같은 날 있었던 lampas-web-edit 핸드오프 
 Package 앱이 같은 `lampas-system` 저장소 소속이며 `package.lampas.io`에 배포돼 있음이
 확인됨 → 정식 엔티티 [[lampas-web-package]] 참고.
 
+**2026-09-26 후속 세션 — 스포츠 전용 규칙 일반화**: 위 첫 연동은 잘 됐으나, Package의 AI 작성
+규칙이 스포츠 클립 파이프라인에서 굳어진 "하이라이트 소개 + 시청 안내" 고정 문체였던 탓에
+First 샘플을 올려도 "너무 스포츠 느낌"이 나는 문제가 [[2026-09-26-package-분야별템플릿-first도메인확정-배포]]
+세션에서 발견·수정됨. First·뷰티·푸드·교육·스포츠 5개 분야 템플릿(+직접 입력)으로 일반화되고,
+관리자 샘플 화면(`admin.first.dalar.ai/samples`)의 "Package로 보내기"가 영상·장면 수를 전달해
+돌잔치 영상용 설정·제목·본문(수정 가능)·제작 링크를 미리 채우도록 개선됨. 이 세션에서 Package
+쪽이 First 실체를 직접 재조사해 "아기 사진으로 돌잔치 영상을 만드는 서비스"임을 재확인(한 차례
+"반려동물 AI 영상"으로 오판했다가 정정). 상세는 [[lampas-web-package]] "분야별 템플릿화" 절.
+
+**제작 링크 도메인 확정**: 같은 세션에서 제작 링크 후보로 `first.lampas.io`가 언급됐으나 DNS
+미연결로 확인되고, 기존 운영 도메인인 **`first.dalar.ai`로 최종 확정**(사용자가 세션 끝에
+"`first.lampas.io`는 잘못 말한 것"이라 직접 정정) — 이 페이지 위쪽에 기록된 `first.dalar.ai`
+단일 운영 도메인 사실과 모순 없이 재확인됨.
+
 ## Pay 분리(`lampas-web-pay`)
 
 기존엔 `pay.lampas.io` 기본 진입 화면에 First 상품까지 섞여 나왔다. 요청("`pay.lampas.io`로
@@ -400,7 +414,9 @@ First 로고 + 밝은 크림 배경으로 **1200×630 공유 이미지** 제작,
   [[2026-09-15-first-ui수정-오류분리-생성시간-인스타로고]](UI 버그·오류 분리·총 생성시간·영상
   미리보기·Instagram 로고) ·
   [[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]](lampas-web-edit 핸드오프) ·
-  [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]]
+  [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] ·
+  [[2026-09-26-package-분야별템플릿-first도메인확정-배포]](Package 분야별 템플릿화, 제작 링크
+  도메인 `first.dalar.ai` 확정)
 - 상위: [[dalar]](제품 라인) · 저장소 [[lampas-studio]](`lampas-system`, 같은 모노레포)
 - 토픽: [[jev-typed-classification]](세 번째 사용처)
 - 스킬: [[scene-reference-lock-visual-consistency]] · [[mutual-referral-coupon-pattern]] ·

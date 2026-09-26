@@ -1,5 +1,5 @@
 ---
-tags: [entity, app, lampas-studio, sports-clip-pipeline, sns-copy, pulse, prompt-engineering, instagram]
+tags: [entity, app, lampas-studio, sports-clip-pipeline, sns-copy, pulse, prompt-engineering, instagram, dalar, field-templates]
 created: 2026-09-26
 updated: 2026-09-26
 ---
@@ -54,6 +54,26 @@ updated: 2026-09-26
 - 2단계(페르소나 우선순위 수정): API 테스트 961개 → API만 재배포(웹 변경 없음).
 - 3단계(톤 5종): API 테스트 968개 → 웹+API 배포, 실제 서비스 반영 확인.
 
+### 분야별 템플릿화 — 스포츠 전용 규칙 일반화 (2026-09-26)
+위 "톤 5종" 구조는 확정 당시 스포츠 클립 파이프라인에서 나온 요구라 **AI 작성 규칙 자체가
+"하이라이트 소개 + 시청 안내"로 고정**돼 있었음이 이 세션([[2026-09-26-package-분야별템플릿-first도메인확정-배포]])에서
+드러남 — `[[dalar-web-first]]`(First, 돌잔치 AI 영상) 샘플을 이 앱으로 올리자 결과물이 "너무
+스포츠 느낌"이라는 사용자 피드백이 계기.
+
+- **First·뷰티·푸드·교육·스포츠 5개 분야 템플릿 + 직접 입력**(템플릿에 없는 분야는 페르소나·
+  타겟 독자·게시 목적을 직접 입력)으로 재설계. 스포츠 전용 "하이라이트 소개 + 시청 안내" 규칙을
+  걷어내고, **분야·페르소나·타겟·게시 목적**에 따라 문체와 본문 구성이 달라지는 구조로 일반화.
+- First 실체는 조사 중 한 차례 "반려동물 AI 영상"으로 오판됐다가 **"아기 사진으로 돌잔치 영상을
+  만드는 서비스"**로 정정 확인 — Package 쪽 세션에서 First 실체를 직접 조사한 것은 이번이 처음
+  (기존 기록은 전부 `[[dalar-web-first]]` 자체 세션에서 나온 것).
+- `[[dalar-web-first]]` 관리자 샘플 화면(`admin.first.dalar.ai/samples`)의 **"Package로
+  보내기"**가 이 갱신으로 영상·장면 수를 전달하고, 돌잔치 영상용 설정·제목·본문(수정 가능)·
+  `first.dalar.ai` 제작 링크를 미리 채우도록 연동됨.
+- 테스트 45개 + 웹 앱 2개(Package·First) 빌드 통과 → API 변경분 중 무관한 다른 작업 미완료
+  변경과 섞여 있어 이번 수정만 분리 배포(API 전체 테스트 1,221개 통과). 제작 링크 도메인은
+  `first.lampas.io`(DNS 미연결 확인)와 `first.dalar.ai`(기존 운영 도메인) 중 후자로 확정,
+  사용자가 세션 끝에 "`first.lampas.io`는 잘못 말한 것"이라 직접 정정.
+
 ### Instagram 채널 연결 API (2026-09-26 세션에서 처음 언급, 미구현 확인)
 `[[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]]` 세션에서 처음 언급된 엔드포인트 —
 `POST /v1/packaging/channels/instagram/connect`에 Instagram 장기 액세스 토큰을 넣어 채널을 연결하는
@@ -69,5 +89,6 @@ updated: 2026-09-26
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
 - 소비처(등록 대상): [[dalar-web-first]] "First" 완성 영상도 이 앱으로 전송해 등록
 - 세션: [[2026-09-20-lampas-package-pulse페르소나-릴스자동작성-톤선택]] ·
-  [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]]
-- 스킬: [[persona-prompt-default-override-audit]]
+  [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] ·
+  [[2026-09-26-package-분야별템플릿-first도메인확정-배포]](분야별 템플릿화, First 실체 재확인)
+- 스킬: [[persona-prompt-default-override-audit]] · [[selective-hunk-commit-shared-file]]

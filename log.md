@@ -2703,3 +2703,11 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 신규 스킬: [[git-secret-discovered-in-remote-history]] — push 거부→fetch로 원격 확인 중 남의 커밋에서 평문 비밀을 발견했을 때 로컬 백업→위에 얹어 푸시→추적 해제 커밋 분리→재발급/히스토리재작성 결정은 사용자에게 맡기는 절차
 - index.md 갱신 (세션 1건 신설, 엔티티 2건 갱신, 토픽 2건 갱신, 스킬 1건 갱신+1건 신설)
 - AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태. `.env` 노출은 사용자 결정(재발급 여부) 대기 중인 미완결 사안이라 엔티티·토픽 페이지로 충분히 커버, 확정되면 그 시점에 반영할 것
+
+## [2026-09-26] ingest | Package 분야별 템플릿화 + First 도메인 확정·배포 (source: 710d4668-2926-44c0-a716-a89f56dba389.md)
+- 원본 보관: `raw/conversations/2026-09-26-package-분야별템플릿-first도메인확정-배포.md` (원본 세션 09:19:01Z 시작, `Tool: codex`, `lampas-system` 작업 디렉터리, 원본 파일명 "Dalar 인스타그램 관리"는 실제 내용과 불일치)
+- 세션 요약 신설: [[2026-09-26-package-분야별템플릿-first도메인확정-배포]] — `admin.first.dalar.ai/samples`→`package.lampas.io/new` 연동 결과물이 "너무 스포츠 느낌"이라는 피드백으로 [[lampas-web-package]]의 스포츠 전용 AI 작성 규칙("하이라이트 소개+시청 안내")을 First·뷰티·푸드·교육·스포츠 5개 분야 템플릿+직접 입력으로 일반화. First 실체를 한 차례 "반려동물 AI 영상"으로 오판했다가 "돌잔치 AI 영상"으로 정정. 관리자 샘플 "Package로 보내기"가 돌잔치 설정·본문·제작 링크를 프리필하도록 연동(테스트 45개+웹 빌드 2개 통과) → 배포 시 무관한 API 미완료 변경과 분리(전체 테스트 1,221개 통과), 제작 링크 도메인 후보 `first.lampas.io`가 DNS 미연결로 확인돼 기존 `first.dalar.ai`로 확정 — 세션 끝에 사용자가 "`first.lampas.io`는 잘못 말한 것"이라 직접 정정
+- 엔티티 갱신: [[lampas-web-package]](분야별 템플릿화 절 신설, First 실체 재확인 기록) · [[dalar-web-first]](Package 연동 절에 후속 세션 요약·도메인 확정 사실 추가)
+- 스킬 갱신: [[selective-hunk-commit-shared-file]]("배포 단위로도 반복" 절 추가 — 커밋이 아니라 배포 단위에서 무관한 변경분 분리하는 변형 사례)
+- index.md 갱신 (세션 1건 신설, 엔티티 2건 갱신)
+- AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태(2026-09-26 앞선 ingest 세션에서도 같은 이유로 보류). 이번 세션 내용은 기능 일반화·도메인 확정으로 엔티티 페이지로 충분히 커버되고, 다음 lint 시 전체 재증류에 포함할 것
