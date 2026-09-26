@@ -426,6 +426,14 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 `[[lampas-web-tools]]`의 `music-gen` 툴은 이 배포 이후에도 여전히 2.6 — 자매 앱 간 버전 불일치가
 남음. 상세·엔티티 → [[lampas-web-music]] · 세션 → [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]]
 
+## `lampas-web-voice`(`voice.lampas.io`) — 보이스 생성·레퍼런스 오디오 업로드 (2026-09-24~ 세션에서 첫 노출)
+
+또 하나의 `AGENTS.md` 미기재 앱. 여러 TTS 모델 중 골라 보이스를 만드는 웹으로, 이 세션에서 오디오
+클론을 받는 유일한 모델(Seed Audio 1.0)에만 레퍼런스 오디오 업로드 UI·엔드포인트를 신설(다른
+모델은 프리셋 보이스)하고, 다음날 생성 내역 소프트 삭제(`voice_generations.deletedAt`)까지
+추가·배포했다. 상세 → [[lampas-web-voice]] · 세션 →
+[[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]].
+
 ## `lampas-web-scenario` — 시나리오/스토리보드 영상 생성 (2026-09-13 세션에서 첫 상세 노출)
 
 Lampas 9앱 목록·스포츠 클립 파이프라인 목록 어디에도 없던 또 다른 앱 — 컷(샷)별 이미지→영상 생성으로
@@ -496,7 +504,8 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]] ·
   [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]] ·
   [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]] ·
-  [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]]
+  [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]] ·
+  [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
@@ -506,7 +515,7 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`) ·
   [[lampas-web-trends]](`trends.lampas.io`) · [[lampas-web-cs]](`cs.lampas.io`) · [[lampas-web-admin]](`admin.lampas.io`) ·
-  [[lampas-web-scenario]](시나리오/스토리보드 영상 생성)
+  [[lampas-web-scenario]](시나리오/스토리보드 영상 생성) · [[lampas-web-voice]](`voice.lampas.io`, 보이스 생성)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]

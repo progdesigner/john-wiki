@@ -26,3 +26,8 @@ tags: [frontend, localstorage, ux, persistence]
 
 ## 출처: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] ([[lampas-studio]])
 관련: 하네스의 모델 선택기 → [[model-selection]]
+
+## 재사용 사례 — Copy/Pulse 카피·페르소나 생성 모델 선택 (2026-09-24~)
+[[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]]에서 [[lampas-web-copy]]·
+[[lampas-web-pulse]]의 생성·채점·교차심사 모델 셀렉트가 같은 패턴 그대로(2번 검증·폴백 포함) 적용됨
+— 저장된 모델 값이 서버가 내려주는 최신 옵션 목록에 없으면 기본값으로 되돌아간다.

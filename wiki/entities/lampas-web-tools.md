@@ -21,6 +21,13 @@ updated: 2026-09-26
   유지**하고 실패 상태·재시도·[[lampas-agent]] Fixs 보고 처리를 개선(v0.1.3).
 - **`music-gen` 툴은 minimax 2.6 고정** — 자매 앱 [[lampas-web-music]]이 2026-09-22 3.0으로 업그레이드
   됐을 때 요청 범위가 music.lampas.io로 한정돼 이 툴은 손대지 않음, 버전 불일치 상태로 남아 있음.
+- **유튜브 제목 툴은 `google/gemini-3-flash-preview` 고정**(2026-09-24~ 세션 질의로 확인) — 툴 정의
+  `defs/youtube-title.ts`는 채팅 스텝 하나이고 모델은 `defs/shared.ts`의 공용 상수 `LLM_MODEL`을
+  가져온다. 이 상수를 Tools 앱의 다른 텍스트 툴 전부가 공유하므로, 바꾸면 `tools.lampas.io`의 LLM
+  툴 전체에 적용된다. 저장소의 다른 모듈(copy·clip-intelligence·sports-wiki 등)은 기본이
+  `google/gemini-3.5-flash`라, **Tools 앱만 한 세대 전 프리뷰 모델에 머물러 있는 상태**(위
+  `music-gen`의 minimax 2.6과 같은 계열의 "자매 앱 버전 정체" 패턴). 세션 →
+  [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]].
 - **`talking-photo.ts`**(`kwaivgi/kling-v2.6-std/avatar` 호출) — 2026-09-13 세션(→
   [[lampas-web-scenario]])이 이 파일을 저장소 전체에서 **아바타/립싱크 계열 모델의 유일한 실제 요청
   body 근거**로 확인함: `{ image, audio }`만 보내고 `prompt` 필드는 없음(가격 카탈로그는 이런 스키마
@@ -51,4 +58,5 @@ updated: 2026-09-26
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
 - Fixs 연동: [[lampas-agent]]
 - 자매 앱: [[lampas-web-music]] (`music-gen` 툴 버전 불일치 — 2.6 vs 3.0)
-- 세션: [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]]
+- 세션: [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
+  [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]](youtube-title 모델 확인)

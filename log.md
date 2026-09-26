@@ -2649,3 +2649,18 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 새 스킬 없음 — 순수 UI 이식·기존 채점 필드 재사용으로, 재사용 가능한 신규 절차는 없음
 - index.md 갱신 (세션 1건 신설, 엔티티 3건(lampas-web-reels·lampas-web-copy·lampas-web-pulse) 갱신)
 - AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태이고, 이 세션은 UI 반복 개선+기존 미해결 항목(Pulse 신뢰도 배포) 해소로 엔티티 페이지 갱신만으로 충분히 커버됨
+
+## [2026-09-26] ingest | Voice 레퍼런스 오디오·소프트 삭제 + Copy/Pulse 모델 선택 (source: 7b12ee13-b037-4c81-9e30-fe582b9dc988.md)
+- raw/conversations/2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택.md 보관 (원본 세션 2026-09-24T10:35:17.967Z 시작, `Tool: claude`, `logs/terminals/archive/7b12ee13-...md`에서 회수 — 이전 ingest 시도가 원본 복사만 하고 중단된 상태였음, 이번에 나머지 단계 완료)
+- wiki/sessions/2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택.md 신설 — 네 화제 순서 정리: ① 신규 앱 `lampas-web-voice`(voice.lampas.io) 레퍼런스 오디오 업로드 최초 구현(Seed Audio 1.0만 지원, API 0.1.138), ② 다음날 생성 내역 소프트 삭제(`deletedAt`, API 0.1.139) + "배포까지 하면 항상 커밋" 규칙 메모리 저장, ③ tools.lampas.io 유튜브 제목 툴 모델 확인(`gemini-3-flash-preview`, 공용 상수), ④ 카피·채점·페르소나 생성 모델 선택 기능(API 0.1.142, 7개 벤더 옵션·실패 시 동종 기본값 재시도·커밋 `24b12b04` 미푸시)
+- wiki/entities/lampas-web-voice.md 신설 — 모델 카탈로그(Seed Audio만 `acceptsReferenceAudio:true`), 레퍼런스 오디오 업로드 API/웹 구현, 소프트 삭제 구현, 배포·커밋 규칙 상세
+- wiki/entities/lampas-web-copy.md 갱신 — "카피 생성·채점 모델 선택" 절 신설(GET /v1/copy/models options, 동벤더 경고, localStorage 폴백)
+- wiki/entities/lampas-web-pulse.md 갱신 — "페르소나 생성·교차 심사 모델 선택" 절 신설(기존 Opus5→Grok 고정 폴백이 사용자 선택으로 확장됨을 명시), 버전 이력에 API 0.1.142 추가
+- wiki/entities/lampas-web-tools.md 갱신 — 유튜브 제목 툴이 공용 상수 `LLM_MODEL`(`gemini-3-flash-preview`)을 쓰며 저장소 다른 모듈보다 한 세대 뒤처졌다는 사실 추가(`music-gen` 2.6 고정과 같은 계열의 자매 앱 버전 정체 패턴)
+- wiki/entities/lampas-studio.md 갱신 — "lampas-web-voice" 신규 절 추가, 관련 앱 목록·세션 목록에 추가
+- wiki/entities/atlas-cloud.md 갱신 — "텍스트 LLM 카탈로그" 절 신설(Copy/Pulse 모델 선택 목록이 다중 벤더 게이트웨이 카탈로그를 텍스트 생성에도 쓴다는 새 근거, 여전히 Atlas Cloud 확정은 아님)
+- wiki/skills/llm-judge-fallback-chain.md 갱신 — "변형: 생성 자체의 사용자 선택 + 동종 기본값 재시도" 절 추가(라우팅·채점에 이은 세 번째 변형)
+- wiki/skills/localstorage-ui-preference-persistence.md 갱신 — Copy/Pulse 모델 선택 재사용 사례 추가
+- 새 스킬 페이지는 만들지 않음 — 두 기존 스킬(llm-judge-fallback-chain·localstorage-ui-preference-persistence)의 변형/재사용 사례로 충분히 커버됨, 소프트 삭제·DDL 선적용도 기존 스킬(prod-ddl-before-deploy-with-drift-check)의 표준 절차 그대로 재사용이라 신규 절차 없음
+- index.md 갱신 (세션 1건 신설, 엔티티 1건 신설(lampas-web-voice), 엔티티 3건(lampas-web-copy·lampas-web-pulse·lampas-web-tools) 한 줄 요약 갱신)
+- AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태이고, 이 세션의 핵심 사실(신규 앱 노출·기능 추가)은 엔티티·세션 페이지로 충분히 커버됨

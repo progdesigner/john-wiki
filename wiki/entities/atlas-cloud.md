@@ -76,6 +76,17 @@ OpenAPI JSON)을 직접 fetch한다. `usedFor` 설명 문장만으론 결론 내
 전량 실패하는 문제가 있어 배치 크기·타임아웃·응답 압축을 함께 조정 → [[llm-batch-inference-timeout-tuning]].
 상세 → [[lampas-web-trends]] · [[2026-09-19-lampas-trends-고도화]].
 
+## 텍스트 LLM 카탈로그 — `[[lampas-web-copy]]`/`[[lampas-web-pulse]]` 사용자 모델 선택 (2026-09-24~ 세션)
+
+카피 생성·채점·페르소나 생성에 사용자가 직접 모델을 고르는 기능이 추가되며, 큐레이션된 옵션 목록이
+**GPT-6 Astra, GPT-5.6 Sol, Claude Opus 5, Claude Sonnet 5, Gemini 3.5 Flash, Gemini 3.1 Pro,
+Grok 4.5** — 여러 벤더를 한 목록에서 고를 수 있음이 드러남. 서버는 "목록 밖이라도 게이트웨이
+카탈로그의 LLM이면 허용"이라 응답해, 이 텍스트 생성 경로도 특정 벤더 API를 직접 물지 않고
+애그리게이터(가장 유력한 후보가 Atlas Cloud, 세션 소스로 확정되진 않음) 카탈로그를 통해 다중 벤더에
+접근하는 구조임을 시사 — 위 [[lampas-web-trends]] 사례(`gemini-3.5-flash` 단일 모델 배치 호출)보다
+더 폭넓은 벤더 혼합 카탈로그가 텍스트 생성에도 존재함을 처음 확인. 상세 → [[lampas-web-copy]]·
+[[lampas-web-pulse]] · 세션 → [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]].
+
 ## 다른 제품에서의 언급
 
 - **[[toktalk]] — 텍스트 모델 카탈로그로 실사용 확인** (2026-09-07~09 세션,
