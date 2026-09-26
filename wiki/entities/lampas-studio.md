@@ -239,6 +239,16 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   당시 env에 남아있던 네이버 키는 그 중간 시점의 스냅샷이었음 → [[lampas-web-spot]]·
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] 참고.
 
+## `lampas-web-trends` + `lampas-trends-collector` — 트렌드 키워드 수집 (2026-09-19 세션에서 첫 상세 노출)
+
+`AGENTS.md` 앱 목록(아래 절)엔 이름만 있던 두 앱이 이 세션에서 처음 상세히 드러남 — 기사 제목·인기
+글이 핵심 키워드 3개로 쓰인다는 전제로 제목마다 키워드를 유추해 재집계하는 트렌드 수집·분석 제품
+(`trends.lampas.io`). 토픽 단위 재구축([[atlas-cloud]] 경유 `gemini-3.5-flash` 텍스트 배치 유추,
+X·Threads 공식 API 소스 추가) → 배포 → 배치 크기·타임아웃 조정(40개→20개·90초·백그라운드 캐시
+워밍) 순으로 진행, 운영 배포까지 완료(수집기 0.1.7·API 0.1.99). Threads 토큰 만료·X 토큰 미설정은
+운영 조치 필요로 남음. 코드는 **미커밋 상태**. 상세 → [[lampas-web-trends]] ·
+[[2026-09-19-lampas-trends-고도화]] · 절차 스킬 [[llm-batch-inference-timeout-tuning]].
+
 ## 2026-09-26 저장소 구조 스냅샷 (`AGENTS.md`) — 이전 기록과 모순 다수
 
 `lampas-web-fit` 구축 세션(`Tool: codex`, 작업 폴더 `lampas-system`)의 시스템 프롬프트에 저장소
@@ -384,7 +394,7 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[2026-07-18-web-ai-등록플로우-사진분류-배포]] ·
   [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
-  [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]]
+  [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] · [[2026-09-19-lampas-trends-고도화]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
@@ -392,7 +402,8 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 - 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-pulse]] · [[lampas-web-copy]] ·
   [[lampas-web-reels]] · [[lampas-web-edit]](`edit.lampas.io`) · [[lampas-web-package]](`package.lampas.io`) ·
   [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
-  [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`)
+  [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`) ·
+  [[lampas-web-trends]](`trends.lampas.io`)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
@@ -400,4 +411,4 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 - 스킬: [[selective-hunk-commit-shared-file]] · [[nominatim-batch-geocode-progressive-rollout]] ·
   [[tailscale-funnel-large-payload-bypass]] · [[cross-subdomain-session-handoff]] ·
   [[execution-run-scoped-status-vs-stale-notification]] · [[accept-then-poll-for-slow-ai-jobs]] ·
-  [[proxy-body-limit-413-appears-as-network-error]]
+  [[proxy-body-limit-413-appears-as-network-error]] · [[llm-batch-inference-timeout-tuning]]

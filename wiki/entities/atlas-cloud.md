@@ -38,6 +38,15 @@ updated: 2026-09-26
 - `models.lampas.io` 카탈로그가 **508개 모델**로 동기화, 스튜디오 모델 선택창 가격이 이 카탈로그를
   유일한 소스로 조회하도록 재연결. → [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]]
 
+## 텍스트 LLM 라우팅 — `[[lampas-web-trends]]` 제목 키워드 유추 (2026-09-19 세션)
+
+이미지·영상·음악 외에 **순수 텍스트 생성(LLM 추론)도 Atlas Cloud를 경유**한다는 첫 확인 사례.
+`lampas-trends-collector`/`lampas-api`가 기사 제목마다 핵심 키워드 3개를 유추할 때 Atlas Cloud
+경유 `gemini-3.5-flash`에 40개씩(이후 20개로 축소) 배치로 질의 — 이미지/영상 모델과 같은
+애그리게이터 계층을 텍스트 추론에도 그대로 쓴다는 근거. 배치가 너무 크면 타임아웃·응답 잘림으로
+전량 실패하는 문제가 있어 배치 크기·타임아웃·응답 압축을 함께 조정 → [[llm-batch-inference-timeout-tuning]].
+상세 → [[lampas-web-trends]] · [[2026-09-19-lampas-trends-고도화]].
+
 ## 다른 제품에서의 언급
 
 - **[[toktalk]] AI 스택** — "AtlasCloud WAN"이 OpenAI·Grok·DeepSeek·Gemini·ElevenLabs와 함께 AI
@@ -48,6 +57,6 @@ updated: 2026-09-26
 
 ## 관련
 - [[openai]] · [[gemini]] · [[grok]] · minimax(음악, [[lampas-web-music]] 경유) (Atlas Cloud가 라우팅하는 개별 모델 제공사)
-- [[lampas-studio]] · [[toktalk]] · [[lampas-web-music]]
+- [[lampas-studio]] · [[toktalk]] · [[lampas-web-music]] · [[lampas-web-trends]]
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
-  [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]]
+  [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] · [[2026-09-19-lampas-trends-고도화]]

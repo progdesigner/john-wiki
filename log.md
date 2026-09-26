@@ -2396,3 +2396,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 세션 갱신: [[2026-09-19-pulse-페르소나-단일출처-계정이관-신뢰도개선]](8시간 앞선 선행 세션 존재·대체 관계 추가)
 - index.md 갱신 (Sessions·Entities 반영)
 - 발견: 운영에 배포된 기능(MLB 영상 수집 파이프라인)이 같은 날 8시간 만에 다른 세션의 DDL로 통째로 폐기된 사례 — 두 세션 모두 목표는 동일("분야별 재사용 페르소나+Copy 개편")하나 메커니즘이 달라 대체된 것으로 추정(인과관계는 소스로 미확인)
+
+## [2026-09-26] ingest | Lampas Trends 고도화 — 토픽 재구축·제목 키워드 유추·X/Threads 소스·배포 (source: 77b4d127-b037-49f5-a220-b3ba095e3eb7.md)
+- 소스: raw/conversations/2026-09-19-lampas-trends-고도화.md (원본 77b4d127-b037-49f5-a220-b3ba095e3eb7.md 복사)
+- 세션 신설: [[2026-09-19-lampas-trends-고도화]]
+- 엔티티 신설: [[lampas-web-trends]](`lampas-web-trends`+`lampas-trends-collector`, 이 위키 첫 상세 노출 — 기존엔 `AGENTS.md` 앱 목록에 이름만 있었음)
+- 엔티티 갱신: [[lampas-studio]](새 절 추가+관련/스킬 목록 링크) · [[atlas-cloud]](텍스트 LLM 라우팅 첫 확인 사례 — gemini-3.5-flash 제목 키워드 배치 유추 절 추가)
+- 스킬 신설: [[llm-batch-inference-timeout-tuning]] (40개 배치 타임아웃/응답잘림 전량 실패 → 배치 20개·타임아웃 90초·응답압축·백그라운드 캐시 워밍으로 수정)
+- index.md 갱신 (Sessions·Entities·Skills 반영)
+- AI_CONTEXT.md 갱신 (lampas-studio 항목에 09-19 트렌드 앱 한 문장 추가, 39/40줄 유지)
+- 발견: 운영 첫 배포 시점에만 드러나는 실패 패턴 — 로컬은 Atlas 키 부재로 규칙 폴백만 타 배치 호출 경로 자체가 검증되지 않았고, 운영에서 처음 실제 모델 배치가 켜지며 타임아웃이 드러남
