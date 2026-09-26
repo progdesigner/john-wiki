@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding, lampas-web-cs, lampas-web-admin]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding, lampas-web-cs, lampas-web-admin, lampas-web-scenario]
 created: 2026-07-09
 updated: 2026-09-26
 ---
@@ -411,6 +411,17 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 `[[lampas-web-tools]]`의 `music-gen` 툴은 이 배포 이후에도 여전히 2.6 — 자매 앱 간 버전 불일치가
 남음. 상세·엔티티 → [[lampas-web-music]] · 세션 → [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]]
 
+## `lampas-web-scenario` — 시나리오/스토리보드 영상 생성 (2026-09-13 세션에서 첫 상세 노출)
+
+Lampas 9앱 목록·스포츠 클립 파이프라인 목록 어디에도 없던 또 다른 앱 — 컷(샷)별 이미지→영상 생성으로
+시나리오/스토리보드를 만드는 웹. 시나리오 전용 백엔드 엔드포인트는 없고 제네릭 [[atlas-cloud]]
+`generateVideo` 게이트웨이를 그대로 탄다. 이 세션에서 ① 이미지+텍스트+오디오 결합(아바타/립싱크)
+모델 4종 추가, ② 영상 길이 10초 고정→5~30초 슬라이더+대본 기반 자동 추정, ③ 카메라 고정 프롬프트
+자동 삽입 3가지를 구현 전 서브에이전트 3개 순차 서베이 후 한 번에 구현·검증(131개 테스트 통과)
+완료. 조사 중 [[atlas-cloud]] 가격 카탈로그가 요청 body 스키마(어떤 필드를 받는지)를 전혀 기록하지
+않는다는 함정을 처음 문서화 → [[atlas-cloud]]. 상세 → [[lampas-web-scenario]] · 세션 →
+[[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]].
+
 ## `lampas-web-cs`·`lampas-web-admin` 첫 상세 노출 — CS 배경음악 어시스턴트 제거 + 관리자 조회 신설 (2026-09-13 세션)
 
 Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admin`)이 이 세션에서 처음 상세히
@@ -468,7 +479,8 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] · [[2026-09-19-lampas-trends-고도화]] ·
   [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]] ·
-  [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]]
+  [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]] ·
+  [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
@@ -477,7 +489,8 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   [[lampas-web-reels]] · [[lampas-web-clips]] · [[lampas-web-edit]](`edit.lampas.io`) · [[lampas-web-package]](`package.lampas.io`) ·
   [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`) ·
-  [[lampas-web-trends]](`trends.lampas.io`) · [[lampas-web-cs]](`cs.lampas.io`) · [[lampas-web-admin]](`admin.lampas.io`)
+  [[lampas-web-trends]](`trends.lampas.io`) · [[lampas-web-cs]](`cs.lampas.io`) · [[lampas-web-admin]](`admin.lampas.io`) ·
+  [[lampas-web-scenario]](시나리오/스토리보드 영상 생성)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]

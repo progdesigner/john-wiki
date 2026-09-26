@@ -1,5 +1,5 @@
 ---
-tags: [entity, ai-provider, image-generation, video-generation, external, wan, qwen, seedance]
+tags: [entity, ai-provider, image-generation, video-generation, external, wan, qwen, seedance, model-catalog, lampas-web-scenario]
 created: 2026-09-07
 updated: 2026-09-26
 ---
@@ -38,6 +38,34 @@ updated: 2026-09-26
 - `models.lampas.io` 카탈로그가 **508개 모델**로 동기화, 스튜디오 모델 선택창 가격이 이 카탈로그를
   유일한 소스로 조회하도록 재연결. → [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]]
 
+## ⚠️ 가격 카탈로그는 요청 body 스키마를 기록하지 않는다 (2026-09-13 세션, [[lampas-web-scenario]])
+
+`apps/lampas-api/src/modules/credits/model-pricing.generated.ts`(`pnpm sync:atlas-pricing`으로
+기계 생성, 사람 오버라이드는 `model-pricing.overrides.ts`)의 각 항목은 `modelId`/`atlasName`/
+`category`/`unit`/`usdPerUnit`·`creditsPerUnit`/`usedFor`(설명 문장)/`products`/선택적
+`capabilities`(`durationSeconds`·`durationDefault`·`resolutions`·`resolutionDefault`·
+`aspectRatios`·`supportsAudio`)만 갖는다 — **`prompt`/`image`/`audio` 같은 요청 필드 존재 여부는
+어디에도 저장되지 않는다.** 동기화 스크립트(`scripts/lib/atlas-model-schema-capabilities.mjs`)가
+Atlas의 모델별 OpenAPI `Input` 스키마를 가져오긴 하지만 duration/resolution/aspect_ratio/
+generate_audio 속성만 추출하고 나머지는 버린다.
+
+**`supportsAudio`는 "오디오 입력을 받는다"는 뜻이 아니다** — Input 스키마에 `generate_audio`/
+`generateAudio` 불리언 속성이 있을 때만 세팅되는 플래그로, "모델이 자체 오디오/SFX를 **생성**하는
+토글이 있는가"만 뜻한다. 아바타/립싱크류가 오디오를 **입력**으로 받는지 여부와는 무관.
+
+**검증 방법(이 세션에서 확립)**: ① 저장소 전체에서 모델 id로 grep해 실사용 프로덕션 코드를 찾는다
+(있으면 최고 신뢰도), ② 없으면 Atlas `GET /api/v1/models` 응답의 모델별 `schema` URL(라이브
+OpenAPI JSON)을 직접 fetch한다. `usedFor` 설명 문장만으론 결론 내지 않는다.
+
+이 세션에서 조사한 이미지+오디오 결합(아바타/립싱크) 모델 6개 중, 저장소 내 유일한 실사용 body
+증거는 `[[lampas-web-tools]]`의 `talking-photo.ts`(`kwaivgi/kling-v2.6-std/avatar`를
+`{ image, audio }`만으로 호출, `prompt` 없음) — 나머지(`kling-v2.6-pro/avatar`,
+`atlascloud/infinitetalk`, `bytedance/avatar-omni-human-v1.5`, `sync/lipsync-v3`,
+`veed/lipsync`)는 카탈로그 설명 문장뿐이었으나, 어시스턴트가 라이브 Atlas OpenAPI 스키마를 직접
+확인해 앞 4종(아바타 2종+infinitetalk+omni-human)이 이미지+오디오+선택적 텍스트 프롬프트를 함께
+받는다고 확인하고 `[[lampas-web-scenario]]`의 컷별 영상 모델 드롭다운에 추가했다. 절차 일반화 →
+[[parallel-survey-before-feature-gap-analysis]] "주의사항" 절.
+
 ## 텍스트 LLM 라우팅 — `[[lampas-web-trends]]` 제목 키워드 유추 (2026-09-19 세션)
 
 이미지·영상·음악 외에 **순수 텍스트 생성(LLM 추론)도 Atlas Cloud를 경유**한다는 첫 확인 사례.
@@ -57,6 +85,8 @@ updated: 2026-09-26
 
 ## 관련
 - [[openai]] · [[gemini]] · [[grok]] · minimax(음악, [[lampas-web-music]] 경유) (Atlas Cloud가 라우팅하는 개별 모델 제공사)
-- [[lampas-studio]] · [[toktalk]] · [[lampas-web-music]] · [[lampas-web-trends]]
+- [[lampas-studio]] · [[toktalk]] · [[lampas-web-music]] · [[lampas-web-trends]] · [[lampas-web-scenario]] · [[lampas-web-tools]]
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
-  [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] · [[2026-09-19-lampas-trends-고도화]]
+  [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] · [[2026-09-19-lampas-trends-고도화]] ·
+  [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]]
+- 스킬: [[parallel-survey-before-feature-gap-analysis]]

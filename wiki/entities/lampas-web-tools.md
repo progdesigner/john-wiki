@@ -21,6 +21,10 @@ updated: 2026-09-26
   유지**하고 실패 상태·재시도·[[lampas-agent]] Fixs 보고 처리를 개선(v0.1.3).
 - **`music-gen` 툴은 minimax 2.6 고정** — 자매 앱 [[lampas-web-music]]이 2026-09-22 3.0으로 업그레이드
   됐을 때 요청 범위가 music.lampas.io로 한정돼 이 툴은 손대지 않음, 버전 불일치 상태로 남아 있음.
+- **`talking-photo.ts`**(`kwaivgi/kling-v2.6-std/avatar` 호출) — 2026-09-13 세션(→
+  [[lampas-web-scenario]])이 이 파일을 저장소 전체에서 **아바타/립싱크 계열 모델의 유일한 실제 요청
+  body 근거**로 확인함: `{ image, audio }`만 보내고 `prompt` 필드는 없음(가격 카탈로그는 이런 스키마
+  정보를 기록하지 않음, → [[atlas-cloud]]).
 
 ## 알려진 버그·수정 이력 (2026-09-25, 한 세션 내 4단계)
 1. **업로드 응답 인식 실패**(v0.1.2) — 서버가 반환하는 `download_url` 필드 형식을 프론트가 인식 못해

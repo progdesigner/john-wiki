@@ -35,7 +35,15 @@ tags: [planning, agents, gap-analysis, lampas-studio]
 - 서베이 도중 작업 트리에 다른 세션의 미커밋 변경이 섞여 있을 수 있다 — 서베이 결과에 "이 파일은
   최근 변경됐을 수 있음"이라는 잡음이 낄 수 있으므로, 구현 착수 전 `git status`로 현재 작업 트리
   상태를 별도로 확인해둔다.
+- **외부 서비스(모델 카탈로그 등) 조사는 "설명 문장"과 "실제 요청 스키마"를 분리해서 확인한다** —
+  가격/기능 카탈로그(예: [[atlas-cloud]]의 `model-pricing.generated.ts`)는 duration/resolution 같은
+  메타데이터만 기록하고 요청 body 필드(prompt/image/audio 유무, 필드명)는 담지 않는 경우가 흔하다.
+  `usedFor` 설명 문장만 보고 스키마를 추정하면 틀릴 수 있으므로, 저장소 내 실사용 코드(grep으로 모델
+  id 검색)나 외부 서비스의 라이브 스키마 엔드포인트를 직접 확인하는 서베이 단계를 별도로 추가한다.
+  → [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]]
 
 ## 출처: [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]] ([[lampas-studio]] AI Clip
 Intelligence + Brand Kit 구현 착수 전 4개 병렬 서베이)
-관련: [[lampas-clip-intelligence]](이 절차로 나온 갭 분석표 원문)
+관련: [[lampas-clip-intelligence]](이 절차로 나온 갭 분석표 원문) ·
+[[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]](카탈로그 vs 실제 스키마 함정 추가 사례,
+[[lampas-web-scenario]])

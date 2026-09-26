@@ -2512,3 +2512,14 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/skills/full-stack-feature-removal-audit.md 갱신 — 이 세션을 두 번째 사례로 추가
 - index.md 갱신 (세션 1건, 엔티티 3건, 스킬 1건 추가/갱신)
 - AI_CONTEXT.md 갱신 보류 — 완료된 단일 세션의 기능 제거/추가라 일회성 사건에 해당, wiki 페이지로 충분
+
+## [2026-09-26] ingest | 시나리오 영상생성: 오디오모델 선택·길이 슬라이더·카메라 고정 (source: de3b0dfd-d034-46a0-a9fa-7c7be0f02783.md)
+- raw/conversations/2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정.md 보관 (원본 세션 날짜 2026-09-13, 뒤늦게 ingest)
+- wiki/sessions/2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정.md 신설
+- wiki/entities/lampas-web-scenario.md 신설 — 컷별 이미지→영상 생성 앱, 첫 상세 노출(Lampas 9앱/스포츠 클립 파이프라인 목록 어디에도 없던 또 다른 앱)
+- wiki/entities/atlas-cloud.md 갱신 — 신규 절 추가(가격 카탈로그가 요청 body 스키마를 기록하지 않는다는 함정 문서화, `supportsAudio` 의미 명확화). 초안에서 이 페이지가 없다고 오판해 전체 덮어쓰기했다가 `git show HEAD`로 원본(2026-09-07 lint 신설)을 복원 후 절 단위로 병합해 바로잡음
+- wiki/entities/lampas-web-tools.md 갱신 — `talking-photo.ts`가 아바타 모델의 유일한 실사용 스키마 근거임을 추가
+- wiki/entities/lampas-studio.md 갱신 — `lampas-web-scenario` 신규 절 + 관련 링크(엔티티·세션·토픽) 갱신
+- wiki/skills/parallel-survey-before-feature-gap-analysis.md 갱신 — "카탈로그 설명 문장 vs 실제 요청 스키마" 주의사항 추가, 이 세션을 두 번째 출처로 추가
+- index.md 갱신 (세션 1건, 엔티티 2건 신설/갱신, 스킬 1건 갱신)
+- AI_CONTEXT.md 갱신 보류 — 이미 광범위한 lampas-studio 서술 대비 단일 세션의 단일 앱 기능 추가라 위키 페이지로 충분, 40줄 한도 내 상시 주입 가치는 낮다고 판단
