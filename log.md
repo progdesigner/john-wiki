@@ -2583,3 +2583,12 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/sessions/2026-09-14-중지버튼-프로브.md · 2026-09-14-중지버튼-프로브-1838.md · 2026-09-14-모델-단계-프로브.md 갱신 — 같은 날 저녁 프로브들이 겨냥했을 법한 기능(정지버튼/모델전환)의 구현 세션으로 이 세션을 관련 절에 추가(정확한 선후관계·동일 코드경로 여부는 미확정으로 명시)
 - AI_CONTEXT.md 갱신 — Tailscale "설치 여부 미확인"을 "설치·가동 확인"(계정·호스트명·포트 명시)으로 정정, `codex/web-cli-sessions`→`main` 머지 완료 사실 추가
 - index.md 갱신 (세션 1건 신설, 스킬 1건 신설, model-selection 항목은 별도 커밋 없이 본문만 갱신)
+
+## [2026-09-26] ingest | 하네스 폴더선택버그·모바일키버튼·Tailscale전용주소·정지버튼·CLI전역전환 (source: 139d1f7d-e75f-4add-abf5-4123dc865922.md)
+- raw/conversations/2026-09-12-하네스-폴더선택버그-모바일키버튼-tailscale전용주소-정지버튼-cli전역전환.md 보관 (원본 세션 2026-09-12T01:37:30.901Z 시작~09-19, `logs/terminals/archive/139d1f7d-...md`에서 회수, 뒤늦게 ingest, `Tool: codex` "하네스 개발 (GPT)")
+- wiki/sessions/2026-09-12-하네스-폴더선택버그-모바일키버튼-tailscale전용주소-정지버튼-cli전역전환.md 신설 — 폴더 조회 API 404(구버전 서버 함정)+모바일 ↑/↓/Enter/ESC 버튼 최초 추가(09-12), 하네스 전용 Tailscale 주소 `tail0e32ab` 시도(Funnel 승인 미완, 09-14), PWA 아이콘 재적용+핀치방지(09-14), GPT/Claude 스크롤 배칭 수정(09-14), 정지 버튼 추가(09-15), 이미지 링크 클릭화(09-15), 한글입력 버그 머지(09-18), 메뉴 겹침 수정(09-19), Codex/Claude CLI 전역 설치 전환(09-19)
+- **핵심 발견**: 이미 위키에 있는 [[2026-09-14-하네스터미널-스크롤드래그복사-모델즉시전환-정지버튼-tailscale재연결]](`Tool: claude`, 같은 날 14:42:54Z 시작)와 두 가지가 표면적으로 충돌·중복됨 — (1) 스크롤 수정 서술이 기술적으로 거의 동일(마우스추적으로 인한 이벤트별 HTTP 요청 폭증→배칭)해 동시 다중 에이전트 편집의 두 번째 독립 증거, (2) 정지 버튼 관련 시점이 서로 안 맞음(claude 세션은 시작 시 이미 존재하던 헤더 버튼을 이 codex 세션 소행으로 지목하는데, 이 codex 세션 안에서는 그보다 늦은 09-15에 "정지 기능이 없다"는 요청이 등장), (3) Tailscale 접미사 `tail43b73a`가 이 세션에선 "기존" 주소로, claude 세션에선 "새" 주소로 등장하는 표면적 모순(가장 그럴듯한 설명: claude 세션의 "새 계정"이 사실상 원래 tailnet과 동일). 세 가지 모두 wiki에 확정 대신 명시적 모순으로 기록
+- wiki/entities/lampas-harness.md 갱신 — "실제 웹 터미널" 절 시간순 사이(09-07 발견과 09-14 claude 세션 사이)에 새 구간 삽입, 09-14 claude 세션의 정지버튼·Tailscale 대목에도 이 세션을 가리키는 교차링크·모순 안내 추가
+- wiki/skills/self-hosted-agent-server-ops.md 갱신 — 함정 5(pinned-cli-path-drift: 하네스가 전역과 다른 별도 경로의 CLI를 참조해 업그레이드가 반영 안 되는 증상) 신설, "네 함정" 표기를 "함정 1~4"로 정정
+- index.md 갱신 (세션 1건 신설, self-hosted-agent-server-ops 태그 목록에 pinned-cli-path-drift 추가)
+- AI_CONTEXT.md 갱신 보류 — Tailscale `tail0e32ab`는 이미 기록된 `tail43b73a` 최종 상태로 대체된 중간 상태이고, CLI 전역 설치 전환은 self-hosted-agent-server-ops 스킬 페이지로 충분히 커버돼 상시 주입 가치 낮음
