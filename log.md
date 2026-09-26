@@ -2476,3 +2476,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 토픽 갱신: [[chat-archive-duplication-anomaly]] — "프로브 세트 첫 사건 재확인" 절 추가, 관련 목록의 "실제 첫 사건" 표시를 이 세션으로 이동
 - 세션 갱신: [[2026-09-14-모델-단계-프로브]] — 1분 45초 앞선 이 세션 발견 사실을 상단 갱신 안내로 반영
 - index.md 갱신 (세션 1건 추가, 시간순으로 기존 프로브 세션들 앞에 배치). 콘텐츠 자체는 트리비얼해 신규 skill 없음, AI_CONTEXT.md는 안정적 신규 사실 없어 갱신 보류
+
+## [2026-09-26] ingest | lampas-web-www 로고 교체 + 메타 정보 개편 (source: cd93dc35-bd35-459a-a2d9-21ee4ab33d9f.md)
+- 원본 raw/conversations/2026-09-14-lampas-로고-변경.md로 보관 (2026-09-14 `Tool: codex` 세션)
+- 세션 요약 신설: [[2026-09-14-lampas-로고-변경]] — 흰색 SVG 로고 교체+선3개 로고 제거+메타 개편 →
+  크기/라임 점 피드백 재조정 → 섹션 라벨 위치 조정 → 90% 축소+overline 밑줄 부수 수정, 총 3회 배포
+- 엔티티 갱신: [[lampas-studio]] — "2026-07-18 오전~오후 세션" 절 아래에 이 세션의 후속 서브섹션 추가,
+  하단 관련 세션 목록·태그(lampas-web-www·logo·branding)에도 반영
+- index.md 갱신 (세션 1건 추가, lampas-studio 엔티티 인덱스 줄에 한 문장 요약 추가)
+- 신규 스킬 없음 — 기존 [[deploy-sandbox-pnpm-shim]] 배포 절차 재사용뿐, 새 절차 없음
+- AI_CONTEXT.md 갱신 보류 — 이미 40줄 한도 근접, 이 세션은 소규모 UI 후속 조정이라 상시 주입 가치 낮다고 판단

@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding]
 created: 2026-07-09
 updated: 2026-09-26
 ---
@@ -168,6 +168,16 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   구현·배포. 상세는 [[lampas-web-ai]] 엔티티 페이지 참고.
 - 배포 중 corepack pnpm shim이 `ln -sf`로 `.bin` 심볼릭 링크를 잘못 남기는 새 함정 발견·정리 →
   [[deploy-sandbox-pnpm-shim]].
+
+### 2026-09-14 후속 — `lampas-web-www` 로고 교체 + 메타 정보 개편
+
+위 landing 재디자인 약 2개월 뒤(`Tool: codex`), 첨부 로고를 검은 배경용 흰색 SVG로 재도입하고 기존
+"선 3개" 심볼 로고·마침표를 완전 제거, 파비콘·공유(OG) 이미지도 새 로고로 통일 + 사이트 성격(스포츠
+콘텐츠·채널 운영·AI 플랫폼)에 맞춘 메타 정보 개편. 배포(`./scripts/deploy-web.sh lampas-web-www`) 후
+"로고가 크고 라임색 점이 빠져 안 어울린다" 피드백 → 크기 축소+라임 점 재도입 → "섹션 라벨이 구분선
+위로" 레이아웃 조정 → "로고 90%로" 재요청 시 라벨 위 선이 `overline` CSS 속성 때문임을 조사 중 발견해
+텍스트 아래로 옮기는 수정까지 자발적으로 포함, 총 3회 재배포. 시각 요소는 실제 배포 후 육안 확인
+피드백으로 여러 차례 재조정되는 패턴 확인. → [[2026-09-14-lampas-로고-변경]]
 
 ## 기타 변경 (2026-07-18, 오후 works-전체저장 세션)
 - 액터 플로우 및 gemini/actors API 확장 커밋·push. [[works-project-portfolio]] 일괄 저장 요청의 일부로,
@@ -413,6 +423,7 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-17-works-저장소-일괄최신화-pull]] ·
   [[2026-07-18-works-전체저장]] ·
   [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[2026-07-18-web-ai-등록플로우-사진분류-배포]] ·
+  [[2026-09-14-lampas-로고-변경]] ·
   [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] · [[2026-09-19-lampas-trends-고도화]]
