@@ -113,6 +113,7 @@
   4커밋(신규 앱 `[[lampas-web-spot]]` 식당지도 포함, 159파일 일괄)을 원격 10커밋과 병합해 push,
   `talk-app-toss-samantha`([[toktalk]]) 버전 충돌은 원격(0.1.7) 채택. 선택적 헝크 커밋 절차 신규 확인
 - [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] — `Tool: codex` 세션(2026-09-24~25로 이어짐). 블루리본 맛집 지도 `spot.lampas.io` 구축. bluer.co.kr 스크래핑 403 차단 → 첨부 엑셀 579곳 → 구글 시트 반영 738곳(블루리본+다이닝코드, 중복 5건 병합)까지 데이터 2단계 확장. 지도 프로바이더 카카오→OpenStreetMap+Nominatim 지오코딩→네이버(401 인증 실패)→**OpenStreetMap 확정** 3회 전환, 최종 502곳 지도 표시. 폐업/정보 신고 기능(개인 숨김+운영자 검토 후 전체 제외) 추가. [[lampas-web-spot]] 스텁 해소
+- [[2026-09-24-pulse-페르소나-카피점수-구조화-개선]] — `Tool: codex` 세션(2026-09-24 시작, 2026-09-26까지 이어진 장기 세션). [[lampas-agent]]의 Pulse 하위 시스템(페르소나·카피 생성·채점) 최초 상세 확인. "페르소나가 유아틱, 카피 점수는 높은데 일반적" 문제 제기 → 4영역 8세부항목 채점 구조 도입·범용문구 69점 상한 배포 → 사용자가 "일반적인 제목이 더 좋아보이는데?"라고 반박 → 익숙한 표현과 근거없는 과장을 구분하도록 정정, 상한 철회 후 재배포(API 1,152개·웹 36개 테스트 통과). 마지막 reels 카드 스트립 요청 3건은 응답 없이 트랜스크립트 종료(다른 도구 세션에서 별도 완료 추정, 미확인)
 
 ## Entities
 
@@ -122,8 +123,8 @@
 - [[dalar]] — 2026-09-26 최초 노출된 제품 라인(스텁). `lampas-system` 모노레포 내 6앱, Node Studio SoT가 여기 위치해 lampas-web-studio로 동기화. 2026-09-24: SoT 관계가 문서 인용을 넘어 실제 sync 실행·드리프트 0으로 확인됨
 - [[lampas-web-spot]] — `lampas-system` 내 맛집 지도 앱(`spot.lampas.io`). 2026-09-26 스텁 해소: 실제 구현 세션 확인, 데이터 738곳(블루리본+다이닝코드), 지도는 카카오→OpenStreetMap→네이버(401 실패)→**OpenStreetMap 확정** 3회 전환, 502곳 지도 표시, 폐업 신고 기능. 병합 커밋 당시 env의 Naver 키는 중간 시점 스냅샷이었음이 드러남
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
-- [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status/Tools 자매 앱, sports-wiki "경기" 엔티티 신설 포함. Fixs 탭에 2026-09-25 작업삭제(v1.0.22)→오류수집 확장(v1.0.23)→경로 그룹핑+Jev 분류(v1.0.25) 순 배포
-- [[lampas-web-copy]] — lampas-system 스포츠 클립 파이프라인 내 SNS 카피·페르소나 생성 웹("Copy"). 2026-09-25 가로스크롤 레이아웃 버그(바깥 fieldset이 카드 너비로 늘어남) 수정·v0.2.6 배포
+- [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status/Tools 자매 앱, sports-wiki "경기" 엔티티 신설 포함. Fixs 탭에 2026-09-25 작업삭제(v1.0.22)→오류수집 확장(v1.0.23)→경로 그룹핑+Jev 분류(v1.0.25) 순 배포. Pulse(페르소나·카피 채점) 상세는 2026-09-24 세션에서 확정
+- [[lampas-web-copy]] — lampas-system 스포츠 클립 파이프라인 내 SNS 카피·페르소나 생성 웹("Copy"), 생성·채점 엔진은 [[lampas-agent]] Pulse. 2026-09-25 가로스크롤 레이아웃 버그(바깥 fieldset이 카드 너비로 늘어남) 수정·v0.2.6 배포
 - [[lampas-web-tools]] — lampas-system 내 AI 생성 도구 모음 웹("Tools", tools.lampas.io, 13개 기능). AGENTS.md 3라인 앱 목록엔 없는 앱. 2026-09-25 업로드 응답 인식·모델표시·Kling 생성거절 UX·영상 재생 버그(S3/CloudFront 직접재생 전환) 순차 수정, 신규 생성분 최종 재생 확인은 미완료
 - [[lampas-web-status]] — lampas-system 내 상태 페이지 앱(status.lampas.io, status.claude.com 형태). 2026-09-25 처음부터 구현·운영 배포 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트
 - [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인. 같은 날 신규 서브앱 `virtual.toktalk.ai`(`[[tavus]]` 기반 사진 아바타 영상통화, 캐릭터 "한소연") 구축·배포 확정. 2026-09-24: `talk-app-toss-samantha`(0.1.7) 존재가 git 병합 충돌로 두 번째 독립 확인됨
@@ -235,3 +236,4 @@
 - [[error-fingerprint-path-grouping]] — 오류 수집 시스템에서 URL/스택 안 가변 토큰(uuid·hash 등)을 `:id`로 정규화해 같은 원인의 오류를 하나로 묶는 fingerprint 절차, 릴리스 다르면 별건 유지 규칙 포함
 - [[selective-hunk-commit-shared-file]] — 같은 파일에 이번 작업 변경분과 다른 미커밋 변경분이 섞였을 때 헝크(git add -p) 단위로 이번 작업분만 골라 커밋, 분리 불가능하면 배포 상태로 포함 타당성 확인 후 함께 커밋
 - [[nominatim-batch-geocode-progressive-rollout]] — 지도 키 없이 대량 주소를 핀으로 표시할 때: OpenStreetMap+Nominatim(초당 1회 제한·캐싱)으로 지오코딩, 건물번호 일치만 인정하는 신뢰도 필터로 오표시 방지, 확인 건수 늘 때마다 단계적 배포
+- [[copy-rubric-familiar-vs-filler]] — 마케팅 카피 채점 루브릭에서 "익숙한 표현"과 "근거 없는 빈말/과장"을 구분: 실제 좋은 제목 예시로 룰 먼저 시험→소재를 바꿔도 성립하면 빈말·안 하면 유효한 훅→기계적 점수 상한은 구분이 끝난 축에만 적용→항목 분해로 사람이 반박 가능하게
