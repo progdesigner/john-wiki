@@ -2357,3 +2357,34 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   변형 추가. [[prod-ddl-before-deploy-with-drift-check]]에 "구 테이블 DROP하는 파괴적 DDL" 변형 추가.
 - `AI_CONTEXT.md`는 39/40줄 예산 소진 상태라 변경하지 않음(이 세션의 핵심 사실은 09-24/09-25 세션
   기록에 이미 흡수돼 현재 상태 이해에 영향 없음).
+
+## [2026-09-26] ingest | Lampas Edit 자막·큐·레이아웃 템플릿 대량 기능개발 (source: afeacf4a-e1d4-4739-b98a-4393529c8d66.md)
+- `Tool: claude` 세션(2026-09-19T06:16Z 시작, DDL 파일명으로 09-20까지 이어짐 확인). 신규 앱
+  `[[lampas-web-edit]]`(edit.lampas.io)이 이 위키에 처음 상세 노출됨 — 버전 0.1.17→0.1.43, API
+  0.1.100→0.1.130. 자막 여백+실측폭 줄바꿈, 큐 합치기/재정렬/추가, "다음 자막까지 유지", 세로
+  위치 자유드래그+정렬기준, 영상팬 가운데스냅, 수동큐 단어강조 합성, 영상·이미지·텍스트 통합
+  레이어 스택, **레이아웃 템플릿 등록/적용+계정종속화(`layout_templates`)+다른 계정으로 보내기**,
+  자막 한국어 번역, 자막·텍스트 타이포(자간·행간·장평·기울임), 트랙 이름 편집까지 20개 이상 기능을
+  한 세션에서 연속 구현·테스트·배포.
+- 템플릿 이미지 `url`(S3/CDN) 필드가 이 세션(0.1.42, SPOTV/Disney+ 로고 업로드)에서 처음
+  도입됨이 드러나 [[template-image-slot-fingerprint-vs-url]] 스킬의 출처 시점을 09-25→09-19/20으로
+  정정(09-25 세션은 이 메커니즘을 다른 계정 레코드에 적용한 후속일 뿐).
+- 갤러리 저장 "Network Error"의 원인이 nginx 100MB 본문 제한(413, CORS 헤더 없음)임을 진단해
+  브라우저→S3 프리사인 직접 업로드로 근본 수정(0.1.43) — 신규 스킬
+  [[proxy-body-limit-413-appears-as-network-error]] 추출, [[tailscale-funnel-large-payload-bypass]]와
+  교차링크.
+- 공유 워크트리(`lampas-system`)에서 경로 단위(`git add apps/...`) 커밋이 병렬 세션의 미커밋
+  파일을 통째로 쓸어간 사고가 최소 2회 발생(커밋 `c86f8fb0`·`cce3ba8b`) + rebase 중 다른 세션의
+  185개 파일 자동 stash→복원 — [[selective-hunk-commit-shared-file]]에 "경로 지정 커밋 오염"
+  변형으로 추가.
+- Reels가 편집 세션 생성 시 브랜드킷 목록 응답을 그대로 보내 DTO 검증에 걸리던 오류도 이 세션에서
+  함께 수정(Reels 0.1.24) → [[lampas-web-reels]] 갱신.
+- 세션 신설: [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]].
+- 엔티티 신설: [[lampas-web-edit]]. 엔티티 갱신: [[lampas-studio]](Edit 절 원출처 시점 정정+
+  관련 링크 추가) · [[lampas-web-reels]](세션 생성 오류 수정 절 추가).
+- 스킬 신설: [[proxy-body-limit-413-appears-as-network-error]]. 스킬 갱신:
+  [[template-image-slot-fingerprint-vs-url]](원출처 정정) ·
+  [[selective-hunk-commit-shared-file]](경로 단위 커밋 오염 변형) ·
+  [[tailscale-funnel-large-payload-bypass]](교차링크만 추가).
+- `AI_CONTEXT.md`(39/40줄 예산)에 `[[lampas-web-edit]]` 한 문장 추가(lampas-studio 항목에 append,
+  줄 수 증가 없음).

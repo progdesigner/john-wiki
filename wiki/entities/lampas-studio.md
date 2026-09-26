@@ -182,18 +182,28 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 남아있지 않을 가능성이 높음(이관 이후 재확인 안 됨) — 최종 상태·상세는 → [[lampas-browser]] · 세션:
 [[2026-09-26-lampas-browser-구축-harness이전]]
 
-## "Edit" 템플릿 에디터 — 신규 노출 기능 (2026-09-25 세션)
+## "Edit" 템플릿 에디터 — 앱 `[[lampas-web-edit]]`(edit.lampas.io)
 
-이전 세션들에 등장하지 않았던 별도 기능. 사용자가 이미지 위에 템플릿(로고 등 이미지 슬롯 포함)을 골라
-적용하는 에디터로, 템플릿은 **계정별로 서버에 저장**된다(예: SPOTV 템플릿이 `progdesigner7`·
-`rallycap.official` 두 계정에 각각 존재).
+> **2026-09-26 ingest 시 시점 정정**: 이 절을 처음 "2026-09-25 세션에서 신규 노출"로 기록했으나,
+> [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]] 세션(같은 저장소, **6일 앞선** `Tool: claude`
+> 세션)에서 이 앱 전체(자막·큐 편집·트랙·레이아웃 템플릿 등 20개 이상 기능)가 처음부터 구현·배포된
+> 것이 뒤늦게 확인됐다. 09-25 세션은 그 계정별 템플릿 데이터의 후속 버그(아래)만 다룬 것이지 앱의
+> 최초 등장이 아니다 — "최초 노출"은 이 위키가 그 세션을 먼저 읽은 관찰 순서일 뿐. 앱 상세는 이제
+> 독립 엔티티 [[lampas-web-edit]] 참고, 이 절은 계정별 템플릿 데이터 버그만 남긴다.
+
+사용자가 이미지 위에 템플릿(로고 등 이미지 슬롯 포함)을 골라 적용하는 에디터로, 템플릿은
+**계정별로 서버에 저장**된다(예: SPOTV 템플릿이 `progdesigner7`·`rallycap.official` 두 계정에
+각각 존재— 계정 종속화 자체는 [[lampas-web-edit]] 0.1.38에서 구현됨).
 
 - **이미지 슬롯 스키마**: `fingerprint`(그 이미지를 만든 브라우저의 로컬 OPFS 저장 키, 기기 종속) +
-  `url`(공개 S3/CloudFront 주소, 기기 독립). 로컬에 없으면 `url`로 폴백하는 로직은 이미 있으나,
-  **드래그로 이미지를 넣어 템플릿을 만들면 `url` 없이 저장되는 경로**가 있어 다른 브라우저에서 이미지가
-  안 붙는 문제가 재발할 수 있음(코드 수정 없이 데이터만 땜질한 상태, 근본 수정 미착수).
+  `url`(공개 S3/CloudFront 주소, 기기 독립 — 0.1.42에서 처음 도입). 로컬에 없으면 `url`로 폴백하는
+  로직은 있으나, **드래그로 이미지를 넣어 템플릿을 만들면 `url` 없이 저장되는 경로**가 있어 다른
+  브라우저에서 이미지가 안 붙는 문제가 재발할 수 있음(2026-09-25 세션은 코드 수정 없이 데이터만
+  땜질, 근본 수정 미착수).
 - 공용 로고 자산은 S3 `cdn/production/edit-templates/logos/`에 보관.
-- 절차 스킬 → [[template-image-slot-fingerprint-vs-url]] · 세션 → [[2026-09-25-edit-템플릿-이미지-s3-url-수정]]
+- 절차 스킬 → [[template-image-slot-fingerprint-vs-url]] · 세션 →
+  [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]](원 구현) ·
+  [[2026-09-25-edit-템플릿-이미지-s3-url-수정]](후속 계정별 데이터 버그)
 
 ## 2026-09-24 저녁 세션 — Seedance 2.0 Mini 추가 + 노드 툴바 UX 개선 + Dalar SoT 동기화 실제 확인
 
@@ -310,7 +320,9 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 - **[[lampas-web-pulse]]**("Pulse", `pulse.lampas.io`, 2026-09-19 세션에서 전면 개편·정식 엔티티화) —
   Google 로그인 세션 단위로 미션을 열람하고 **페르소나를 만드는 단일 출처**(이전엔 Copy가 생성했음).
   계정간 미션 보내기 기능도 이 세션에서 함께 구현.
-- **[[lampas-web-copy]]**("Copy") · **[[lampas-web-reels]]("Reels")** · **[[lampas-web-package]]**
+- **[[lampas-web-edit]]**("Edit", `edit.lampas.io`, 2026-09-19 세션에서 첫 상세 구현 — 자막 편집·
+  큐 타이밍·레이어 스택·계정 종속 레이아웃 템플릿까지 이 파이프라인에서 가장 기능이 많은 앱) ·
+  **[[lampas-web-copy]]**("Copy") · **[[lampas-web-reels]]("Reels")** · **[[lampas-web-package]]**
   ("Package", `package.lampas.io`, 2026-09-20 세션에서 정식 엔티티화 — 이전엔 다른 페이지에서
   "소속 미상"으로만 언급) · **[[lampas-web-status]]**
   (`status.lampas.io`, 2026-09-25 status.claude.com 형태로 처음부터 구현·운영 배포 완료 —
@@ -361,7 +373,7 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   기존 이슈).
 
 ## 관련
-- 세션: [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
+- 세션: [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]] · [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
   [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] ·
   [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
   [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] ·
@@ -378,7 +390,7 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
   [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]]
 - 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-pulse]] · [[lampas-web-copy]] ·
-  [[lampas-web-reels]] · [[lampas-web-package]](`package.lampas.io`) ·
+  [[lampas-web-reels]] · [[lampas-web-edit]](`edit.lampas.io`) · [[lampas-web-package]](`package.lampas.io`) ·
   [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
@@ -387,4 +399,5 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
 - 포트폴리오 배경: [[works-project-portfolio]]
 - 스킬: [[selective-hunk-commit-shared-file]] · [[nominatim-batch-geocode-progressive-rollout]] ·
   [[tailscale-funnel-large-payload-bypass]] · [[cross-subdomain-session-handoff]] ·
-  [[execution-run-scoped-status-vs-stale-notification]] · [[accept-then-poll-for-slow-ai-jobs]]
+  [[execution-run-scoped-status-vs-stale-notification]] · [[accept-then-poll-for-slow-ai-jobs]] ·
+  [[proxy-body-limit-413-appears-as-network-error]]

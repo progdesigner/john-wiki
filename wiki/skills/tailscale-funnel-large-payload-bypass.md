@@ -43,3 +43,5 @@ tags: [tailscale, bandwidth, s3, performance, mac-mini, bottleneck-diagnosis]
 - 128MB급 파일로 실측(업로드·수신 각각 2~3초대)해 개선을 정량 확인하고 배포한다.
 
 ## 출처: [[2026-09-20-lampas-flow-만들기]] ([[lampas-agent]] 유튜브 다운로드 전송병목 + 전사 엔진 로딩 병목)
+관련: [[proxy-body-limit-413-appears-as-network-error]](같은 "오브젝트 스토리지 직접 전송으로
+프록시/터널 우회" 패턴의 다른 원인 — nginx 본문 크기 제한)

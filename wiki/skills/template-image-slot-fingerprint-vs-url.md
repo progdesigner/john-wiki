@@ -2,9 +2,19 @@
 name: template-image-slot-fingerprint-vs-url
 description: 저장된 템플릿의 이미지가 특정 브라우저/기기에서만 안 붙을 때 fingerprint(로컬)/url(공개 CDN) 필드를 확인·보정하는 절차
 created: 2026-09-25
-tags: [lampas-studio, template, s3, cloudfront, cross-device]
+updated: 2026-09-26
+tags: [lampas-studio, lampas-web-edit, template, s3, cloudfront, cross-device]
 ---
 # 템플릿 이미지 슬롯 fingerprint vs url
+
+> **원출처 정정(2026-09-26 ingest)**: 이 스킬은 처음 2026-09-25 세션(계정별 데이터 땜질)을 출처로
+> 기록했으나, `url` 필드와 이 폴백 로직 자체는 그보다 5~6일 앞선
+> [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]] 세션(`[[lampas-web-edit]]` 0.1.42)에서
+> **처음 구현**됐다. 그 세션에서 사용자가 SPOTV 템플릿 이미지 2장(로고)을 첨부하며 "S3 업로드 경로를
+> 쓰도록 해달라"고 요청 → 로고를 S3(`cdn/production/edit-templates/logos/`)에 올리고, 템플릿 이미지
+> 슬롯에 `url` 필드를 신설, **적용 시 우선순위를 "로컬 → 템플릿 `url` → 로그인 계정의 원본 자동
+> 백업" 순으로 확장**했다. 09-25 세션은 이 기존 메커니즘을 이용해 `url`이 비어 있던 **다른 계정**의
+> 템플릿 레코드만 땜질한 것 — 아래 절차는 그대로 유효하지만 "발견"이 아니라 "적용"이었다는 점을 정정.
 
 ## 언제 쓰는가
 저장된 템플릿(또는 이와 유사한 "재사용 가능한 프리셋")을 적용했을 때, 이미지가 **만든 브라우저/기기에서는
@@ -38,4 +48,5 @@ tags: [lampas-studio, template, s3, cloudfront, cross-device]
 - 공용 로고·아이콘처럼 여러 템플릿에서 재사용되는 자산은 애초에 CDN 경로(`cdn/production/edit-templates/
   logos/` 류)에 올리고 URL로 라이브러리에 등록한 뒤 템플릿을 만들면 이 문제 자체가 발생하지 않는다.
 
-## 출처: [[2026-09-25-edit-템플릿-이미지-s3-url-수정]]
+## 출처: [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]](`url` 필드·폴백 순서 최초 구현) ·
+[[2026-09-25-edit-템플릿-이미지-s3-url-수정]](다른 계정 레코드에 같은 메커니즘 적용)
