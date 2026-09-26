@@ -259,6 +259,32 @@ X·Threads 공식 API 소스 추가) → 배포 → 배치 크기·타임아웃 
 운영 조치 필요로 남음. 코드는 **미커밋 상태**. 상세 → [[lampas-web-trends]] ·
 [[2026-09-19-lampas-trends-고도화]] · 절차 스킬 [[llm-batch-inference-timeout-tuning]].
 
+## `AGENTS.md` 최이른 확인 시점 정정 — 2026-09-13/14 (2026-09-26 뒤늦게 ingest)
+
+[[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]] 세션(`Tool: codex`, 2026-09-13T13:55Z
+시작)의 시스템 프롬프트에 포함된 `AGENTS.md` 전문이, 아래 "2026-09-26 저장소 구조 스냅샷" 절이
+"09-21에 이미 존재"로 정정해둔 것보다도 **더 이른 시점**(09-13/14)에 이미 다음을 확정하고
+있었음이 확인됨 — 아래 절의 "최초 노출"·"이번 세션에서 바뀐 것으로 보임" 서술을 시점만 다시
+당겨서 읽을 것(구조 자체가 09-13 이전부터 있었다는 뜻):
+
+- **`lampas-web-studio`라는 이름이 이미 완전히 정착**돼 있고(`lampas-web-sdk`라는 이름은
+  이 세션 어디에도 없음), Atomic Design(atoms/molecules/organisms/pages) 디렉터리 구조·Node
+  Studio 라우트(`/works`, `/{actors|objects|spaces}/works/:entityKey`)까지 상세히 문서화되어
+  있다 — 09-26 세션이 관찰한 "리네이밍된 것으로 보임"이라는 추정이 실은 최소 09-13부터의 기정
+  사실이었다는 뜻.
+- **DB가 "NestJS + Prisma + MySQL"로 이미 명시**돼 있다 — 기존 "PostgreSQL(2026-07-15 코드 확인)
+  vs MySQL(2026-09-21 AGENTS.md 최초 관찰로 기록)" 모순의 **더 이른 쪽 증거점**이 09-13/14로
+  당겨진다. 여전히 코드 재확인은 안 됐다.
+- **Dalar가 Node Studio(`lampas-web-studio`)의 SoT라는 관계와 `pnpm sync:studio` 동기화
+  스크립트가 이미 문서화**돼 있다 — 기존에 "09-20 세션에서 처음 언급, 09-24 세션에서 실행으로
+  실증"으로 기록했던 타임라인의 "언급 시점"이 09-13/14로 더 당겨진다.
+- **신규 세부 확인**: Actor Studio API 엔드포인트별 AI 프로바이더 라우팅표(예: 스튜디오 합성=
+  Atlas Cloud `google/nano-banana-2/edit` 기본·NSFW는 `alibaba/wan-2.7-pro/image-edit` 고정,
+  프롬프트 재작성·NSFW 제안=Grok, Close-up/레퍼런스시트 생성=Gemini 직접), 버튼 플랫 디자인
+  규칙("그라데이션·글로우·`active:scale-*` 금지, 단색+얇은 보더만")이 이 세션 소스로 처음
+  구체적으로 확인됨 — 이전 페이지 서술("스튜디오 합성=Atlas Cloud" 요약, "Object 단독 촬영은
+  실제로 Gemini 직접" 예외 1건)보다 훨씬 세밀한 기능별 분기표가 존재한다.
+
 ## 2026-09-26 저장소 구조 스냅샷 (`AGENTS.md`) — 이전 기록과 모순 다수
 
 `lampas-web-fit` 구축 세션(`Tool: codex`, 작업 폴더 `lampas-system`)의 시스템 프롬프트에 저장소
@@ -426,7 +452,8 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[2026-09-14-lampas-로고-변경]] ·
   [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
-  [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] · [[2026-09-19-lampas-trends-고도화]]
+  [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] · [[2026-09-19-lampas-trends-고도화]] ·
+  [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·

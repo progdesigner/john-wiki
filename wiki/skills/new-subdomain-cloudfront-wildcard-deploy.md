@@ -2,7 +2,8 @@
 name: new-subdomain-cloudfront-wildcard-deploy
 description: 기존 와일드카드 인증서를 쓰는 도메인 아래에 완전히 새 서브도메인(신규 앱)을 배포할 때 CloudFront·DNS·검증 순서
 created: 2026-09-26
-tags: [deploy, cloudfront, dns, aws, lampas-studio]
+updated: 2026-09-26
+tags: [deploy, cloudfront, dns, aws, lampas-studio, dalar]
 ---
 # 새 서브도메인 CloudFront 배포
 
@@ -30,6 +31,14 @@ tags: [deploy, cloudfront, dns, aws, lampas-studio]
 ## 주의사항 / 함정
 - 신규 서브도메인이라고 새 ACM 인증서부터 발급하려 하면 검증(DNS/이메일) 대기로 배포가 불필요하게
   지연된다 — 루트 와일드카드 인증서 재사용이 가능한지 먼저 확인.
+- **루트 와일드카드는 한 단계 깊이까지만 커버한다.** `*.lampas.io`는 `fit.lampas.io`는 덮지만
+  `admin.first.dalar.ai`처럼 **두 단계 아래**(서브도메인의 서브도메인)는 덮지 못한다 — 이런
+  경우 `*.first.dalar.ai` 같은 하위 와일드카드나 해당 도메인 전용 인증서를 **새로 발급**해야
+  한다. [[dalar-web-first]] 구축 세션([[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]])
+  에서 `admin.first.dalar.ai` 인증서 발급이 AWS 계정의 **`acm:RequestCertificate` 권한 부재로
+  거부**돼, 임시로 `first.dalar.ai/admin` 경로로 관리자 기능을 배포하고 전용 서브도메인은 권한
+  확보 후 과제로 미룬 사례가 있다 — 새 인증서 발급이 필요한 상황이면 **먼저 IAM 권한을
+  확인**한다(권한이 없으면 경로 기반 임시 배포로 우회 가능한지부터 검토).
 - 작업 환경 DNS 캐시와 실제 공개 DNS 상태가 다를 수 있다는 점을 배포 검증 실패로 오판하지 않는다.
 - 배포는 반드시 저장소의 `./scripts/deploy-*.sh`로만 한다(수동 S3/CloudFront 개별 명령 금지) —
   이 원칙은 [[lampas-studio]] 제품 CLAUDE.md/AGENTS.md에 명문화되어 있다.
@@ -39,4 +48,5 @@ tags: [deploy, cloudfront, dns, aws, lampas-studio]
   앱 공개가 아니라 죽은 외부 도메인에서 기존 자산을 이전하는 시나리오(S3 복사+DB URL 치환+3rd-party
   DNS 병목 포함)라 별도 스킬로 분리됨.
 
-## 출처: [[2026-09-25-lampas-web-fit-구축-배포]]
+## 출처: [[2026-09-25-lampas-web-fit-구축-배포]] ·
+[[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]](2단계 서브도메인 인증서 함정 추가)

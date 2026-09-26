@@ -2,8 +2,8 @@
 name: credit-ledger-balance-pattern
 description: 잔액 컬럼 없이 원장(ledger) 방식으로 크레딧/포인트를 지급·차감하는 기존 시스템을 다른 저장소로 이식할 때 확인·보강할 것들
 created: 2026-07-16
-updated: 2026-07-16
-tags: [ledger, credit, balance, concurrency, migration, typeorm, prisma, nestjs]
+updated: 2026-09-26
+tags: [ledger, credit, balance, concurrency, migration, typeorm, prisma, nestjs, dalar]
 ---
 # 원장(ledger) 방식 크레딧 잔액 시스템 이식
 
@@ -42,4 +42,11 @@ tags: [ledger, credit, balance, concurrency, migration, typeorm, prisma, nestjs]
 - 레거시의 동시성 미보호를 "원래 이랬으니까"라며 그대로 이식하면 이식 시스템에도 같은 레이스 컨디션이
   전파된다 — 이식은 결함을 고칠 기회로 삼는다.
 
-## 출처: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]]
+## 검증 사례 — 동시 결제 요청 (2026-09-13, [[dalar-web-first]])
+[[credit-ledger-balance-pattern]]을 결제(주문·크레딧 차감을 같은 서버 트랜잭션)에 적용한 뒤, 실제
+DB에 **동시 결제 요청 8개**를 보내 **단 한 번만 차감**되는 것을 확인한 사례. "코드 리뷰로 트랜잭션이
+있다"를 확인하는 것과, 실제 동시 요청을 재현해 결과를 세는 것은 별개라는 점을 보여준다 — 4번 항목
+("동시성 보호 여부 확인")의 실제 검증 방법으로 참고.
+
+## 출처: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] ·
+[[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]](동시 결제 검증 사례)

@@ -2486,3 +2486,17 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - index.md 갱신 (세션 1건 추가, lampas-studio 엔티티 인덱스 줄에 한 문장 요약 추가)
 - 신규 스킬 없음 — 기존 [[deploy-sandbox-pnpm-shim]] 배포 절차 재사용뿐, 새 절차 없음
 - AI_CONTEXT.md 갱신 보류 — 이미 40줄 한도 근접, 이 세션은 소규모 UI 후속 조정이라 상시 주입 가치 낮다고 판단
+
+## [2026-09-26] ingest | dalar-web-first 최초구축 + 오만크레딧 결제 요청 (source: 1f155c31-88e6-4b72-b9c5-08011f0e0604.md)
+- 원본 보관: raw/conversations/2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청.md (`Tool: codex`, 2026-09-13T13:55:42Z 시작)
+- 신규 세션 페이지: [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]] — `[[dalar-web-first]]`("First" 돌잔치 AI 영상)를 처음부터 설계·구현·배포한 origin 세션 확인. Gmail 로그인+가입 1,000크레딧, 5만 크레딧 고정 결제, `admin.first.dalar.ai` 인증서가 AWS `acm:RequestCertificate` 권한 부재로 거부돼 `/admin` 경로 임시 배포, 동시 결제 8건 실증(1회만 차감), 실사진→36초 완성영상까지 실사용 검증. 마지막 "결제 즉시 5만 크레딧 자동실행+5만 고정" 요청은 응답 없이 세션 종료(미확인으로 남김)
+- 엔티티 갱신:
+  - [[dalar-web-first]] — "최초 구축 세션" 절 신설(기존 09-20 세션 기준 "이번 세션 이전 원래 형태"의 실제 origin을 6일 앞선 이 세션으로 정정), "원래 형태" 절 이름을 "09-20 세션 이전"으로 명확화
+  - [[dalar]] — 이 세션의 `AGENTS.md`도 동일 Dalar 6앱 목록(dalar-web-first 미등재)임을 확인, 스냅샷 최이른 시점을 09-25→09-13/14로 정정
+  - [[lampas-studio]] — "`AGENTS.md` 최이른 확인 시점 정정" 절 신설: `lampas-web-studio` 이름 정착·MySQL 명시·Dalar SoT sync 문서화가 모두 09-13/14부터였음을 확인(기존 09-20/09-21/09-26 관찰 시점보다 앞당김), Actor Studio AI 프로바이더 라우팅표·플랫 버튼 디자인 규칙 등 세부 신규 확인
+- 스킬 갱신:
+  - [[credit-ledger-balance-pattern]] — "검증 사례 — 동시 결제 요청" 절 추가(동시 요청 8개→1회만 차감 실증)
+  - [[new-subdomain-cloudfront-wildcard-deploy]] — "루트 와일드카드는 한 단계 깊이까지만 커버" 함정 추가(2단계 서브도메인은 별도 인증서+IAM 권한 필요)
+  - [[resumable-worker-checkpoint-resume]] — 이 세션이 실제 최초 구현이며 자체 재시작 테스트를 통과했었다는 참고 절 추가(09-20 세션이 발견한 더 미묘한 결함과 시간차 병기)
+- index.md 갱신 (세션 1건 추가, dalar·dalar-web-first·lampas-studio 엔티티 줄 갱신, 스킬 2건 줄 갱신)
+- AI_CONTEXT.md 갱신 보류 — 타임라인 정정은 상세 이력이라 wiki 페이지로 충분, 40줄 한도 내 상시 주입 가치는 낮다고 판단
