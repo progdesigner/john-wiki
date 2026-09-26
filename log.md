@@ -2052,3 +2052,23 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `AI_CONTEXT.md` 갱신: 기존 cwc-system 멤버십 크레딧 이식 줄에 이번 장애·발견·복구 요약 추가
   (39줄, 40줄 이내 유지).
 - `index.md` Sessions·Entities·Skills 반영(세션1 신설·엔티티2 갱신·스킬1 신설).
+
+## [2026-09-26] ingest | Studio 개선 — Seedance 2.0 Mini 추가·노드 툴바 UX·멀티커밋 푸시 (source: 14b667d0-126a-4685-8a39-fb8592578143.md)
+- 원본 보관: `raw/conversations/2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시.md`
+- 세션 신설: [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] — `Tool: claude` 세션
+  (2026-09-24 22:13 UTC 시작, `lampas-system` 작업). 동영상 생성에 Seedance 2.0 Mini 모델 추가(모델
+  피커·capabilities·DTO 허용목록·정규식·크레딧 오버라이드 전 계층 반영) + 노드 캔버스 선택 시 좌우
+  + 버튼 동시 표시 UX 개선 → 배포(lampas-api 0.1.140, lampas-web-studio 0.5.40) → 미커밋 4커밋(신규
+  앱 lampas-web-spot 포함)을 원격 10커밋과 병합해 push.
+- 엔티티 갱신: [[lampas-studio]] — Seedance Mini·노드 툴바·배포 상세 절 신설, Node Studio SoT가
+  `dalar-web-app`이라는 관계를 `pnpm sync:studio` 실제 실행·드리프트 0으로 실증(기존 AGENTS.md 인용
+  뿐이던 모순 해소). [[dalar]] — 같은 SoT 확인 반영, 열린 질문 중 단방향 동기화 여부 부분 해소.
+  [[toktalk]] — `talk-app-toss-samantha`(0.1.7) 존재를 git 병합 충돌로 두 번째 독립 확인.
+- 엔티티 신설: [[lampas-web-spot]] — 원격 병합 커밋으로 처음 노출된 Naver 지도 기반 식당 지도 앱
+  (스텁, 이 세션이 직접 구현한 것 아님, 실제 구현 세션 미상).
+- 스킬 신설: [[selective-hunk-commit-shared-file]] — 공유 파일에 이번 작업 변경과 다른 미커밋 변경이
+  섞였을 때 헝크 단위로 이번 작업분만 골라 커밋하는 절차(`git add -p`, 분리 불가 시 배포 상태로
+  포함 타당성 판단).
+- `AI_CONTEXT.md` 갱신: lampas-studio 줄에 이번 세션 요약(Seedance Mini·Dalar SoT 실증·lampas-web-spot
+  ·samantha 버전 충돌) 추가(39줄, 40줄 이내 유지).
+- `index.md` Sessions·Entities·Skills 반영(세션1 신설·엔티티3 갱신·엔티티1 신설·스킬1 신설).

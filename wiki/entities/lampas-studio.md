@@ -195,6 +195,35 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 - 공용 로고 자산은 S3 `cdn/production/edit-templates/logos/`에 보관.
 - 절차 스킬 → [[template-image-slot-fingerprint-vs-url]] · 세션 → [[2026-09-25-edit-템플릿-이미지-s3-url-수정]]
 
+## 2026-09-24 저녁 세션 — Seedance 2.0 Mini 추가 + 노드 툴바 UX 개선 + Dalar SoT 동기화 실제 확인
+
+[[dalar]]가 Node Studio(스튜디오 UI)의 SoT라는 사실이 이전엔 `AGENTS.md` 문서 인용으로만 추정
+기록돼 있었는데, 이 세션에서 **실제로 `dalar-web-app`을 먼저 수정하고 `pnpm sync:studio`로
+`lampas-web-studio`에 반영해 드리프트 0을 확인**함으로써 처음 실증됨(문서 인용이 아니라 명령 실행
+결과) → [[dalar]] 참고.
+
+- **동영상 생성에 Seedance 2.0 Mini 추가**: 모델 피커에 "Seedance 2.0 Mini"(56cr/초, 시작 프레임
+  1장)·"Seedance 2.0 Mini · 여러 이미지"(레퍼런스 최대 9장) 두 항목, `modelCapabilities.js` 정적
+  폴백(4~15초, 480p/720p, 원본 비율, 오디오 지원), `video.dto.ts` 허용 목록·`atlas-cloud` reference-
+  to-video 정규식에 mini 포함(누락 시 서버 400), 크레딧 오버라이드(56크레딧/초, 제품
+  `lampas-web-studio`) 추가. 배포 후 운영 `GET /v1/credits/pricing`에서 반영 확인.
+- **노드 선택 시 좌우 + 버튼 동시 표시**(`NodeStudioCanvas.jsx`): 기존엔 포인터가 노드 중심선 어느
+  쪽에 있는지 추적하는 전역 pointermove 리스너 2개로 hover 방향에 따라 한쪽 버튼만 노출돼 선택이
+  어렵다는 사용자 피드백 → 선택 시 좌우 `NodeToolbar` 동시 표시(각 방향은 연결 가능한 노드가 있을
+  때만, 메뉴는 한쪽만 열림)로 변경.
+- **부수 수정**: `lampas-web-studio`의 `workDetailPath.spec.js`가 `node:test` 문법이라 vitest에서
+  실패 중이던 것(방치되면 `deploy-web.sh` 테스트 게이트가 막힘)을 vitest 문법으로 교체, 테스트
+  228개 전체 통과.
+- **배포**: `lampas-api` 0.1.140(micro 서버 PM2)·`lampas-web-studio` 0.5.40(S3+CloudFront). 배포 전
+  운영 DB 드리프트 검사 "empty migration"으로 클린 확인.
+- **선택적 헝크 커밋**: 공유 `atlas-cloud.service.ts`처럼 다른 미커밋 변경과 섞인 파일은 이번 작업
+  헝크만 골라 스테이징(`7b50335f`, 16개 파일) → 절차 스킬 [[selective-hunk-commit-shared-file]].
+- **이어진 멀티커밋 푸시**: 미커밋 4커밋(`fixs`·`trends`·**`lampas-web-spot`(식당 지도, 신규) →
+  [[lampas-web-spot]]**·잔여작업 159파일)을 원격 10커밋과 병합해 push. 충돌 3건은 모두
+  `talk-app-toss-samantha`([[toktalk]])였고 원격의 0.1.7이 이미 배포된 상태라 원격 채택 — 이전에
+  `AGENTS.md` 문서 인용으로만 기록됐던 `talk-app-toss-samantha` 앱 존재가 실제 git 충돌로 재확인됨.
+- 세션 → [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]]
+
 ## 2026-09-26 저장소 구조 스냅샷 (`AGENTS.md`) — 이전 기록과 모순 다수
 
 `lampas-web-fit` 구축 세션(`Tool: codex`, 작업 폴더 `lampas-system`)의 시스템 프롬프트에 저장소
@@ -216,6 +245,10 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 - **Node Studio SoT가 `apps/dalar-web-app`으로 이동**했다고 명시 — `lampas-web-studio` 반영은
   `pnpm sync:studio`(`scripts/sync-studio-from-dalar.mjs`)로 동기화. 이 페이지의 기존 "스튜디오 구조" 절이
   기술하는 `lampas-web-sdk` 자체 구현 서술과 배치되므로, 이후 세션에서 실제 소스 위치 재확인 필요.
+  **2026-09-24 갱신**: 위 절의 세션이 이 SoT 관계를 문서 인용이 아니라 실제 `pnpm sync:studio` 실행·
+  드리프트 0 확인으로 실증함 — 이 모순은 사실상 해소(SoT는 `dalar-web-app`, `lampas-web-studio`는
+  동기화 대상이 맞음). 다만 `lampas-web-sdk`라는 이름 자체가 `lampas-web-studio`로 리네이밍된 것인지,
+  아니면 SoT 이전으로 자체 구현이 완전히 얇아진 것인지는 여전히 미확인.
 - **DB 모순**: `AGENTS.md`는 "NestJS + Prisma + **MySQL**"이라 명시. 이 페이지의 기존 서술(2026-07-15
   rebase 세션에서 코드로 직접 확인한 **PostgreSQL**, 위 절 참고)과 정면으로 다름 — 어느 쪽이 최신·
   정확한지 이 세션 소스만으론 판별 불가, 다음 코드 접근 시 재확인 요망.
@@ -249,7 +282,7 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   빌드에 섞일 수 있음(Threads 탭 오노출 사례) → [[lampas-agent]] 참고.
 
 ## 관련
-- 세션: [[2026-09-25-lampas-web-fit-구축-배포]] ·
+- 세션: [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
   [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
   [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-17-works-저장소-일괄최신화-pull]] ·
@@ -258,8 +291,10 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]]
 - 토픽: [[lampas-actor-object-space-positioning]]
-- 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] · [[lampas-web-tools]]
+- 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] · [[lampas-web-tools]] ·
+  [[lampas-web-spot]](식당 지도, 스텁)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
 - 포트폴리오 배경: [[works-project-portfolio]]
+- 스킬: [[selective-hunk-commit-shared-file]]

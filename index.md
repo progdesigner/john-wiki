@@ -106,19 +106,26 @@
 - [[2026-09-26-lampas-browser-구축-harness이전]] — `Tool: codex` 세션. "Aside 같은" AI 조작형 Chromium 브라우저를 `lampas-system` 아래 `apps/lampas-browser`로 처음부터 구축(WebContentsView·읽기/조작 분리·CSV·영상 URL 다운로드)한 뒤, 같은 날 `lampas-harness`의 `apps/browser`로 완전 이관 — 자체 AI API 키를 걷어내고 하네스 Codex CLI/Claude Code 세션 재사용으로 전환, 새 세션 "브라우징" 선택지 신설. 배포 중 9월 24일부터 방치된 구버전 서버가 `apps/wiki`(같은 날 다른 세션)와 함께 반영을 막고 있던 사실 발견·재시작 진행(반영 재확인은 다음 세션 필요)
 - [[2026-09-26-virtual-toktalk-tavus-아바타-구축]] — `Tool: codex` 세션. `[[toktalk]]` 신규 서브앱 `virtual.toktalk.ai`(사진 아바타+실시간 한국어 영상통화)를 오픈소스 조사(OpenAvatarChat·SoulX-FlashHead·Qwen3-Omni 등)→API 경로 선회→`[[tavus]]` 채택→당일 구축·배포까지 완료. 캐릭터를 "하루"→"한소연"으로 교체, 학습상태 감지 버그 수정, 이후 "일일 한도"·"통화 15분 컷"·"워터마크" 3건을 자체 서버 설정 vs Tavus 실제 제약으로 분리 진단, 메모리·웹검색 등 Tavus 기능 최대 활용까지 확장
 - [[2026-09-25-엘레비노-예약취소-크레딧환불-배포장애]] — `Tool: claude` 세션. `[[elevino-system]]` 어드민에 모임 예약 취소·크레딧 환불 기능(`CREDIT_REFUND` 트랜잭션 타입) 구현·개발배포 후 반복된 "배포해줘" 요청으로 프로덕션까지 진행 — API가 오래된 `ServiceLoader` 결함(문자열 아닌 provider 이름에서 TypeError)으로 다운, 롤백도 실패. 조사 끝에 프로덕션이 8월 3일부터 형제 저장소 `[[cwc-system]]`의 `apps/elevino-*`에서 수동 배포되고 있었음을 발견 — 공통 조상 기준 3-way 머지로 두 저장소를 통합·재배포해 복구(다운타임 23분). `[[prod-rollback-source-of-truth-verify]]` 스킬 추출 계기
+- [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] — `Tool: claude` 세션. lampas-studio 동영상
+  생성에 Seedance 2.0 Mini 모델 추가(허용목록·정규식·크레딧 오버라이드 전 계층 반영) + 노드 캔버스 선택
+  시 좌우 + 버튼 동시 표시 UX 개선, 배포 완료(API 0.1.140/studio 0.5.40). 이 과정에서 `[[dalar]]`가
+  Node Studio SoT라는 관계를 `pnpm sync:studio` 실제 실행으로 처음 실증(드리프트 0). 이어 미커밋
+  4커밋(신규 앱 `[[lampas-web-spot]]` 식당지도 포함, 159파일 일괄)을 원격 10커밋과 병합해 push,
+  `talk-app-toss-samantha`([[toktalk]]) 버전 충돌은 원격(0.1.7) 채택. 선택적 헝크 커밋 절차 신규 확인
 
 ## Entities
 
 - [[lampas-harness]] — Claude Agent SDK 기반 웹 하네스 (맥미니 데몬, 큐, 채팅 UI). 2026-09-26: `apps/wiki`(wiki.html) 신설 — john-wiki를 사람이 브라우징하는 읽기전용 위키 뷰어, 설정>위키 버튼. 같은 날 `apps/browser`(Lampas Browser 이관) 신설 — 새 세션 "브라우징" 선택지
 - [[lampas-browser]] — AI가 읽고 조작하는 Chromium 기반 Electron 브라우저(WebContentsView). `lampas-system`에서 기획·1차 구축 후 같은 날(2026-09-26) `lampas-harness apps/browser`로 완전 이관, AI는 하네스 CLI 세션 재사용
-- [[lampas-studio]] — Lampas AI 이미지 생성 스튜디오 제품 (lampas-api + lampas-web-sdk/lampas-web-studio + lampas-web-product, sdk.lampas.io). 2026-09-26: `lampas-system` 저장소가 Lampas+Dalar+Talk 3개 라인으로 확장된 정황, 신규 앱 lampas-web-fit(fit.lampas.io)
-- [[dalar]] — 2026-09-26 최초 노출된 제품 라인(스텁). `lampas-system` 모노레포 내 6앱, Node Studio SoT가 여기 위치해 lampas-web-studio로 동기화
+- [[lampas-studio]] — Lampas AI 이미지 생성 스튜디오 제품 (lampas-api + lampas-web-sdk/lampas-web-studio + lampas-web-product, sdk.lampas.io). 2026-09-26: `lampas-system` 저장소가 Lampas+Dalar+Talk 3개 라인으로 확장된 정황, 신규 앱 lampas-web-fit(fit.lampas.io). 2026-09-24: 동영상 생성에 Seedance 2.0 Mini 추가+노드 캔버스 좌우 버튼 UX 개선 배포, Dalar SoT 관계를 `pnpm sync:studio` 실행으로 실증
+- [[dalar]] — 2026-09-26 최초 노출된 제품 라인(스텁). `lampas-system` 모노레포 내 6앱, Node Studio SoT가 여기 위치해 lampas-web-studio로 동기화. 2026-09-24: SoT 관계가 문서 인용을 넘어 실제 sync 실행·드리프트 0으로 확인됨
+- [[lampas-web-spot]] — 2026-09-24 원격 병합 커밋으로 처음 노출된 신규 앱(스텁). `lampas-system` 내 Naver 지도 기반 식당 지도 앱으로 추정, 27파일 신규 스캐폴딩. 실제 구현 세션은 미ingest
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
 - [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status/Tools 자매 앱, sports-wiki "경기" 엔티티 신설 포함. Fixs 탭에 2026-09-25 작업삭제(v1.0.22)→오류수집 확장(v1.0.23)→경로 그룹핑+Jev 분류(v1.0.25) 순 배포
 - [[lampas-web-copy]] — lampas-system 스포츠 클립 파이프라인 내 SNS 카피·페르소나 생성 웹("Copy"). 2026-09-25 가로스크롤 레이아웃 버그(바깥 fieldset이 카드 너비로 늘어남) 수정·v0.2.6 배포
 - [[lampas-web-tools]] — lampas-system 내 AI 생성 도구 모음 웹("Tools", tools.lampas.io, 13개 기능). AGENTS.md 3라인 앱 목록엔 없는 앱. 2026-09-25 업로드 응답 인식·모델표시·Kling 생성거절 UX·영상 재생 버그(S3/CloudFront 직접재생 전환) 순차 수정, 신규 생성분 최종 재생 확인은 미완료
 - [[lampas-web-status]] — lampas-system 내 상태 페이지 앱(status.lampas.io, status.claude.com 형태). 2026-09-25 처음부터 구현·운영 배포 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트
-- [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인. 같은 날 신규 서브앱 `virtual.toktalk.ai`(`[[tavus]]` 기반 사진 아바타 영상통화, 캐릭터 "한소연") 구축·배포 확정
+- [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인. 같은 날 신규 서브앱 `virtual.toktalk.ai`(`[[tavus]]` 기반 사진 아바타 영상통화, 캐릭터 "한소연") 구축·배포 확정. 2026-09-24: `talk-app-toss-samantha`(0.1.7) 존재가 git 병합 충돌로 두 번째 독립 확인됨
 - [[tavus]] — 사진→아바타(Phoenix-4/4.5)+실시간 영상통화(CVI)+카메라인식(Raven)+메모리 API. [[toktalk]] `virtual.toktalk.ai`가 채택. 확인된 제약: 사진 아바타 생성 결제 게이트(402), 통화 최대시간 요금제 상한(요청 30분→실제 15분 자동 축소)
 - [[lampas]] — 하네스 에이전트의 이름(람파스/Lampas)
 - [[john-wiki]] — progdesigner의 공통 장기기억 저장소·개인 위키 (이 저장소). 2026-09-26: `lampas-harness apps/wiki`의 사람용 브라우징 UI 데이터 소스로 처음 연결됨
@@ -225,3 +232,4 @@
 - [[deterministic-extraction-vs-llm-rewrite]] — 프로즈 재작성 파이프라인이 잘림·파싱실패·실패은닉으로 고장 날 때, 원본 보유 지점에서 구조화 JSON 추출→LLM 없는 결정적 저장→서사만 짧은 LLM 호출로 분리하는 절차
 - [[prod-ddl-before-deploy-with-drift-check]] — 새 DB 테이블 쓰는 기능을 운영 배포 전 DDL 선적용 순서 + 작업본의 다른 미커밋 기능 스키마까지 드리프트 검사(무관한 테스트 실패는 재현 확인 후 게이트 통과, 커밋 범위는 스키마만 분리)
 - [[error-fingerprint-path-grouping]] — 오류 수집 시스템에서 URL/스택 안 가변 토큰(uuid·hash 등)을 `:id`로 정규화해 같은 원인의 오류를 하나로 묶는 fingerprint 절차, 릴리스 다르면 별건 유지 규칙 포함
+- [[selective-hunk-commit-shared-file]] — 같은 파일에 이번 작업 변경분과 다른 미커밋 변경분이 섞였을 때 헝크(git add -p) 단위로 이번 작업분만 골라 커밋, 분리 불가능하면 배포 상태로 포함 타당성 확인 후 함께 커밋

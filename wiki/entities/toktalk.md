@@ -69,6 +69,10 @@ updated: 2026-09-26
   아니라 이 서비스 자체 서버 env**로 제한 → `[[self-imposed-vs-provider-limit-diagnosis]]`.
 - **개명 추정**: 기존 `apps/toss-mina`·`apps/toss-brainrot`이 `talk-app-toss-samantha`·
   `talk-app-toss-brainrot`으로 이름이 바뀐 것으로 보임(포트 8245/8246 동일 유지) — 확정은 아님.
+- **2026-09-24 재확인**: `lampas-system` 저장소를 멀티커밋 푸시하던 세션
+  ([[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]])에서 `talk-app-toss-samantha`가
+  `DEPLOYMENT.md`·`package.json`·`sync-from-web.mjs`를 가진 실제 앱으로 git 병합 충돌(로컬 0.1.6 vs
+  원격 0.1.7, 원격 채택)을 통해 재확인됨 — `AGENTS.md` 문서 인용을 넘어선 두 번째 독립 확인.
 - Prisma는 `pnpm prisma:generate:talk` 등 `:talk` 접미 스크립트를 쓴다고 명시 — 별도 스키마 유지
   정황(완전 병합이 아닐 가능성을 뒷받침).
 
@@ -80,7 +84,8 @@ updated: 2026-09-26
 
 ## 관련
 - 세션: [[2026-07-08-toktalk-에피소드-배경전환-플레이]] · [[2026-07-16-tts-stream-elevenlabs-구현착수]](참고 예시로 지목, 접근 실패) ·
-  [[2026-09-25-lampas-web-fit-구축-배포]](저장소 편입 모순 발견) · [[2026-09-26-virtual-toktalk-tavus-아바타-구축]](virtual.toktalk.ai 구축)
+  [[2026-09-25-lampas-web-fit-구축-배포]](저장소 편입 모순 발견) · [[2026-09-26-virtual-toktalk-tavus-아바타-구축]](virtual.toktalk.ai 구축) ·
+  [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]](talk-app-toss-samantha git 충돌로 재확인)
 - 토픽: [[episode-beat-play-system]] · [[realtime-photo-avatar-voice-ai-landscape]] / 스킬: [[loading-state-key-mismatch]] · [[self-imposed-vs-provider-limit-diagnosis]]
 - 외부 AI 프로바이더(virtual): [[tavus]]
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]] · 공급자: [[progdesigner]]
