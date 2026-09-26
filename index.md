@@ -99,6 +99,7 @@
 - [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] — lampas-studio "Edit" 템플릿 에디터(이 위키 최초 노출)에서 SPOTV 템플릿 로고가 다른 브라우저에 안 붙는 문제 수정. 이미지 슬롯 `fingerprint`(로컬 OPFS)/`url`(공개 CDN) 이원 구조 확인, 계정별 템플릿 레코드 중 `url` 누락분에 기존 CloudFront URL 채워 넣는 서버 데이터 수정(코드·배포 불필요)
 - [[2026-09-25-lampas-web-fit-구축-배포]] — `Tool: codex` 세션. 신규 앱 `lampas-web-fit`(음악 박자 동기 운동 가이드, 다음 동작 8박 전 예고+4박 음성 카운트)을 처음부터 구현·검증하고 `fit.lampas.io`로 신규 CloudFront+기존 와일드카드 인증서 배포까지 완료. 저장소 `AGENTS.md` 스냅샷에서 lampas-system이 Lampas+Dalar(신규)+Talk(구 dbs/talk-system 통합 정황) 3개 제품 라인으로 확장된 사실과 DB(MySQL vs 기록된 PostgreSQL) 모순 발견
 - [[2026-09-25-스포츠위키-경기엔티티-설계구현]] — "클립 만들어도 위키가 왜 안 쌓이나" 문제 제기 → 실패 은닉·categoryKey undefined 스킵·"경기" 타입 부재 3중 원인 진단 → 역할 분리 설계(에이전트=구조화 추출, API=결정적 저장) 채택·구현·운영 배포까지 완료. `lampas-agent`(스포츠 클립 맥미니 데몬)·Copy·Reels·Status 앱 신규 노출, `[[lampas]]`와 이름 충돌 확인. 배포 동시성으로 Threads 탭이 잘못 노출됐다 재배포로 정정된 사례 포함
+- [[2026-09-20-talk속도개선-사만다전환-스튜디오개편]] — `Tool: codex` 세션(2026-09-20~21, 뒤늦게 ingest). `[[toktalk]]` 텍스트 대화 지연 46.6초→0.8~1.3초 수정(xAI 직접연결+저추론 모델, [[llm-chat-latency-direct-connection]]), `talk-app-toss-mina`→**`talk-app-toss-samantha`** 개명 확정(기존 "추정" 기록 해소)+모바일 재설계+Toss 등록이미지(로고2·스크린샷4) 제작, 어드민 스튜디오를 단일 공개 에피소드(대사→선택지→대사→자유대화 전환) 구조로 재구축하며 기존 에피소드 14개+진행기록 19개 백업 후 삭제(삭제 범위 사전 확인 절차 포함), NSFW 시드오디오 요청 명시 거부, `app.toktalk.ai` 웹/Toss 미니앱 디자인 의도적 분리 확정
 - [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] — `Tool: codex` 세션. `lampas-agent`에 요청한 "위키 기반 Threads 글 자동생성+페르소나 학습" 기능이 sports-wiki↔john-wiki 오인을 거쳐 이 저장소로 정정됐다가 전면 취소(v1.0.26→v1.0.29). "이 위키를 보는" 부분만 분리돼 `lampas-harness`의 신규 `apps/wiki`(wiki.html, 설정>위키 버튼, 검색·목차·위키링크·역링크)로 이전·구현·검증(테스트79개+Playwright 데스크톱/모바일) 완료 — john-wiki가 처음으로 사람용 브라우징 UI 데이터 소스가 됨. 서버 재시작(반영)은 대기 중 종료
 - [[2026-09-25-status-서비스-구축-배포]] — "status.claude.com 처럼 만들어줘" 요청으로 `lampas-web-status`(status.lampas.io)를 처음부터 구현하고 같은 세션에서 운영 배포까지 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트. 운영 DDL 선적용 중 드리프트 검사로 무관해 보이던 sports-wiki `sports_wiki_games` 테이블 누락을 함께 발견·수정, 동시실행 일시적 테스트 실패(sports-wiki 9건)를 재현 확인 후 배포 게이트 통과
 - [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] — `lampas-agent`의 Fixs(재귀 오류 자동 수정) 탭에 경로 그룹핑(uuid·hash 등을 `:id`로 치환해 fingerprint 병합, 운영 DB 69건→42건)과 Jev 타입드 분류(`POST /v1/ai/systemone`, 텍스트 생성 없이 입력 토큰만 과금) 추가·배포(v1.0.25, 커밋 `900ce062`). 파트너 키 부재로 `toktalk`의 `talk-api` 운영 키를 임시 차용 중(후속 과제)
@@ -144,7 +145,7 @@
 - [[lampas-web-tools]] — lampas-system 내 AI 생성 도구 모음 웹("Tools", tools.lampas.io, 13개 기능). AGENTS.md 3라인 앱 목록엔 없는 앱. 2026-09-25 업로드 응답 인식·모델표시·Kling 생성거절 UX·영상 재생 버그(S3/CloudFront 직접재생 전환) 순차 수정, 신규 생성분 최종 재생 확인은 미완료. `music-gen` 툴은 minimax 2.6 고정(자매 앱 [[lampas-web-music]]은 3.0)
 - [[lampas-web-music]] — lampas-system 내 음악 생성 웹(`music.lampas.io`). [[atlas-cloud]] 경유 minimax 음악 모델, 2026-09-22 2.6→3.0 업그레이드·운영 배포 완료(곡당 150크레딧 유지). 3.0 길이 제한(5분/2,000자/3,500자)에 UI 가드 없음. 자매 앱 [[lampas-web-tools]] `music-gen`은 2.6 유지
 - [[lampas-web-status]] — lampas-system 내 상태 페이지 앱(status.lampas.io, status.claude.com 형태). 2026-09-25 처음부터 구현·운영 배포 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트
-- [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인. 같은 날 신규 서브앱 `virtual.toktalk.ai`(`[[tavus]]` 기반 사진 아바타 영상통화, 캐릭터 "한소연") 구축·배포 확정. 2026-09-24: `talk-app-toss-samantha`(0.1.7) 존재가 git 병합 충돌로 두 번째 독립 확인됨
+- [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인. 같은 날 신규 서브앱 `virtual.toktalk.ai`(`[[tavus]]` 기반 사진 아바타 영상통화, 캐릭터 "한소연") 구축·배포 확정. 2026-09-24: `talk-app-toss-samantha`(0.1.7) 존재가 git 병합 충돌로 두 번째 독립 확인됨. **2026-09-20~21**(뒤늦게 ingest): `talk-app-toss-mina`→`talk-app-toss-samantha` 개명 **원본 이벤트 확인**(기존 "추정" 해소), 텍스트 대화 지연 46.6초→0.8~1.3초 수정, 어드민 스튜디오를 단일 공개 에피소드 구조로 재구축하며 기존 에피소드 14개 백업 후 삭제, NSFW 시드오디오 요청 명시 거부, 웹/Toss 디자인 분리 확정
 - [[tavus]] — 사진→아바타(Phoenix-4/4.5)+실시간 영상통화(CVI)+카메라인식(Raven)+메모리 API. [[toktalk]] `virtual.toktalk.ai`가 채택. 확인된 제약: 사진 아바타 생성 결제 게이트(402), 통화 최대시간 요금제 상한(요청 30분→실제 15분 자동 축소)
 - [[lampas]] — 하네스 에이전트의 이름(람파스/Lampas)
 - [[john-wiki]] — progdesigner의 공통 장기기억 저장소·개인 위키 (이 저장소). 2026-09-26: `lampas-harness apps/wiki`의 사람용 브라우징 UI 데이터 소스로 처음 연결됨
@@ -181,7 +182,7 @@
 - [[harness-queue-vs-chat]] — 채팅(즉시 실행) vs 큐(백그라운드 적재) 두 경로 구분
 - [[instagram-reference-integration]] — Instagram 레퍼런스 이미지 통합 (소스 3종·프록시·캐러셀·폐기된 오래된순)
 - [[long-term-memory-architecture]] — LLM 장기기억: 저장≠조회, 3계층 저장 전략, 조회 연결 3방법
-- [[episode-beat-play-system]] — TokTalk 에피소드 beat 플레이·배경 전환(선전환·sticky·직접연결) 로직
+- [[episode-beat-play-system]] — TokTalk 에피소드 beat 플레이·배경 전환(선전환·sticky·직접연결) 로직. 2026-09-21: 사만다 전용 단일 공개 에피소드(대사→선택지→대사→자유대화) 구조로 재설계, 구 다중 에피소드 데이터 폐기
 - [[system-prompt-mimicry-misconception]] — 공개 시스템 프롬프트 복제로 모델 흉내내기 통념의 한계 + 출처미상 지침 붙여넣기 보안 주의
 - [[harness-background-process-lifecycle]] — 에이전트가 턴 안에서 띄운 배경작업은 턴/세션 종료로 죽는다 (스케줄러·다운로드 관통 한계)
 - [[local-llm-on-apple-silicon]] — Apple Silicon 로컬 LLM: 모델크기·양자화·백엔드(Metal/MLX/CPU), Rapid-MLX vs llama.cpp vs Ollama
@@ -248,6 +249,7 @@
 - [[prompt-structuring-for-execution]] — 초안 프롬프트 "다듬어줘" 요청에 정보 손실 없이 표준 구조(소개→서비스→강조포인트→지시사항)로 재정리하고 누락된 실행 조건을 3가지 이내로 역질문하는 절차
 - [[self-imposed-vs-provider-limit-diagnosis]] — 외부 API 연동 서비스에서 "왜 제한에 걸리나" 질문 시 자체 서버 env 설정과 외부 제공자(Tavus 등) 실제 제약을 분리 진단하는 절차(env 먼저 확인→요청값과 실측값 대조→402/종료사유 등 제공자 응답 직접 인용)
 - [[prod-rollback-source-of-truth-verify]] — 프로덕션 롤백이 안 먹힐 때 git 히스토리가 실제 배포본과 다를 가능성(로컬 수동 빌드·형제 저장소 병행 배포)부터 의심하고 공통 조상 기준 3-way 머지로 복구하는 절차
+- [[llm-chat-latency-direct-connection]] — 같은 제품의 다른 대화 모드(음성)는 빠른데 텍스트만 느릴 때, 부가 요청·추론량·게이트웨이 경유 3축을 개별 측정해 첫 응답 지연을 줄이는 절차
 - [[template-image-slot-fingerprint-vs-url]] — 저장된 템플릿 이미지가 다른 브라우저/기기에서 안 붙을 때 fingerprint(로컬)/url(공개 CDN) 필드 확인·보정, MD5 대조로 재업로드 불필요 여부 판단
 - [[new-subdomain-cloudfront-wildcard-deploy]] — 기존 와일드카드 인증서 도메인 아래 완전 신규 서브도메인 배포 시 CloudFront 신규 생성(인증서 재발급 없이 재사용)→DNS 연결→공개 DNS 기준 검증 순서
 - [[deterministic-extraction-vs-llm-rewrite]] — 프로즈 재작성 파이프라인이 잘림·파싱실패·실패은닉으로 고장 날 때, 원본 보유 지점에서 구조화 JSON 추출→LLM 없는 결정적 저장→서사만 짧은 LLM 호출로 분리하는 절차
