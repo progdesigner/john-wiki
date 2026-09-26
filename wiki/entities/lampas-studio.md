@@ -223,6 +223,11 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   `talk-app-toss-samantha`([[toktalk]])였고 원격의 0.1.7이 이미 배포된 상태라 원격 채택 — 이전에
   `AGENTS.md` 문서 인용으로만 기록됐던 `talk-app-toss-samantha` 앱 존재가 실제 git 충돌로 재확인됨.
 - 세션 → [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]]
+- **2026-09-26 갱신**: 이 세션의 병합 커밋에 포착됐던 `lampas-web-spot`을 실제로 만든 별도
+  `codex` 세션이 확인됨 — `spot.lampas.io` 맛집 지도, 지도 프로바이더는 카카오→OpenStreetMap→
+  네이버(401 실패)→**OpenStreetMap 확정**으로 3회 전환, 최종 738곳 중 502곳 지도 표시. 이 세션
+  당시 env에 남아있던 네이버 키는 그 중간 시점의 스냅샷이었음 → [[lampas-web-spot]]·
+  [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] 참고.
 
 ## 2026-09-26 저장소 구조 스냅샷 (`AGENTS.md`) — 이전 기록과 모순 다수
 
@@ -289,12 +294,13 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   [[2026-07-18-works-전체저장]] ·
   [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[2026-07-18-web-ai-등록플로우-사진분류-배포]] ·
   [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
-  [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]]
+  [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
+  [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]]
 - 토픽: [[lampas-actor-object-space-positioning]]
 - 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] · [[lampas-web-tools]] ·
-  [[lampas-web-spot]](식당 지도, 스텁)
+  [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
 - 포트폴리오 배경: [[works-project-portfolio]]
-- 스킬: [[selective-hunk-commit-shared-file]]
+- 스킬: [[selective-hunk-commit-shared-file]] · [[nominatim-batch-geocode-progressive-rollout]]

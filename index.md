@@ -112,6 +112,7 @@
   Node Studio SoT라는 관계를 `pnpm sync:studio` 실제 실행으로 처음 실증(드리프트 0). 이어 미커밋
   4커밋(신규 앱 `[[lampas-web-spot]]` 식당지도 포함, 159파일 일괄)을 원격 10커밋과 병합해 push,
   `talk-app-toss-samantha`([[toktalk]]) 버전 충돌은 원격(0.1.7) 채택. 선택적 헝크 커밋 절차 신규 확인
+- [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] — `Tool: codex` 세션(2026-09-24~25로 이어짐). 블루리본 맛집 지도 `spot.lampas.io` 구축. bluer.co.kr 스크래핑 403 차단 → 첨부 엑셀 579곳 → 구글 시트 반영 738곳(블루리본+다이닝코드, 중복 5건 병합)까지 데이터 2단계 확장. 지도 프로바이더 카카오→OpenStreetMap+Nominatim 지오코딩→네이버(401 인증 실패)→**OpenStreetMap 확정** 3회 전환, 최종 502곳 지도 표시. 폐업/정보 신고 기능(개인 숨김+운영자 검토 후 전체 제외) 추가. [[lampas-web-spot]] 스텁 해소
 
 ## Entities
 
@@ -119,7 +120,7 @@
 - [[lampas-browser]] — AI가 읽고 조작하는 Chromium 기반 Electron 브라우저(WebContentsView). `lampas-system`에서 기획·1차 구축 후 같은 날(2026-09-26) `lampas-harness apps/browser`로 완전 이관, AI는 하네스 CLI 세션 재사용
 - [[lampas-studio]] — Lampas AI 이미지 생성 스튜디오 제품 (lampas-api + lampas-web-sdk/lampas-web-studio + lampas-web-product, sdk.lampas.io). 2026-09-26: `lampas-system` 저장소가 Lampas+Dalar+Talk 3개 라인으로 확장된 정황, 신규 앱 lampas-web-fit(fit.lampas.io). 2026-09-24: 동영상 생성에 Seedance 2.0 Mini 추가+노드 캔버스 좌우 버튼 UX 개선 배포, Dalar SoT 관계를 `pnpm sync:studio` 실행으로 실증
 - [[dalar]] — 2026-09-26 최초 노출된 제품 라인(스텁). `lampas-system` 모노레포 내 6앱, Node Studio SoT가 여기 위치해 lampas-web-studio로 동기화. 2026-09-24: SoT 관계가 문서 인용을 넘어 실제 sync 실행·드리프트 0으로 확인됨
-- [[lampas-web-spot]] — 2026-09-24 원격 병합 커밋으로 처음 노출된 신규 앱(스텁). `lampas-system` 내 Naver 지도 기반 식당 지도 앱으로 추정, 27파일 신규 스캐폴딩. 실제 구현 세션은 미ingest
+- [[lampas-web-spot]] — `lampas-system` 내 맛집 지도 앱(`spot.lampas.io`). 2026-09-26 스텁 해소: 실제 구현 세션 확인, 데이터 738곳(블루리본+다이닝코드), 지도는 카카오→OpenStreetMap→네이버(401 실패)→**OpenStreetMap 확정** 3회 전환, 502곳 지도 표시, 폐업 신고 기능. 병합 커밋 당시 env의 Naver 키는 중간 시점 스냅샷이었음이 드러남
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
 - [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status/Tools 자매 앱, sports-wiki "경기" 엔티티 신설 포함. Fixs 탭에 2026-09-25 작업삭제(v1.0.22)→오류수집 확장(v1.0.23)→경로 그룹핑+Jev 분류(v1.0.25) 순 배포
 - [[lampas-web-copy]] — lampas-system 스포츠 클립 파이프라인 내 SNS 카피·페르소나 생성 웹("Copy"). 2026-09-25 가로스크롤 레이아웃 버그(바깥 fieldset이 카드 너비로 늘어남) 수정·v0.2.6 배포
@@ -233,3 +234,4 @@
 - [[prod-ddl-before-deploy-with-drift-check]] — 새 DB 테이블 쓰는 기능을 운영 배포 전 DDL 선적용 순서 + 작업본의 다른 미커밋 기능 스키마까지 드리프트 검사(무관한 테스트 실패는 재현 확인 후 게이트 통과, 커밋 범위는 스키마만 분리)
 - [[error-fingerprint-path-grouping]] — 오류 수집 시스템에서 URL/스택 안 가변 토큰(uuid·hash 등)을 `:id`로 정규화해 같은 원인의 오류를 하나로 묶는 fingerprint 절차, 릴리스 다르면 별건 유지 규칙 포함
 - [[selective-hunk-commit-shared-file]] — 같은 파일에 이번 작업 변경분과 다른 미커밋 변경분이 섞였을 때 헝크(git add -p) 단위로 이번 작업분만 골라 커밋, 분리 불가능하면 배포 상태로 포함 타당성 확인 후 함께 커밋
+- [[nominatim-batch-geocode-progressive-rollout]] — 지도 키 없이 대량 주소를 핀으로 표시할 때: OpenStreetMap+Nominatim(초당 1회 제한·캐싱)으로 지오코딩, 건물번호 일치만 인정하는 신뢰도 필터로 오표시 방지, 확인 건수 늘 때마다 단계적 배포

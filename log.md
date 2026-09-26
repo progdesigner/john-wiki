@@ -2072,3 +2072,24 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `AI_CONTEXT.md` 갱신: lampas-studio 줄에 이번 세션 요약(Seedance Mini·Dalar SoT 실증·lampas-web-spot
   ·samantha 버전 충돌) 추가(39줄, 40줄 이내 유지).
 - `index.md` Sessions·Entities·Skills 반영(세션1 신설·엔티티3 갱신·엔티티1 신설·스킬1 신설).
+
+## [2026-09-26] ingest | spot.lampas.io 맛집 지도 구축 — 지도 프로바이더 3회 전환·데이터 2단계 확장·폐업 신고 (source: 91a88d78-8d8e-4dba-98b1-1deb26038209.md)
+- 원본 보관: `raw/conversations/2026-09-24-spot-맛집지도-구축-지도전환-신고기능.md`
+- 세션 신설: [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]] — `Tool: codex` 세션(2026-09-24T00:42Z
+  시작, 종료 시점 환경 컨텍스트는 2026-09-25). `lampas-system` 작업. 블루리본(`bluer.co.kr`) 맛집 지도
+  `spot.lampas.io` 요청 → 사이트 403 차단으로 자동 수집 불가 → 첨부 엑셀 579곳(좌표 없음) 반영 →
+  지도 위 핀 요구에 OpenStreetMap+Nominatim 지오코딩(초당 1회 제한, 건물번호 일치만 인정) 채택,
+  단계적 배포로 396핀까지 확장 → 네이버 지도 재전환 시도했으나 401 인증 실패, OSM 자동 폴백만 배포 →
+  구글 시트(블루리본 657+다이닝코드 86, 중복 5건 병합)로 738곳까지 확장, 502곳 지도 표시 → 사용자
+  지시로 네이버 코드 전부 제거, **OpenStreetMap 단일 경로로 최종 확정** → 폐업/정보 신고 기능(개인
+  숨김+운영자 검토 후 전체 제외, 시트 재동기화에도 제외 유지) 추가.
+- 엔티티 갱신: [[lampas-web-spot]] — 기존 스텁(2026-09-26, 병합 커밋 메타데이터만으로 "Naver 지도
+  기반 추정" 기록)을 이 세션으로 해소. 실제 최종 지도는 OpenStreetMap이며, env에 남아있던 Naver 키는
+  세션 중간(네이버 재전환 시도) 시점의 스냅샷이었음을 명시해 모순 해소. [[lampas-studio]] — 관련 절에
+  이 세션의 스텁 해소 사실과 최종 지도 결정 추가.
+- 스킬 신설: [[nominatim-batch-geocode-progressive-rollout]] — 지도 API 키 없이 대량 주소를 지도에
+  표시할 때 OpenStreetMap+Nominatim(요청 제한 준수·캐싱)으로 지오코딩하고, 정확히 일치하는 결과만
+  신뢰해 오표시를 막으며, 확인 건수가 늘 때마다 단계적으로 배포하는 절차.
+- `AI_CONTEXT.md` 갱신: lampas-studio 줄 끝에 lampas-web-spot 스텁 해소 요약(지도 프로바이더 3회
+  전환·최종 OpenStreetMap·738곳 중 502곳 표시·폐업 신고) 추가(39줄, 40줄 이내 유지).
+- `index.md` Sessions 세션1 신설·Entities lampas-web-spot 갱신·Skills 1신설 반영.
