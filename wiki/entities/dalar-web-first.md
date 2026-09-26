@@ -67,6 +67,32 @@ Dalar 앱**이다.
 [[resumable-worker-checkpoint-resume]] 참고)에서 09-20 세션 시작. 위 09-15 핸드오프 기능은 이
 정체기 중간에 추가된 기능이다.
 
+## 초기 운영 안정화 — UI 버그·오류 분리·총 생성시간·영상 미리보기 (2026-09-15, 2026-09-26 뒤늦게 ingest)
+
+09-13/14 최초 구축 직후, 09-20 대규모 확장(장면 수·가격 체계·초대코드) **이전**의 초기 운영
+안정화 단계에서 있었던 세션([[2026-09-15-first-ui수정-오류분리-생성시간-인스타로고]], `Tool:
+codex`, KST 02:22 시작) — 같은 날 있었던 lampas-web-edit 핸드오프 세션과는 별개.
+
+- **`/create` 영상 비율 선택 라디오 버튼 깨짐**: 일반 입력창(input) 스타일이 잘못 적용돼 버튼이
+  늘어나고 라벨과 겹치던 버그 수정. 모바일·데스크톱 4개 너비·키보드 선택 검증 후 배포.
+- **주문 오류 표시 사용자/관리자 분리**(`/orders/<id>`): 고객 화면은 자동 재시도 중 "잠시 지연되어
+  다시 시도하고 있어요" 안내, 제작 중단 시 고객센터 연결로 대체(오류 원문 비노출). 관리자 화면은
+  주문 상태·실패 단계·재시도 횟수·오류 원문을 함께 표시. 절차 스킬 →
+  [[user-facing-error-admin-detail-split]](이 세션에서 최초 추출).
+- **관리자 총 생성 시간**: 결제 시각~최종 영상 제공 시각 기준(대기·재시도 시간 포함, 관리자 화면에
+  명시), 완료 주문은 고정 표시·제작 중인 주문은 매초 갱신. 완료·구매 확정·중단·미결제 상태 전부와
+  고객 화면 비노출을 검증. 커밋 범위를 "First 프론트 앱 전체 + 이번 수정"으로 지정해 커밋
+  `12691a01` → `origin/main` 푸시.
+- **관리자 영상 미리보기 이미지**: 장면(scene) 영상에 poster가 없어 재생 전 검은 화면으로 보이던
+  문제를 각 장면의 생성 이미지를 미리보기로 연결해 해결, 이미지 없는 장면은 영상 정보를 미리
+  로드. 커밋 `fa3ee1ee`로 배포·커밋·푸시.
+- **Instagram 프로필 로고 + 웹 로고 f/i 점 정렬**: `first` 워드마크를 브랜드 브라운 배경 + 크림색
+  글자로 1080×1080 PNG 제작(원형 크롭 대비 여백 확보) → S3 업로드
+  (`https://first.dalar.ai/brand/first-instagram-profile-1080.png`) → 사용자 지적으로 `f`의 둥근
+  끝과 `i`의 점이 하나로 겹치도록 재수정, **같은 벡터 원본을 프로필 이미지와 웹 상·하단 로고 양쪽에
+  동일 적용**. 신규 URL `https://first.dalar.ai/brand/first-instagram-profile-1080-v2.png`(기존
+  v1 URL 유지).
+
 ## 장면 수 선택 + 가격 체계 (여러 차례 개정)
 
 **콘티 → "장면" 개명**: 사용자 요청으로 고객 화면의 전 용어를 "콘티"에서 "**장면**"으로 교체
@@ -221,12 +247,15 @@ First 로고 + 밝은 크림 배경으로 **1200×630 공유 이미지** 제작,
 
 ## 관련
 - 세션: [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]](origin) ·
+  [[2026-09-15-first-ui수정-오류분리-생성시간-인스타로고]](UI 버그·오류 분리·총 생성시간·영상
+  미리보기·Instagram 로고) ·
   [[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]](lampas-web-edit 핸드오프) ·
   [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]]
 - 상위: [[dalar]](제품 라인) · 저장소 [[lampas-studio]](`lampas-system`, 같은 모노레포)
 - 토픽: [[jev-typed-classification]](세 번째 사용처)
 - 스킬: [[scene-reference-lock-visual-consistency]] · [[mutual-referral-coupon-pattern]] ·
   [[resumable-worker-checkpoint-resume]] · [[selective-hunk-commit-shared-file]] ·
-  [[cross-subdomain-session-handoff]](대비되는 이전 방식)
+  [[cross-subdomain-session-handoff]](대비되는 이전 방식) ·
+  [[user-facing-error-admin-detail-split]](2026-09-15 오류 분리에서 최초 추출)
 - 연동: `lampas-web-pay`(`pay.lampas.io`, 결제 공유), [[lampas-web-package]](콘텐츠 등록·게시),
   [[lampas-web-edit]](컷 영상 편집 핸드오프, edit-sessions 세 번째 소스 앱)

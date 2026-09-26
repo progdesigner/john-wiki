@@ -2612,3 +2612,11 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/skills/aws-permission-gap-fallback-to-existing-server-process.md 신설 — Lambda+스케줄러 생성 권한이 없을 때 기존 API 서버 별도 프로세스로 폴백하는 절차(승인 대기 없이 먼저 배포, 최소 두 주기 관찰로 검증)
 - index.md 갱신 (세션 1건 신설, lampas-web-trends 엔티티 항목 갱신, 스킬 1건 신설)
 - AI_CONTEXT.md 갱신 — 09-15 lampas-web-trends 문장을 "최초 구축(오전)→뷰티·AI·커밋→실시간검색(저녁)" 순서로 재작성
+
+## [2026-09-26] ingest | First 돌잔치 UI 개선 + 주문 오류 분리 + 관리자 총 생성시간·영상 미리보기 + Instagram 로고 (source: ae4a2581-2dff-41aa-bebe-9d9e56bd1b94.md)
+- raw/conversations/2026-09-15-first-ui수정-오류분리-생성시간-인스타로고.md 보관 (원본 세션 Started 2026-09-14T17:22:07.972Z = KST 2026-09-15 02:22 시작, jsonl 파일명 기준 날짜 접두사 결정, `logs/terminals/archive/ae4a2581-...md`에서 회수, 뒤늦게 ingest, `Tool: codex`, 작업폴더 `lampas-system`)
+- wiki/sessions/2026-09-15-first-ui수정-오류분리-생성시간-인스타로고.md 신설 — `[[dalar-web-first]]` 초기 운영 안정화 6왕복: `/create` 영상 비율 라디오 버튼 스타일 오염 수정·배포, 주문 상세 오류 표시를 고객(재시도/중단 안내, 오류 원문 비노출)·관리자(상태·실패단계·재시도횟수·오류원문) 화면으로 분리, 관리자 총 생성시간(결제~제공 기준, 대기·재시도 포함, 완료 고정/진행중 매초 갱신) 추가 후 커밋 `12691a01` 푸시, 관리자 영상에 장면 생성이미지를 미리보기(poster)로 연결(커밋 `fa3ee1ee`), First Instagram 프로필 로고(1080×1080 PNG) 제작→S3 업로드→`f`/`i` 둥근 점 겹침 재수정해 웹 로고와 동일 벡터로 통일
+- wiki/entities/dalar-web-first.md 갱신 — "초기 운영 안정화 — UI 버그·오류 분리·총 생성시간·영상 미리보기 (2026-09-15)" 절 신설(09-13/14 origin 직후, 09-20 대규모 확장 이전에 삽입), 관련 세션·스킬 링크 추가
+- wiki/skills/user-facing-error-admin-detail-split.md 신설 — 같은 실패 상태를 고객 화면(일시적/영구적 두 범주, 오류 원문 비노출)과 관리자 화면(상태·실패단계·재시도횟수·오류원문 상세)으로 분리 표시하는 절차
+- index.md 갱신 (세션 1건 신설, dalar-web-first 엔티티 항목 갱신, 스킬 1건 신설)
+- AI_CONTEXT.md 갱신 보류 — dalar-web-first 위키 페이지로 충분히 커버되는 초기 운영 안정화 세부사항이고, 40줄 예산 대비 상시 주입 가치가 낮음
