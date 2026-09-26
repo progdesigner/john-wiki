@@ -2641,3 +2641,11 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/skills/resumable-worker-checkpoint-resume.md 갱신 — "중간 지점 — 자동 재시도 도입(2026-09-14)" 절 추가, 09-20 세션이 발견한 "재시도 카운터 초기화 여지"가 가리키는 카운터가 바로 이 세션에서 도입된 것임을 시간순으로 정리
 - index.md 갱신 (세션 1건 신설, 엔티티 2건(dalar-web-first·lampas-web-scenario) 갱신, 스킬 2건 신설)
 - AI_CONTEXT.md 갱신 보류 — 이미 40줄 한도에 근접해 있고, 이 세션의 핵심 사실(고정 12장면 중간 상태·TTS 빌드/제거)은 이미 최신 상태(4·6·8·12장면 선택, 배포완료)로 대체된 과거 이력이라 엔티티·세션 페이지로 충분히 커버됨
+
+## [2026-09-26] ingest | Reels 페르소나 카드 스트립 + 점수순 정렬 (source: b6094813-008b-4ce1-95e0-2f5e713da15f.md)
+- 원본은 이미 `raw/conversations/2026-09-25-reels-페르소나-카드스트립-점수정렬.md`로 보관돼 있었음(2026-09-25-스포츠위키-경기엔티티-설계구현 ingest 때 참고만 하고 정식 ingest는 미룬 상태) — 이번에 그 정식 ingest를 완료
+- 세션 신설: [[2026-09-25-reels-페르소나-카드스트립-점수정렬]] — `Tool: claude` 세션(22:51:58Z). [[lampas-web-reels]]의 페르소나 선택 UI를 칩→[[lampas-web-copy]]식 260px 가로 스크롤 카드 스트립+분야/카테고리 필터 칩으로 교체(커밋 `c7fda05b`) → 이어서 페르소나·카피 모두 API가 이미 내려주던 `confidence`/`review` 값으로 점수순 정렬(커밋 `5dc469b2`, 백엔드 변경 없음)
+- 엔티티 갱신: [[lampas-web-reels]](페르소나 선택 UI·점수순 정렬 절 상세화, "미정식 ingest·상세 미확인" 참조를 이 세션 링크로 교체) · [[lampas-web-copy]](같은 교체, 카드 스트립 디자인 원본으로서의 역할 명시) · [[lampas-web-pulse]]("신뢰도 개선 배포 여부 미확인"이었던 미해결 항목을 이 세션에서 API 응답 확인으로 간접 해소)
+- 새 스킬 없음 — 순수 UI 이식·기존 채점 필드 재사용으로, 재사용 가능한 신규 절차는 없음
+- index.md 갱신 (세션 1건 신설, 엔티티 3건(lampas-web-reels·lampas-web-copy·lampas-web-pulse) 갱신)
+- AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태이고, 이 세션은 UI 반복 개선+기존 미해결 항목(Pulse 신뢰도 배포) 해소로 엔티티 페이지 갱신만으로 충분히 커버됨
