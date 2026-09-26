@@ -2564,3 +2564,12 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/entities/lampas-harness.md 갱신 — "신규 서브시스템 — 실제 웹 터미널" 절에 "여섯 번째 사례"로 추가(PTY 웹 터미널이 codex 도구로 같은 날 두 번째로 별도 가동됐다는 추가 독립 확인), 세션 링크 목록에도 추가
 - index.md 갱신 (세션 1건 신설)
 - AI_CONTEXT.md 갱신 보류 — 콘텐츠 자체가 트리비얼 스모크테스트이고 기존 "PTY 웹 터미널 가동 확인"이라는 상태를 보강할 뿐 새 결정·상태 변화가 없어 상시 주입 가치 낮음
+
+## [2026-09-26] ingest | 톡톡 2.0 재구축 — 사만다(Her) 페르소나 최초 도입 (source: 735d95d4-e467-474f-85c2-04da86fbff71.md)
+- raw/conversations/2026-09-07-톡톡-2.0-재구축-사만다-도입.md 보관 (원본 세션 2026-09-07T16:07:30.066Z 시작 ~ 2026-09-09, `logs/terminals/archive/735d95d4-...md`에서 회수, 뒤늦게 ingest, `Tool: codex`)
+- wiki/sessions/2026-09-07-톡톡-2.0-재구축-사만다-도입.md 신설 — [[toktalk]]의 기존 캐릭터/스토리 구조를 전부 폐기하고 영화 《Her》 사만다 페르소나(`samantha.md`)로 재구축, `app.toktalk.ai` 최초 배포. 텍스트 모델을 [[atlas-cloud]] 카탈로그로 통일(실시간 음성은 비동기 한계로 xAI `grok-voice-latest`/`eve` 유지), NSFW 요청 3단계 에스컬레이션(플러팅 허용→토글 신설→노골적 표현 거부) 최초 확정, `env/.env.*` 항상 커밋 정책 확정 — [[2026-09-20-talk속도개선-사만다전환-스튜디오개편]]이 "추정"으로만 남겼던 사만다 도입의 **진짜 원본 이벤트**임이 드러남
+- wiki/entities/toktalk.md 갱신 — "2026-09-07~09 사만다 페르소나 최초 도입" 절 신설(09-20~21 절보다 앞에 배치), 09-20~21 절 제목·서두를 "Toss 이식" 후속 작업으로 정정, 관련 섹션에 신규 세션·[[atlas-cloud]]·xAI 링크 추가
+- wiki/entities/atlas-cloud.md 갱신 — "다른 제품에서의 언급" 절의 toktalk 항목을 추정("목록에만 등장")에서 실사용 확인(텍스트 모델 카탈로그로 직접 통일, 실시간 음성은 제외)으로 정정, 관련 세션 링크 추가
+- wiki/topics/secrets-plaintext-exposure-pattern.md 갱신 — "반대 방향 사례" 절 신설, toktalk의 "env/.env.* 항상 커밋" 명시 정책을 우발적 노출과 대비되는 5번째 사례로 교차 기록
+- index.md 갱신 (세션 1건 신설, toktalk·atlas-cloud·secrets-plaintext-exposure-pattern 엔트리 갱신)
+- AI_CONTEXT.md 갱신 — toktalk 항목에 09-07~09 원본 이벤트(사만다 최초 도입·NSFW 경계·env 커밋 정책)를 09-20~21보다 앞서 추가, "개명 확정"을 "이식·개명"으로 정정

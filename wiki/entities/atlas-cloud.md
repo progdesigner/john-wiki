@@ -3,6 +3,7 @@ tags: [entity, ai-provider, image-generation, video-generation, external, wan, q
 created: 2026-09-07
 updated: 2026-09-26
 ---
+
 # Atlas Cloud
 
 [[lampas-studio]]가 [[gemini]] 직접 생성과 나란히 쓰는 **이미지/영상 생성 대행 서비스** — 모델을
@@ -77,9 +78,15 @@ OpenAPI JSON)을 직접 fetch한다. `usedFor` 설명 문장만으론 결론 내
 
 ## 다른 제품에서의 언급
 
-- **[[toktalk]] AI 스택** — "AtlasCloud WAN"이 OpenAI·Grok·DeepSeek·Gemini·ElevenLabs와 함께 AI
-  계층 목록에 등장. lampas-studio와 같은 Atlas Cloud 계정/연동인지는 이 위키 소스로 미확인 —
-  제품이 다르므로 별개 통합일 가능성이 더 높다.
+- **[[toktalk]] — 텍스트 모델 카탈로그로 실사용 확인** (2026-09-07~09 세션,
+  [[2026-09-07-톡톡-2.0-재구축-사만다-도입]]) — "AtlasCloud WAN"이 목록에만 등장하던 이전 추정과
+  달리, 이 세션에서 **사만다(Her) 페르소나의 텍스트 모델 선택(GPT Astra·Grok·Claude·Gemini)을
+  AtlasCloud 카탈로그로 직접 통일**한 것이 실사용으로 확인됨 — 기존 AtlasCloud 키 재사용, 프로바이더별
+  개별 키 불필요. 단 **실시간 음성 생성은 AtlasCloud가 비동기(생성 완료 대기) 방식이라 제외**하고
+  xAI `grok-voice-latest`를 그대로 유지 — 실시간 스트리밍이 필요한 경로에는 AtlasCloud가 아직
+  부적합하다는 두 번째 확인 사례(첫 사례는 위 "가격 카탈로그" 절과 무관, [[lampas-web-trends]] 텍스트
+  경로는 배치 비동기라 문제 없었음과 대조). lampas-studio와 같은 Atlas Cloud 계정/연동인지는
+  여전히 미확인 — 제품이 다르므로 별개 통합일 가능성이 더 높다.
 - **[[openai]]** — OpenAI의 `gpt-image-2`가 Atlas Cloud를 통해 간접 노출되는 것으로 확인,
   Atlas Cloud가 다중 모델 애그리게이터 역할을 한다는 근거.
 
@@ -88,5 +95,6 @@ OpenAPI JSON)을 직접 fetch한다. `usedFor` 설명 문장만으론 결론 내
 - [[lampas-studio]] · [[toktalk]] · [[lampas-web-music]] · [[lampas-web-trends]] · [[lampas-web-scenario]] · [[lampas-web-tools]]
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
   [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] · [[2026-09-19-lampas-trends-고도화]] ·
-  [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]]
+  [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]] ·
+  [[2026-09-07-톡톡-2.0-재구축-사만다-도입]]
 - 스킬: [[parallel-survey-before-feature-gap-analysis]]

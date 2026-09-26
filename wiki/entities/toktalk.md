@@ -77,10 +77,42 @@ updated: 2026-09-26
 - Prisma는 `pnpm prisma:generate:talk` 등 `:talk` 접미 스크립트를 쓴다고 명시 — 별도 스키마 유지
   정황(완전 병합이 아닐 가능성을 뒷받침).
 
-## 2026-09-20~21 — Talk 속도개선·사만다 전환·스튜디오 개편 (원본 이벤트 확인)
+## 2026-09-07~09 — 사만다 페르소나 최초 도입 (`app.toktalk.ai`, 진짜 원본 이벤트)
+
+이번 ingest([[2026-09-07-톡톡-2.0-재구축-사만다-도입]])로, 아래 절(2026-09-20~21)이 다뤘던
+"사만다 전환"이 실은 **이미 존재하던 사만다를 Toss 미니앱으로 이식**한 후속 작업이었고, 진짜 최초
+도입은 13일 앞선 이 세션임이 드러남. 기존 캐릭터 선택·피드·스토리 구조를 전부 폐기하고 영화
+《Her》 사만다 단일 페르소나로 재구축한 사건.
+
+- 사용자가 《Her》 각본 1–105페이지 기반으로 직접 작성한 상세 페르소나 지침을
+  `apps/talk-api/companion/samantha.md`로 저장 — 텍스트·음성이 이 파일 하나만 공통으로 읽음(기존
+  캐릭터 DB 미사용). 첫인사가 자기 말투·의도를 설명하던 문제를 지적받아 즉시 수정.
+- 초기 모델: 텍스트 **`grok-4.5`**, 실시간 음성 **xAI `grok-voice-latest`**(공식 별칭
+  `grok-voice-think-fast-2.0`, 목소리 `eve`). 이후 텍스트 모델 선택을 GPT Astra·Grok·Claude·Gemini
+  중 고를 수 있게 **[[atlas-cloud]] 카탈로그**로 통일(개별 프로바이더 키 불필요) — 단 AtlasCloud
+  음성 생성은 비동기라 **실시간 통화는 xAI 전용으로 유지**.
+- 배포: `http://127.0.0.1:8242` 로컬 검증 → 사용자가 `app.toktalk.io`로 요청했으나 오기였고
+  `https://app.toktalk.ai/`로 정정 배포, Samantha API를 별도 프로세스+`/companion` 경로로 연결.
+- UI: 참고 저장소 [jesuscopado/samantha-os1-openai-realtime](https://github.com/jesuscopado/samantha-os1-openai-realtime)에서
+  **기능만**(∞ 리본 로딩 애니메이션, 대화 목록 접기/펼치기, 반투명 알파값 UI) 차용, 페르소나는 그대로 유지.
+- **NSFW 3단계 에스컬레이션·거부 경계 최초 확정**: ①"MD 수정해서 성적 표현 가능?" → 플러팅·비노골
+  로맨스는 가능하다고 답만 하고 미착수 ②"NSFW 대화 가능하도록" → 설정에 "성인 로맨스 대화" 토글
+  신설(기본 꺼짐, 18세 이상 확인, 플러팅·비노골 로맨스 한정) ③"NSFW 켜지면 노골적 표현도" → **명시
+  거부**("노골적인 성행위 묘사 생성이나 제한 우회는 도와드릴 수 없다"). 이 경계는 13일 뒤 아래 절의
+  "Eve 시드 오디오로 야한 음성" 요청에도 동일하게 재현됨 — 이 제품의 표준 거부 라인.
+- **`env/.env.*` 항상 커밋 규칙 확정**: "env 안에 .env.* 파일들은 항상 포함되어야해" 지시로, 이
+  저장소는 환경 파일을 커밋 제외 대상이 아니라 **항상 포함해야 한다는 사용자 정책**이 명시적으로
+  성립 → [[secrets-plaintext-exposure-pattern]]에 교차 기록(우발적 노출과 반대 방향의 의도적 정책).
+- 로그인 계정 기준 MySQL 서버 저장 전환(기존 브라우저 로컬 저장 폐기), 모바일 키보드 하단 고정
+  수정([[lampas-harness]] UI 참조), 《Her》 대본 기반 장면 모드(조용한 방·도시 산책·바닷가) 추가.
+  ElevenLabs 커스텀 보이스 디자인은 "유료 플랜 전용" 거절로 미구현.
+
+## 2026-09-20~21 — Talk 속도개선·사만다 전환(Toss 이식)·스튜디오 개편
 
 이번 ingest([[2026-09-20-talk속도개선-사만다전환-스튜디오개편]])로, 09-24/09-26 세션이
-"추정"·"정황"으로만 남겼던 `talk-app-toss-samantha`의 실제 개명·구축 과정이 확인됨.
+"추정"·"정황"으로만 남겼던 `talk-app-toss-samantha`의 실제 개명·구축 과정이 확인됨. **위 절의
+사만다는 이 세션 이전에 이미 `app.toktalk.ai`에서 운영 중이었고**, 이 세션은 그 사만다를 Toss
+미니앱 전용으로 이식·개명한 것 — "사만다 전환"이라는 제목과 달리 사만다 자체의 최초 도입은 아니다.
 
 - **텍스트 대화 지연 수정**: `talk-api`/`talk-web-app` 텍스트 경로가 매 턴 세션 갱신 요청 +
   추론량 미지정 Grok + 게이트웨이 경유였던 것을 제거·`grok-4.3`(저추론) 기본화·xAI 직접 연결로
@@ -118,12 +150,13 @@ updated: 2026-09-26
 
 ## 관련
 - 세션: [[2026-07-08-toktalk-에피소드-배경전환-플레이]] · [[2026-07-16-tts-stream-elevenlabs-구현착수]](참고 예시로 지목, 접근 실패) ·
-  [[2026-09-20-talk속도개선-사만다전환-스튜디오개편]](사만다 개명·스튜디오 재구축 원본 이벤트) ·
+  [[2026-09-07-톡톡-2.0-재구축-사만다-도입]](사만다 페르소나 **최초** 도입, `app.toktalk.ai` 배포 원본 이벤트) ·
+  [[2026-09-20-talk속도개선-사만다전환-스튜디오개편]](기존 사만다를 Toss 미니앱으로 이식·개명, 스튜디오 재구축) ·
   [[2026-09-25-lampas-web-fit-구축-배포]](저장소 편입 모순 발견) · [[2026-09-26-virtual-toktalk-tavus-아바타-구축]](virtual.toktalk.ai 구축) ·
   [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]](talk-app-toss-samantha git 충돌로 재확인)
-- 토픽: [[episode-beat-play-system]] · [[realtime-photo-avatar-voice-ai-landscape]] / 스킬: [[loading-state-key-mismatch]] ·
-  [[self-imposed-vs-provider-limit-diagnosis]] · [[llm-chat-latency-direct-connection]]
-- 외부 AI 프로바이더(virtual): [[tavus]]
+- 토픽: [[episode-beat-play-system]] · [[realtime-photo-avatar-voice-ai-landscape]] · [[secrets-plaintext-exposure-pattern]](env 항상 커밋 규칙) /
+  스킬: [[loading-state-key-mismatch]] · [[self-imposed-vs-provider-limit-diagnosis]] · [[llm-chat-latency-direct-connection]]
+- 외부 AI 프로바이더: [[atlas-cloud]](텍스트 모델 카탈로그), xAI(`grok-voice-latest`/`eve`, 실시간 음성), [[tavus]](virtual)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]] · 공급자: [[progdesigner]]
 - 자매 제품(2026-07 기준 별개 코드베이스로 기록, 2026-09-26 `lampas-system` 편입 정황과 모순 —
   위 절 참고): [[lampas-studio]]
