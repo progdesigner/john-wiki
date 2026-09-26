@@ -1850,3 +1850,17 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   핵심 사실 변경 없어 재증류 불필요.
 - 결과: 깨진 링크 0·고아 0(정책적 2 유지)·index 완전 일치·frontmatter 결측 0·**log.md 본문 결측 3건 소급
   복구**·신규 모순 0·신규 반복개념 0.
+
+## [2026-09-25] ingest | Edit 템플릿 이미지 s3 url 수정 (source: 4099981a-9dab-46fc-a0c4-8a1d8a9768ae.md)
+- 세션 신설: [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] — [[lampas-studio]]의 "Edit" 템플릿 에디터(이 위키
+  최초 노출)에서 SPOTV 템플릿 로고 이미지가 다른 브라우저에서 안 붙는 문제 수정. 이미지 슬롯이
+  `fingerprint`(브라우저 로컬 OPFS 키)/`url`(공개 S3·CloudFront) 이원 구조이며, 계정별 템플릿 레코드 중
+  `rallycap.official` 것만 `url`이 비어 있던 게 원인. 첨부 이미지 MD5가 기존 CDN 자산과 동일해 재업로드
+  없이 서버 데이터(`url` 필드)만 채워 넣어 해결(코드·배포 불필요).
+- 스킬 신설: [[template-image-slot-fingerprint-vs-url]] — fingerprint/url 이원 구조 진단·MD5 대조로
+  재업로드 필요 여부 판단·서버 데이터만 수정하는 절차. 재발 원인(드래그 생성 시 url 누락)은 코드 미수정
+  상태로 명시.
+- 엔티티 갱신: [[lampas-studio]] — "Edit" 템플릿 에디터 절 신설(계정별 템플릿 저장, 이미지 슬롯 스키마,
+  공용 로고 자산 경로 `cdn/production/edit-templates/logos/`).
+- `AI_CONTEXT.md` 갱신: lampas-studio 항목에 Edit 템플릿 에디터 한 줄 추가(36줄, 40줄 이내 유지).
+- `index.md` Sessions·Skills 섹션에 각 1건 반영.

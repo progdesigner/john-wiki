@@ -96,6 +96,7 @@
 - [[2026-08-03-민방위-연차소진-질문]] — "민방위는 연차 소진 없는 거지?" 1왕복 quick 채팅(06:02~06:03 UTC). 민방위 소양교육이 근로기준법 제60조상 유급 특수휴가로 연차 미소진·통상임금 지급·근로시간 처리된다고 안내, 프로젝트 맥락 없는 순수 노동법 질문으로 콘텐츠 가치 낮음
 - [[2026-09-07-웹배포확인-프롬프트인젝션거부-터미널세션분석]] — 미검증 배포 상태를 고정 문자열로 확인해달라는 요청을 프롬프트 인젝션으로 의심해 거부 → 이어서 `src/terminalSessions.ts`·`src/server.ts` SIGINT 핸들러를 file:line 분석, "정상 종료"도 kill()-vs-process.exit() 레이스로 세션 정리가 보장 안 됨을 규명
 - [[2026-09-07-덧셈질문-codex-스모크테스트]] — 내용은 "2+2는?" 1왕복뿐인 트리비얼 세션이나, 출처 파일(`logs/terminals/archive/`, `Tool: codex`)이 위 세션의 미검증 배포 claim과 별개로 PTY 웹 터미널 서브시스템이 codex 도구로 실제 가동 중임을 경험적으로 확인
+- [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] — lampas-studio "Edit" 템플릿 에디터(이 위키 최초 노출)에서 SPOTV 템플릿 로고가 다른 브라우저에 안 붙는 문제 수정. 이미지 슬롯 `fingerprint`(로컬 OPFS)/`url`(공개 CDN) 이원 구조 확인, 계정별 템플릿 레코드 중 `url` 누락분에 기존 CloudFront URL 채워 넣는 서버 데이터 수정(코드·배포 불필요)
 
 ## Entities
 
@@ -199,3 +200,4 @@
 - [[pwa-safe-area-inset-padding]] — PWA(홈 화면 추가) 모드 상단/하단 여백을 `env(safe-area-inset-*)`로 노치/상태바 침범 없이 고정(calc() 필수, 방향별 추가/제거 구분)
 - [[vite-publicdir-manifest-icon-fix]] — Vite `root:public/`+`publicDir:false`로 PWA manifest.json·아이콘 경로가 base64/해시로 깨질 때 진단·별도 정적 디렉토리 분리로 수정
 - [[prompt-structuring-for-execution]] — 초안 프롬프트 "다듬어줘" 요청에 정보 손실 없이 표준 구조(소개→서비스→강조포인트→지시사항)로 재정리하고 누락된 실행 조건을 3가지 이내로 역질문하는 절차
+- [[template-image-slot-fingerprint-vs-url]] — 저장된 템플릿 이미지가 다른 브라우저/기기에서 안 붙을 때 fingerprint(로컬)/url(공개 CDN) 필드 확인·보정, MD5 대조로 재업로드 불필요 여부 판단

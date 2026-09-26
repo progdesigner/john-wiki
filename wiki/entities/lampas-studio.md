@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights]
 created: 2026-07-09
-updated: 2026-09-07
+updated: 2026-09-25
 ---
 # lampas-studio (Lampas 이미지 생성 스튜디오)
 
@@ -174,12 +174,26 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   변경 세부 내용은 소스에 한 줄 요약만 있어 미상 — 위 오전~오후 세션에서 배포까지 된 변경분을 이 시점에
   비로소 커밋했을 가능성이 높음(정확한 대응 관계는 두 세션 소스만으론 확정 불가). → [[2026-07-18-works-전체저장]]
 
+## "Edit" 템플릿 에디터 — 신규 노출 기능 (2026-09-25 세션)
+
+이전 세션들에 등장하지 않았던 별도 기능. 사용자가 이미지 위에 템플릿(로고 등 이미지 슬롯 포함)을 골라
+적용하는 에디터로, 템플릿은 **계정별로 서버에 저장**된다(예: SPOTV 템플릿이 `progdesigner7`·
+`rallycap.official` 두 계정에 각각 존재).
+
+- **이미지 슬롯 스키마**: `fingerprint`(그 이미지를 만든 브라우저의 로컬 OPFS 저장 키, 기기 종속) +
+  `url`(공개 S3/CloudFront 주소, 기기 독립). 로컬에 없으면 `url`로 폴백하는 로직은 이미 있으나,
+  **드래그로 이미지를 넣어 템플릿을 만들면 `url` 없이 저장되는 경로**가 있어 다른 브라우저에서 이미지가
+  안 붙는 문제가 재발할 수 있음(코드 수정 없이 데이터만 땜질한 상태, 근본 수정 미착수).
+- 공용 로고 자산은 S3 `cdn/production/edit-templates/logos/`에 보관.
+- 절차 스킬 → [[template-image-slot-fingerprint-vs-url]] · 세션 → [[2026-09-25-edit-템플릿-이미지-s3-url-수정]]
+
 ## 관련
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-15-웹ai-프롬프트분할-샷변경-되돌리기-space설계]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
   [[2026-07-16-lampas-web-product-신규앱-구현]] · [[2026-07-17-works-저장소-일괄최신화-pull]] ·
   [[2026-07-18-works-전체저장]] ·
-  [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[2026-07-18-web-ai-등록플로우-사진분류-배포]]
+  [[2026-07-17-람파스-차별화전략-용어-works저장-quick]] · [[2026-07-18-web-ai-등록플로우-사진분류-배포]] ·
+  [[2026-09-25-edit-템플릿-이미지-s3-url-수정]]
 - 토픽: [[lampas-actor-object-space-positioning]]
 - 앱: [[lampas-web-ai]]
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
