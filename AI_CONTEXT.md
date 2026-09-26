@@ -24,7 +24,10 @@ updated: 2026-09-26
 - [[cwc-system]]에 [[elevino-system]] DB(원장 방식 크레딧)를 재사용해 멤버십 검색+크레딧 지급/차감 관리자 기능을 이식하는 설계 완료, **구현은 하네스 권한 장애로 미완**(재개 필요) → [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]]. **2026-09-26**: 별개로 [[elevino-system]]에 어드민 모임예약 취소·크레딧환불 기능 구현·배포 중 프로덕션 장애 발생 → 프로덕션이 8월 3일부터 실제로는 [[cwc-system]]의 `apps/elevino-*`에서 수동 배포되고 있었음이 드러나 두 저장소 3-way 머지로 복구(다운타임 23분) → [[prod-rollback-source-of-truth-verify]].
 
 ## 확정된 결정
-- 원격 접속: Tailscale 사설 VPN 권장, 공유기 포트포워딩 비권장 (설치 여부는 미확인).
+- 원격 접속: Tailscale 사설 VPN, 공유기 포트포워딩 비권장. **2026-09-14 확인: 설치·가동 중** —
+  계정 `progdesigner7@gmail.com` 테일넷, 호스트 `lampas-harness.tail43b73a.ts.net`, Funnel 443+8443
+  둘 다 개방. `[[lampas-harness]]` 저장소는 이 세션에서 `codex/web-cli-sessions`→`main` fast-forward
+  머지 완료.
 - 장기 기억은 git markdown 위키(사람이 감사 가능) — SQLite 아님.
 - 로컬 LLM은 Rapid-MLX 상주 ([[local-llm-rapidmlx-install]]).
 - 사용자 대면 이름은 **"람파스"** (내부 식별자·저장소명 `lampas-harness`는 유지) → [[lampas]]

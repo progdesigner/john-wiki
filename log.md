@@ -2573,3 +2573,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/topics/secrets-plaintext-exposure-pattern.md 갱신 — "반대 방향 사례" 절 신설, toktalk의 "env/.env.* 항상 커밋" 명시 정책을 우발적 노출과 대비되는 5번째 사례로 교차 기록
 - index.md 갱신 (세션 1건 신설, toktalk·atlas-cloud·secrets-plaintext-exposure-pattern 엔트리 갱신)
 - AI_CONTEXT.md 갱신 — toktalk 항목에 09-07~09 원본 이벤트(사만다 최초 도입·NSFW 경계·env 커밋 정책)를 09-20~21보다 앞서 추가, "개명 확정"을 "이식·개명"으로 정정
+
+## [2026-09-26] ingest | 하네스터미널 스크롤·드래그복사·모델즉시전환·정지버튼 + Tailscale 계정재연결 (source: 57978fbc-1868-4d9a-a07d-aaa3b740ea3b.md)
+- raw/conversations/2026-09-14-하네스터미널-스크롤드래그복사-모델즉시전환-정지버튼-tailscale재연결.md 보관 (원본 세션 2026-09-14T14:42:54.118Z 시작, `logs/terminals/archive/57978fbc-...md`에서 회수, 뒤늦게 ingest, `Tool: claude`)
+- wiki/sessions/2026-09-14-하네스터미널-스크롤드래그복사-모델즉시전환-정지버튼-tailscale재연결.md 신설 — 6개 요청 연속 처리: 마우스추적 배칭으로 터미널 스크롤 수정, xterm 강제선택으로 드래그 복사 구현, `modelChangeBlocker`로 모델 즉시전환 근본수정, 정지버튼+Esc+대화목록 드래그정렬 구현, Tailscale 새 계정 재연결 후 DNS 전파 지연 진단(결론이 두 번 뒤집힘)·8443 포트 추가, `main` fast-forward 머지까지 완료
+- wiki/entities/lampas-harness.md 갱신 — 저장소 브랜치 서술 정정(`main` 단독 표기 → `codex/web-cli-sessions`가 이 세션에서 `main`으로 fast-forward 머지됨), "실제 웹 터미널" 계열에 이 세션을 09-07 발견과 09-20~24 확장 사이(시간순)에 새 절로 삽입 — 헤더의 "■ 정지" 버튼이 동시에 돌던 다른 Codex 세션이 만든 것이었다는 동시편집 증거 포함, 관련 세션 목록 갱신
+- wiki/topics/model-selection.md 갱신 — "Claude Code CLI /model 커맨드" 절에 이 세션이 밝힌 `modelChangeBlocker`·배너파서 자동화 메커니즘과 `opus[1m]` 카탈로그 불일치 한계를 반영, 프로브 세션의 수동 /model 입력과 이 자동화가 같은 코드 경로인지는 미확정으로 명시
+- wiki/skills/dns-propagation-stale-resolver-diagnosis.md 신설 — "도메인이 안 풀린다" 보고 시 레코드 부재 단정 전 권한서버 교차조회·SOA 시리얼 비교·다수결 판단으로 진단하는 절차, 이 세션의 Tailscale DNS 진단(두 번 뒤집힌 결론) 사례에서 추출
+- wiki/sessions/2026-09-14-중지버튼-프로브.md · 2026-09-14-중지버튼-프로브-1838.md · 2026-09-14-모델-단계-프로브.md 갱신 — 같은 날 저녁 프로브들이 겨냥했을 법한 기능(정지버튼/모델전환)의 구현 세션으로 이 세션을 관련 절에 추가(정확한 선후관계·동일 코드경로 여부는 미확정으로 명시)
+- AI_CONTEXT.md 갱신 — Tailscale "설치 여부 미확인"을 "설치·가동 확인"(계정·호스트명·포트 명시)으로 정정, `codex/web-cli-sessions`→`main` 머지 완료 사실 추가
+- index.md 갱신 (세션 1건 신설, 스킬 1건 신설, model-selection 항목은 별도 커밋 없이 본문만 갱신)
