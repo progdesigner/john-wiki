@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser]
 created: 2026-07-09
 updated: 2026-09-26
 ---
@@ -173,6 +173,14 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
 - 액터 플로우 및 gemini/actors API 확장 커밋·push. [[works-project-portfolio]] 일괄 저장 요청의 일부로,
   변경 세부 내용은 소스에 한 줄 요약만 있어 미상 — 위 오전~오후 세션에서 배포까지 된 변경분을 이 시점에
   비로소 커밋했을 가능성이 높음(정확한 대응 관계는 두 세션 소스만으론 확정 불가). → [[2026-07-18-works-전체저장]]
+
+## Lampas Browser — 기획됐다가 `lampas-harness`로 이관됨 (2026-09-26 세션)
+
+`apps/lampas-browser`(Electron 기반 AI 조작형 Chromium 브라우저)가 이 저장소(`lampas-system`) 아래에서
+하루 만에 기획·1차 구축까지 됐으나, 같은 날 안에 소스 전체가 `[[lampas-harness]]`의 `apps/browser`로
+이관되며 AI 실행 방식도 자체 API 키에서 하네스 CLI 세션 재사용으로 바뀌었다. 이 저장소엔 더 이상
+남아있지 않을 가능성이 높음(이관 이후 재확인 안 됨) — 최종 상태·상세는 → [[lampas-browser]] · 세션:
+[[2026-09-26-lampas-browser-구축-harness이전]]
 
 ## "Edit" 템플릿 에디터 — 신규 노출 기능 (2026-09-25 세션)
 

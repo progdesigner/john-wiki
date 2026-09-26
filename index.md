@@ -102,10 +102,12 @@
 - [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] — `Tool: codex` 세션. `lampas-agent`에 요청한 "위키 기반 Threads 글 자동생성+페르소나 학습" 기능이 sports-wiki↔john-wiki 오인을 거쳐 이 저장소로 정정됐다가 전면 취소(v1.0.26→v1.0.29). "이 위키를 보는" 부분만 분리돼 `lampas-harness`의 신규 `apps/wiki`(wiki.html, 설정>위키 버튼, 검색·목차·위키링크·역링크)로 이전·구현·검증(테스트79개+Playwright 데스크톱/모바일) 완료 — john-wiki가 처음으로 사람용 브라우징 UI 데이터 소스가 됨. 서버 재시작(반영)은 대기 중 종료
 - [[2026-09-25-status-서비스-구축-배포]] — "status.claude.com 처럼 만들어줘" 요청으로 `lampas-web-status`(status.lampas.io)를 처음부터 구현하고 같은 세션에서 운영 배포까지 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트. 운영 DDL 선적용 중 드리프트 검사로 무관해 보이던 sports-wiki `sports_wiki_games` 테이블 누락을 함께 발견·수정, 동시실행 일시적 테스트 실패(sports-wiki 9건)를 재현 확인 후 배포 게이트 통과
 - [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] — `lampas-agent`의 Fixs(재귀 오류 자동 수정) 탭에 경로 그룹핑(uuid·hash 등을 `:id`로 치환해 fingerprint 병합, 운영 DB 69건→42건)과 Jev 타입드 분류(`POST /v1/ai/systemone`, 텍스트 생성 없이 입력 토큰만 과금) 추가·배포(v1.0.25, 커밋 `900ce062`). 파트너 키 부재로 `toktalk`의 `talk-api` 운영 키를 임시 차용 중(후속 과제)
+- [[2026-09-26-lampas-browser-구축-harness이전]] — `Tool: codex` 세션. "Aside 같은" AI 조작형 Chromium 브라우저를 `lampas-system` 아래 `apps/lampas-browser`로 처음부터 구축(WebContentsView·읽기/조작 분리·CSV·영상 URL 다운로드)한 뒤, 같은 날 `lampas-harness`의 `apps/browser`로 완전 이관 — 자체 AI API 키를 걷어내고 하네스 Codex CLI/Claude Code 세션 재사용으로 전환, 새 세션 "브라우징" 선택지 신설. 배포 중 9월 24일부터 방치된 구버전 서버가 `apps/wiki`(같은 날 다른 세션)와 함께 반영을 막고 있던 사실 발견·재시작 진행(반영 재확인은 다음 세션 필요)
 
 ## Entities
 
-- [[lampas-harness]] — Claude Agent SDK 기반 웹 하네스 (맥미니 데몬, 큐, 채팅 UI). 2026-09-26: `apps/wiki`(wiki.html) 신설 — john-wiki를 사람이 브라우징하는 읽기전용 위키 뷰어, 설정>위키 버튼
+- [[lampas-harness]] — Claude Agent SDK 기반 웹 하네스 (맥미니 데몬, 큐, 채팅 UI). 2026-09-26: `apps/wiki`(wiki.html) 신설 — john-wiki를 사람이 브라우징하는 읽기전용 위키 뷰어, 설정>위키 버튼. 같은 날 `apps/browser`(Lampas Browser 이관) 신설 — 새 세션 "브라우징" 선택지
+- [[lampas-browser]] — AI가 읽고 조작하는 Chromium 기반 Electron 브라우저(WebContentsView). `lampas-system`에서 기획·1차 구축 후 같은 날(2026-09-26) `lampas-harness apps/browser`로 완전 이관, AI는 하네스 CLI 세션 재사용
 - [[lampas-studio]] — Lampas AI 이미지 생성 스튜디오 제품 (lampas-api + lampas-web-sdk/lampas-web-studio + lampas-web-product, sdk.lampas.io). 2026-09-26: `lampas-system` 저장소가 Lampas+Dalar+Talk 3개 라인으로 확장된 정황, 신규 앱 lampas-web-fit(fit.lampas.io)
 - [[dalar]] — 2026-09-26 최초 노출된 제품 라인(스텁). `lampas-system` 모노레포 내 6앱, Node Studio SoT가 여기 위치해 lampas-web-studio로 동기화
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)

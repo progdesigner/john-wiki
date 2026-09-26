@@ -1973,3 +1973,26 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `index.md` Sessions·Entities·Topics·Skills 반영(세션1·엔티티1 갱신·토픽1·스킬1 추가).
 - 특이사항: 파트너 키 임시 차용(`FIXS_AI_API_KEY`에 `toktalk`의 `talk-api` 운영 키 복사)은 세션 시점
   기준 미해결 후속 과제로 명시적으로 남김 — 다음 ingest에서 교체 여부 확인 필요.
+
+## [2026-09-26] ingest | Lampas Browser 구축 → lampas-harness apps/browser 이관 (source: 65279805-a911-47e0-ab68-7d3f0ff9eb84.md)
+- 원본 보관: `raw/conversations/2026-09-26-lampas-browser-구축-harness이전.md`
+- 세션 신설: [[2026-09-26-lampas-browser-구축-harness이전]] — "Aside 같은" AI 조작형 Chromium 브라우저를
+  `lampas-system` 아래 `apps/lampas-browser`로 처음부터 구축(WebContentsView 탭·읽기/조작 단계 분리·
+  권한 격리 설계, CSV 편집·영상 URL 다운로드·Lampas 생성 API 연동)한 뒤, 같은 날 `lampas-harness`의
+  `apps/browser`로 완전 이관 — 자체 Claude/GPT API 키·Relay 서버를 걷어내고 하네스 기존 Codex CLI/
+  Claude Code 세션 재사용으로 전환, 새 세션 "브라우징" 선택지 신설(세션별 브라우저 프로필 분리).
+  배포 중 9월 24일부터 방치된 구버전 서버가 원인이 되어 `apps/wiki`(같은 날 다른 세션)와 함께 반영이
+  막혀 있던 사실을 발견·사용자 승인 후 재시작 진행 — 반영 확인은 다음 세션 필요로 명시.
+- 엔티티 신설: [[lampas-browser]] — 위치 변천(lampas-system → lampas-harness), 설계 원칙(공용 제어
+  모듈·읽기/조작 분리·권한 격리), 기능별 구현/미구현 표, 하네스 통합 상세, 배포 대기 상태.
+- 엔티티 갱신: [[lampas-harness]] — 신규 서브앱 절 `apps/browser` 추가, `apps/wiki` 배포 지연 절에
+  원인 확정(구버전 프로세스 장기 방치) 후속 링크 추가, 관련 링크·태그(electron, browser) 갱신.
+  [[lampas-studio]] — Lampas Browser가 이 저장소에서 시작해 이관됐음을 짧게 교차참조.
+- 스킬 갱신: [[self-hosted-agent-server-ops]] — 함정 1에 "변종 2: 며칠째 방치된 구버전 프로세스"
+  사례 추가(EADDRINUSE·IPv6 가로채기 없는 가장 단순한 변형, 기동 시각 대조로 진단).
+- `AI_CONTEXT.md` 갱신: lampas-harness 줄에 Lampas Browser 이관·브라우징 세션 사실 추가, john-wiki
+  줄의 apps/wiki 반영 상태를 "원인 규명 후 재시작 진행, 다음 확인 필요"로 갱신(39줄, 40줄 이내 유지).
+- `index.md` Sessions·Entities 반영(세션1 신설·엔티티1 신설·엔티티1 갱신).
+- 특이사항: 이 세션과 [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]은 같은 날 같은
+  재시작 대기 상태를 공유 — 두 세션이 만든 기능(브라우징 세션 + apps/wiki)이 같은 재시작 한 번으로
+  함께 반영될 예정이었음. 재시작 이후 실제 반영 여부는 이 세션 소스에 없어 **다음 ingest에서 확인 필요**.
