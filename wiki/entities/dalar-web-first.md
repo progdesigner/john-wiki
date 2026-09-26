@@ -37,12 +37,35 @@ Dalar 앱**이다.
 5만 크레딧 자동 실행 + 5만 크레딧 결제만 가능하게 고정"을 요청했으나 **응답 없이 소스 종료** —
 구현 여부 미확인.
 
+## 관리자 → lampas-web-edit 컷 핸드오프 (2026-09-15, 2026-09-26 뒤늦게 ingest)
+최초 구축(09-13/14) 직후, 09-20 대규모 확장보다 5일 앞선 시점에 발견된 중간 이벤트. 관리자 컷
+편집기에서 컷마다 만들어진 영상을 `[[lampas-web-edit]]`로 보내는 기능을 **기존 `[[lampas-web-scenario]]`/
+`[[lampas-web-reels]]` 핸드오프 패턴을 참고해 First로 확장** — First가 edit-sessions 화이트리스트의
+세 번째 소스 앱이 됨.
+
+- 컷별 "이 컷 편집기로 보내기" + 상단 바 "영상 있는 컷 전부 편집기로" 일괄 버튼. 컷 영상 URL을
+  url 클립으로 담아 편집 세션 생성 후 `edit.lampas.io/editor?session=<id>` 새 탭으로 오픈.
+- 편집 세션이 Lampas 계정 소유라 admin JWT로는 생성 불가 — "Lampas 계정 연결" 버튼으로 기존
+  Google 팝업 브리지를 lampas 네임스페이스로 재사용, 토큰은 sessionStorage 보관 + 딥링크에
+  `access_token` 쿼리 파라미터로 직접 전달(추후 [[cross-subdomain-session-handoff]] 스킬이
+  정식화한 "토큰 대신 일회용 교환 코드" 원칙보다 5일 이른, 더 단순하고 약한 버전).
+- 같은 주문·컷은 편집 세션 1개를 재사용(reuse 키 `<orderId>:scene:<n>` / `<orderId>:all`).
+- 팝업 차단 시 카드에 "편집기 열기" 링크 대체 노출.
+- 변경 범위: `apps/dalar-web-first`(`editHandoff.ts`·`googlePopup.ts`·`EditorHandoff.tsx`, vitest
+  최초 도입), `apps/lampas-api`(edit-sessions·media-exports 화이트리스트에 `first` 추가),
+  `apps/lampas-web-edit`(`EditSessionApp` 타입에 First 라벨 추가). First vitest 13·edit vitest 22·
+  API jest 41 통과, **배포는 하지 않고** 커밋 `dbacd8c8`로 push만 완료(이전 세션 미커밋 변경과
+  섞인 5개 공유 파일을 헝크 단위로 분리 커밋 — [[selective-hunk-commit-shared-file]] 스킬의
+  더 이른 실사례).
+- 세션 전체 → [[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]]
+
 ## 원래 형태 → 09-20 세션 이전
 위 최초 구축 세션 결과물 그대로 고정 **12장면** 인터뷰 대본 하나만 존재하는 상태로 약 1주일
 운영됐다(4·6·8·12장면 선택은 09-20 세션에서 처음 추가). "페이지를 닫아도 제작이 계속된다"는
 안내가 있었으나 실제로는 완전히 보장되지 않던 상태(아래 "서버 워커 복구" 절, 09-13/14 세션
 자체 재시작 테스트는 통과했으나 더 미묘한 결함이 남아있었음 →
-[[resumable-worker-checkpoint-resume]] 참고)에서 09-20 세션 시작.
+[[resumable-worker-checkpoint-resume]] 참고)에서 09-20 세션 시작. 위 09-15 핸드오프 기능은 이
+정체기 중간에 추가된 기능이다.
 
 ## 장면 수 선택 + 가격 체계 (여러 차례 개정)
 
@@ -198,9 +221,12 @@ First 로고 + 밝은 크림 배경으로 **1200×630 공유 이미지** 제작,
 
 ## 관련
 - 세션: [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]](origin) ·
+  [[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]](lampas-web-edit 핸드오프) ·
   [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]]
 - 상위: [[dalar]](제품 라인) · 저장소 [[lampas-studio]](`lampas-system`, 같은 모노레포)
 - 토픽: [[jev-typed-classification]](세 번째 사용처)
 - 스킬: [[scene-reference-lock-visual-consistency]] · [[mutual-referral-coupon-pattern]] ·
-  [[resumable-worker-checkpoint-resume]]
-- 연동: `lampas-web-pay`(`pay.lampas.io`, 결제 공유), [[lampas-web-package]](콘텐츠 등록·게시)
+  [[resumable-worker-checkpoint-resume]] · [[selective-hunk-commit-shared-file]] ·
+  [[cross-subdomain-session-handoff]](대비되는 이전 방식)
+- 연동: `lampas-web-pay`(`pay.lampas.io`, 결제 공유), [[lampas-web-package]](콘텐츠 등록·게시),
+  [[lampas-web-edit]](컷 영상 편집 핸드오프, edit-sessions 세 번째 소스 앱)

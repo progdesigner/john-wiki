@@ -22,6 +22,16 @@ CS·시나리오·dalar-web-first — 보다도 이른 06:10Z 시작)이 실제 
 09-13(이미지/트랙/텍스트효과/S3백업) → 09-18(Auto Reframe/브랜드킷/ASR청크) →
 09-19~20(자막/큐/레이아웃템플릿 대량 확장)이다.
 
+## edit-sessions 핸드오프 소스 앱 확장 — First 추가 (2026-09-15)
+`lampas-api`가 관리하는 edit-sessions·media-exports 화이트리스트에 이미 `[[lampas-web-scenario]]`·
+`[[lampas-web-reels]]`가 세션을 만들어 이 앱으로 넘기고 있었고, 이 시점에 **`[[dalar-web-first]]`가
+세 번째 소스 앱으로 추가**됐다 — `EditSessionApp` 타입·앱 라벨에 First 추가. First 관리자가 컷별
+영상을 url 클립으로 담아 세션을 만들고 `/editor?session=<id>`로 새 탭을 여는 방식, admin JWT로는
+세션을 만들 수 없어 Google 팝업 브리지로 lampas 계정 토큰을 받아 sessionStorage+딥링크
+`access_token`으로 전달(같은 주문·컷은 `<orderId>:scene:<n>` 키로 세션 재사용). 상세는
+[[dalar-web-first]] "관리자 → lampas-web-edit 컷 핸드오프" 절 참고 — 세션 전체는
+[[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]].
+
 ## 이미지 미디어·트랙·텍스트 효과·원본 백업 최초 구현 (2026-09-13)
 - **이미지를 미디어로 추가**(0.1.2→0.1.3): `ReelClip`/`LibraryItem`에 `kind:'video'|'image'`,
   `probeImage`가 이미지 파일을 프로브(너비/높이, 기본 표시 5초), 트림은 이미지에 한해 원본 길이
@@ -203,11 +213,13 @@ S3 업로드 + CloudFront 무효화(정적 SPA), API는 PM2. 배포 전 매번 `
 테스트(500~580여 개)를 통과시키는 패턴이 일관됨.
 
 ## 관련
-- 상위 파이프라인: [[lampas-web-flow]](5번째 노드 Edit) · [[lampas-web-reels]](Edit로 세션 전달)
+- 상위 파이프라인: [[lampas-web-flow]](5번째 노드 Edit) · [[lampas-web-reels]](Edit로 세션 전달) ·
+  [[dalar-web-first]](Edit로 세션 전달, 세 번째 소스 앱)
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
 - 세션: [[2026-09-12-lampas-copy페르소나-clips분야카테고리-스포츠위키-구축]](`replaceClipMedia`/"클립
   교체" 구현·미배포 — 09-13 세션과 병행, 09-26 뒤늦게 ingest) ·
   [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]](실제 최초 관찰 시점, 이미지/트랙/텍스트효과/S3백업) ·
+  [[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]](First 핸드오프 소스 앱 추가) ·
   [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]](Auto Reframe·브랜드킷·ASR청크) ·
   [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]](자막·큐·레이아웃템플릿 대량 확장) ·
   [[2026-09-25-edit-템플릿-이미지-s3-url-수정]](계정별 템플릿 url 누락 후속 수정)

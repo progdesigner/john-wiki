@@ -2592,3 +2592,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/skills/self-hosted-agent-server-ops.md 갱신 — 함정 5(pinned-cli-path-drift: 하네스가 전역과 다른 별도 경로의 CLI를 참조해 업그레이드가 반영 안 되는 증상) 신설, "네 함정" 표기를 "함정 1~4"로 정정
 - index.md 갱신 (세션 1건 신설, self-hosted-agent-server-ops 태그 목록에 pinned-cli-path-drift 추가)
 - AI_CONTEXT.md 갱신 보류 — Tailscale `tail0e32ab`는 이미 기록된 `tail43b73a` 최종 상태로 대체된 중간 상태이고, CLI 전역 설치 전환은 self-hosted-agent-server-ops 스킬 페이지로 충분히 커버돼 상시 주입 가치 낮음
+
+## [2026-09-26] ingest | Facebook MCP 질문 + dalar-web-first→lampas-web-edit 컷 핸드오프 구현 (source: 39a98dbd-11e2-483f-bda2-8f3709fbe858.md)
+- raw/conversations/2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시.md 보관 (원본 세션 2026-09-15T02:27:22.206Z 시작, `logs/terminals/archive/39a98dbd-...md`에서 회수, 뒤늦게 ingest, `Tool: claude`, 작업폴더 `lampas-system`)
+- wiki/sessions/2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시.md 신설 — 무관한 1턴 Facebook 앱 생성 MCP 질문(앱 생성 자체를 대신하는 MCP는 없다는 결론) + `[[dalar-web-first]]` 관리자 컷 편집기 → `[[lampas-web-edit]]` 핸드오프 구현(기존 scenario/reels 패턴 확장, edit-sessions 화이트리스트 세 번째 소스 앱) + "배포 말고 커밋·푸시만" 요청에 대한 선택적 헝크 커밋(`dbacd8c8`)까지 3턴. `[[dalar-web-first]]`의 09-13/14 origin과 09-20 대규모 확장 사이에 있던 미확인 중간 이벤트를 메움
+- wiki/entities/dalar-web-first.md 갱신 — "관리자 → lampas-web-edit 컷 핸드오프 (2026-09-15)" 절 신설(최초구축과 09-20 확장 사이에 삽입), 관련 섹션에 세션·스킬 링크 추가
+- wiki/entities/lampas-web-edit.md 갱신 — "edit-sessions 핸드오프 소스 앱 확장 — First 추가 (2026-09-15)" 절 신설, 관련 섹션에 dalar-web-first·세션 링크 추가
+- wiki/skills/selective-hunk-commit-shared-file.md 갱신 — 이 세션의 선택적 헝크 커밋이 기존 출처(09-19·09-24)보다 4~9일 이른 실사례임을 "더 이른 실사례" 절로 추가, 출처 목록 갱신
+- wiki/skills/cross-subdomain-session-handoff.md 갱신 — "대비 사례" 절 신설, 이 세션이 5일 앞서 같은 문제(서브도메인 간 세션 이어받기)를 교환 코드가 아닌 토큰-in-URL 방식으로 더 단순·약하게 풀었음을 교차기록
+- index.md 갱신 (세션 1건 신설, dalar-web-first·lampas-web-edit·selective-hunk-commit-shared-file·cross-subdomain-session-handoff 항목 갱신)
+- AI_CONTEXT.md 갱신 보류 — 이미 충분히 상세한 dalar-web-first/lampas-web-edit 위키 페이지로 커버되는 중간 시점 기능 추가이고, 40줄 예산 대비 상시 주입 가치가 낮음

@@ -39,4 +39,13 @@ tags: [auth, sso, sessions, multi-app, security]
 - 로컬 데몬처럼 **두 개의 별도 인증 영역**을 가진 백엔드는 하나만 연결하고 끝내기 쉽다 — 어떤
   세션들이 독립적으로 인증을 요구하는지 먼저 목록화한다.
 
+## 대비 사례 — 5일 이른, 더 단순하고 약한 이전 방식 (2026-09-15)
+[[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]] 세션이 같은 문제(서로 다른
+로그인 저장소 간 세션 이어받기, `[[dalar-web-first]]` admin → `[[lampas-web-edit]]`)를 이 스킬이
+정식화한 절차보다 5일 앞서 풀었는데, **1번 원칙("토큰을 URL에 넣지 않는다")을 지키지 않았다** —
+Google 팝업 브리지로 받은 lampas 계정 토큰을 sessionStorage에 두고 딥링크에 `access_token` 쿼리
+파라미터로 그대로 실어 보냈다. 일회용 교환 코드가 아니라 토큰 자체가 URL에 노출되는 더 약한
+방식이다. 이후 이 First 핸드오프 경로가 교환 코드 방식으로 개정됐는지는 소스 부재로 미확인 —
+같은 저장소 안에 두 가지 다른 성숙도의 핸드오프 패턴이 공존했을 가능성을 열어둔다.
+
 ## 출처: [[2026-09-20-lampas-flow-만들기]] ([[lampas-web-flow]] Flow↔Clips/Copy/Reels/Edit/Package↔[[lampas-agent]] 계정 이동)
