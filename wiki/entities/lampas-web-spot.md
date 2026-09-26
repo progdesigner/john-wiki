@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, lampas-studio, map, openstreetmap, geocoding, spot]
+tags: [entity, project, product, lampas-studio, map, openstreetmap, kakao, geocoding, spot]
 created: 2026-09-26
 updated: 2026-09-26
 ---
@@ -50,9 +50,29 @@ updated: 2026-09-26
   운영자가 문의함을 검토한 뒤 수동 반영하며, 제외된 장소는 구글 시트 재동기화·개인 숨김 복원과
   무관하게 계속 제외 상태 유지.
 
+## ⚠️ 모순 기록 (2026-09-26 추가) — "OSM 확정" 이틀 만에 카카오맵 재도입 준비
+위 "최종 OpenStreetMap 단일 경로" 결정은 2026-09-24/25 세션 기준이다. 불과 이틀 뒤인
+[[2026-09-26-카카오-지도-api-키-발급]] 세션에서 `[[progdesigner]]`가 다시 "카카오 지도 서비스를
+연동하려고 해"라고 요청해 카카오 앱(ID **1588569**, 이름 "Lampas Spot")을 새로 만들고 JavaScript/
+REST/네이티브 키 3종을 발급·도메인(`spot.lampas.io`, `localhost:8478`) 등록까지 완료했다. 키는
+`apps/lampas-web-spot/env/.env.production`·`.env.local`·최상위 `.env.local` 3곳에 반영됐고
+README에 "카카오맵 연동" 절도 추가됐다.
+
+**단, 실제 지도 SDK 교체는 이 세션에서도 진행되지 않았다** — spot 앱은 여전히 Leaflet + OpenStreetMap을
+쓰고 있고, 어시스턴트 스스로 "지도 SDK 교체 작업은 별도로 진행 필요"라고 남겼다. 즉 현재 상태는:
+
+- **실제 렌더링 지도**: 여전히 OpenStreetMap (2026-09-24/25 확정 그대로, 미변경)
+- **발급·설정 완료, 미사용 대기 중**: 카카오맵 JS/REST/네이티브 키 (2026-09-26 신규)
+
+두 기록이 같은 앱을 두고 "OSM으로 확정"과 "카카오로 재전환 준비"라는 상반된 방향을 담고 있다 —
+어느 쪽이 최종 상태인지는 **다음 세션에서 SDK 교체 착수 여부로 재확인 필요**. 카카오 키 발급 세션
+자체는 REST API 키(서버 전용)를 env에 넣지 않고 JS 키(도메인 제한 클라이언트 키)만 넣은 판단을
+남겨 [[secrets-plaintext-exposure-pattern]]에도 반영했다.
+
 ## 관련
 - 상위 저장소: [[lampas-studio]] (`lampas-system`)
-- 세션: [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]](실제 구현·최종 상태) ·
+- 세션: [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]](실제 구현·OSM 확정 원본) ·
   [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]](네이버 키가 남아있던 중간 시점을
-  병합 커밋 메타데이터로 먼저 포착한 세션)
+  병합 커밋 메타데이터로 먼저 포착한 세션) ·
+  [[2026-09-26-카카오-지도-api-키-발급]](카카오 키 재발급·모순 발생 세션)
 - 스킬: [[nominatim-batch-geocode-progressive-rollout]]

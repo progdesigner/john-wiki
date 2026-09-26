@@ -2673,3 +2673,14 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 신규 스킬: [[meta-oauth-token-console-popup-unreliable-in-automated-browser]] — 자동화 브라우저에서 Meta 콘솔 토큰 생성 팝업이 구조적으로 막힐 때 curl 기반 OAuth 코드 교환으로 우회하는 절차
 - index.md 갱신 (세션 1건 신설, 엔티티 3건(dalar·lampas-web-package·lampas-browser) 갱신, 스킬 1건 신설)
 - AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태이고, 이 세션의 핵심 사실(토큰 발급 미완료·다음 단계는 앱 시크릿 수령)은 아직 완결되지 않은 진행 중 작업이라 엔티티·세션 페이지로 충분히 커버됨. 토큰 발급이 완료되면 그 시점에 확정 사실로 반영할 것
+
+## [2026-09-26] ingest | 카카오 지도 API 키 발급 (source: c67f4b05-e33b-4857-a520-5d28cbf4c147.md)
+- 원본 보관: `raw/conversations/2026-09-26-카카오-지도-api-키-발급.md`
+- 세션 요약 신설: [[2026-09-26-카카오-지도-api-키-발급]] — [[lampas-web-spot]]용 카카오 앱 "Lampas Spot"(ID 1588569) 생성, 로그인·모달(카테고리·약관 체크박스) 스크롤은 브라우징 패널 한계로 사람에게 위임, 무료 쿼터 오판(spark 앱 것으로 오인)을 사용자가 유료 진행 선택 후 자체 정정, JS/REST/네이티브 키 발급+도메인 등록+env 3곳 반영+README 갱신까지 완료
+- ⚠️ 모순 발견: [[lampas-web-spot]]이 2026-09-24/25 세션에서 "OpenStreetMap 단일 경로로 확정"했다고 기록했는데, 불과 이틀 뒤인 이 세션이 다시 카카오맵 키를 발급·설정 완료함(단 SDK 교체는 미착수, 실제 렌더링은 여전히 OSM) — 두 기록을 모순으로 병기, 최종 지도 프로바이더는 다음 세션에서 재확인 필요
+- 핵심 판단 발견: 어시스턴트가 사용자 지시 없이 자체적으로 JS 키(도메인 제한 클라이언트 키)는 커밋하고 REST 키(서버 전용)는 env에서 제외하는 분류를 적용 → [[secrets-plaintext-exposure-pattern]]에 6번째 사례로 반영
+- 핵심 발견: 하네스 브라우징 패널이 [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]](3분 전 시작, 별도 세션)과 거의 동시에 사용됨 — 모달 내부 스크롤 불가라는 네 번째 한계 유형 추가 확인, 두 세션이 독립적으로 "정확히 필요한 만큼만 사람에게 위임"하는 동일 전략에 도달
+- 엔티티 갱신: [[lampas-web-spot]](카카오/OSM 모순 절 추가) · [[lampas-browser]](세 번째 한계 사례 절 추가) · [[secrets-plaintext-exposure-pattern]](6번째 사례 추가)
+- 신규 스킬: [[browser-automation-human-handoff-for-blocked-ui]] — 자동화 브라우저가 비밀번호·모달 스크롤·팝업 완료감지 등에 막히면 재시도 대신 최소 범위만 사람에게 위임하는 일반 절차, [[meta-oauth-token-console-popup-unreliable-in-automated-browser]]에 상호 링크 추가
+- index.md 갱신 (세션 1건 신설, 엔티티 3건(lampas-web-spot·lampas-browser·secrets-plaintext-exposure-pattern) 갱신, 스킬 1건 신설)
+- AI_CONTEXT.md 갱신: lampas-studio 항목의 lampas-web-spot 서술에 "OSM 확정과 상충하는 카카오 재도입, 최종 프로바이더 미확정" 한 문장 추가(줄 수는 42줄로 유지, 신규 줄 추가 없이 기존 줄 확장)
