@@ -1,7 +1,7 @@
 ---
 tags: [topic, claude-agent-sdk, model, config]
 created: 2026-07-07
-updated: 2026-07-16
+updated: 2026-09-26
 ---
 # 하네스 모델 선택
 
@@ -93,6 +93,17 @@ medium→`claude-sonnet-5`(`LAMPAS_AUTO_MEDIUM`), hard→`claude-opus-4-8`(`LAMP
 오버레이(`apps/web/public/quick.html`)에도 동일하게 추가. 서버 판정 로직은 공유, 클라이언트 쪽만
 같은 드롭다운·표시 UI를 이식. → [[2026-07-16-quick-html-폴더선택기-auto모델-구현]]
 
+## Claude Code CLI `/model` 커맨드 — 웹 드롭다운과 별개 경로 (2026-09-14 관찰, 2026-09-26 ingest)
+위 "UI 모델 선택기"는 하네스 웹 채팅(`server.ts`)의 드롭다운이다. 이와 별도로, 하네스의 PTY 기반
+실제 웹 터미널 서브시스템(`src/terminalSessions.ts`, `[[lampas-harness]]` "신규 서브시스템" 절 참고)
+안에서는 사용자가 **Claude Code CLI 자체의 네이티브 `/model` 슬래시 커맨드**를 직접 쓸 수 있다.
+`[[2026-09-14-모델-단계-프로브]]` 세션에서 `/model` 실행 결과 `Set model to \`Opus 5\` for this
+session only`가 확인됨 — "Opus 5"라는 표시명은 2026-07-07 시점에 서버가 내려주던 위 Claude 목록
+(`claude-opus-4-8` 등 4-8/4-7 세대 별칭)에는 없던 이름으로, CLI 자체가 그 사이 새 세대 별칭을
+노출하게 됐거나(가정) 터미널 경로가 별도 모델 목록을 쓰는 것으로 추정된다(코드 확인 안 됨,
+미검증). "세션 한정"이라는 stdout 문구대로, 이 전환이 같은 터미널 프로세스를 벗어나 이어지는지는
+미확인.
+
 ## 관련
 - [[lampas-harness]] / [[lampas]] / [[2026-07-06-lampas-harness-구축]] / [[2026-07-11-desktop-퀵채팅-설치-스크립트]] / [[2026-07-13-람파스-누적운영기억-이관]] / [[2026-07-15-auto모델-기능-최초구현]] / [[2026-07-15-auto모델-난이도판정-확인ux-개선]] / [[2026-07-16-quick-html-폴더선택기-auto모델-구현]]
-- [[local-llm-on-apple-silicon]] / [[env-empty-var-shadows-dotenv]]
+- [[local-llm-on-apple-silicon]] / [[env-empty-var-shadows-dotenv]] / [[2026-09-14-모델-단계-프로브]]
