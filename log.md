@@ -1954,3 +1954,22 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   파일명·날짜 접두사는 시작 시각 기준 2026-09-25로 통일(기존 컨벤션과 동일). sports-wiki spec 9건
   실패는 진짜 회귀가 아니라 동시 실행 중 생긴 일시적 실패였음을 단독 재실행으로 재현 확인 — 이 세션이
   스스로 검증한 것이므로 위키도 "미검증"이 아닌 "재현 확인됨"으로 기록.
+
+## [2026-09-26] ingest | Fixs 업그레이드: 경로 그룹핑·Jev 오류 분류 (source: 7e2548f8-d157-4ce5-814e-52c1aa5b33b7.md)
+- 원본 보관: `raw/conversations/2026-09-25-fixs-업그레이드-경로묶음-jev분류.md`
+- 세션 신설: [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] — `[[lampas-agent]]` Fixs 탭(재귀 오류
+  자동 수정)에 경로 fingerprint 그룹핑(uuid·hash 등을 `:id`로 치환, 운영 DB 69건→42건)과 Jev 타입드
+  분류(`POST /v1/ai/systemone`, 유형·수정위치·심각도·해결확률 4문항, 텍스트 생성 없이 입력 토큰만
+  과금) 추가·배포(v1.0.25, 커밋 `900ce062`).
+- 엔티티 갱신: [[lampas-agent]] — Fixs 탭 절 신설(그룹핑·Jev 분류·파트너 키 임시 차용 상세), 관련
+  링크에 세션·스킬·토픽·`[[toktalk]]` 추가.
+- 토픽 신설: [[jev-typed-classification]] — "Jev" 패턴을 sports-wiki ingest 게이트(2026-09-25 스포츠
+  경기 엔티티 세션에서 이름만 언급됐던 것)와 Fixs 오류 triage(이번 세션에서 처음 구체화) 두 사용처로
+  통합 정리, 관찰된 함정(nginx 404 재시도 필요·TypeSafe 502 자기참조·파트너 키 미분리) 포함.
+- 스킬 신설: [[error-fingerprint-path-grouping]] — 오류 URL/스택의 가변 토큰을 정규화해 그룹핑하는
+  절차, 릴리스별 별건 유지 규칙과 SQLite WAL 백업 함정 포함.
+- `AI_CONTEXT.md` 갱신: lampas-studio 줄에 Fixs 업그레이드 배포 완료 사실 + [[jev-typed-classification]]
+  링크 추가(36줄, 40줄 이내 유지).
+- `index.md` Sessions·Entities·Topics·Skills 반영(세션1·엔티티1 갱신·토픽1·스킬1 추가).
+- 특이사항: 파트너 키 임시 차용(`FIXS_AI_API_KEY`에 `toktalk`의 `talk-api` 운영 키 복사)은 세션 시점
+  기준 미해결 후속 과제로 명시적으로 남김 — 다음 ingest에서 교체 여부 확인 필요.

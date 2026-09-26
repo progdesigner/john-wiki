@@ -40,6 +40,21 @@ updated: 2026-09-26
   `categoryKey` 없는 스포츠 잡은 큐 진입 자체를 차단(`DomainCategoryPicker.tsx`의 카테고리 목록 로드 전
   선택 시 `undefined`가 되어 조용히 skip되던 버그의 재발 방지).
 
+## Fixs 탭 — 재귀 오류 자동 수집·수정 (2026-09-25 업그레이드)
+Fixs는 오류를 수집해 재귀로 자동 수정하는 기존 기능. 2026-09-25 세션에서 두 가지가 추가돼 v1.0.25
+(커밋 `900ce062`)로 배포됨 → [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]].
+
+- **경로 그룹핑(fingerprint)**: 메시지·스택 안의 uuid·hex·숫자·불투명 토큰·`run_xxx`·번들 해시를
+  `:id`/`:hash`로 치환해 비슷한 경로의 오류를 한 건으로 묶는다(`.../prediction/4617ffc8…` →
+  `.../prediction/:id`). 리포터가 만든 요청 오류는 스택이 리포터 프레임뿐이라 fingerprint에서 제외.
+  데몬 최초 기동 시 기존 레코드 재그룹 — 운영 DB 69건 → 42건. 릴리스가 다르면 여전히 별건 처리.
+- **Jev 오류 유형 분류**: 접수된 오류마다 `POST /v1/ai/systemone`에 typed 질문 4개(유형·수정 위치·
+  심각도·해결 가능 확률)를 한 번에 질의, 텍스트 생성 없이 구조화 답만 받아 **입력 토큰만 과금**.
+  데몬이 5초마다 미분류 1건씩 처리. 상세 → [[jev-typed-classification]].
+- 파트너 키가 없어(`AGENT_AI_API_KEY` 비어 있음) `FIXS_AI_API_KEY`에 `[[toktalk]]`의 `talk-api` 운영
+  키를 임시로 복사해 사용 중 — `platform.lampas.io`에서 Fixs 전용 키 발급 교체가 후속 과제.
+- 접속: `https://lampas-system.tail0e32ab.ts.net/fixs`.
+
 ## 관련 앱 (같은 저장소, 클립 파이프라인 생태계)
 - **[[lampas-web-copy]]**("Copy") — 클립 근거로 SNS 카피/페르소나를 생성하는 웹. 2026-09-25 세션에서
   경기 맥락(어느 경기·팀·장면)을 카피 프롬프트 끝에 추가하고 결과 상단에 "이 클립의 경기" 표시 연동.
@@ -82,7 +97,11 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
 ## 관련
 - 상위 제품: [[lampas-studio]] (같은 저장소 `lampas-system`)
 - 이름 충돌 대상(별개): [[lampas]] · [[lampas-harness]]
-- 세션: [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]
-- 스킬: [[deterministic-extraction-vs-llm-rewrite]] · [[full-stack-feature-removal-audit]]
+- 세션: [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] ·
+  [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]]
+- 스킬: [[deterministic-extraction-vs-llm-rewrite]] · [[full-stack-feature-removal-audit]] ·
+  [[error-fingerprint-path-grouping]]
+- 토픽: [[jev-typed-classification]]
 - 외부 AI 프로바이더: [[gemini]](비전 라벨링, `gemini-3.5-flash` 언급)
-- 연관 저장소: [[john-wiki]] (Threads 데이터 소스로 잠깐 연결됐다가 기능 취소로 분리)
+- 연관 저장소: [[john-wiki]] (Threads 데이터 소스로 잠깐 연결됐다가 기능 취소로 분리) · [[toktalk]]
+  (`talk-api` 운영 키를 Fixs가 임시로 차용)

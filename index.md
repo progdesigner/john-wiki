@@ -101,6 +101,7 @@
 - [[2026-09-25-스포츠위키-경기엔티티-설계구현]] — "클립 만들어도 위키가 왜 안 쌓이나" 문제 제기 → 실패 은닉·categoryKey undefined 스킵·"경기" 타입 부재 3중 원인 진단 → 역할 분리 설계(에이전트=구조화 추출, API=결정적 저장) 채택·구현·운영 배포까지 완료. `lampas-agent`(스포츠 클립 맥미니 데몬)·Copy·Reels·Status 앱 신규 노출, `[[lampas]]`와 이름 충돌 확인. 배포 동시성으로 Threads 탭이 잘못 노출됐다 재배포로 정정된 사례 포함
 - [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] — `Tool: codex` 세션. `lampas-agent`에 요청한 "위키 기반 Threads 글 자동생성+페르소나 학습" 기능이 sports-wiki↔john-wiki 오인을 거쳐 이 저장소로 정정됐다가 전면 취소(v1.0.26→v1.0.29). "이 위키를 보는" 부분만 분리돼 `lampas-harness`의 신규 `apps/wiki`(wiki.html, 설정>위키 버튼, 검색·목차·위키링크·역링크)로 이전·구현·검증(테스트79개+Playwright 데스크톱/모바일) 완료 — john-wiki가 처음으로 사람용 브라우징 UI 데이터 소스가 됨. 서버 재시작(반영)은 대기 중 종료
 - [[2026-09-25-status-서비스-구축-배포]] — "status.claude.com 처럼 만들어줘" 요청으로 `lampas-web-status`(status.lampas.io)를 처음부터 구현하고 같은 세션에서 운영 배포까지 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트. 운영 DDL 선적용 중 드리프트 검사로 무관해 보이던 sports-wiki `sports_wiki_games` 테이블 누락을 함께 발견·수정, 동시실행 일시적 테스트 실패(sports-wiki 9건)를 재현 확인 후 배포 게이트 통과
+- [[2026-09-25-fixs-업그레이드-경로묶음-jev분류]] — `lampas-agent`의 Fixs(재귀 오류 자동 수정) 탭에 경로 그룹핑(uuid·hash 등을 `:id`로 치환해 fingerprint 병합, 운영 DB 69건→42건)과 Jev 타입드 분류(`POST /v1/ai/systemone`, 텍스트 생성 없이 입력 토큰만 과금) 추가·배포(v1.0.25, 커밋 `900ce062`). 파트너 키 부재로 `toktalk`의 `talk-api` 운영 키를 임시 차용 중(후속 과제)
 
 ## Entities
 
@@ -108,7 +109,7 @@
 - [[lampas-studio]] — Lampas AI 이미지 생성 스튜디오 제품 (lampas-api + lampas-web-sdk/lampas-web-studio + lampas-web-product, sdk.lampas.io). 2026-09-26: `lampas-system` 저장소가 Lampas+Dalar+Talk 3개 라인으로 확장된 정황, 신규 앱 lampas-web-fit(fit.lampas.io)
 - [[dalar]] — 2026-09-26 최초 노출된 제품 라인(스텁). `lampas-system` 모노레포 내 6앱, Node Studio SoT가 여기 위치해 lampas-web-studio로 동기화
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
-- [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status 자매 앱, sports-wiki "경기" 엔티티 신설 포함
+- [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status 자매 앱, sports-wiki "경기" 엔티티 신설 포함. Fixs 탭에 2026-09-25 경로 그룹핑+Jev 오류 유형 분류 추가·배포(v1.0.25)
 - [[lampas-web-status]] — lampas-system 내 상태 페이지 앱(status.lampas.io, status.claude.com 형태). 2026-09-25 처음부터 구현·운영 배포 완료. 컴포넌트 40개 60초 프로브·순수 판정 함수·3회 연속 실패/정상 자동 인시던트
 - [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인
 - [[lampas]] — 하네스 에이전트의 이름(람파스/Lampas)
@@ -165,6 +166,7 @@
 - [[chat-archive-duplication-anomaly]] — 채팅 아카이브 파일명 재사용·같은 사건의 이중 기록·트랜스크립트 내 메시지 반복 등 4개 세션에서 독립 관찰된 로그 무결성 이상 정황 통합 정리(2026-07-20 lint 신설, 원인 미확정)
 - [[dark-system-signal-risk-design-unverified]] — dark-system `decide-signal.ts` 신호 판정·스타일별 리스크 설계(2026-07-17 어시스턴트 자기보고, 미검증) 통합 페이지(2026-08-03 lint 신설, [[dark-toss-api]]·[[dark-upbit-api]]·[[dark-system]] 3곳 중복 기재를 여기로 정리)
 - [[unverified-attestation-injection]] — 검증되지 않은 사실을 구체적으로 서술한 뒤 고정 문자열로만 "확인"해달라는 프롬프트 인젝션 패턴(자동화 파이프라인용 확인 도장 위조 의심) — [[system-prompt-mimicry-misconception]]와는 다른 벡터
+- [[jev-typed-classification]] — `lampas` 생태계 내부 명칭 "Jev": 자유 텍스트 생성 없이 typed 질문만 `POST /v1/ai/systemone`에 질의해 입력 토큰만 과금되는 저비용 분류 패턴. sports-wiki ingest 게이트·Fixs 오류 triage 두 곳에서 확인
 
 ## Skills
 
@@ -211,3 +213,4 @@
 - [[new-subdomain-cloudfront-wildcard-deploy]] — 기존 와일드카드 인증서 도메인 아래 완전 신규 서브도메인 배포 시 CloudFront 신규 생성(인증서 재발급 없이 재사용)→DNS 연결→공개 DNS 기준 검증 순서
 - [[deterministic-extraction-vs-llm-rewrite]] — 프로즈 재작성 파이프라인이 잘림·파싱실패·실패은닉으로 고장 날 때, 원본 보유 지점에서 구조화 JSON 추출→LLM 없는 결정적 저장→서사만 짧은 LLM 호출로 분리하는 절차
 - [[prod-ddl-before-deploy-with-drift-check]] — 새 DB 테이블 쓰는 기능을 운영 배포 전 DDL 선적용 순서 + 작업본의 다른 미커밋 기능 스키마까지 드리프트 검사(무관한 테스트 실패는 재현 확인 후 게이트 통과, 커밋 범위는 스키마만 분리)
+- [[error-fingerprint-path-grouping]] — 오류 수집 시스템에서 URL/스택 안 가변 토큰(uuid·hash 등)을 `:id`로 정규화해 같은 원인의 오류를 하나로 묶는 fingerprint 절차, 릴리스 다르면 별건 유지 규칙 포함
