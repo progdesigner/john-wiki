@@ -43,6 +43,25 @@ updated: 2026-09-26
 - 스펙 문서 경로: `docs/superpowers/specs/2026-08-02-studio-sync-dalar-to-lampas-design.md`(내용 미확인).
 - `pnpm sync:studio:check`로 스튜디오 SoT 드리프트를 검사하는 명령이 별도 존재.
 
+## 채팅 의도 분류 Jev 도입 — 구현 완료, 배포 여부 미확인 (2026-09-20 세션)
+
+`[[lampas-studio]]`(`lampas-system`) AI 호출 패턴 전체 감사 세션(`Tool: claude`, 2a32a383, → 아래
+세션 링크)에서 사용자가 "#6 채팅 의도 분류·플로우 턴 판별"을 지정해 구현:
+
+- `dalar-api POST /v1/orchestration/classify-intent` — 의도 `choice`(10종)+취소 `noul`을
+  `[[jev-typed-classification]]`(TypeSafe) 한 호출로 판정. `analyze-flow-turn`이 확신 취소(≥0.75)·
+  shoot 이외 플로우 진행(≥0.85)을 Grok 없이 확정.
+- `dalar-web-app director/mergeIntent.ts` — 기존 `classifyIntent.ts`(16종 한국어 정규식)와 confidence
+  게이팅(≥0.6 채택, 취소 ≥0.8, 사진 첨부는 규칙)으로 병합. 기존 평가 세트 28건 그대로 통과, 병합
+  로직 테스트 10건 추가.
+- 벤치 스크립트 `apps/dalar-api/scripts/bench-intent-jev.ts` — 같은 평가 세트로 Jev의 한국어 정확도를
+  직접 측정하기 위한 도구(실행 여부 미확인).
+- lampas-api 1003·dalar-api 19 스위트·dalar-web-app 469 테스트까지 전부 통과했으나, **세션 종료
+  시점엔 `TYPESAFE_API_KEY`가 어느 env에도 없어 배포가 보류됨**. 이후 실제 운영 배포·벤치 실행 여부를
+  언급하는 후속 소스가 이 위키에 없어 **미확인 상태로 남긴다** — 같은 세션에서 함께 구현된
+  `lampas-api` sports-wiki 게이트(#7)는 5일 뒤 소스로 실제 배포가 간접 확인됐지만, 이 기능은 그런
+  확인이 없다.
+
 ## 열린 질문
 - Dalar가 `[[lampas-studio]]`와 같은 회사/제품군인지, 별도 브랜드인지 이름만으로는 판단 불가.
 - ~~`lampas-web-studio`가 Dalar에서 단방향 동기화만 받는지, 자체 변경분도 있는지 미확인.~~ →
@@ -51,6 +70,8 @@ updated: 2026-09-26
 
 ## 관련
 - 세션: [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
-  [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]]
+  [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] ·
+  [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]]
 - 저장소: [[lampas-studio]] (같은 모노레포 `lampas-system` 안에 공존)
 - 앱: [[dalar-web-first]]("First" AI 돌잔치 영상 서비스, `first.dalar.ai`)
+- 토픽: [[jev-typed-classification]] · [[lampas-system-ai-call-architecture-audit]]

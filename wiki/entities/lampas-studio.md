@@ -271,13 +271,27 @@ Space=매핑으로 추천받음. 상세 → [[lampas-actor-object-space-position
   **내장 오리지널 비트** 사용(라이선스 미확인 회피). 배포는 기존 `deploy-web.sh` 경로 + `fit.lampas.io`
   전용 CloudFront 신규 생성 + 기존 Lampas 와일드카드 인증서로 HTTPS 적용. → [[2026-09-25-lampas-web-fit-구축-배포]]
 
-## Jev(TypeSafe) 도입 검토 — 미채택 자문 (2026-09-20 세션)
+## Jev(TypeSafe) 도입 — 같은 날 세 세션이 서로 다른 결과 (2026-09-20)
 
-`[[progdesigner]]`의 요청으로 [[lampas]]가 `lampas-api`의 `references`·`orchestration`·`trends`·
-`product-insights` 모듈을 훑어 `[[jev-typed-classification]]`(typed 질문 기반 저비용 판정) 적용처를
-추천만 한 자문 세션 — **코드 수정 없음**. 우선순위 1위는 레퍼런스 탐색 결과 재정렬
-(`reference-explore.service.ts:217`)이었으나 최종 결론은 "전면 도입 보류"였다. 상세 →
-[[jev-typed-classification]] "미채택 후보 5개" 절 · [[2026-09-20-jev-활용처-추천-lampas-system]].
+2026-09-20 하루에 거의 같은 프롬프트("Jev 활용처 찾아서 lampas-system 개선 추천")로 시작된 세 세션이
+있었다. 서로 다른 도구·다른 서베이·다른 결론을 냈으므로 혼동하지 않도록 나열:
+
+1. **11:00:08Z, `Tool: claude`** — `lampas-api`/`dalar-api`/`lampas-agent`/`lampas-web-*`/`talk-api`
+   전체 AI 호출 패턴을 조사(→ [[lampas-system-ai-call-architecture-audit]])하고 Jev 적용처 10개를
+   추천, 사용자가 "#6" 지정 → **`dalar-api` 채팅 의도분류 + `lampas-api` sports-wiki ingest 게이트를
+   실제로 구현·테스트**(코드 완료, 배포는 `TYPESAFE_API_KEY` 부재로 세션 종료 시점 보류).
+   → [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]]
+2. **11:38:22Z, `Tool: codex`** — `references`·`orchestration`·`trends`·`product-insights` 모듈만
+   훑어 별도로 5개 후보를 추천, **코드 수정 없이** "전면 도입 보류"로 종료. 우선순위 1위는 레퍼런스
+   탐색 결과 재정렬(`reference-explore.service.ts:217`). → [[jev-typed-classification]] "미채택 후보
+   5개" 절 · [[2026-09-20-jev-활용처-추천-lampas-system]]
+3. **11:52:53Z, `Tool: codex`** — Flow 구축 세션의 "Jev 노드 자동화" 절에서 사용자가
+   `TYPESAFE_API_KEY` 값을 직접 제공, `.env.production`에 반영 → **이 값이 1번 세션이 막아둔 배포
+   전제조건을 사실상 해소**했을 가능성이 높다(5일 뒤 sports-wiki 세션이 게이트의 실제 프로덕션 동작을
+   서술함, → [[jev-typed-classification]] "확인된 사용처 #1"). → [[2026-09-20-lampas-flow-만들기]]
+
+세 세션의 소스만으로는 1번의 코드가 3번의 배포와 정확히 어떻게 합류했는지 확정할 수 없다 — 커밋
+그래프 확인이 필요한 열린 질문으로 남긴다.
 
 ## 스포츠 클립 파이프라인 — 에이전트·위키·Copy·Reels·Status·Tools (2026-09-25 세션에서 첫 노출)
 
@@ -352,8 +366,10 @@ Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[
   [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] · [[2026-09-25-스포츠위키-경기엔티티-설계구현]] ·
   [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]]
-- 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]]
-- 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]]
+- 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
+  [[lampas-system-ai-call-architecture-audit]]
+- 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
+  [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]]
 - 앱: [[lampas-web-ai]] · [[lampas-agent]](스포츠 클립 파이프라인) · [[lampas-web-copy]] ·
   [[lampas-web-reels]] · [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`)

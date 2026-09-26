@@ -2250,3 +2250,36 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `index.md` 갱신 (Sessions 1신설·Topics 1갱신 라인 반영).
 - 특이사항: 소스 파일명이 "Lampas Agent 개선"이지만 실제 내용은 스포츠 클립 데몬 `[[lampas-agent]]`가
   아니라 `lampas-system` 저장소(`[[lampas-studio]]`) 전체 대상 — 세션 페이지에 명시적으로 정정 기록.
+
+## [2026-09-26] ingest | Jev(TypeSafe) 어댑터 도입 + Dalar 의도분류·sports-wiki 게이트 구현 (source: 2a32a383-6df8-4e10-bac5-0afa7e7a8c86.md)
+- 원본: `raw/conversations/2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현.md`
+  (`Tool: claude`, 세션 `2a32a383`, 2026-09-20T11:00:08Z 시작). 소스 제목 "Lampas Agent 개선"은
+  오인 소지 — 실제 대상은 `lampas-system`(`[[lampas-studio]]`) 전체.
+- 세션 신설: [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]] — 저장소 전체
+  AI 호출 패턴 조사(85 tool-use) → Jev 적용처 10개 추천 → 사용자가 "#6" 지정 → `lampas-api`에
+  TypeSafe 직결 어댑터+`POST /v1/ai/systemone` 게이트웨이 신설, `dalar-api` 채팅 의도분류
+  (`classify-intent`)+`dalar-web-app` confidence 병합(`mergeIntent.ts`), `lampas-api` sports-wiki
+  ingest Jev 게이트(`sports-wiki-gate.ts`) 구현·테스트(1003+19+469 테스트 통과) — 배포는
+  `TYPESAFE_API_KEY` 부재로 세션 종료 시점 보류.
+- **같은 날 세 세션 정리**: 이 세션(11:00Z, claude)과 별개로 11:38Z `codex` 세션이 같은 프롬프트로
+  다른 서베이·5개 후보만 추천(기존 [[2026-09-20-jev-활용처-추천-lampas-system]], 코드 수정 없음),
+  11:52Z `codex` 세션([[2026-09-20-lampas-flow-만들기]])이 Flow 구축 중 사용자가
+  `TYPESAFE_API_KEY`를 직접 제공해 `.env.production`에 반영 — 이 세션의 배포 보류를 사실상 해소한
+  것으로 추정되나 세 세션 소스만으론 확정 불가.
+- **타임라인 정정**: [[jev-typed-classification]] "확인된 사용처 #1"(sports-wiki 게이트)의 실제
+  구현 시점을 기존 "2026-09-25 이름만 언급"에서 **2026-09-20 코드·테스트 완료**로 정정. 5일 뒤
+  2026-09-25 sports-wiki 세션(`raw/conversations/2026-09-25-위키개선-스포츠경기엔티티-설계.md:47-48`)
+  이 게이트의 실제 프로덕션 동작(skip·15초 타임아웃)을 서술해 그 사이 배포가 풀렸음을 간접 확인.
+  같은 세션에서 구현된 dalar 의도분류(#6)는 이런 후속 확인이 없어 배포 미확인으로 별도 명시.
+- 토픽 신설: [[lampas-system-ai-call-architecture-audit]] — JSON 파서 7종 중복, 앱 간 파일 포크,
+  폴백 루프 복붙, tool-calling 부재, 뒤집힌 스트리밍 등 10대 구조적 문제 지도. Jev와 무관하게도
+  재사용 가치 있는 리팩터 근거 자료로 별도 페이지 분리.
+- 토픽 갱신: [[jev-typed-classification]] — 사용처 #1 타임라인 정정 + #5(dalar 의도분류, 배포
+  미확인) 신설 + "미채택 후보" #2와의 혼동 방지 각주 추가.
+- 엔티티 갱신: [[lampas-studio]] (같은 날 세 Jev 세션을 시간순 정리하는 절로 기존 "미채택 자문" 절
+  교체) · [[dalar]] (채팅 의도분류 구현·배포 미확인 절 신설).
+- `index.md` 갱신 (Sessions 1신설·Entities 2갱신·Topics 1신설+1갱신).
+- 특이사항: 이 ingest의 핵심 가치는 새 사실 자체보다 **기존 위키 기록의 시점 오류 정정**이다 —
+  sports-wiki Jev 게이트를 "2026-09-25 신규"로 알고 있던 기록이 실제로는 5일 앞선 구현의 뒤늦은
+  재확인이었음이 드러남. `AI_CONTEXT.md`는 40줄 예산이 이미 소진 상태라 변경하지 않음(상세는 위
+  두 토픽·두 엔티티 페이지에 있고 기존 요약 문장에서 이미 [[jev-typed-classification]]로 링크됨).
