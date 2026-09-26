@@ -2549,3 +2549,11 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - wiki/skills/macos-launchd-daemon.md 갱신 — `bootstrap` 직후 오류 5 재발 사례에 스크립트 자체 3회 재시도 루프 자동화 사례 추가
 - index.md 갱신 (세션 1건 신설, 엔티티 6건 갱신, 스킬 1건 신설+1건 갱신)
 - AI_CONTEXT.md 갱신 보류 — 이 세션의 핵심 사실(시점 재정정, 근본원인 규명)은 위키 엔티티 페이지에 이미 상세 반영됐고 lampas-studio 서술 대비 현재 상태를 바꾸는 내용이 아니라 상시 주입 가치가 낮다고 판단
+
+## [2026-09-26] ingest | elevino-admin 모바일메뉴 수정 + 소장 신청 차단·취소 (source: a9f511a0-d26c-46cb-9547-d5001002c209.md)
+- raw/conversations/2026-09-11-elevino-admin모바일메뉴-소장신청차단취소.md 보관 (원본 세션 2026-09-11T12:25Z 시작~09-12, 뒤늦게 ingest)
+- wiki/sessions/2026-09-11-elevino-admin모바일메뉴-소장신청차단취소.md 신설 — elevino-admin 모바일 메뉴 즉시 닫힘 버그 수정(리사이즈 체크 로직 원인), 소장하기 신규 신청 차단(API+웹, "더이상 지원하지 않습니다" 메시지)+관리자 SUPPLY→소장 신청 관리 메뉴·대기 신청 취소 기능 구현·배포, 커밋 `721c74df` 푸시
+- wiki/entities/elevino-system.md 갱신 — **핵심 발견**: 이 세션이 2026-09-25 배포장애 세션에서 "cwc-system 쪽에만 있다가 사라졌다"고 기록된 소장 신청 중단/취소·모바일 관리자 메뉴 기능의 원 구현 세션임을 확인. 작업 폴더가 처음부터 `cwc-system/apps/elevino-admin`이었고 `admin.elevino.io`에 직접 배포 — 09-25 "8월 3일부터 cwc-system이 프로덕션 배포 소스"라는 발견을 09-11 시점에서 소급 실증
+- wiki/entities/cwc-system.md 갱신 — 변경 이력에 09-11 세션의 소급 확인 사실 추가
+- index.md 갱신 (세션 1건 신설, 엔티티 2건 갱신)
+- AI_CONTEXT.md 갱신 보류 — 09-25 기록된 사실(cwc-system이 elevino 프로덕션 배포 소스)의 시점을 소급 뒷받침할 뿐 현재 상태·결정을 바꾸지 않아 상시 주입 가치 낮음
