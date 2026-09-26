@@ -2664,3 +2664,12 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 새 스킬 페이지는 만들지 않음 — 두 기존 스킬(llm-judge-fallback-chain·localstorage-ui-preference-persistence)의 변형/재사용 사례로 충분히 커버됨, 소프트 삭제·DDL 선적용도 기존 스킬(prod-ddl-before-deploy-with-drift-check)의 표준 절차 그대로 재사용이라 신규 절차 없음
 - index.md 갱신 (세션 1건 신설, 엔티티 1건 신설(lampas-web-voice), 엔티티 3건(lampas-web-copy·lampas-web-pulse·lampas-web-tools) 한 줄 요약 갱신)
 - AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태이고, 이 세션의 핵심 사실(신규 앱 노출·기능 추가)은 엔티티·세션 페이지로 충분히 커버됨
+
+## [2026-09-26] ingest | ai.dalar 인스타그램 토큰 발급 시도 — 메타 앱 생성 (source: e3fd9877-e942-41ef-8257-5f144172500b.md)
+- raw/conversations/2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성.md 보관 (원본 세션 2026-09-26T08:29:35.487Z 시작, `Tool: claude`, `lampas-system` 작업 디렉터리)
+- 세션 신설: [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] — Instagram 계정 `ai.dalar`(`[[dalar]]` 콘텐츠 자동게시용으로 추정)용 전용 Meta 앱 "dalar ai publisher"(앱 ID 1845197946676275) 생성, 권한 5종 추가, 테스터 초대·수락, 개인→비즈니스 계정 전환, 권한 동의까지 완료했으나 장기 액세스 토큰 발급에서 막혀 세션 종료 시점까지 미완료
+- 핵심 발견: `[[lampas-browser]]`(하네스 "브라우징" 패널)의 OAuth 팝업 처리 한계 — 팝업이 별도 탭으로 열려 완료 감지 불가, 비밀번호 필드는 AI 도구가 조작 불가, 좁은 시크릿 표시란은 selection/클립보드 모두로 읽기 실패. 동시에 이 세션은 전날 [[2026-09-26-lampas-browser-구축-harness이전]]이 남긴 "재시작 후 확인 필요"였던 브라우징 기능이 실제로 살아났음을 보여준 최초의 간접 실사용 사례이기도 함
+- 엔티티 갱신: [[dalar]](`ai.dalar` Instagram 계정·토큰 시도 절 추가) · [[lampas-web-package]](`POST /v1/packaging/channels/instagram/connect` 엔드포인트 존재 확인, 상세 미조사) · [[lampas-browser]](실사용 첫 사례+3가지 한계 절 추가)
+- 신규 스킬: [[meta-oauth-token-console-popup-unreliable-in-automated-browser]] — 자동화 브라우저에서 Meta 콘솔 토큰 생성 팝업이 구조적으로 막힐 때 curl 기반 OAuth 코드 교환으로 우회하는 절차
+- index.md 갱신 (세션 1건 신설, 엔티티 3건(dalar·lampas-web-package·lampas-browser) 갱신, 스킬 1건 신설)
+- AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태이고, 이 세션의 핵심 사실(토큰 발급 미완료·다음 단계는 앱 시크릿 수령)은 아직 완결되지 않은 진행 중 작업이라 엔티티·세션 페이지로 충분히 커버됨. 토큰 발급이 완료되면 그 시점에 확정 사실로 반영할 것

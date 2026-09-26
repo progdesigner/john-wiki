@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, tool, electron, chromium, ai-agent, lampas-harness, lampas-studio]
+tags: [entity, project, tool, electron, chromium, ai-agent, lampas-harness, lampas-studio, oauth]
 created: 2026-09-26
 updated: 2026-09-26
 ---
@@ -68,8 +68,30 @@ AI가 읽고 조작할 수 있는 Chromium 기반 데스크톱 브라우저. `[[
 [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]이 만든 `apps/wiki`(wiki.html)도 함께
 반영될 예정이었다 — 두 기능을 함께 검증할 것.
 
+## 실사용 첫 사례 — Meta 개발자 콘솔 조작 (2026-09-26, 재시작 약 18시간 후)
+
+[[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] 세션(08:29Z 시작)이 "Harness 브라우징 패널"의
+여러 탭(로그인·개발자 콘솔·OAuth 콜백)을 실제로 열고 조작한 기록을 남겨, 위 "배포 상태" 절이 남긴
+재시작 확인 필요 사항에 대한 **최초의 간접 확인**이 됐다 — 브라우징 기능 자체는 살아난 것으로 보인다.
+다만 이 세션은 동시에 실사용 한계도 드러냈다:
+
+- **비밀번호 입력 필드는 AI 도구가 조작하지 못한다** — 보안상 의도적 제외로 추정, 항상 사람이 브라우징
+  패널에서 직접 입력해야 함.
+- **팝업 기반 OAuth 완료 감지가 안 된다** — 팝업이 별도 탭으로 열려 닫히지 않아, "팝업이 닫히면 완료
+  감지"하는 방식의 콘솔 UI(Meta 토큰 생성 등)는 메인 화면이 끝내 완료를 인식하지 못했다.
+- **좁은 입력란에 표시되는 값은 `selection`·클립보드 경유 모두로 못 읽을 수 있다** — 복사 버튼이
+  실제로 시스템 클립보드에 텍스트를 넣지 않는 경우가 관찰됨.
+
+이 세 가지는 [[lampas-browser]] 설계 자체의 결함이라기보다 **자동화 브라우저가 OAuth 팝업 플로우와
+구조적으로 상성이 안 맞는 문제**로 보인다 → 절차화: [[meta-oauth-token-console-popup-unreliable-in-automated-browser]].
+단, "실 Claude/Codex 모델에 작업을 지시하는 엔드투엔드 테스트는 미실시"였던 원 세션의 남은 미검증
+항목은 이 세션으로도 해소되지 않는다 — 이 세션은 사람이 실시간으로 지시하며 브라우저를 조작한
+사례이지, 모델이 자율적으로 브라우징 작업을 완결한 사례는 아니다.
+
 ## 관련
-- 세션: [[2026-09-26-lampas-browser-구축-harness이전]]
+- 세션: [[2026-09-26-lampas-browser-구축-harness이전]] ·
+  [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]](실사용 첫 사례·한계 발견)
 - [[lampas-harness]] — 최종 소속, `apps/browser`, 세션 "브라우징" 선택지
 - [[lampas-studio]] — 최초 기획 맥락(`lampas-system`), 생성 API 연동 대상
 - [[self-hosted-agent-server-ops]] — 배포 지연·재시작 확인 절차, 옛 프로세스 장기 방치 함정
+- 스킬: [[meta-oauth-token-console-popup-unreliable-in-automated-browser]]

@@ -1,5 +1,5 @@
 ---
-tags: [entity, app, lampas-studio, sports-clip-pipeline, sns-copy, pulse, prompt-engineering]
+tags: [entity, app, lampas-studio, sports-clip-pipeline, sns-copy, pulse, prompt-engineering, instagram]
 created: 2026-09-26
 updated: 2026-09-26
 ---
@@ -54,11 +54,20 @@ updated: 2026-09-26
 - 2단계(페르소나 우선순위 수정): API 테스트 961개 → API만 재배포(웹 변경 없음).
 - 3단계(톤 5종): API 테스트 968개 → 웹+API 배포, 실제 서비스 반영 확인.
 
+### Instagram 채널 연결 API (2026-09-26 세션에서 처음 언급, 미구현 확인)
+`[[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]]` 세션에서 처음 언급된 엔드포인트 —
+`POST /v1/packaging/channels/instagram/connect`에 Instagram 장기 액세스 토큰을 넣어 채널을 연결하는
+구조로 추정된다(엔드포인트 자체를 이 세션이 조사·구현한 건 아니라 **존재만 확인, 상세 미조사**).
+대안/보완 경로로 `env`의 `INSTAGRAM_ACCESS_TOKEN`·`META_APP_ID`·`META_APP_SECRET`를 새 값으로
+교체하는 방식도 언급됨. 연결 대상 토큰은 `[[dalar]]`의 `ai.dalar` 계정용으로 발급 시도 중이었으나
+**세션 종료 시점까지 토큰 발급 자체가 미완료**라 이 엔드포인트가 실제로 호출된 적은 없다.
+
 ## 관련
 - 상위 파이프라인: [[lampas-agent]](Pulse 페르소나 생성·채점) · [[lampas-web-reels]](Package로
   완성 영상 전송하는 직전 단계) · [[lampas-web-copy]](같은 Pulse 페르소나를 카피 생성에 사용) ·
   [[lampas-web-flow]](오케스트레이션, Package가 6번째/마지막 Work 노드)
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
 - 소비처(등록 대상): [[dalar-web-first]] "First" 완성 영상도 이 앱으로 전송해 등록
-- 세션: [[2026-09-20-lampas-package-pulse페르소나-릴스자동작성-톤선택]]
+- 세션: [[2026-09-20-lampas-package-pulse페르소나-릴스자동작성-톤선택]] ·
+  [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]]
 - 스킬: [[persona-prompt-default-override-audit]]

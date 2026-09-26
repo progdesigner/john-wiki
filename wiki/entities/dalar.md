@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, monorepo, stub]
+tags: [entity, project, product, monorepo, stub, instagram]
 created: 2026-09-26
 updated: 2026-09-26
 ---
@@ -73,10 +73,22 @@ updated: 2026-09-26
   2026-09-24 세션에서 최소 1건은 단방향(dalar-web-app→sync:studio→lampas-web-studio) 동기화로
   확인됨. 다른 기능도 전부 단방향인지는 여전히 미확인.
 
+## `ai.dalar` Instagram 계정 — 콘텐츠 자동 게시용 (2026-09-26, 추정)
+
+[[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] 세션에서 Instagram 계정 **`ai.dalar`**
+(IG user ID `17841446605741878`)용 전용 Meta 앱 "dalar ai publisher"(앱 ID `1845197946676275`,
+Instagram 앱 ID `4664045167163943`)를 만들어 `instagram_business_content_publish` 등 5개 권한과
+장기 액세스 토큰을 확보하려는 작업이 진행됐다. 목표 연결 지점이 `[[lampas-web-package]]`의
+`POST /v1/packaging/channels/instagram/connect`인 점으로 미루어 `ai.dalar`는 Dalar 콘텐츠를
+자동 게시하는 전용 계정으로 **추정**된다(세션 내 직접 확인 없음). **세션 종료 시점까지 토큰 발급
+미완료** — Meta 앱 시크릿 확보가 막혀 있었다(자세한 장애물은 세션·스킬 링크 참고).
+
 ## 관련
 - 세션: [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
   [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] ·
-  [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]]
+  [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]] ·
+  [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]]
 - 저장소: [[lampas-studio]] (같은 모노레포 `lampas-system` 안에 공존)
 - 앱: [[dalar-web-first]]("First" AI 돌잔치 영상 서비스, `first.dalar.ai`)
 - 토픽: [[jev-typed-classification]] · [[lampas-system-ai-call-architecture-audit]]
+- 채널 연동: [[lampas-web-package]] (Instagram 채널 연결 API 소비처로 추정)
