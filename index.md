@@ -99,17 +99,18 @@
 - [[2026-09-25-edit-템플릿-이미지-s3-url-수정]] — lampas-studio "Edit" 템플릿 에디터(이 위키 최초 노출)에서 SPOTV 템플릿 로고가 다른 브라우저에 안 붙는 문제 수정. 이미지 슬롯 `fingerprint`(로컬 OPFS)/`url`(공개 CDN) 이원 구조 확인, 계정별 템플릿 레코드 중 `url` 누락분에 기존 CloudFront URL 채워 넣는 서버 데이터 수정(코드·배포 불필요)
 - [[2026-09-25-lampas-web-fit-구축-배포]] — `Tool: codex` 세션. 신규 앱 `lampas-web-fit`(음악 박자 동기 운동 가이드, 다음 동작 8박 전 예고+4박 음성 카운트)을 처음부터 구현·검증하고 `fit.lampas.io`로 신규 CloudFront+기존 와일드카드 인증서 배포까지 완료. 저장소 `AGENTS.md` 스냅샷에서 lampas-system이 Lampas+Dalar(신규)+Talk(구 dbs/talk-system 통합 정황) 3개 제품 라인으로 확장된 사실과 DB(MySQL vs 기록된 PostgreSQL) 모순 발견
 - [[2026-09-25-스포츠위키-경기엔티티-설계구현]] — "클립 만들어도 위키가 왜 안 쌓이나" 문제 제기 → 실패 은닉·categoryKey undefined 스킵·"경기" 타입 부재 3중 원인 진단 → 역할 분리 설계(에이전트=구조화 추출, API=결정적 저장) 채택·구현·운영 배포까지 완료. `lampas-agent`(스포츠 클립 맥미니 데몬)·Copy·Reels·Status 앱 신규 노출, `[[lampas]]`와 이름 충돌 확인. 배포 동시성으로 Threads 탭이 잘못 노출됐다 재배포로 정정된 사례 포함
+- [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] — `Tool: codex` 세션. `lampas-agent`에 요청한 "위키 기반 Threads 글 자동생성+페르소나 학습" 기능이 sports-wiki↔john-wiki 오인을 거쳐 이 저장소로 정정됐다가 전면 취소(v1.0.26→v1.0.29). "이 위키를 보는" 부분만 분리돼 `lampas-harness`의 신규 `apps/wiki`(wiki.html, 설정>위키 버튼, 검색·목차·위키링크·역링크)로 이전·구현·검증(테스트79개+Playwright 데스크톱/모바일) 완료 — john-wiki가 처음으로 사람용 브라우징 UI 데이터 소스가 됨. 서버 재시작(반영)은 대기 중 종료
 
 ## Entities
 
-- [[lampas-harness]] — Claude Agent SDK 기반 웹 하네스 (맥미니 데몬, 큐, 채팅 UI)
+- [[lampas-harness]] — Claude Agent SDK 기반 웹 하네스 (맥미니 데몬, 큐, 채팅 UI). 2026-09-26: `apps/wiki`(wiki.html) 신설 — john-wiki를 사람이 브라우징하는 읽기전용 위키 뷰어, 설정>위키 버튼
 - [[lampas-studio]] — Lampas AI 이미지 생성 스튜디오 제품 (lampas-api + lampas-web-sdk/lampas-web-studio + lampas-web-product, sdk.lampas.io). 2026-09-26: `lampas-system` 저장소가 Lampas+Dalar+Talk 3개 라인으로 확장된 정황, 신규 앱 lampas-web-fit(fit.lampas.io)
 - [[dalar]] — 2026-09-26 최초 노출된 제품 라인(스텁). `lampas-system` 모노레포 내 6앱, Node Studio SoT가 여기 위치해 lampas-web-studio로 동기화
 - [[lampas-web-ai]] — lampas-studio 내 대화형 AI 스튜디오 앱(ai.lampas.io), 2026-07-15부터 주요 앱. actorFlow.ts 단일 상태머신 파일(2,658줄)
-- [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Threads·Fixs 탭). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status 자매 앱, sports-wiki "경기" 엔티티 신설 포함
+- [[lampas-agent]] — lampas-system 내 스포츠 클립 라벨링·업로드 맥미니 데몬(Clips·Pulse·Fixs 탭, Threads는 2026-09-26 추가 후 전면 제거됨). **[[lampas]](하네스 에이전트)와 이름만 겹치는 별개 앱** — Copy/Reels/Status 자매 앱, sports-wiki "경기" 엔티티 신설 포함
 - [[toktalk]] — TokTalk AI 캐릭터/보이스 챗 제품 (talk-* 7앱 모노레포, toktalk.ai). 2026-09-26: `lampas-system` AGENTS.md가 talk-* 앱을 자기 하위로 열거(구 dbs/talk-system 주석) — "별개 코드베이스" 기존 기록과 모순, 미확인
 - [[lampas]] — 하네스 에이전트의 이름(람파스/Lampas)
-- [[john-wiki]] — progdesigner의 공통 장기기억 저장소·개인 위키 (이 저장소)
+- [[john-wiki]] — progdesigner의 공통 장기기억 저장소·개인 위키 (이 저장소). 2026-09-26: `lampas-harness apps/wiki`의 사람용 브라우징 UI 데이터 소스로 처음 연결됨
 - [[progdesigner]] — 개발자·소스 공급자, 맥미니 운용
 - [[cwc-commerce]] — 씨더블유씨커머스 유한회사, 위키/제품군 배경 회사 "CWC" (대표 이용욱/John Lee, 엘레망 광화문 임차)
 - [[sylvan-korea]] — CWC 계열사, 공유오피스 계약 2026-09 종료 → 엘레망 광화문 일부 공간 공동 사용 검토

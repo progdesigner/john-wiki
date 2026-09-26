@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, knowledge-base, long-term-memory]
 created: 2026-07-09
-updated: 2026-07-27
+updated: 2026-09-26
 ---
 # john-wiki
 
@@ -36,8 +36,30 @@ LLM이 작성·유지하고 사람은 소스를 공급·질문한다.
   없어 pull 자체가 불필요했다 → [[2026-07-15-works-프로젝트-최신화-lampas-system-리베이스]] ·
   [[2026-07-17-works-저장소-일괄최신화-pull]]. 반대 방향(commit+push)은 [[2026-07-18-works-전체저장]] 참고.
 
+## 사람용 브라우징 UI 연결 — `lampas-harness apps/wiki` (2026-09-26)
+
+기존 `[[wiki-memory-provider-integration]]`(방법 C, LLM이 tool로 능동 검색)와는 **별개의 새 소비
+경로**가 처음 생겼다: `[[lampas-harness]]`에 이 저장소를 **사람이 위키피디아처럼 브라우징**하는
+읽기 전용 웹 UI(`apps/wiki`, 진입점 `wiki.html`)가 추가되고, 하네스 설정(⚙) 아래 **"위키" 버튼**으로
+노출됨. 하네스 기존 인증 + `WIKI_DIR` 설정(2026-07-11에 이미 코드 레벨로 존재했던 그 경로,
+[[2026-07-11-기억-요약-wiki-경로-확인]])을 그대로 재사용해 이 저장소의 markdown 원본을 서버가 직접
+읽는다. 본문 검색·문서 목차·분류·위키링크·역링크(backlink) 렌더링까지 구현, 하네스 테스트 79개
+(검색·위키링크·역링크·접근 제한 포함)와 Playwright 데스크톱·모바일 실브라우저 검증 통과. →
+[[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]
+
+- **경위**: 원래 `[[lampas-agent]]`(스포츠 클립 데몬)에 이 위키 기반 Threads(SNS 글 자동생성) 기능을
+  요청했다가, 어시스턴트가 처음엔 "위키"를 sports-wiki로 오인 → 사용자 정정으로 이 저장소임을 확정 →
+  결국 Threads 기능 자체는 취소되고, "이 위키를 보는 기능"만 분리되어 `lampas-harness apps/wiki`로
+  이전됨.
+- **소비 경로 분류 갱신**: 기존 방법 A(요약 붙여넣기)/B(`AI_CONTEXT.md` 자동주입)/C(LLM 검색 tool,
+  미완)에 이어 **방법 D: 사람용 읽기 전용 웹 UI**가 실제 구현·검증까지 완료된 첫 사례. → 상세 비교는
+  [[long-term-memory-architecture]] 참고.
+- **미확인**: 세션 종료 시점에 하네스 서버 재시작(반영)이 실행 중인 터미널 세션 보호를 위해 대기
+  중이었음 — 실제 프로덕션에 이 기능이 반영됐는지는 다음 확인 필요.
+
 ## 관련
 - 소유자·사서 소스: [[progdesigner]]
-- 연동 대상 하네스: [[lampas-harness]]
+- 연동 대상 하네스: [[lampas-harness]] (`apps/wiki` 사람용 브라우저 + memory provider 제안)
 - 토픽: [[long-term-memory-architecture]]
 - 스킬: [[wiki-memory-provider-integration]]
+- 세션: [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]

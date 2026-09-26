@@ -3,6 +3,8 @@ tags: [entity, project, product, sports, video, mac-mini, daemon, lampas-studio]
 created: 2026-09-26
 updated: 2026-09-26
 ---
+> **2026-09-26 갱신**: Threads 탭은 아래 "Threads 기능 추가→취소" 절 참고 — 2026-09-25 세션이 관찰한
+> Clips·Pulse·Threads·Fixs 4탭 중 Threads는 결국 **전면 제거**되어 v1.0.29 기준 3탭(Clips·Pulse·Fixs)이다.
 # lampas-agent (스포츠 클립 에이전트)
 
 `apps/lampas-agent` — `[[lampas-studio]]` 저장소(`lampas-system`) 내 앱. **스포츠 경기 영상을 클립으로
@@ -58,9 +60,26 @@ updated: 2026-09-26
 어시스턴트 결론: **한 저장소의 배포는 한 세션에서만 수행하는 것이 안전.** → 세션:
 [[2026-09-25-스포츠위키-경기엔티티-설계구현]]
 
+## Threads 기능 추가→취소 (2026-09-26)
+
+Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거로 SNS(Threads) 글 초안을 자동
+생성하고, 사용자가 수정·저장한 글에서 말투·의도(페르소나)를 학습해 다음 글에 반영하는 기능을
+요청받아 구현→배포까지 갔다가, **사용자가 전면 취소**했다.
+
+- **데이터 소스 오인 → 정정**: 어시스턴트가 처음엔 "보관 위키"를 이 앱에 이미 연결된 sports-wiki로
+  오인해 브라우저 localStorage 저장 방식으로 구현(v1.0.26 배포 전 단계). 사용자가 "llm-wiki"를
+  가리켰음을 정정하자, 실제 대상이 `[[john-wiki]]`(`~/Works/john-wiki`, **186개 페이지**)로 확정되고
+  저장 방식도 브라우저 로컬 저장 → **서버 DB**(기기/브라우저 무관 이어쓰기, 충돌 검사)로 전환됐다.
+  v1.0.26으로 재배포(테스트 437개 통과 후, Clips 위키 코드와 어긋난 기존 테스트를 먼저 갱신).
+- **전면 취소**: 곧이어 "Threads 만드는 기능은 취소할게, lampas-agent에서 제거해줘" 지시로 탭 UI +
+  API 전체가 삭제되고 v1.0.29로 재배포됨. john-wiki를 "보는" 부분만 살아남아
+  `[[lampas-harness]]`의 `apps/wiki`로 이전됨(사람용 위키 브라우저, LLM 기능 아님).
+  → 세션: [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]
+
 ## 관련
 - 상위 제품: [[lampas-studio]] (같은 저장소 `lampas-system`)
 - 이름 충돌 대상(별개): [[lampas]] · [[lampas-harness]]
-- 세션: [[2026-09-25-스포츠위키-경기엔티티-설계구현]]
-- 스킬: [[deterministic-extraction-vs-llm-rewrite]]
+- 세션: [[2026-09-25-스포츠위키-경기엔티티-설계구현]] · [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]
+- 스킬: [[deterministic-extraction-vs-llm-rewrite]] · [[full-stack-feature-removal-audit]]
 - 외부 AI 프로바이더: [[gemini]](비전 라벨링, `gemini-3.5-flash` 언급)
+- 연관 저장소: [[john-wiki]] (Threads 데이터 소스로 잠깐 연결됐다가 기능 취소로 분리)

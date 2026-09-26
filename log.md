@@ -1917,3 +1917,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 특이사항: 같은 밤 별도 세션(`raw/conversations/2026-09-25-reels-페르소나-카드스트립-점수정렬.md`,
   Copy/Reels/Pulse 신뢰도 점수 관련)이 아직 wiki/sessions로 정식 ingest되지 않은 채 발견됨 — 이번
   ingest에서 참고만 하고 정식 세션 페이지 생성은 다음 ingest로 미룸(원본은 이미 raw/에 존재).
+
+## [2026-09-26] ingest | Threads 기능 취소·제거 + llm-wiki 탐색기 apps/wiki 이전 (source: fddf51f9-43f6-48d4-91e6-cc31f849c47d.md)
+- 원본 보관: `raw/conversations/2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전.md`
+- 세션 신설: [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] — `Tool: codex` 세션. [[lampas-agent]]에
+  "보관 위키 데이터로 Threads 글 자동생성+수정본 학습 페르소나" 기능 요청 → 어시스턴트가 처음엔
+  sports-wiki로 오인해 브라우저 저장 방식 구현 → 사용자 정정으로 실제 대상이 이 저장소([[john-wiki]],
+  186페이지)임이 확정되며 서버 DB 저장으로 전환, v1.0.26 배포 → 사용자가 "Threads 기능은 취소, 제거해줘"
+  지시로 탭 UI+API 전면 삭제, v1.0.29 재배포 → "이 위키를 보는" 부분만 분리돼 [[lampas-harness]]의
+  신규 `apps/wiki`(wiki.html, 설정>위키 버튼, 검색·목차·위키링크·역링크)로 이전·구현, 테스트 79개+
+  Playwright 데스크톱/모바일 검증 통과 — 서버 재시작(반영)은 실행중 터미널 세션 보호 위해 대기 중 종료.
+- 엔티티 갱신: [[john-wiki]](사람용 브라우징 UI 데이터 소스로 처음 연결된 절 신설, 소비 경로에 "방법 D"
+  추가), [[lampas-agent]](Threads 기능 추가→취소 절 신설, 탭 구성 Clips·Pulse·Fixs로 정정),
+  [[lampas-harness]](`apps/wiki` 신규 서브앱 절 신설, codex PTY 서브시스템 네 번째 실사용 증거 추가).
+- 스킬 갱신: [[wiki-memory-provider-integration]] — "상태" 절에 apps/wiki(사람용 브라우저)와 이 스킬이
+  다루는 LLM tool 조회(방법 C, 여전히 미구현)를 혼동하지 않도록 구분 메모 추가.
+- `AI_CONTEXT.md` 갱신: john-wiki 항목에 apps/wiki 연결 사실 한 줄 추가(36줄, 40줄 이내 유지).
+- `index.md` Sessions·Entities(john-wiki·lampas-harness·lampas-agent 한 줄 갱신) 반영.
