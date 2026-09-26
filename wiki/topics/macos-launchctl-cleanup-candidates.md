@@ -1,7 +1,7 @@
 ---
 tags: [topic, macos, system-maintenance]
 created: 2026-07-16
-updated: 2026-07-16
+updated: 2026-09-26
 ---
 # macOS launchctl 정리 후보 (progdesigner 맥미니, 2026-07-16 시점)
 
@@ -15,6 +15,13 @@ updated: 2026-07-16
 - **Adobe Creative Cloud 관련 에이전트 다수** (`com.adobe.*`, PID 다수 실행 중) — 디자인
   작업을 안 하면 Adobe CC 앱의 백그라운드 실행을 끄는 것으로 정리.
 - **`com.microsoft.OneDriveStandaloneUpdater`** — 자동 동기화만 필요하면 업데이터 자체는 비활성화 가능.
+
+## ✅ 이후 제거 완료
+
+- **`com.omnara.daemon`** — 이 세션의 원시 로그(약 560개 항목)에 이미 찍혀 있었으나 당시 분석
+  대상에서 누락돼 이 목록에 오르지 못했다. [[omnara]] 소프트웨어의 상주 데몬이었음이 나중에
+  밝혀졌고, **2026-09-26** 사용자 요청으로 `~/.omnara`(512MB) 전체와 함께 완전 제거됨
+  → [[2026-09-26-omnara-완전제거]].
 
 ## ✅ 필수 유지 확인됨
 

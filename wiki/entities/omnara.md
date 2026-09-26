@@ -1,5 +1,5 @@
 ---
-tags: [entity, external-project, agent-architecture, durable-execution, reference, go, postgres]
+tags: [entity, external-project, agent-architecture, durable-execution, reference, go, postgres, uninstalled]
 created: 2026-09-26
 updated: 2026-09-26
 ---
@@ -9,6 +9,17 @@ updated: 2026-09-26
 [[2026-09-18-lampas-agent-omnara분석-durable-run구현]] 세션에서 서브에이전트가 코드베이스를 정독해
 "프로세스가 아니라 DB 상태 머신으로서의 에이전트" 설계를 [[lampas-agent]] 개선안의 근거로 삼았다.
 Go 백엔드 + PostgreSQL, 프론트엔드 SDK(`frontend/packages/sdk`) 보유.
+
+> ⚠️ **같은 이름의 실사용 설치와는 별개 사건** — 위 분석은 코드베이스를 읽은 것이고, 이와 별도로
+> 맥미니에 **실제 Omnara 소프트웨어**(`Omnara.app`, CLI, `claude_wrapper`, `omnara-voice` 포함,
+> `com.omnara.daemon` LaunchAgent로 상주)가 설치돼 있었다. [[macos-launchctl-cleanup-candidates]]의
+> 2026-07-16 launchctl 원시 로그에 `com.omnara.daemon`이 이미 찍혀 있어 최소 그 시점부터 설치돼
+> 있었던 것으로 보이나, 그 세션에서는 분석 대상에서 누락됐다. **2026-09-26**: 사용자 요청으로
+> 완전 제거 완료(`~/.omnara` 512MB 전체 삭제, LaunchAgent 등록 해제, `.zshrc` PATH 설정 제거,
+> 관련 캐시 삭제 — 절차는 [[macos-app-complete-uninstall]] 스킬로 추출) →
+> [[2026-09-26-omnara-완전제거]]. Claude Code 자체 세션 기록(`~/.claude.json`의 옛 워크트리 경로
+> 프로젝트 항목 14개, `~/.claude/projects`의 관련 세션 2개)은 Omnara 소프트웨어가 아니라 대화
+> 기록이라 판단해 삭제하지 않고 보존.
 
 ## 핵심 철학
 **에이전트는 장기 실행 프로세스가 아니라 DB 상태 머신이다.** 상태 없는 워커 풀이 트랜잭션 하나로
@@ -111,7 +122,7 @@ reddit-signal-agent(Apify MCP 비동기 폴링)로 모두 provisioning 스크립
 패턴. 전체 10개 순위 목록은 → [[durable-agent-runtime-design-patterns]] 스킬 페이지.
 
 ## 관련
-- 세션: [[2026-09-18-lampas-agent-omnara분석-durable-run구현]](유일한 노출 지점)
-- 엔티티: [[lampas-agent]](이식 대상)
-- 스킬: [[durable-agent-runtime-design-patterns]]
-- 토픽: [[lampas-system-ai-call-architecture-audit]](비교 대상이 된 lampas-system 쪽 현황)
+- 세션: [[2026-09-18-lampas-agent-omnara분석-durable-run구현]](코드 분석), [[2026-09-26-omnara-완전제거]](실사용 설치 제거)
+- 엔티티: [[lampas-agent]](이식 대상), [[progdesigner]](맥미니 운용자)
+- 스킬: [[durable-agent-runtime-design-patterns]], [[macos-app-complete-uninstall]](제거 절차)
+- 토픽: [[lampas-system-ai-call-architecture-audit]](비교 대상이 된 lampas-system 쪽 현황), [[macos-launchctl-cleanup-candidates]](2026-07-16 시점 이미 노출됐던 흔적)

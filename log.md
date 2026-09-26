@@ -2684,3 +2684,12 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 신규 스킬: [[browser-automation-human-handoff-for-blocked-ui]] — 자동화 브라우저가 비밀번호·모달 스크롤·팝업 완료감지 등에 막히면 재시도 대신 최소 범위만 사람에게 위임하는 일반 절차, [[meta-oauth-token-console-popup-unreliable-in-automated-browser]]에 상호 링크 추가
 - index.md 갱신 (세션 1건 신설, 엔티티 3건(lampas-web-spot·lampas-browser·secrets-plaintext-exposure-pattern) 갱신, 스킬 1건 신설)
 - AI_CONTEXT.md 갱신: lampas-studio 항목의 lampas-web-spot 서술에 "OSM 확정과 상충하는 카카오 재도입, 최종 프로바이더 미확정" 한 문장 추가(줄 수는 42줄로 유지, 신규 줄 추가 없이 기존 줄 확장)
+
+## [2026-09-26] ingest | Omnara 완전 제거 (source: 1b4ba002-5290-4840-92eb-75f2356e4f45.md)
+- 원본 보관: `raw/conversations/2026-09-26-omnara-제거.md` (원본 세션 09:03:42Z 시작, `Tool: claude`, `/Users/progdesigner/Works` 작업 디렉터리)
+- 세션 요약 신설: [[2026-09-26-omnara-완전제거]] — 맥미니에 LaunchAgent 데몬(`com.omnara.daemon`)으로 상주하던 Omnara를 조사 후 완전 제거. `~/.omnara`(512MB, 앱+CLI+`claude_wrapper`+`omnara-voice`+자격증명+로그) 삭제, LaunchAgent 등록 해제, `.zshrc` PATH 3줄 제거, 관련 캐시 삭제, 삭제 후 프로세스·launchctl·패키지매니저·`/Applications` 재조회로 잔여물 없음 검증. `~/.claude.json`/`~/.claude/projects`의 옛 워크트리 경로 참조는 Claude Code 자체 대화 기록이라 판단해 보존
+- 핵심 발견: [[omnara]] 엔티티는 지금까지 "비교·분석용 외부 레퍼런스 코드베이스"로만 기록돼 있었는데, **같은 이름의 실제 소프트웨어가 별도로 맥미니에 설치돼 있었다**는 사실이 이번에 처음 드러남 — 코드 분석과 실사용 설치는 별개 사건. [[macos-launchctl-cleanup-candidates]](2026-07-16)의 원시 로그에 `com.omnara.daemon`이 이미 찍혀 있었으나 당시 분석 대상에서 누락됐던 것도 함께 확인
+- 엔티티 갱신: [[omnara]](실사용 설치·제거 이력 절 추가) · [[macos-launchctl-cleanup-candidates]](완전 제거 완료 절 추가)
+- 신규 스킬: [[macos-app-complete-uninstall]] — LaunchAgent 데몬을 동반한 앱을 조사→데몬해제→본체삭제→PATH정리→캐시삭제→사후검증 순으로 흔적 없이 제거하는 절차
+- index.md 갱신 (세션 1건 신설, 엔티티 2건(omnara·macos-launchctl-cleanup-candidates) 갱신, 스킬 1건 신설)
+- AI_CONTEXT.md 갱신 보류 — 일회성 시스템 유지보수 작업으로 진행 중 프로젝트 상태 변경이 아님(CLAUDE.md "담지 말 것: 일회성 사건" 규칙 적용), 엔티티·세션 페이지로 충분히 커버됨
