@@ -2,6 +2,7 @@
 name: prod-ddl-before-deploy-with-drift-check
 description: 새 DB 테이블을 쓰는 기능을 운영 배포하기 전에 DDL 적용 순서를 지키고, 작업본의 다른 미커밋 기능이 만든 스키마까지 드리프트 검사로 함께 잡아내는 절차
 created: 2026-09-26
+updated: 2026-09-26
 tags: [deploy, database, migration, prisma, ddl, drift, lampas-studio]
 ---
 # 운영 DDL 선적용 + 스키마 드리프트 검사
@@ -44,7 +45,9 @@ tags: [deploy, database, migration, prisma, ddl, drift, lampas-studio]
   커진다 — 스키마(모델+DDL)와 나머지 코드를 분리해서 커밋 여부를 판단한다.
 
 ## 출처: [[2026-09-25-status-서비스-구축-배포]] ([[lampas-studio]] `lampas-web-status` 운영 배포)
-관련: [[new-subdomain-cloudfront-wildcard-deploy]](같은 배포에서 신규 서브도메인이 필요한 경우)
+관련: [[new-subdomain-cloudfront-wildcard-deploy]](같은 배포에서 신규 서브도메인이 필요한 경우) ·
+[[2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃]](재확인 사례 — `signup_domain_rules`
+테이블을 API 배포 전 운영 DB에 멱등하게 미리 생성, [[signup-domain-abuse-rate-limit-and-reclaim]])
 
 ## 변형: 다른 세션의 미커밋 드리프트가 파괴적(컬럼 삭제)일 때 — 전체 push 대신 신규분만 SQL로
 [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]]([[lampas-web-edit]] `EditSessionAsset`

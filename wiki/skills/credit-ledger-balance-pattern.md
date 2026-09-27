@@ -50,3 +50,6 @@ DB에 **동시 결제 요청 8개**를 보내 **단 한 번만 차감**되는 �
 
 ## 출처: [[2026-07-15-cwc-system-멤버십-크레딧-이식-설계]] ·
 [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]](동시 결제 검증 사례)
+관련: [[signup-domain-abuse-rate-limit-and-reclaim]] — 다른 저장소([[lampas-studio]] `lampas-api`)의
+원장 시스템에 "관리자 회수(clawback)" 행을 추가하는 구체 실사례(보너스만/전액 두 모드, 재실행
+idempotent).

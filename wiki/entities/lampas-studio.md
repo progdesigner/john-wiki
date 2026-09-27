@@ -505,7 +505,8 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]] ·
   [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]] ·
   [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]] ·
-  [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]]
+  [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]] ·
+  [[2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
@@ -527,4 +528,5 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   [[parallel-survey-before-feature-gap-analysis]] · [[asr-long-audio-silent-truncation]] ·
   [[full-stack-feature-removal-audit]] · [[admin-guard-precedent-reuse]] ·
   [[tailwind-preflight-img-maxwidth-overrides-inline-scale]] ·
-  [[local-asset-fingerprint-s3-backup-recovery]] · [[prod-ddl-before-deploy-with-drift-check]]
+  [[local-asset-fingerprint-s3-backup-recovery]] · [[prod-ddl-before-deploy-with-drift-check]] ·
+  [[signup-domain-abuse-rate-limit-and-reclaim]]

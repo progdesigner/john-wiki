@@ -2711,3 +2711,12 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 스킬 갱신: [[selective-hunk-commit-shared-file]]("배포 단위로도 반복" 절 추가 — 커밋이 아니라 배포 단위에서 무관한 변경분 분리하는 변형 사례)
 - index.md 갱신 (세션 1건 신설, 엔티티 2건 갱신)
 - AI_CONTEXT.md 갱신 보류 — 이미 42줄로 예산 초과 상태(2026-09-26 앞선 ingest 세션에서도 같은 이유로 보류). 이번 세션 내용은 기능 일반화·도메인 확정으로 엔티티 페이지로 충분히 커버되고, 다음 lint 시 전체 재증류에 포함할 것
+
+## [2026-09-26] ingest | 가입 도메인 필터·크레딧 회수·이상 가입 대시보드 + 어드민 레이아웃/크레딧 버튼 통합 (source: 7fe51cb2-9524-479c-aed4-8e0fd3f602cb.md)
+- 원본 보관: `raw/conversations/2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃.md` (원본 세션 10:04:31Z 시작, `Tool: claude`, `lampas-system` 작업 디렉터리)
+- 세션 요약 신설: [[2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃]] — `gehuy.biz.id` 가입 보너스 어뷰징 대응으로 도메인별 가입 상한 게이트+크레딧 회수(유저 유지, 보너스만/전액, idempotent)+대시보드 이상 가입 감지를 lampas-api/lampas-web-admin에 구현·검증·커밋(`a23f94c1`, 배포는 다른 세션 미커밋 변경으로 보류) → 같은 날 후속 두 턴에서 전체 폭 레이아웃 배포(`5911f67d`)·크레딧 지급/회수 버튼 통합(`5ba07f9b`) 완료
+- 엔티티 갱신: [[lampas-web-admin]](가입 도메인 필터·이상가입 대시보드·크레딧 버튼 통합·전체폭 레이아웃 절 신설) · [[lampas-studio]](세션·스킬 목록 갱신)
+- 신규 스킬: [[signup-domain-abuse-rate-limit-and-reclaim]] — 도메인 상한 게이트+계정유지 크레딧 회수(보너스만/전액, idempotent)+다중시간창 임계치 대시보드 탐지 절차
+- 스킬 갱신: [[selective-hunk-commit-shared-file]](반대 방향 변형 — 내 변경이 남의 커밋에 섞여 이미 배포된 사례 추가) · [[prod-ddl-before-deploy-with-drift-check]](DDL 선적용 재확인 사례) · [[credit-ledger-balance-pattern]](관리자 회수 실사례로 교차 참조)
+- index.md 갱신 (세션 1건 신설, 엔티티 1건 갱신, 스킬 1건 신설+2건 갱신)
+- AI_CONTEXT.md 갱신 보류 — 이미 예산 근접 상태(직전 09-26 ingest들도 같은 이유로 보류)이며, 이번 세션은 lampas-studio 내 기능 추가로 엔티티 페이지가 충분히 커버 — 다음 lint 시 전체 재증류에 포함할 것
