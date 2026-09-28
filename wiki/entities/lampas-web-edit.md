@@ -1,7 +1,7 @@
 ---
 tags: [entity, app, lampas-studio, sports-clip-pipeline, video-editing, subtitle, template, brand-kit, auto-reframe, image-media, s3-backup]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-28
 ---
 # lampas-web-edit ("Edit", edit.lampas.io)
 
@@ -185,7 +185,7 @@ ingest, 상호 교차 확인됨).
   그래도 없으면 계정 백업에서 조회 → [[template-image-slot-fingerprint-vs-url]] (이 앱의 0.1.42가
   `url` 필드의 최초 구현 지점, 상세는 그 스킬 문서 참고).
 
-### `layout_templates` 테이블 (lampas MySQL DB, Prisma 모델 `LayoutTemplate`)
+### `layout_templates` 테이블 (lampas MySQL DB[^1], Prisma 모델 `LayoutTemplate`)
 `id`(VARCHAR64, 클라이언트 `tpl-...`) · `userId`(FK) · `name` · `payload`(JSON, 템플릿 전체) ·
 `createdAt`/`updatedAt`/`deletedAt`(소프트삭제). DDL: `apps/lampas-api/prisma/manual/
 2026-09-20-layout-templates.sql`. 브라우저 로컬 캐시 키: `lampas-edit.layoutTemplates.v1`.
@@ -226,3 +226,6 @@ S3 업로드 + CloudFront 무효화(정적 SPA), API는 PM2. 배포 전 매번 `
 - 스킬: [[template-image-slot-fingerprint-vs-url]] · [[proxy-body-limit-413-appears-as-network-error]] ·
   [[selective-hunk-commit-shared-file]] · [[tailwind-preflight-img-maxwidth-overrides-inline-scale]] ·
   [[local-asset-fingerprint-s3-backup-recovery]] · [[prod-ddl-before-deploy-with-drift-check]]
+
+[^1]: DB 종류는 문서상 모순이 있음 — [[lampas-studio]] "DB 모순" 절 참고(2026-07-15 코드 확인
+    PostgreSQL vs `AGENTS.md` 명시 MySQL, 미해소).

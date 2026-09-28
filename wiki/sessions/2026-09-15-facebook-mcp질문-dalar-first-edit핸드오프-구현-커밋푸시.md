@@ -85,7 +85,7 @@ First vitest 13개, edit vitest 22개, API jest(edit-sessions·media-exports) 41
 
 ## 관련
 - 엔티티: [[dalar-web-first]](이 세션으로 09-13/14와 09-20 사이 공백 메워짐) ·
-  [[lampas-web-edit]](edit-sessions 화이트리스트 세 번째 앱으로 First 추가) · [[lampas-api]]
+  [[lampas-web-edit]](edit-sessions 화이트리스트 세 번째 앱으로 First 추가) · [[lampas-studio]](`lampas-api` 백엔드)
 - 선행: [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]]
 - 후속: [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]]
 - 스킬: [[selective-hunk-commit-shared-file]](더 이른 출처로 추가) ·

@@ -68,5 +68,6 @@ updated: 2026-09-26
 - 세션: [[2026-09-15-lampas-web-trends-실시간검색-구현]](같은 날 저녁, 이 세션의 산출물 위에
   실시간 검색 엔드포인트를 얹은 후속) · [[2026-09-19-lampas-trends-고도화]](토픽 재구축 등 추가
   고도화)
+- 스킬: [[aws-permission-gap-fallback-to-existing-server-process]](이 세션에서 추출)
 - 원본: `raw/conversations/2026-09-15-lampas-web-trends-최초구축-스포츠예능뷰티ai.md` (source:
   `ac1acb4b-761e-43f1-a8fc-6b86615071de.md`)

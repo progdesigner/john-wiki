@@ -6,7 +6,7 @@ updated: 2026-09-26
 # lampas-web-voice ("Voice", `voice.lampas.io`)
 
 `[[lampas-studio]]` 저장소(`lampas-system`)의 앱. 여러 TTS·음성 모델 중 하나를 골라 보이스를 만드는
-웹. [[2026-09-24-voice레퍼런스오디오-생성삭제-카피pulse모델선택]] 세션에서 이 위키에 처음 노출됨 —
+웹. [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]] 세션에서 이 위키에 처음 노출됨 —
 저장소 루트 `AGENTS.md` 3라인 앱 목록(Lampas/Dalar/Talk)에도, 기존에 기록된 스포츠 클립 파이프라인
 앱 목록에도 등장하지 않아, `[[lampas-web-tools]]`·`[[lampas-web-copy]]` 등과 마찬가지로 문서상 앱
 목록과 실제 앱 부분집합이 다름을 한 번 더 확인시켜주는 사례.
@@ -57,4 +57,4 @@ ElevenLabs가 이 앱에서 나란히 옵션으로 뜨는 것은 `[[toktalk]]`�
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
 - 음성 프로바이더: [[elevenlabs]](프리셋 보이스만, 레퍼런스 오디오 미지원) · [[gemini]] · [[atlas-cloud]](Seed Audio 경유 여부 미확인)
 - 배포 절차: [[prod-ddl-before-deploy-with-drift-check]]
-- 세션: [[2026-09-24-voice레퍼런스오디오-생성삭제-카피pulse모델선택]]
+- 세션: [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]]

@@ -7,7 +7,8 @@ updated: 2026-09-26
 
 `[[lampas-studio]]` 저장소(`lampas-system`)의 스포츠 클립 파이프라인 자매 앱. 클립 편집 그룹 보드에서
 페르소나·카피를 선택해 편집 그룹을 만들고, 갤러리에 완성된 영상을 Package로 보내는 역할을 한다.
-`[[lampas-web-flow]]`의 4·6번째 노드(Reels·Package)가 이 앱을 가리킨다. 이전까지는 다른 엔티티 페이지
+`[[lampas-web-flow]]`의 4번째 노드(Reels)가 이 앱을 가리키고, 6번째 노드(Package)는 별도 앱
+[[lampas-web-package]]로 이어진다(아래 "Package 연동" 참고). 이전까지는 다른 엔티티 페이지
 안에서 코드체(`lampas-web-reels`)로만 언급됐고 독립 페이지는 없었음 — 이 페이지가 최초 정식 엔티티화
 (2026-09-26 ingest, 출처는 여러 날짜의 세션 조각).
 

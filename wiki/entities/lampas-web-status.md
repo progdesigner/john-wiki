@@ -1,13 +1,16 @@
 ---
 tags: [entity, project, app, status-page, monitoring, lampas-studio]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-28
 ---
 # lampas-web-status (Lampas 상태 페이지)
 
-`apps/lampas-web-status`(포트 8461) — `[[lampas-studio]]` 저장소(`lampas-system`) 내 앱. status.claude.com을
+`apps/lampas-web-status`(포트 8461[^1]) — `[[lampas-studio]]` 저장소(`lampas-system`) 내 앱. status.claude.com을
 본떠 만든 공개 시스템 상태 페이지, 도메인 `status.lampas.io`. 2026-09-25 세션에서 처음부터 구현되고
 같은 세션에서 운영 배포까지 완료됨 → [[2026-09-25-status-서비스-구축-배포]].
+
+[^1]: 2026-09-28 lint 발견 — `[[lampas-web-flow]]`도 로컬 개발 주소를 동일한 8461 포트로 기록하고
+    있어 겹침. 어느 쪽이 정확한지 재확인 필요.
 
 ## 구조
 

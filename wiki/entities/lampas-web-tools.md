@@ -1,7 +1,7 @@
 ---
 tags: [entity, app, lampas-studio, ai-tools, video, image, react, error-tracking]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-28
 ---
 # lampas-web-tools ("Tools", `tools.lampas.io`)
 
@@ -15,10 +15,11 @@ updated: 2026-09-26
 ## 기능·모델
 - **13개 기능**에 목록·상세 화면에서 실제 실행 모델을 표시(여러 모델을 단계적으로 쓰는 기능은 단계별
   표시), 2026-09-25 세션에서 추가·배포(v0.1.3).
-- 영상 생성에 **Kling**(`kwaivgi/kling-*`, Atlas Cloud 경유 추정 — 이 위키에 Kling 모델 최초 노출)을
-  사용 확인. 콘텐츠 심사 거절 시 응답에 `Failure to pass the risk control system`만 오고 구체적 사유는
-  없음 — 클라이언트에서 거절 자체를 해제할 수는 없어, 거절 사유를 사라지는 토스트 대신 **결과 영역에
-  유지**하고 실패 상태·재시도·[[lampas-agent]] Fixs 보고 처리를 개선(v0.1.3).
+- 영상 생성에 **Kling**(`kwaivgi/kling-*`, Atlas Cloud 경유 추정)을 사용 확인 — 이 위키의 Kling 최초
+  노출은 이보다 앞선 2026-09-13 [[lampas-web-scenario]] 세션(`talking-photo.ts`, 아래 참고)이며, 이
+  Tools 세션은 재확인 사례다.[^1] 콘텐츠 심사 거절 시 응답에 `Failure to pass the risk control system`만
+  오고 구체적 사유는 없음 — 클라이언트에서 거절 자체를 해제할 수는 없어, 거절 사유를 사라지는 토스트
+  대신 **결과 영역에 유지**하고 실패 상태·재시도·[[lampas-agent]] Fixs 보고 처리를 개선(v0.1.3).
 - **`music-gen` 툴은 minimax 2.6 고정** — 자매 앱 [[lampas-web-music]]이 2026-09-22 3.0으로 업그레이드
   됐을 때 요청 범위가 music.lampas.io로 한정돼 이 툴은 손대지 않음, 버전 불일치 상태로 남아 있음.
 - **유튜브 제목 툴은 `google/gemini-3-flash-preview` 고정**(2026-09-24~ 세션 질의로 확인) — 툴 정의
@@ -60,3 +61,6 @@ updated: 2026-09-26
 - 자매 앱: [[lampas-web-music]] (`music-gen` 툴 버전 불일치 — 2.6 vs 3.0)
 - 세션: [[2026-09-25-copy스크롤-fixs삭제-tools모델표시-영상재생버그]] ·
   [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]](youtube-title 모델 확인)
+
+[^1]: 2026-09-26 lint에서 정정 — 원래 이 줄이 "최초 노출"이라 적었으나 같은 파일 "`talking-photo.ts`"
+    절이 더 이른 2026-09-13 출처를 가리키고 있어 자기모순이었음.

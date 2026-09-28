@@ -1,7 +1,7 @@
 ---
 tags: [entity, app, lampas-studio, sports-clip-pipeline, orchestration, tailscale, s3, jev]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-28
 ---
 # lampas-web-flow ("Flow", flow.lampas.io)
 
@@ -60,7 +60,9 @@ Flow에서 다른 작업 공간(Clips/Copy/Reels/Edit/Package)으로 이동하�
 - 배포: S3 + CloudFront (`./scripts/deploy-web.sh`), API는 기존 `lampas-api`에 `flow_works` 테이블
   추가.
 - 맥미니 Agent 접속: `https://lampas-system.tail0e32ab.ts.net/` (Tailscale HTTPS).
-- 로컬: `http://127.0.0.1:8461` (개발/최초 검증 시 사용된 주소).
+- 로컬: `http://127.0.0.1:8461` (개발/최초 검증 시 사용된 주소). **2026-09-28 lint 발견**: 이 포트가
+  `[[lampas-web-status]]`(포트 8461로 기록됨)와 겹침 — 어느 한쪽 기록이 오기이거나 로컬 개발 중
+  임시로 재사용된 포트일 가능성, 재확인 필요.
 
 ## 관련
 - 엔티티: [[lampas-agent]](영상 수집·Clips·Pulse) · [[lampas-web-copy]](카피) ·
