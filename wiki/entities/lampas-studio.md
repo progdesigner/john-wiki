@@ -486,13 +486,26 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   API 타입검사 통과. Dalar API 전체 타입 검사는 기존 Prisma 타입 불일치로 제한(이 세션 이전부터의
   기존 이슈).
 
+## GA4 전사 적용 + First 전용 퍼널 구성 (2026-09-28 세션, 미배포)
+
+사용자 요청으로 `dalar.ai`·`lampas.io` 전 서비스에 GA4를 적용. 기존 측정 ID 확인(Dalar
+`G-7R1C9BXKTX`, Lampas `G-BR3R64CQB9`), **웹 앱 30개**의 태그 누락·페이지뷰 처리 불일치를
+공통 계측 모듈로 통일하고 서비스 이동·작업 시작/수락/실패를 같은 기준 이벤트로 통일, 결제 URL의
+인증값 등 민감 파라미터는 GA로 보내지 않도록 정리. 이어서 브라우저로 `first.dalar.ai` 실사용
+흐름을 직접 돌아보며 결제 화면(`pay.lampas.io/first`)이 구조적으로 **Lampas 측정 ID로 전송되는
+문제**를 발견 → Dalar 측정 ID로 전환 + `first_*` 이벤트 분리, GA4 Explore에 구매·제작·시작 3개
+흐름의 [First 전용 퍼널](https://analytics.google.com/analytics/web/#/analysis/a402451861p547256216/edit/1ewF4tNmQ3-zrUbc41j_hw)을
+저장. 웹 30개 빌드·API 빌드는 통과했으나 **운영 배포는 이 세션에서 실행하지 않아**, 새 퍼널
+데이터는 세션 종료 시점까지 비어 있었다. 상세 → [[2026-09-28-google-analytics-설정-first전용퍼널]].
+
 ## GA4 퍼널 수집 공백 조사 + 이벤트 카탈로그 구글시트 (2026-09-29 세션, PostHog 도입 33분 전)
 
-[[dalar-web-first]]의 `first.dalar.ai → admin.first.dalar.ai` 결제 퍼널을 관리자 화면 또는 GA4에서
-볼 수 있는지 조사한 결과, 운영 사이트에 **수집 공백**이 확인됐다: `first.dalar.ai`에는 GA4
-태그·First 이벤트가 없고, 결제 추적(`pay.lampas.io/first`)은 구현돼 있지만 **Lampas 속성**으로
-전송되며(Dalar 속성 아님), `admin.first.dalar.ai`에는 방문자 기반 퍼널 조회 기능이 없다. Dalar와
-같은 속성으로 연결하는 개선 코드는 로컬에 준비됐으나 **운영에는 반영되지 않은 상태**였다.
+위 2026-09-28 세션의 산출물이 실제로 반영됐는지 **+1일 뒤 재확인**한 세션. [[dalar-web-first]]의
+`first.dalar.ai → admin.first.dalar.ai` 결제 퍼널을 관리자 화면 또는 GA4에서 볼 수 있는지 조사한
+결과, 운영 사이트에 **수집 공백**이 그대로 남아 있었다: `first.dalar.ai`에는 GA4 태그·First
+이벤트가 없고, 결제 추적(`pay.lampas.io/first`)은 구현돼 있지만 여전히 **Lampas 속성**으로
+전송되며(Dalar 속성 아님 — 전날 세션에서 고친 코드가 미배포 상태), `admin.first.dalar.ai`에는
+방문자 기반 퍼널 조회 기능이 없다.
 관리자에 GA4 Data API 기반 "전환 분석" 화면을 추가하는 개선안 4단계가 제시됐으나, **실제로는
 33분 뒤 시작된 다음 세션에서 이 권고안 대신 [[posthog]] 도입으로 해결**됐다(아래 절). 같은
 세션에서 `lampas-harness` 서비스 계정(`lampas-crawler@lampas.iam.gserviceaccount.com`)을 편집자로
@@ -514,7 +527,9 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
 [[2026-09-29-posthog-구축-연동]].
 
 ## 관련
-- 세션: [[2026-09-29-posthog-구축-연동]](PostHog 36개 웹 공통 계측 도입) ·
+- 세션: [[2026-09-28-google-analytics-설정-first전용퍼널]](GA4 전사 적용·First 퍼널 구성 원본,
+  미배포) ·
+  [[2026-09-29-posthog-구축-연동]](PostHog 36개 웹 공통 계측 도입) ·
   [[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]](GA4 퍼널 수집 공백 조사·이벤트 카탈로그
   구글시트, 위 PostHog 세션 33분 전) ·
   [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]] ·

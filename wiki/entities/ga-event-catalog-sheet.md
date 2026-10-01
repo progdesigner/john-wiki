@@ -23,6 +23,8 @@ updated: 2026-10-01
 
 ## 관련
 - 세션: [[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]](구축 원본, 같은 세션에서
-  `first.dalar.ai`/`admin.first.dalar.ai` GA4 퍼널 수집 공백도 함께 조사)
+  `first.dalar.ai`/`admin.first.dalar.ai` GA4 퍼널 수집 공백도 함께 조사) ·
+  [[2026-09-28-google-analytics-설정-first전용퍼널]](+1일 전, 이 카탈로그가 스캔한 GA 이벤트를
+  전사에 처음 적용한 선행 세션)
 - 엔티티: [[lampas-studio]](저장소 전체 대상) · [[dalar-web-first]](First 퍼널 탭 포함) ·
   [[posthog]](같은 날 뒤이어 도입된 별도 분석 솔루션, 이 카탈로그와는 독립)

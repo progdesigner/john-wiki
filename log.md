@@ -2788,3 +2788,18 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   교차 기록.
 - **모순 없음** — 기존 PostHog 기록과 상충하지 않고, "같은 날 먼저 GA4 경로를 조사·권고했으나
   실행은 PostHog로 갔다"는 시간순 보완 사실만 추가됨.
+
+## [2026-10-01] ingest | Google Analytics 전사 적용 + First 전용 퍼널 구성 (미배포, 2026-09-28 세션) (source: 5c31495b-0d05-4abc-8918-6af52aa9d62c.md)
+- 신규 세션 페이지 [[2026-09-28-google-analytics-설정-first전용퍼널]] 작성. `Tool: codex`,
+  Started 2026-09-27T15:04Z UTC = KST 2026-09-28 00:04. `dalar.ai`·`lampas.io` 웹 30개에 GA4
+  공통 계측 적용(측정 ID Dalar `G-7R1C9BXKTX`/Lampas `G-BR3R64CQB9`, 민감 파라미터 제거),
+  `first.dalar.ai` 결제(`pay.lampas.io/first`)가 Lampas 속성으로 새던 문제를 Dalar 속성+`first_*`
+  이벤트로 분리, GA4 Explore에 구매/제작/시작 3단계 First 전용 퍼널 저장. 빌드·테스트는 통과했으나
+  **운영 배포는 이 세션에서 실행하지 않음**.
+- **시간순 정정 발견**: 이 세션은 기존에 ingest된 [[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]]
+  (+1일)가 "로컬에만 준비되고 운영 미반영"이라고 관찰한 GA4 계측·퍼널의 **원본 작업 세션**임이
+  확인됨 — 저장된 GA4 Explore 링크가 두 세션에서 동일. [[lampas-studio]]·[[dalar-web-first]]·
+  [[ga-event-catalog-sheet]]·[[posthog]] 엔티티에 이 원본 세션을 교차 링크하고, 09-29 절들을
+  "+1일 재확인"으로 재서술.
+- 모순 아님 — 09-28 세션에서 만든 GA4 코드가 미배포 상태로 남아있던 사실이 09-29 세션에서
+  확인된 자연스러운 시간순 흐름.
