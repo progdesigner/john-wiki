@@ -407,6 +407,16 @@ First 로고 + 밝은 크림 배경으로 **1200×630 공유 이미지** 제작,
 완성 영상 URL 접근 가능 여부를 매번 대조(5→6→11건, 제공이력 6→7→12건, 영상 파일 6→12개로
 누적 확인). [[prod-ddl-before-deploy-with-drift-check]] 스킬과 같은 계열의 배포 규율.
 
+## GA4 퍼널 수집 공백 조사 (2026-09-29, PostHog 도입 33분 전)
+
+같은 날 PostHog 도입 직전 세션([[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]])에서 First
+결제 퍼널을 `admin.first.dalar.ai` 또는 GA4에서 분석할 수 있는지 먼저 조사했다. 결과:
+`first.dalar.ai`에 GA4 태그·First 이벤트가 없고, `pay.lampas.io/first` 결제 추적은 **Lampas
+속성**으로 전송되고 있었으며(Dalar 속성 아님), 관리자에는 퍼널 조회 기능이 없었다. 관리자의
+"결제 완료" 숫자도 `first_orders.paidAt` 존재 여부 기준이라 결제 사이트 실제 승인 건수와
+의미가 다를 수 있다는 점도 지적됨. 이 세션이 제시한 "GA4 Data API 기반 관리자 전환 분석 화면"
+개선안은 실행되지 않았고, 33분 뒤 시작된 다음 세션에서 **PostHog 도입으로 대신 해결**됐다(아래).
+
 ## PostHog 구매·제작 퍼널 분석 도입 (2026-09-29)
 
 [[posthog]] 연동 세션에서 First가 전체 서비스 중 **최우선 분석 대상**으로 지정돼, 방문→결제 시작→
@@ -426,9 +436,11 @@ ID를 결제 페이지(`pay.lampas.io`)와 연결해 로그인 전후 여정을 
   [[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]](lampas-web-edit 핸드오프) ·
   [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] ·
   [[2026-09-26-package-분야별템플릿-first도메인확정-배포]](Package 분야별 템플릿화, 제작 링크
-  도메인 `first.dalar.ai` 확정) · [[2026-09-29-posthog-구축-연동]](구매·제작 퍼널 분석 도입)
+  도메인 `first.dalar.ai` 확정) ·
+  [[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]](GA4 퍼널 수집 공백 조사, PostHog 도입 33분 전) ·
+  [[2026-09-29-posthog-구축-연동]](구매·제작 퍼널 분석 도입)
 - 상위: [[dalar]](제품 라인) · 저장소 [[lampas-studio]](`lampas-system`, 같은 모노레포)
-- 분석: [[posthog]](구매·제작 퍼널·매출 대시보드)
+- 분석: [[posthog]](구매·제작 퍼널·매출 대시보드) · [[ga-event-catalog-sheet]](코드 기준 GA 이벤트 카탈로그)
 - 토픽: [[jev-typed-classification]](세 번째 사용처)
 - 스킬: [[scene-reference-lock-visual-consistency]] · [[mutual-referral-coupon-pattern]] ·
   [[resumable-worker-checkpoint-resume]](자동 재시도는 09-14 세션 최초 도입) ·

@@ -43,7 +43,10 @@ updated: 2026-10-01
 특정 구현이 아니라 AI 조작 브라우저 자동화 전반의 구조적 한계임을 도구를 바꿔서도 재확인했다.
 
 ## 관련
-- 세션: [[2026-09-29-posthog-구축-연동]](도입 원본)
+- 세션: [[2026-09-29-posthog-구축-연동]](도입 원본) ·
+  [[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]](33분 전 세션 — GA4 경로로 First 퍼널
+  수집 공백을 먼저 조사·관리자 전환 분석 화면을 권고했으나, 이 PostHog 도입으로 대신 해결됨)
 - 엔티티: [[dalar-web-first]](결제 퍼널 분석 대상) · [[lampas-studio]](36개 웹 공통 계측) ·
-  [[dalar]] · [[toktalk]]
+  [[dalar]] · [[toktalk]] · [[ga-event-catalog-sheet]](같은 날 별도로 구축된 GA4 이벤트 카탈로그,
+  PostHog와는 독립)
 - 스킬: [[browser-automation-human-handoff-for-blocked-ui]]

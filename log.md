@@ -2771,3 +2771,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   브라우징"에서 "AI 조작 브라우저 일반"으로 넓히는 근거가 추가됨.
 - **AI_CONTEXT.md**: lampas-studio 항목에 "PostHog 36개 웹 도입 완료(2026-09-29), 결제 완료 실수신
   미검증" 한 문장 추가.
+
+## [2026-10-01] ingest | 분석 사이트 구축: GA4 퍼널 점검 + 이벤트 카탈로그 구글시트 (source: a52e3711-2e0e-4143-9b12-468d45a2fd38.md)
+- `Tool: codex` 세션(2026-09-29T20:02:29Z 시작, lampas-system) ingest. 크로스도메인 결제 퍼널 설계
+  상담 → [[dalar-web-first]]의 `first.dalar.ai`/`admin.first.dalar.ai`/GA4 수집 공백 실태 조사
+  (GA4 태그 미설치·결제 추적이 Lampas 속성으로 전송·관리자 퍼널 조회 기능 없음) → 구글시트에
+  `lampas-system` GA 이벤트 106개·앱별 382행 카탈로그 적재(`lampas-harness` 서비스 계정 초대,
+  `pnpm analytics:catalog:sync` 재동기화).
+- **신규 세션 페이지**: [[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]].
+- **신규 엔티티**: [[ga-event-catalog-sheet]](구글시트 카탈로그).
+- **신규 스킬**: [[catalog-sheet-sync-preserve-manual-columns]](코드 스캔 카탈로그를 구글시트에
+  적재·재동기화하며 사람 입력 열 보존하는 절차).
+- **엔티티 갱신**: [[lampas-studio]]·[[dalar-web-first]]·[[posthog]] — 이 세션이 **PostHog 도입
+  세션([[2026-09-29-posthog-구축-연동]]) 33분 전**에 있었고, GA4 Data API 기반 관리자 전환 분석
+  권고안은 실행되지 않은 채 다음 세션에서 PostHog로 대신 해결된 시간순 관계를 양쪽 페이지에
+  교차 기록.
+- **모순 없음** — 기존 PostHog 기록과 상충하지 않고, "같은 날 먼저 GA4 경로를 조사·권고했으나
+  실행은 PostHog로 갔다"는 시간순 보완 사실만 추가됨.

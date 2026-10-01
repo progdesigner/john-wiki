@@ -486,6 +486,20 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   API 타입검사 통과. Dalar API 전체 타입 검사는 기존 Prisma 타입 불일치로 제한(이 세션 이전부터의
   기존 이슈).
 
+## GA4 퍼널 수집 공백 조사 + 이벤트 카탈로그 구글시트 (2026-09-29 세션, PostHog 도입 33분 전)
+
+[[dalar-web-first]]의 `first.dalar.ai → admin.first.dalar.ai` 결제 퍼널을 관리자 화면 또는 GA4에서
+볼 수 있는지 조사한 결과, 운영 사이트에 **수집 공백**이 확인됐다: `first.dalar.ai`에는 GA4
+태그·First 이벤트가 없고, 결제 추적(`pay.lampas.io/first`)은 구현돼 있지만 **Lampas 속성**으로
+전송되며(Dalar 속성 아님), `admin.first.dalar.ai`에는 방문자 기반 퍼널 조회 기능이 없다. Dalar와
+같은 속성으로 연결하는 개선 코드는 로컬에 준비됐으나 **운영에는 반영되지 않은 상태**였다.
+관리자에 GA4 Data API 기반 "전환 분석" 화면을 추가하는 개선안 4단계가 제시됐으나, **실제로는
+33분 뒤 시작된 다음 세션에서 이 권고안 대신 [[posthog]] 도입으로 해결**됐다(아래 절). 같은
+세션에서 `lampas-harness` 서비스 계정(`lampas-crawler@lampas.iam.gserviceaccount.com`)을 편집자로
+초대한 구글시트에 저장소 전체 GA 이벤트를 조사해 **106개 이벤트명·앱별 382행**을 적재하고
+`pnpm analytics:catalog:sync` 재동기화 커맨드(사람 입력 열 보존)를 추가했다. 상세 →
+[[ga-event-catalog-sheet]] · 세션 → [[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]].
+
 ## PostHog 분석 도입 — 36개 웹 공통 계측 (2026-09-29 세션)
 
 [[dalar-web-first]] 결제 퍼널 분석 요청을 계기로 [[posthog]](`us.posthog.com`, 프로젝트 `636309`)가
@@ -501,6 +515,8 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
 
 ## 관련
 - 세션: [[2026-09-29-posthog-구축-연동]](PostHog 36개 웹 공통 계측 도입) ·
+  [[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]](GA4 퍼널 수집 공백 조사·이벤트 카탈로그
+  구글시트, 위 PostHog 세션 33분 전) ·
   [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]] ·
   [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]] · [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
   [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] ·
