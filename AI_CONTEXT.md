@@ -1,7 +1,7 @@
 ---
 tags: [ai-context, summary]
 created: 2026-07-12
-updated: 2026-09-28
+updated: 2026-10-01
 ---
 # AI_CONTEXT — 핵심 기억 요약
 
@@ -14,7 +14,7 @@ updated: 2026-09-28
 - [[lampas-harness]] — Claude Agent SDK 웹 하네스(맥미니 launchd 데몬, 원격은 Tailscale 권장). Auto 모델 4단계(easy~extreme/Fable 5) → [[model-selection]] — 판정 1순위 Haiku 4.5(API)는 **`ANTHROPIC_API_KEY` 크레딧 잔액 0으로 계속 실패 중**, [[rapid-mlx]] 로컬 LLM이 실질 판정 경로. `apps/wiki`(위키 브라우징 뷰어)·`apps/browser`(AI 조작 Chromium, WebContentsView) 신설 완료. 기본 과금은 Claude Code 구독(OAuth), API 종량 아님 → [[sdk-claude-code-vs-api-billing]].
 - [[john-wiki]] — 이 위키. 저장 경로: "기억에 보관" 버튼·대화목록 롱프레스·야간 자동 ingest(앞 둘은 동일 동작으로 통합) + `apps/wiki` 사람용 브라우징. 능동 조회(검색 tool)는 미구현.
 - [[toktalk]] — 사만다(Her) 페르소나 확정, `app.toktalk.ai`+Toss 미니앱(`talk-app-toss-samantha`) 운영 중. 서브앱 `virtual.toktalk.ai`([[tavus]] 기반 사진 아바타+실시간 영상통화) 배포 완료. NSFW는 플러팅 허용/노골적 표현 거부 경계 확정.
-- [[lampas-studio]] (저장소 `lampas-system`) — 최대 활성 프로젝트, Lampas+Dalar+Talk 3개 제품 라인. **미해결 모순 2건**: DB 종류(2026-07 코드확인 PostgreSQL vs `AGENTS.md` 명시 MySQL), [[lampas-web-spot]] 지도 프로바이더("OSM 확정" 발표 후 카카오 키 재발급 — 최종 미정). 스포츠 클립 파이프라인([[lampas-agent]] Clips/Pulse/Fixs + Copy/Reels/Edit/Package/Flow/Tools/Trends/Status/Voice/Music/Spot 자매 앱군)이 최대 활동 영역. [[dalar]] 라인의 소비자 제품 [[dalar-web-first]](`first.dalar.ai`, AI 돌잔치 영상)가 실사용 운영 중.
+- [[lampas-studio]] (저장소 `lampas-system`) — 최대 활성 프로젝트, Lampas+Dalar+Talk 3개 제품 라인. **미해결 모순 2건**: DB 종류(2026-07 코드확인 PostgreSQL vs `AGENTS.md` 명시 MySQL), [[lampas-web-spot]] 지도 프로바이더("OSM 확정" 발표 후 카카오 키 재발급 — 최종 미정). 스포츠 클립 파이프라인([[lampas-agent]] Clips/Pulse/Fixs + Copy/Reels/Edit/Package/Flow/Tools/Trends/Status/Voice/Music/Spot 자매 앱군)이 최대 활동 영역. [[dalar]] 라인의 소비자 제품 [[dalar-web-first]](`first.dalar.ai`, AI 돌잔치 영상)가 실사용 운영 중. [[posthog]] 사용자 여정·결제 전환 분석을 36개 웹 전체에 도입 완료(2026-09-29, First 퍼널 우선) — 결제 완료 실수신은 미검증.
 - `~/Works` 저장소 12개 → [[works-project-portfolio]] (다수 미조사). [[dark-system]](개인 트레이딩 봇 4앱). [[cwc-system]]/[[elevino-system]]: 프로덕션이 실제로는 cwc-system의 `apps/elevino-*`에서 배포되고 있었음이 2026-09-25 장애로 드러나 복구(다운타임 23분) → [[prod-rollback-source-of-truth-verify]].
 
 ## 확정된 결정

@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding, lampas-web-cs, lampas-web-admin, lampas-web-scenario]
 created: 2026-07-09
-updated: 2026-09-26
+updated: 2026-10-01
 ---
 # lampas-studio (Lampas 이미지 생성 스튜디오)
 
@@ -486,8 +486,22 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   API 타입검사 통과. Dalar API 전체 타입 검사는 기존 Prisma 타입 불일치로 제한(이 세션 이전부터의
   기존 이슈).
 
+## PostHog 분석 도입 — 36개 웹 공통 계측 (2026-09-29 세션)
+
+[[dalar-web-first]] 결제 퍼널 분석 요청을 계기로 [[posthog]](`us.posthog.com`, 프로젝트 `636309`)가
+`lampas-system`의 공통 계측 모듈에 연결돼, `deploy.json`이 있는 **웹 36개 전체**(Lampas·Dalar·
+[[toktalk]] Talk·Iileex)에 일괄 반영됐다. 기존 GA4 계측 위에 얹는 형태이며 First 전용 대시보드
+(구매·제작 퍼널 3개·매출)와 전체 서비스 대시보드(방문·경로·결제 전환/실패·매출 비교)가 저장됨 —
+Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Google 로그인이 비밀번호 입력·추가 본인
+인증(OTP)에 두 차례 막혀 사람에게 위임됐는데, 이번엔 `[[lampas-browser]]`가 아니라 **`Tool: codex`
+자체 브라우저 도구**에서 일어나 [[browser-automation-human-handoff-for-blocked-ui]] 패턴이 특정
+구현이 아니라 AI 조작 브라우저 자동화 전반의 구조적 한계임을 재확인했다. 실제 결제 완료 이벤트
+수신은 미검증(서버 승인 성공 기준 설계만 완료). 상세 → [[posthog]] · 세션 →
+[[2026-09-29-posthog-구축-연동]].
+
 ## 관련
-- 세션: [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]] ·
+- 세션: [[2026-09-29-posthog-구축-연동]](PostHog 36개 웹 공통 계측 도입) ·
+  [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]] ·
   [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]] · [[2026-09-20-lampas-flow-만들기]] · [[2026-09-21-lampas-agent-fixs-신설]] ·
   [[2026-09-21-lampas-studio-edit모델-wan3.0-qwen이미지-멀티이미지영상]] ·
   [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
@@ -518,6 +532,7 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   [[lampas-web-trends]](`trends.lampas.io`) · [[lampas-web-cs]](`cs.lampas.io`) · [[lampas-web-admin]](`admin.lampas.io`) ·
   [[lampas-web-scenario]](시나리오/스토리보드 영상 생성) · [[lampas-web-voice]](`voice.lampas.io`, 보이스 생성)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
+- 외부 분석 서비스: [[posthog]](사용자 여정·결제 전환 분석, 36개 웹 공통 계측)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
 - 공급자: [[progdesigner]]
 - 포트폴리오 배경: [[works-project-portfolio]]

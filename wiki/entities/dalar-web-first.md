@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, dalar, lampas-system, video-generation, ai-baby-video, jev, referral-coupon]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-01
 ---
 # dalar-web-first ("First" — AI 돌잔치 인터뷰 영상 서비스)
 
@@ -407,6 +407,16 @@ First 로고 + 밝은 크림 배경으로 **1200×630 공유 이미지** 제작,
 완성 영상 URL 접근 가능 여부를 매번 대조(5→6→11건, 제공이력 6→7→12건, 영상 파일 6→12개로
 누적 확인). [[prod-ddl-before-deploy-with-drift-check]] 스킬과 같은 계열의 배포 규율.
 
+## PostHog 구매·제작 퍼널 분석 도입 (2026-09-29)
+
+[[posthog]] 연동 세션에서 First가 전체 서비스 중 **최우선 분석 대상**으로 지정돼, 방문→결제 시작→
+결제 완료·제작 단계 이탈을 보는 퍼널 3개와 매출 차트가 구성되고 [First 전용
+대시보드](https://us.posthog.com/project/636309/dashboard/2150784)로 저장됐다. 로그인 후 사용자
+ID를 결제 페이지(`pay.lampas.io`)와 연결해 로그인 전후 여정을 하나로 잇는다. 기존 GA4 계측(이
+페이지 상세 기능 이력)은 그대로 유지한 채 PostHog가 그 위에 얹힌 형태 — 실제 운영 배포까지 완료되고
+방문 이벤트 수신은 확인됐으나, **결제 완료 이벤트는 실제 유료 결제로 검증되지 않았다**(서버 승인
+성공 기준으로만 설계). 상세 → [[2026-09-29-posthog-구축-연동]].
+
 ## 관련
 - 세션: [[2026-09-13-dalar-web-first-최초구축-오만크레딧결제요청]](origin) ·
   [[2026-09-14-돌잔치-ai-기능-보완-장면구조화-tts빌드제거-어드민개편]](12장면 구조화·TTS 빌드/
@@ -416,8 +426,9 @@ First 로고 + 밝은 크림 배경으로 **1200×630 공유 이미지** 제작,
   [[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]](lampas-web-edit 핸드오프) ·
   [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] ·
   [[2026-09-26-package-분야별템플릿-first도메인확정-배포]](Package 분야별 템플릿화, 제작 링크
-  도메인 `first.dalar.ai` 확정)
+  도메인 `first.dalar.ai` 확정) · [[2026-09-29-posthog-구축-연동]](구매·제작 퍼널 분석 도입)
 - 상위: [[dalar]](제품 라인) · 저장소 [[lampas-studio]](`lampas-system`, 같은 모노레포)
+- 분석: [[posthog]](구매·제작 퍼널·매출 대시보드)
 - 토픽: [[jev-typed-classification]](세 번째 사용처)
 - 스킬: [[scene-reference-lock-visual-consistency]] · [[mutual-referral-coupon-pattern]] ·
   [[resumable-worker-checkpoint-resume]](자동 재시도는 09-14 세션 최초 도입) ·

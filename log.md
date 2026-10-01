@@ -2750,3 +2750,24 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - **반복개념 재검토**: AGENTS.md(60회/24파일)·sports-wiki(20파일)·"동시 다중 에이전트 편집" 관찰(4파일)
   모두 기존 엔티티/토픽 페이지 내 서술로 충분히 커버돼 별도 topic 페이지 신설 기준 미충족으로 판단,
   신설 보류.
+
+## [2026-10-01] ingest | PostHog 구축·연동 — first.dalar.ai부터 36개 웹 결제 전환 분석 도입 (source: d0c604ee-93c5-4e9b-a0b2-4e1774cecaf7.md)
+- **원본**: `Tool: codex` 세션(2026-09-29T20:35:45Z 시작, 작업 폴더 `lampas-system`). 신규 세션 페이지
+  [[2026-09-29-posthog-구축-연동]], 신규 엔티티 [[posthog]].
+- **핵심 내용**: [[dalar-web-first]](`first.dalar.ai`)를 시작점으로 사용자 여정·결제 전환 분석 요청 →
+  기존 GA4 계측 확인 → [[posthog]] Google 로그인이 비밀번호 입력+추가 본인인증(OTP)에 두 차례 막혀
+  사람에게 위임 → 로그인 완료 후 미국 리전 프로젝트(636309) 연결 → Dalar·Lampas 공통 계측 모듈에
+  PostHog 코드 추가 → First·결제 웹 배포 후 실제 방문 이벤트 수신 확인, 구매·제작 퍼널 3개+매출
+  차트 구성 → Talk·Iileex까지 확장해 `deploy.json` 보유 웹 **36개 전체**에 공통 계측 반영. First
+  전용 대시보드+전체 서비스 대시보드 저장. 결제 완료 이벤트는 서버 승인 성공 기준으로만 설계,
+  실제 유료 결제로는 미검증. Toss 내부 미니앱 3개는 이번 적용 범위 제외.
+- **반영 페이지**: 신규 [[posthog]](엔티티)·[[2026-09-29-posthog-구축-연동]](세션). 기존 페이지
+  갱신 — [[dalar-web-first]](PostHog 퍼널 분석 절 추가), [[lampas-studio]](36개 웹 공통 계측 절
+  추가, 외부 분석 서비스 링크), [[toktalk]](Talk 웹 계측 반영 1줄 추가).
+- **스킬 갱신**: [[browser-automation-human-handoff-for-blocked-ui]] — Google OAuth 로그인 장벽을
+  세 번째 독립 사례로 추가. 기존 두 사례는 [[lampas-browser]](하네스 자체 브라우징 패널)에서
+  발생했으나, 이번은 `Tool: codex` 자체 브라우저 도구에서 발생해 이 패턴이 특정 구현의 한계가
+  아니라 AI 조작 브라우저 자동화 전반의 구조적 한계임을 도구를 바꿔 재확인 — 스킬 범위를 "하네스
+  브라우징"에서 "AI 조작 브라우저 일반"으로 넓히는 근거가 추가됨.
+- **AI_CONTEXT.md**: lampas-studio 항목에 "PostHog 36개 웹 도입 완료(2026-09-29), 결제 완료 실수신
+  미검증" 한 문장 추가.

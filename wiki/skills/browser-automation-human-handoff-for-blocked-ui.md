@@ -2,7 +2,8 @@
 name: browser-automation-human-handoff-for-blocked-ui
 description: AI가 조작하는 자동화 브라우저가 비밀번호 입력·모달 내부 스크롤·팝업 완료 감지 등 구조적으로 못 건드리는 UI 요소에 막혔을 때
 created: 2026-09-26
-tags: [browser-automation, human-in-the-loop, lampas-browser, harness-browsing]
+updated: 2026-10-01
+tags: [browser-automation, human-in-the-loop, lampas-browser, harness-browsing, codex, posthog]
 ---
 # 자동화 브라우저가 막히면 "정확히 필요한 만큼만" 사람에게 위임한다
 
@@ -20,6 +21,13 @@ tags: [browser-automation, human-in-the-loop, lampas-browser, harness-browsing]
 ([[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] — 비밀번호·팝업·좁은 필드,
 [[2026-09-26-카카오-지도-api-키-발급]] — 비밀번호·모달 스크롤)이 각각 다른 구체적 장벽에서
 동일한 대응 전략에 도달해 일반화함.
+
+**2026-10-01 추가(세 번째 독립 재현, 도구 확장)**: [[2026-09-29-posthog-구축-연동]] 세션
+([[posthog]] 연동)에서 Google OAuth 로그인이 비밀번호 입력 + 추가 본인 인증(패스키·휴대전화 승인·
+OTP)에 막혀 동일 전략(사람에게 로그인만 위임, 그동안 연동 코드 선반영)으로 대응했다. 이 사례는
+**`[[lampas-browser]]`가 아니라 `Tool: codex` 자체 브라우저 도구**에서 일어났다는 점이 중요 —
+이 패턴이 lampas-browser라는 특정 구현의 한계가 아니라 **AI가 조작하는 브라우저 자동화 도구 전반의
+구조적 한계**라는 기존 가설(아래 "주의사항" 절)을 다른 도구로도 재확인한 첫 사례다.
 
 ## 절차 (단계별)
 1. 막힌 지점까지는 최대한 도구로 채워 둔다 — 폼 필드, 이름, 옵션 등 도구가 접근 가능한 부분은
@@ -45,4 +53,4 @@ tags: [browser-automation, human-in-the-loop, lampas-browser, harness-browsing]
   (비밀번호 미조작은 보안 설계, 팝업/스크롤은 자동화 도구가 실제 사용자 제스처를 완전히 재현하지
   못하는 문제) — 새 서비스·새 콘솔에서도 재현될 것으로 예상하고 처음부터 이 절차를 1순위로 쓴다.
 
-## 출처: [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] · [[2026-09-26-카카오-지도-api-키-발급]] · [[lampas-browser]]
+## 출처: [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] · [[2026-09-26-카카오-지도-api-키-발급]] · [[lampas-browser]] · [[2026-09-29-posthog-구축-연동]]

@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, toktalk, nestjs, react, monorepo, ai-chat, avatar]
 created: 2026-07-09
-updated: 2026-09-26
+updated: 2026-10-01
 ---
 # toktalk (TokTalk — AI 캐릭터/보이스 챗)
 
@@ -148,8 +148,16 @@ updated: 2026-09-26
   실제 구현(보이스 ID·모델·스트리밍 방식)은 끝내 확인되지 않았다. → [[work-folder-sandboxing]] ·
   [[2026-07-16-tts-stream-elevenlabs-구현착수]]
 
+## PostHog 공통 분석 코드 반영 (2026-09-29)
+
+[[lampas-studio]] 저장소 전체(36개 웹)에 [[posthog]] 사용자 여정·결제 분석 코드를 일괄 반영하는
+세션에서 Talk 웹에도 공통 계측이 적용되고, Talk의 자체 결제 흐름도 함께 점검됐다. 실제 이벤트 수신도
+Talk에서 확인됨 — 단 Toss 미니앱(`talk-app-toss-samantha` 등)은 이번 웹 전용 적용 범위에서 제외.
+상세는 이 세션 소스가 Talk 자체는 깊게 다루지 않아 [[posthog]]·[[2026-09-29-posthog-구축-연동]] 참고.
+
 ## 관련
-- 세션: [[2026-07-08-toktalk-에피소드-배경전환-플레이]] · [[2026-07-16-tts-stream-elevenlabs-구현착수]](참고 예시로 지목, 접근 실패) ·
+- 세션: [[2026-09-29-posthog-구축-연동]](PostHog 공통 계측 반영) ·
+  [[2026-07-08-toktalk-에피소드-배경전환-플레이]] · [[2026-07-16-tts-stream-elevenlabs-구현착수]](참고 예시로 지목, 접근 실패) ·
   [[2026-09-07-톡톡-2.0-재구축-사만다-도입]](사만다 페르소나 **최초** 도입, `app.toktalk.ai` 배포 원본 이벤트) ·
   [[2026-09-20-talk속도개선-사만다전환-스튜디오개편]](기존 사만다를 Toss 미니앱으로 이식·개명, 스튜디오 재구축) ·
   [[2026-09-25-lampas-web-fit-구축-배포]](저장소 편입 모순 발견) · [[2026-09-26-virtual-toktalk-tavus-아바타-구축]](virtual.toktalk.ai 구축) ·
