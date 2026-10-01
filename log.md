@@ -2803,3 +2803,13 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   "+1일 재확인"으로 재서술.
 - 모순 아님 — 09-28 세션에서 만든 GA4 코드가 미배포 상태로 남아있던 사실이 09-29 세션에서
   확인된 자연스러운 시간순 흐름.
+
+## [2026-10-01] ingest | First "BY DALAR" 제거·톡톡 대사편집 다듬기·삭제허용·음성우선 (source: 87509bb6-ba23-44c0-b216-160ef91544bc.md)
+- `dalar-web-first` 헤더·푸터 "BY DALAR" 문구 제거, 배포.
+- `toktalk` 사만다 스튜디오(`admin.toktalk.ai`) 대사/답변 편집 UI 재배치, 답변 라벨 "답변 N" 교체,
+  음성 생성 버튼 비활성화 사유 토스트 안내 추가.
+- 대사 삭제 제한 전면 해제 — 클라이언트·서버 양쪽에 중복돼 있던 "최소 2개" 제약을 모두 제거,
+  삭제된 대사로 향하는 선택지 자동 정리 + 시작 대사 자동 재지정.
+- `app.toktalk.ai` 홈을 로고 중심으로 재설계, 공개 에피소드 없으면 즉시 자유 대화 진입, 이어서
+  음성 대화를 기본값으로 전환.
+- 갱신: [[dalar-web-first]] · [[toktalk]] · [[episode-beat-play-system]] · AI_CONTEXT.md.
