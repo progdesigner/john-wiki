@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, claude-agent-sdk, typescript, electron, browser]
 created: 2026-07-07
-updated: 2026-09-27
+updated: 2026-10-03
 ---
 
 # lampas-harness
@@ -950,6 +950,28 @@ Threads 글 생성" 기능이 전면 취소된 뒤, **같은 목표의 기능이
   테스트·빌드 통과 → 데몬 재시작 헬스체크 확인 문장에서 **소스 종료, 실제 재시작 성공 여부 미확인**.
 - ⚠️ 세션 헤더의 `Working directory`는 `lampas-system`으로 기록돼 있으나 실제 편집은 전부
   `lampas-harness` 저장소에서 이뤄짐 — PTY 터미널의 기본 cwd와 실제 작업 대상 저장소가 다를 수 있음.
+
+## 추가 기능 (2026-10-03 세션 — Codex↔Claude 터미널 세션 작업 넘기기)
+
+- **"Claude로 이어가기"(Codex 세션)/"Codex로 이어가기"(Claude 세션) 버튼** — 같은 작업 폴더 안에서
+  Codex·Claude Code 두 CLI 도구를 오가며 쓸 때, 진행 중이던 대화 맥락을 반대 도구의 새 세션으로
+  넘기는 기능. 원본 대화(사용자·어시스턴트 텍스트만, 도구 호출 결과 제외)를
+  `<작업 폴더>/.lampas-attachments/handoff-<uuid>.md`로 저장 → 같은 작업 폴더·제목·권한 모드·브라우징
+  유형으로 반대 도구 새 세션 시작 → 화면 전환. 첫 프롬프트로 "기록을 읽고 현재 상태를 직접 재확인한
+  뒤 이어서 진행하라" 지시(CLI 위치 인자로 전달). 원본 세션은 종료하지 않고 유지.
+  - 변경: `src/terminalSessions.ts`(`handoffTerminal()`, `startTerminal` 첫 프롬프트 인자,
+    `handoffFrom` 기록) · `src/server.ts`(`POST /api/terminals/:id/handoff`,
+    `capabilities.handoff`) · `apps/web/public/index.html`·`terminal.js`(버튼·핸들러) ·
+    `tests/terminal-handoff.test.ts`(신규).
+  - **한계**: 도구 호출 결과·모델 설정은 안 넘어감, 트랜스크립트 없는 Codex 세션은 못 넘김, 넘김
+    파일은 자동 정리 안 됨(`.lampas-attachments`에 누적), 테스트는 가짜 CLI로 인자 전달만 확인(실제
+    바이너리 구동 미검증).
+  - 테스트 90개 전체 통과, 빌드(`npm run build:server && npm run build:web`)·서버 재시작은 사용자에게
+    위임([[self-hosted-agent-server-ops]] 함정 2). 이 세션 소스 범위에선 실제 반영 여부 미확인(사용자
+    "재시작해줘" 요청으로 세션 종료).
+  - 재사용 가능한 절차로 분리: → [[cli-tool-handoff-via-transcript-file]] (↔ [[cross-subdomain-session-handoff]]와는
+    구분 — 저쪽은 로그인 세션, 이쪽은 대화 맥락을 넘김).
+  - → 세션: [[2026-10-03-lampas-harness-codex-claude-핸드오프-구현]]
 
 ## 재확인된 함정 (2026-07-08~09 세션)
 - **"Stream closed"** — 파일 수정 도구 권한 승인 채널이 세션 중 끊겨 편집 불가(2회). 사용자 재전송/재시작으로 복구.

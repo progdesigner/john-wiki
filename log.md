@@ -3073,3 +3073,16 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 신규 세션: [[2026-10-03-lampas-agent-플레이리스트구독계획-codex원본]].
 - 갱신: [[lampas-agent]]("재구축 착수" 절을 1차 소스로 전면 보강) · index.md(세션 1·엔티티 1
   한 줄 반영).
+
+## [2026-10-03] ingest | lampas-harness Codex↔Claude 작업 넘기기(handoff) 구현 (source: 982b8bdc-e120-46f7-806e-ffd91037795d.md)
+- `Tool: claude` 세션(10:34:25Z, `lampas-harness`) — 터미널 세션 헤더에 "Claude로 이어가기"/
+  "Codex로 이어가기" 버튼 신설. 원본 대화(사용자·어시스턴트 텍스트만)를
+  `.lampas-attachments/handoff-<uuid>.md`로 저장 → 같은 작업 폴더·제목·권한 모드·브라우징 유형으로
+  반대 도구 새 세션 시작, 첫 프롬프트로 "기록 확인 후 현재 상태 재확인·이어서 진행" 지시. 원본 세션은
+  유지. 한계: 도구 호출 결과·모델 설정 미승계, 트랜스크립트 없는 Codex 세션은 넘김 불가, 넘김 파일
+  자동정리 없음. 테스트 90개 통과, 빌드·재시작은 사용자에게 위임.
+- 신규 세션: [[2026-10-03-lampas-harness-codex-claude-핸드오프-구현]].
+- 신규 스킬: [[cli-tool-handoff-via-transcript-file]] (↔ 기존 [[cross-subdomain-session-handoff]]와
+  구분 — 저쪽은 로그인 세션, 이쪽은 대화 맥락 이전).
+- 갱신: [[lampas-harness]](신규 절 추가) · [[cross-subdomain-session-handoff]](혼동 주의 절 추가) ·
+  AI_CONTEXT.md(lampas-harness 상태 한 줄 추가) · index.md(세션 1·엔티티 1·스킬 1 반영).

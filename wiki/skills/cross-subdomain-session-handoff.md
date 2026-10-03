@@ -48,4 +48,8 @@ Google 팝업 브리지로 받은 lampas 계정 토큰을 sessionStorage에 두�
 방식이다. 이후 이 First 핸드오프 경로가 교환 코드 방식으로 개정됐는지는 소스 부재로 미확인 —
 같은 저장소 안에 두 가지 다른 성숙도의 핸드오프 패턴이 공존했을 가능성을 열어둔다.
 
+## 혼동 주의 — 대화 맥락 넘기기와는 다름
+`[[lampas-harness]]`의 Codex↔Claude CLI 간 **작업(대화) 넘기기**는 이름은 비슷하지만 로그인 세션이
+아니라 대화 텍스트를 파일로 직렬화해 넘기는 별개 패턴이다 → [[cli-tool-handoff-via-transcript-file]].
+
 ## 출처: [[2026-09-20-lampas-flow-만들기]] ([[lampas-web-flow]] Flow↔Clips/Copy/Reels/Edit/Package↔[[lampas-agent]] 계정 이동)
