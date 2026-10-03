@@ -641,6 +641,19 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
   비율 비례.
 - 세션 → [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]]
 
+## lampas-api-mcp — 원격 MCP+OAuth 구현, ChatGPT·Claude 커넥터 연동 (2026-09-27~28 세션)
+
+2026-09-26 다른 세션이 "진행 중"이라 손대지 않고 넘어갔던 `apps/lampas-api-mcp`(AI 게이트웨이 MCP
+서버) 작업을 이 세션이 완성·배포했다. 로컬 `stdio`(Claude Desktop)는 유지하고 **원격 HTTP MCP +
+OAuth(DCR)**를 추가, 요청마다 사용자 인증을 분리해 다른 계정의 크레딧이 섞이지 않게 했다
+(`https://api.lampas.io/mcp`, 기존 API 도메인 재사용). 16개 테스트·빌드 통과 후 배포했으나, 실제
+Chrome에서 OAuth 연결 폼을 제출하면 서버에 걸어둔 `Referrer-Policy: no-referrer`가 `Origin: null`을
+유발해 거부되는 버그가 남아 있었다 — "통합 테스트 통과"가 실제 브라우저 제출까지는 검증하지 못한
+사례. 헤더 수정 + **최종 승인 전 계정(이름·이메일·크레딧 잔액) 확인 화면** 추가로 수정·재배포.
+확정 사실: 연결되는 계정은 입력한 Secret Key 소유자의 Lampas 계정이다.
+→ 신규 엔티티 [[lampas-api-mcp]], 스킬 [[remote-mcp-oauth-account-confirmation-and-origin-null-pitfall]],
+세션 [[2026-09-27-lampas-api-mcp-oauth-원격mcp-chatgpt클로드연동]].
+
 ## PostHog 분석 도입 — 36개 웹 공통 계측 (2026-09-29 세션)
 
 [[dalar-web-first]] 결제 퍼널 분석 요청을 계기로 [[posthog]](`us.posthog.com`, 프로젝트 `636309`)가
@@ -691,7 +704,8 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
   [[lampas-web-flow]](오케스트레이션 허브) · [[lampas-web-tools]] ·
   [[lampas-web-spot]](식당 지도, `spot.lampas.io`, OpenStreetMap 확정) · [[lampas-web-music]](`music.lampas.io`) ·
   [[lampas-web-trends]](`trends.lampas.io`) · [[lampas-web-cs]](`cs.lampas.io`) · [[lampas-web-admin]](`admin.lampas.io`) ·
-  [[lampas-web-scenario]](시나리오/스토리보드 영상 생성) · [[lampas-web-voice]](`voice.lampas.io`, 보이스 생성)
+  [[lampas-web-scenario]](시나리오/스토리보드 영상 생성) · [[lampas-web-voice]](`voice.lampas.io`, 보이스 생성) ·
+  [[lampas-api-mcp]](AI 게이트웨이 MCP 서버, ChatGPT/Claude 원격 커넥터)
 - 외부 AI 프로바이더: [[gemini]] · [[atlas-cloud]] · [[grok]] · [[openai]] · [[higgsfield]](경쟁 비교)
 - 외부 분석 서비스: [[posthog]](사용자 여정·결제 전환 분석, 36개 웹 공통 계측)
 - 개발/배포 주체: [[lampas]] on [[lampas-harness]]
@@ -707,4 +721,5 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
   [[local-asset-fingerprint-s3-backup-recovery]] · [[prod-ddl-before-deploy-with-drift-check]] ·
   [[signup-domain-abuse-rate-limit-and-reclaim]] · [[multi-domain-single-build-variant-split]] ·
   [[nestjs-admin-guard-requires-jwtmodule]] · [[url-vs-base64-field-ambiguity]] ·
-  [[url-shaped-id-as-rest-path-param]] · [[scope-filtered-list-hides-cross-scope-items]]
+  [[url-shaped-id-as-rest-path-param]] · [[scope-filtered-list-hides-cross-scope-items]] ·
+  [[remote-mcp-oauth-account-confirmation-and-origin-null-pitfall]]

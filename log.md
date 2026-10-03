@@ -2948,3 +2948,18 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   데몬 재시작 헬스체크 확인 문장에서 소스 종료(결과 미확인).
 - 갱신: [[lampas-harness]](신규 절) · [[rebase-local-feature-onto-refactored-remote]](출처 추가) ·
   index.md(세션 1·엔티티 1 한 줄 반영).
+
+## [2026-10-03] ingest | lampas-api-mcp 원격 MCP+OAuth 구현, ChatGPT·Claude 커넥터 연동 (source: 85b28210-0eff-4a3a-bb35-59c57d628adf.md)
+- `lampas-system`(`Tool: codex`, 세션 시작 2026-09-27T02:54Z, 실제 캘린더로 09-27/28/10-03 사흘에
+  걸쳐 이어진 터미널) ingest. [[2026-09-26-fit-서비스-개선]]이 "다른 세션 진행 중"이라 손대지 않고
+  넘어간 `apps/lampas-api-mcp`(AI 게이트웨이 MCP 서버)의 OAuth·HTTP 서버 작업을 이 세션이 완성했다.
+- 주요 내용: ① 로컬 stdio(Claude Desktop) 유지+원격 HTTP MCP·OAuth(DCR, ChatGPT/Claude 커넥터)
+  신규 구현, 요청별 사용자 인증 분리(동시 두 사용자 테스트 통과)로 다른 계정 크레딧 혼용 방지,
+  ② 기존 `https://api.lampas.io` 도메인 재사용해 `/mcp` 경로로 운영 배포, ③ 09-28 "연결은 됐는데
+  계정을 모르겠다" 제보 → `Referrer-Policy:no-referrer`가 Chrome의 OAuth 폼 제출을 `Origin:null`로
+  거부시키던 버그 재현·수정("통합 테스트 통과"가 실제 브라우저 제출은 검증 못 했던 격차),
+  ④ 키 입력 즉시승인 → 최종 승인 전 계정(이름·이메일·크레딧 잔액, Secret Key 실제 인증 결과) 확인
+  화면 신설, ⑤ 10-03 "ChatGPT 연동법 다시 알려줘" 재질문에 소스가 응답 기록 없이 종료.
+- 신규 엔티티: [[lampas-api-mcp]]. 신규 스킬: [[remote-mcp-oauth-account-confirmation-and-origin-null-pitfall]].
+- 갱신: [[lampas-studio]](신규 절+관련 앱/스킬 인덱스) · AI_CONTEXT.md(lampas-studio 줄에
+  lampas-api-mcp 배포 사실 추가) · index.md(세션 1·엔티티 1·스킬 1 한 줄 반영).
