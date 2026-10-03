@@ -1,7 +1,7 @@
 ---
-tags: [entity, app, lampas-studio, sports-clip-pipeline, video-editing, subtitle, template, brand-kit, auto-reframe, image-media, s3-backup]
+tags: [entity, app, lampas-studio, sports-clip-pipeline, video-editing, subtitle, template, brand-kit, auto-reframe, image-media, s3-backup, audio, sound, media-replace]
 created: 2026-09-26
-updated: 2026-09-28
+updated: 2026-10-03
 ---
 # lampas-web-edit ("Edit", edit.lampas.io)
 
@@ -73,6 +73,11 @@ CS·시나리오·dalar-web-first — 보다도 이른 06:10Z 시작)이 실제 
 - 세션 전체 → [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]]
 
 ## "클립 교체"(replaceClipMedia) — 구현·테스트 완료, 배포는 이 소스에선 미확인 (2026-09-12)
+> **2026-10-03 ingest 해소**: 아래 "배포 여부 미확인" 열린 질문은 해소됨.
+> [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]] 세션에서 "기존 '클립
+> 교체'는 그 클립 하나만 바꾸는 동작으로 그대로 남아 있습니다"라고 명시 — 그 사이 어느 시점(이
+> 위키가 읽은 소스로는 특정 불가)에 실제 배포까지 완료된 상태로 확인된다.
+
 [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]] 세션이 "다른 세션이 동시에 `editorCommands.ts`/
 `TimelineStrip.tsx`/`ClipBankDialog.tsx`/`ClipBankBrowser.tsx`에 클립 교체 기능을 얹고 있다"고 짧게
 언급했던 바로 그 병행 세션이
@@ -208,9 +213,55 @@ ingest, 상호 교차 확인됨).
   그대로 넣어 서버 DTO 검증에 걸리던 오류를 0.1.30(+Reels 0.1.24)에서 스냅샷 필드만 남기도록 수정
   → [[lampas-web-reels]].
 
+## Sound에 mp3 로컬 업로드 추가 (2026-09-26)
+기존엔 `music.lampas.io` 게시 트랙만 사운드로 고를 수 있었음. 에셋 패널 사운드 "추가" 픽커 상단에
+mp3·m4a·wav·ogg·flac 다중 업로드 영역이 신설돼, 드롭/클릭으로 여러 개를 고르면 플레이헤드 위치부터
+순서대로 배치된다. 홈/에디터 드롭 영역에 영상·이미지와 오디오를 섞어 넣어도 종류별로 클립/사운드
+트랙으로 자동 분리.
+- 저장 방식은 다른 로컬 미디어와 동일한 패턴 재사용: 브라우저 OPFS에 fingerprint 단위 저장(`audio/`
+  디렉터리), 사운드 항목이 그 fingerprint를 참조, 미리보기·최종 렌더·비트 싱크 모두 이 로컬 파일을
+  사용. 로그인 시 영상·이미지와 같은 편집 세션 자산 백업으로 S3에 올려 타기기 자동 복구(→
+  [[local-asset-fingerprint-s3-backup-recovery]]), 파일이 없으면 "파일 없음"+해당 사운드만 렌더 제외.
+  인스펙터에 "내 오디오 파일" 표시.
+- 신규 `apps/lampas-web-edit/src/lib/localSound.ts`(순수 로직+테스트). API 편집 세션 자산 백업
+  kind에 `audio` 추가.
+- 검증: vitest 593개, API jest 26개, tsc·vite build 통과. 배포 완료, 커밋 `1692ef53`·`e4466590`(미푸시).
+- 부수 관찰: 배포 전 루트 `pnpm prisma:generate`가 exit 254로 실패했으나 `deploy-api.sh`의 테스트
+  게이트는 영향 없이 정상 통과 — 루트 prisma 커맨드와 배포 스크립트 게이트가 분리되어 있음.
+
+## 에셋(라이브러리 원본) 단위 교체 — "원본 교체" (2026-09-26)
+기존 `replaceClipMedia`(타임라인의 클립 하나만 교체)와 별개로, **라이브러리 원본 파일을 바꾸면 그
+원본을 쓰는 모든 클립 인스턴스가 한 번에 교체**되는 기능. 에셋 카드 호버 시 "추가" 옆 ⇄ 교체
+버튼(바뀔 클립 개수 툴팁 표시), 타임라인 우클릭 메뉴에 "원본 교체 (같은 원본 클립 모두)" 항목 추가.
+- **교체 규칙**: 위치·레이어·전환·자막·화면 맞춤·팬 키프레임은 유지. 트림 구간은 길이를 지키며 새
+  원본 범위 안으로 clamp(뱅크 클립에 구간이 있으면 그 구간 안으로, 원래 트림이 새 원본보다 길면
+  새 원본 전체 사용). 이미지로 바꾸면 이미지 클립, 영상으로 바꾸면 영상 클립으로 종류 전환. 라이브러리
+  에선 옛 항목 자리에 새 항목이 들어가고(새 파일이 이미 있으면 옛 항목만 정리), 새 파일은 기존
+  반입 경로(OPFS+로그인 시 S3 백업)와 동일하게 처리.
+- 신규 `apps/lampas-web-edit/src/lib/replaceMedia.ts`(순수 로직+테스트)+커맨드 `replaceLibraryMedia` —
+  단일 클립 교체와 같은 반입 함수를 공유하도록 정리.
+- 검증: vitest 603개, tsc 통과. 배포 완료, 커밋 `e0b4661f`(미푸시).
+
+## 템플릿 구조 편집(`/templates`) — 트랙 추가·삭제·순서 변경 (2026-09-26)
+좌상단 버튼이 "텍스트 트랙 +"·"영상 트랙 +"·"이미지 트랙 +"(파일 선택)로 바뀌어, 누르면 새 트랙이
+생기며 항목 하나가 들어간다. 트랙 행마다 기존 ↑↓ 순서 이동 옆에 ✕ 삭제 버튼이 추가돼, 확인 후 그
+트랙에 담긴 항목까지 함께 지우고 같은 종류의 위 트랙 번호를 당겨 번호가 비지 않게 한다. 순서·삭제
+로직은 `lib/templateTracks.ts` 순수 함수로 분리하고 테스트를 붙임.
+
+## 에디터 타임라인 텍스트 트랙 위/아래 이동·삭제 버그 수정 (2026-09-26)
+"텍스트가 삭제도 안 된다"는 제보로 조사한 결과, 실제 원인은 **타임라인 텍스트 블록에 우클릭 메뉴
+자체가 없었던 것** — 기능 누락이 아니라 진입점 누락이라 사용자에게는 삭제·이동이 막힌 것처럼
+보였음. 우클릭 메뉴에 "위 트랙으로 이동"(맨 위 트랙이면 새 텍스트 트랙을 만들어 이동)·"아래
+트랙으로 이동"·"텍스트 삭제" 3항목 추가, 같은 트랙의 다른 텍스트와 구간이 겹쳐 이동 불가 시 토스트로
+이유를 안내. 삭제는 우클릭 메뉴·인스펙터 "삭제" 버튼·텍스트 선택 후 Delete 키 세 경로 모두 동작
+확인. 잠긴 트랙의 텍스트는 메뉴가 열리지 않으므로 그 경우 트랙 잠금을 먼저 풀어야 함.
+- 검증: vitest 633개, tsc, vite build 통과. 배포 완료, 커밋 `1223e67f`(미푸시) — 워킹트리에 다른
+  세션([[lampas-web-spot]] 추정)의 미관련 변경이 있어 자기 경로만 선택 커밋.
+- 세션 전체(위 세 절 + "동영상 편집 노드 모델 확장" 포함) → [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]]
+
 ## 배포 방식
 S3 업로드 + CloudFront 무효화(정적 SPA), API는 PM2. 배포 전 매번 `web-edit` 타입체크+전체
-테스트(500~580여 개)를 통과시키는 패턴이 일관됨.
+테스트(500~630여 개)를 통과시키는 패턴이 일관됨.
 
 ## 관련
 - 상위 파이프라인: [[lampas-web-flow]](5번째 노드 Edit) · [[lampas-web-reels]](Edit로 세션 전달) ·
@@ -222,7 +273,9 @@ S3 업로드 + CloudFront 무효화(정적 SPA), API는 PM2. 배포 전 매번 `
   [[2026-09-15-facebook-mcp질문-dalar-first-edit핸드오프-구현-커밋푸시]](First 핸드오프 소스 앱 추가) ·
   [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]](Auto Reframe·브랜드킷·ASR청크) ·
   [[2026-09-19-lampas-edit-자막-템플릿-대량기능개발]](자막·큐·레이아웃템플릿 대량 확장) ·
-  [[2026-09-25-edit-템플릿-이미지-s3-url-수정]](계정별 템플릿 url 누락 후속 수정)
+  [[2026-09-25-edit-템플릿-이미지-s3-url-수정]](계정별 템플릿 url 누락 후속 수정) ·
+  [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]](mp3 사운드·에셋 단위
+  원본 교체·템플릿 트랙 추가삭제·에디터 텍스트 트랙 이동삭제 버그 수정)
 - 스킬: [[template-image-slot-fingerprint-vs-url]] · [[proxy-body-limit-413-appears-as-network-error]] ·
   [[selective-hunk-commit-shared-file]] · [[tailwind-preflight-img-maxwidth-overrides-inline-scale]] ·
   [[local-asset-fingerprint-s3-backup-recovery]] · [[prod-ddl-before-deploy-with-drift-check]]

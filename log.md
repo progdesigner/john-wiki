@@ -2813,3 +2813,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - `app.toktalk.ai` 홈을 로고 중심으로 재설계, 공개 에피소드 없으면 즉시 자유 대화 진입, 이어서
   음성 대화를 기본값으로 전환.
 - 갱신: [[dalar-web-first]] · [[toktalk]] · [[episode-beat-play-system]] · AI_CONTEXT.md.
+
+## [2026-10-03] ingest | Edit mp3 사운드·원본 교체·동영상 편집 모델 확장·템플릿 트랙 편집 (source: e5ba5093-338c-4b32-b590-dbc31df40761.md)
+- 신규 세션 페이지 [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]] 작성.
+  `Tool: claude`, `lampas-system`, 2026-09-26T14:21Z 시작. 네 가지 독립 요청 모두 구현·검증·배포·
+  커밋 완료(커밋 `1692ef53`·`e4466590`·`e0b4661f`·`bc0e7bff`·`1223e67f`, 전부 미푸시):
+  ① [[lampas-web-edit]] Sound에 mp3·m4a·wav·ogg·flac 로컬 업로드(OPFS+S3 백업) 신설,
+  ② 에셋(라이브러리 원본) 단위 일괄 교체 "원본 교체" 신설(`replaceMedia.ts`/`replaceLibraryMedia`),
+  ③ Node Studio "동영상 편집" 노드의 [[atlas-cloud]] 영상 편집 모델을 3종→8종으로 확장
+  (`video-edit-models.ts` 레지스트리, `dalar-web-app`→`sync:studio` SoT 패턴 [[dalar]] 세 번째
+  실행 확인, xAI Imagine Edit 가격 드리프트 미해소 메모),
+  ④ 템플릿 구조 편집(`/templates`) 트랙 추가·삭제(`templateTracks.ts`) + 에디터 타임라인 텍스트
+  트랙 위/아래 이동·삭제 버그(우클릭 메뉴 누락) 수정.
+- 갱신: [[lampas-web-edit]](신규 절 4개 + "클립 교체" 배포 여부 미확인 열린 질문 해소) ·
+  [[atlas-cloud]](영상 편집 모델 레지스트리 절 신설) · [[dalar]](SoT 패턴 세 번째 확인 절 신설) ·
+  index.md(세션·엔티티 3곳 한줄요약 갱신).
+- 모순 없음 — 기존 09-13/09-19/09-25 Edit 기록, 09-21/09-24 Atlas·Dalar 기록과 상충하지 않고
+  시간순으로 자연스럽게 이어짐.

@@ -1,7 +1,7 @@
 ---
-tags: [entity, project, product, monorepo, stub, instagram]
+tags: [entity, project, product, monorepo, stub, instagram, atlas-cloud, video-edit]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-03
 ---
 # Dalar
 
@@ -67,11 +67,20 @@ updated: 2026-09-26
   `lampas-api` sports-wiki 게이트(#7)는 5일 뒤 소스로 실제 배포가 간접 확인됐지만, 이 기능은 그런
   확인이 없다.
 
+## 영상 편집 모델 8종 확장 — SoT 관계 세 번째 실행 확인 (2026-09-26 세션)
+[[lampas-studio]] Node Studio "동영상 편집" 노드에 [[atlas-cloud]] 영상 편집 모델을 3종→8종으로
+확장할 때도 **`dalar-web-app`을 먼저 고치고 `pnpm sync:studio`로 `lampas-web-studio`에 반영**하는
+동일 패턴을 따름 — 2026-09-24(Seedance 2.0 Mini)에 이어 이 SoT 관계가 실행으로 확인된 **세 번째
+사례**. 모델 레지스트리 자체(`video-edit-models.ts`)는 `lampas-api`/`dalar-api` 양쪽에 같은 파일로
+존재. 상세 → [[atlas-cloud]] "영상 편집 모델 레지스트리" 절 · 세션 →
+[[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]].
+
 ## 열린 질문
 - Dalar가 `[[lampas-studio]]`와 같은 회사/제품군인지, 별도 브랜드인지 이름만으로는 판단 불가.
 - ~~`lampas-web-studio`가 Dalar에서 단방향 동기화만 받는지, 자체 변경분도 있는지 미확인.~~ →
   2026-09-24 세션에서 최소 1건은 단방향(dalar-web-app→sync:studio→lampas-web-studio) 동기화로
-  확인됨. 다른 기능도 전부 단방향인지는 여전히 미확인.
+  확인됨, 2026-09-26 세션(영상 편집 모델 확장)에서 같은 방향으로 재확인. 다른 기능도 전부 단방향인지는
+  여전히 미확인.
 
 ## `ai.dalar` Instagram 계정 — 콘텐츠 자동 게시용 (2026-09-26, 추정)
 
@@ -87,7 +96,8 @@ Instagram 앱 ID `4664045167163943`)를 만들어 `instagram_business_content_pu
 - 세션: [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-24-studio개선-seedance미니-노드툴바-멀티커밋푸시]] ·
   [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] ·
   [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]] ·
-  [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]]
+  [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] ·
+  [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]]
 - 저장소: [[lampas-studio]] (같은 모노레포 `lampas-system` 안에 공존)
 - 앱: [[dalar-web-first]]("First" AI 돌잔치 영상 서비스, `first.dalar.ai`)
 - 토픽: [[jev-typed-classification]] · [[lampas-system-ai-call-architecture-audit]]

@@ -1,7 +1,7 @@
 ---
-tags: [entity, ai-provider, image-generation, video-generation, external, wan, qwen, seedance, model-catalog, lampas-web-scenario]
+tags: [entity, ai-provider, image-generation, video-generation, external, wan, qwen, seedance, model-catalog, lampas-web-scenario, lampas-web-edit, video-edit, dalar]
 created: 2026-09-07
-updated: 2026-09-26
+updated: 2026-10-03
 ---
 
 # Atlas Cloud
@@ -67,6 +67,32 @@ OpenAPI JSON)을 직접 fetch한다. `usedFor` 설명 문장만으론 결론 내
 받는다고 확인하고 `[[lampas-web-scenario]]`의 컷별 영상 모델 드롭다운에 추가했다. 절차 일반화 →
 [[parallel-survey-before-feature-gap-analysis]] "주의사항" 절.
 
+## 영상 편집(Video Edit) 모델 레지스트리 — 3종 → 8종 확장 (2026-09-26 세션)
+
+[[lampas-studio]] Node Studio("동영상 편집" 노드)가 받는 입력 영상 자체를 고쳐주는 편집 전용 모델
+목록. 사용자가 모델 목록 스크린샷을 첨부하며 "쓸 수 있는 모델 모두 넣어줘"로 요청 → Atlas 카탈로그
+전체에서 영상 입력을 받는 편집 모델을 조사해 기존 3종(xAI Imagine Edit·Gemini Omni Flash Edit·
+Wan 2.7 Video Edit)에 5종(Gemini Omni 1.1 Flash Edit·HappyHorse 1.0 Video Edit·Kling O3 Pro/Std
+Video Edit·FLUX 3 Edit Video)을 추가.
+
+- **레지스트리 위치**: `lampas-api infrastructure/atlas-cloud/video-edit-models.ts`, `dalar-api`
+  파사드에도 동일 파일 — 모델별 Atlas 입력 스키마를 실제 조회해 소스 영상 필드명(`video`/`video_url`)·
+  길이 상한·비율 지원·기본 옵션을 한 곳에 정리. 요청 본문 생성·DTO 허용 목록·Transform 길이 캡·크롭
+  판정이 모두 이 레지스트리에 위임되어 이후 모델 추가는 한 줄.
+- **크롭 처리**: Wan 2.7만 모델이 비율을 직접 받고, 나머지 7종은 서버가 센터 크롭한 뒤 편집에 전달.
+- **의도적으로 제외한 모델**: Wan 2.6 video-to-video(참조영상으로 새 영상을 생성하는 방식, 출력
+  5·10초 고정·캐릭터 참조 문법 — "편집"이 아니라 "생성"), video-extend·video-upscaler·
+  reference-to-video 계열(편집과 다른 작업, 필요하면 별도 노드로 분리하는 게 맞다고 판단).
+- **스튜디오 반영**: `dalar-web-app`을 먼저 고치고 `pnpm sync:studio`로 `lampas-web-studio`에
+  반영 — [[dalar]]의 "Node Studio SoT는 `dalar-web-app`" 관계가 2026-09-24에 이어 **세 번째
+  실행 확인**.
+- **가격 드리프트 미해소**: xAI Imagine Edit의 Atlas 정가가 현재 초당 $0.07인데 과금 오버라이드는
+  여전히 $0.05(50크레딧)로 남아 있음 — `pnpm sync:atlas-pricing` 실행 시 재확인 필요, 이 세션에서는
+  고치지 않음.
+- 이 "동영상 편집" 노드는 Node Studio(`lampas-web-studio`/`dalar-web-app`) 소속이며 [[lampas-web-edit]]
+  (edit.lampas.io, 자막·트랙 편집 앱)과는 별개 — 같은 세션에서 함께 다뤄져 혼동하기 쉽다. 상세 →
+  [[dalar]] · 세션 → [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]]
+
 ## 텍스트 LLM 라우팅 — `[[lampas-web-trends]]` 제목 키워드 유추 (2026-09-19 세션)
 
 이미지·영상·음악 외에 **순수 텍스트 생성(LLM 추론)도 Atlas Cloud를 경유**한다는 첫 확인 사례.
@@ -107,5 +133,6 @@ Grok 4.5** — 여러 벤더를 한 목록에서 고를 수 있음이 드러남.
 - 세션: [[2026-07-08-lampas-스튜디오-레퍼런스-instagram]] · [[2026-07-15-스페이스-엔티티-sdk-api-webai-구현]] ·
   [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] · [[2026-09-19-lampas-trends-고도화]] ·
   [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]] ·
-  [[2026-09-07-톡톡-2.0-재구축-사만다-도입]]
+  [[2026-09-07-톡톡-2.0-재구축-사만다-도입]] ·
+  [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]](영상 편집 모델 3→8종)
 - 스킬: [[parallel-survey-before-feature-gap-analysis]]
