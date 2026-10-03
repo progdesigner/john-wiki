@@ -672,6 +672,22 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
 수신은 미검증(서버 승인 성공 기준 설계만 완료). 상세 → [[posthog]] · 세션 →
 [[2026-09-29-posthog-구축-연동]].
 
+## 포토부스 Transform 크레딧 중복 소진 — 원인 수정 + 과거 환불 (2026-10-03 세션, 배포 미확인)
+
+포토부스 앱(`lampas-app-photobooth`)이 생성 1회당 "AI 사진 생성" 50크레딧을 직접 선차감한 뒤, 같은
+요청이 호출하는 서버의 `POST /transforms/:key/run`이 모델 단가(nano-banana 80, gpt-image-2 10)를 한
+번 더 차감하고 있던 중복 과금 버그를 발견·수정했다. 수정은 포토부스 앱 세션 토큰으로 들어온 요청만
+서버 쪽 모델 단가 차감을 건너뛰도록 판정 로직을 `apps/lampas-api/src/modules/credits/lib/app-credit-session.ts`로
+분리(일반 로그인 사용자의 Transform 실행 과금은 그대로 유지, 이미지뿐 아니라 영상·이미지→영상
+Transform에도 동일 적용), 테스트·타입체크 통과했으나 **세션 종료 시점까지 미배포·미커밋** —
+배포 전까지는 포토부스 생성마다 중복 차감이 계속된다. 과거 중복분은 운영 DB에 즉시 반영: 토스
+포토부스 사용자 60명·255건·총 13,610크레딧(2026-07-23~세션 당일) 환불, 같은 사용자의 두 차감을
+30분 이내 1:1로 매칭 → 사용자별 조정(ADJUSTMENT) 원장 기록, 재실행해 추가 대상 0건 확인(idempotent),
+짝이 없는 1건(사용자 10008, 8월 3일 80크레딧)은 환불 제외. 환불 스크립트:
+`apps/lampas-api/scripts/refund-photobooth-transform-double-charge.js`. 다음 lampas-system 세션에서
+배포·추가 환불 완료 여부 재확인 필요 → 세션 [[2026-10-03-포토부스-transform-크레딧중복소진-환불]],
+스킬 [[app-session-flat-fee-vs-server-metered-double-charge]](신규 추출).
+
 ## 관련
 - 세션: [[2026-09-28-google-analytics-설정-first전용퍼널]](GA4 전사 적용·First 퍼널 구성 원본,
   미배포) ·
@@ -699,7 +715,8 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
   [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]] ·
   [[2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃]] ·
   [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]] ·
-  [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]]
+  [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]] ·
+  [[2026-10-03-포토부스-transform-크레딧중복소진-환불]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
@@ -727,4 +744,5 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
   [[signup-domain-abuse-rate-limit-and-reclaim]] · [[multi-domain-single-build-variant-split]] ·
   [[nestjs-admin-guard-requires-jwtmodule]] · [[url-vs-base64-field-ambiguity]] ·
   [[url-shaped-id-as-rest-path-param]] · [[scope-filtered-list-hides-cross-scope-items]] ·
-  [[remote-mcp-oauth-account-confirmation-and-origin-null-pitfall]]
+  [[remote-mcp-oauth-account-confirmation-and-origin-null-pitfall]] ·
+  [[app-session-flat-fee-vs-server-metered-double-charge]]

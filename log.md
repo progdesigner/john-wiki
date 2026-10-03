@@ -3104,3 +3104,21 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   구현 전 비용 주체를 반드시 확인.
 - 갱신: [[lampas-web-admin]](`/jobs` 대납 생성 절 추가) · [[dalar-web-first]](관리자 대리결제 절
   추가) · AI_CONTEXT.md(lampas-studio 상태 한 줄 추가) · index.md(세션 1·엔티티 2·스킬 1 반영).
+
+## [2026-10-03] ingest | 포토부스 Transform 크레딧 중복소진 원인 수정 + 과거환불 (source: 1a0aad51-237e-4f0d-a892-74aa44eaf37a.md)
+- `Tool: claude` 세션(11:19:32Z 시작, `lampas-system`) — 포토부스 앱(`lampas-app-photobooth`)이 생성
+  1회당 "AI 사진 생성" 50크레딧을 선차감한 뒤, 같은 요청이 호출하는 서버 `POST /transforms/:key/run`이
+  모델 단가(nano-banana 80, gpt-image-2 10)를 한 번 더 차감하던 중복 과금 원인을 발견. 수정은 포토부스
+  앱 세션 토큰 요청만 서버 쪽 모델 단가 차감을 건너뛰도록 판정 로직을 `app-credit-session.ts`로 분리
+  (일반 로그인 사용자 과금은 유지, 이미지·영상·이미지→영상 전부 적용) — 테스트·타입체크 통과했으나
+  **세션 종료 시점까지 미배포·미커밋**. 과거 중복분은 운영 DB에 즉시 환불: 토스 포토부스 사용자
+  60명·255건·총 13,610크레딧(2026-07-23~세션 당일), 같은 사용자의 두 차감을 30분 이내 1:1 매칭 →
+  조정(ADJUSTMENT) 원장 기록, 재실행해 추가 대상 0건 확인(idempotent), 짝이 없는 1건은 환불 제외.
+- 신규 세션: [[2026-10-03-포토부스-transform-크레딧중복소진-환불]] (이미 작성돼 있던 페이지를 이번
+  ingest로 완성 — 원본 raw 복사·세션 페이지는 선행 작업에서 생성됐으나 스킬·entity·index·log·
+  AI_CONTEXT 반영이 누락된 상태였음).
+- 신규 스킬: [[app-session-flat-fee-vs-server-metered-double-charge]].
+- 갱신: [[lampas-studio]](신규 절 추가 + 관련 세션/스킬 링크) · AI_CONTEXT.md(lampas-studio 상태 한 줄
+  추가) · index.md(세션 1·엔티티 1·스킬 1 반영).
+- 미해결: 배포·배포 시점까지 추가 쌓인 중복분 재환불 완료 여부는 이 소스만으로 확인 불가 — 다음
+  lampas-system 세션에서 재확인 필요.
