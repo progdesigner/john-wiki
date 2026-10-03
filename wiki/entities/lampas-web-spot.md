@@ -95,6 +95,15 @@ updated: 2026-10-03
 - 상세·버그 2건(Gemini thinking 토큰 JSON 절단, `.env.local` 운영 번들 유입)·UX 반복은 세션 페이지
   참고 → [[2026-09-26-spot-주소기반재구축-카카오맵전환-네이버보강-채팅검색]].
 
+## Threads 홍보 + 메타(OG) 이미지 적용 (2026-09-27)
+`spot.lampas.io` Threads 홍보 문구 작성("이번 주말에 어디서 먹지" 공감형 도입 + 지도·즐겨찾기
+기능 소개) 직후, [[lampas-web-fit]]이 이미 갖춘 4:3 OG 공유 이미지 패턴을 그대로 가져와 Spot용
+이미지를 신규 제작(`imagegen` 스킬, 파란 톤 + 음식·지도 이미지, 문구 "오늘, 어디서 먹을까?")·
+OG·Twitter 메타 태그 연결·배포. 1차 배포 보고 후 사용자가 "메타 이미지도 적용해줘야지"라고
+재요청해 2차로 재확인 — 실제로는 1차에 이미 적용돼 있었음. 스레드에 남은 구버전 미리보기는
+플랫폼 쪽 언퍼널 캐시 문제로, `?share=20260927` 같은 쿼리 파라미터로 우회 제안
+→ [[social-share-preview-cache-bust-query-param]] · [[2026-09-27-fit-spot-threads홍보문구-spot메타이미지적용]].
+
 ## 관련
 - 상위 저장소: [[lampas-studio]] (`lampas-system`)
 - 세션: [[2026-09-24-spot-맛집지도-구축-지도전환-신고기능]](최초 구축·OSM 확정, 이후 뒤집힘) ·
@@ -102,6 +111,9 @@ updated: 2026-10-03
   병합 커밋 메타데이터로 먼저 포착한 세션) ·
   [[2026-09-26-카카오-지도-api-키-발급]](카카오 키 발급, 83초 뒤 아래 세션으로 이어짐) ·
   [[2026-09-26-spot-주소기반재구축-카카오맵전환-네이버보강-채팅검색]](카카오맵 전환·서비스 성격
-  전환·Jev 채팅검색 신설, 최신 상태)
+  전환·Jev 채팅검색 신설, 최신 상태) ·
+  [[2026-09-27-fit-spot-threads홍보문구-spot메타이미지적용]](Threads 문구·Fit 패턴을 가져온 OG
+  이미지 적용)
 - 스킬: [[nominatim-batch-geocode-progressive-rollout]] ·
-  [[gemini-thinking-tokens-eat-maxtokens-budget]] · [[vite-build-env-precedence-local-leaks-into-prod]]
+  [[gemini-thinking-tokens-eat-maxtokens-budget]] · [[vite-build-env-precedence-local-leaks-into-prod]] ·
+  [[social-share-preview-cache-bust-query-param]]

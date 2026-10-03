@@ -2963,3 +2963,15 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 신규 엔티티: [[lampas-api-mcp]]. 신규 스킬: [[remote-mcp-oauth-account-confirmation-and-origin-null-pitfall]].
 - 갱신: [[lampas-studio]](신규 절+관련 앱/스킬 인덱스) · AI_CONTEXT.md(lampas-studio 줄에
   lampas-api-mcp 배포 사실 추가) · index.md(세션 1·엔티티 1·스킬 1 한 줄 반영).
+
+## [2026-10-03] ingest | Fit·Spot Threads 홍보 문구 + Spot 메타 이미지 적용·재배포 (source: a033e81c-54b3-4268-b3dd-7c9983e7b29d.md)
+- `lampas-system`(`Tool: codex`, 2026-09-27T08:08Z) 짧은 운영 세션. [[lampas-web-fit]] Threads
+  홍보 문구 3회 재작성(일반→여성 타겟 암시(성별 단어 없이)→"유행하는 챌린지" 제작자 공개형) +
+  [[lampas-web-spot]] 신규 Threads 문구 + Fit의 4:3 OG 공유 이미지 패턴을 Spot에 복제·적용(`imagegen`
+  스킬)·OG·Twitter 메타 태그 연결·재배포.
+- 사용자의 "메타 이미지도 적용해줘야지" 재요청은 1차 응답에 이미 반영된 내용의 재확인이었음 — 스레드에
+  남은 구버전 미리보기는 서버 문제가 아니라 플랫폼 언퍼널 캐시 문제로, 쿼리 파라미터(`?share=날짜`)
+  우회를 제안.
+- 신규 스킬: [[social-share-preview-cache-bust-query-param]].
+- 갱신: [[lampas-web-fit]](신규 절) · [[lampas-web-spot]](신규 절) · index.md(세션 1·스킬 1 한 줄
+  반영).

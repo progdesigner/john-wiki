@@ -207,6 +207,7 @@
   ([[rebase-local-feature-onto-refactored-remote]] 재사용) → 빌드까지 통과했으나 데몬 재시작
   헬스체크 확인 문장에서 소스 종료, 실제 재시작 성공 여부 미확인
 - [[2026-10-03-mac-mini-lampas-system-동기화조사-요청]] — `Tool: codex` 세션(09:56Z, Mac mini, `lampas-system`). `[[progdesigner]]`가 이 저장소를 검토·커밋·푸시 후 **MacBook Pro로 동기화**해달라 요청(MacBook Pro 첫 언급) — 읽기전용 조사(hostname·git status·diff·동시 에이전트 충돌·AGENTS.md)만 먼저 하도록 범위를 좁혔으나, 착수 응답만 남긴 채 조사 결과 없이 "아직도 안되나?"에서 소스 종료(미완료). 시스템 프롬프트 `AGENTS.md`는 09-13/14·09-21·09-26 구조를 재확인하면서 AI 모델 env var 기본값(`GEMINI_IMAGE_MODEL`/`GEMINI_TEXT_MODEL`/`GEMINI_VIDEO_MODEL`/`GROK_MODEL`/`GENERATE_IMAGE_MODULE`/`ATLASCLOUD_TEXT_MODEL`)·Atlas Cloud `imageModel` 라우팅표를 처음 구체적으로 노출 → [[lampas-studio]] 반영
+- [[2026-09-27-fit-spot-threads홍보문구-spot메타이미지적용]] — `Tool: codex` 세션(08:08Z, `lampas-system`). [[lampas-web-fit]] Threads 홍보 문구 3회 재작성(일반→여성 타겟 암시(성별 단어 없이)→"유행하는 챌린지" 제작자 공개형) + [[lampas-web-spot]] 신규 Threads 문구 + Fit의 4:3 OG 공유 이미지 패턴을 Spot에 복제·적용·재배포. 사용자의 "메타 이미지도 적용해줘야지" 재요청은 1차 응답에 이미 반영된 내용의 재확인이었고, 스레드 구버전 미리보기는 플랫폼 언퍼널 캐시 문제로 쿼리 파라미터 우회 제안 → [[social-share-preview-cache-bust-query-param]]
 
 ## Entities
 
@@ -396,3 +397,4 @@
 - [[url-shaped-id-as-rest-path-param]] — 엔티티 id 자체가 URL(`u:https://…`)일 때 이를 REST 경로 파라미터(`/:id`)로 쓰면 리버스 프록시의 `%2F`/`//` 정규화로 조용히 404가 나는 함정: id를 본문으로 받는 `POST .../upsert`·`.../remove` 라우트 신설로 해결. [[lampas-studio]] 레퍼런스 라이브러리 저장 버그에서 추출
 - [[scope-filtered-list-hides-cross-scope-items]] — 서버엔 정상 저장된 항목이 목록(갤러리 등)에 안 보일 때, 목록이 "현재 선택된 스코프 소속 엔티티"만 간접 필터링하는 구조가 원인인지 확인하는 진단 절차 — 교차 스코프 선택을 새로 허용하는 기능이 추가된 직후 흔히 발생. [[lampas-studio]] 갤러리 스코프 불일치 사례에서 추출
 - [[remote-mcp-oauth-account-confirmation-and-origin-null-pitfall]] — 자체 MCP 서버를 ChatGPT·Claude 원격 커넥터(OAuth DCR)로 노출할 때: 요청별 사용자 인증 분리(동시 다계정 테스트)+최종 승인 전 "그 키로 실제 인증한" 계정(이름·이메일·크레딧) 확인 화면 필수+`Referrer-Policy:no-referrer`가 Chrome의 OAuth 폼 제출을 `Origin:null`로 거부시키는 함정(통합 테스트만으론 못 잡음, 실브라우저 제출 검증 필요). [[lampas-api-mcp]]에서 추출
+- [[social-share-preview-cache-bust-query-param]] — Threads·Slack 등 링크 미리보기가 og:image를 새로 바꾼 뒤에도 구버전을 계속 보여줄 때: 서버 쪽은 이미 정상(새 이미지 바이트 확인됨)이라면 CDN이 아니라 플랫폼의 URL 단위 언퍼널 캐시가 원인 — 공유 URL에 쿼리 파라미터(`?share=날짜`)를 붙여 새 URL로 보이게 해 캐시를 우회한다. [[lampas-web-spot]] OG 이미지 적용 세션에서 추출

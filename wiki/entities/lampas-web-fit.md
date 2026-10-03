@@ -1,7 +1,7 @@
 ---
 tags: [entity, app, lampas-studio, fitness, music, video, elevenlabs, deploy]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-03
 ---
 # lampas-web-fit ("1분 플랭크 챌린지", `fit.lampas.io`)
 
@@ -59,9 +59,15 @@ updated: 2026-09-26
 설계값과 대조(10ms~수백ms 이내 일치) + 콘솔 오류 확인 → 배포 → 운영 200 응답 확인 → 커밋. fit 앱
 경로만 선택적으로 커밋해 같은 작업 트리의 다른 세션 변경분(lampas-api-mcp OAuth 작업 등)과 분리.
 
+## 홍보 (2026-09-27)
+`fit.lampas.io`를 Threads에 올릴 홍보 문구를 3회 반복 재작성(일반 홍보→여성 타겟 암시(성별 단어
+없이)→"유행하는 챌린지" 제작자 공개형). 같은 세션에서 Fit의 4:3 OG 공유 이미지 구성이
+[[lampas-web-spot]]에도 그대로 복제·적용됨 → [[2026-09-27-fit-spot-threads홍보문구-spot메타이미지적용]].
+
 ## 관련
 - 상위 제품: [[lampas-studio]] (`lampas-system` 저장소)
 - 세션: [[2026-09-25-lampas-web-fit-구축-배포]] (최초 구축) · [[2026-09-26-fit-서비스-개선]] (대규모
-  반복 개선)
+  반복 개선) · [[2026-09-27-fit-spot-threads홍보문구-spot메타이미지적용]] (Threads 문구·OG 이미지가
+  Spot의 참고 원형이 됨)
 - 프로바이더: [[elevenlabs]] (코치 음성)
 - 스킬: [[transparent-video-browser-alpha-fallback]] · [[web-audio-context-close-after-last-source]]
