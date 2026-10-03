@@ -1,14 +1,14 @@
 ---
 tags: [ai-context, summary]
 created: 2026-07-12
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 # AI_CONTEXT — 핵심 기억 요약
 
 > 하네스가 매 대화 시작 시 이 파일을 시스템 프롬프트에 주입한다. 40줄 이내 유지 (규칙: CLAUDE.md).
 
 ## 사용자
-- [[progdesigner]] (John, bacchus.dev@gmail.com) — CWC([[cwc-commerce]]) 소속 개발자·디자이너. **응답은 항상 한국어**(도구의 사람 읽는 필드까지). 기억은 비자명한 것만 저장. 네이버 블로그 `study-ai-what`에 람파스 기억 시스템 공개 연재 중 → [[naver-blog-tag-seo]].
+- [[progdesigner]] (John, bacchus.dev@gmail.com) — CWC([[cwc-commerce]]) 소속 개발자·디자이너. **응답은 항상 한국어**(도구의 사람 읽는 필드까지). 기억은 비자명한 것만 저장. 네이버 블로그 `study-ai-what`에 람파스 기억 시스템 공개 연재 중 → [[naver-blog-tag-seo]]. 작업 기기: 맥미니(상시 서버)+**MacBook Pro**(2026-10-03 신규 등장, 역할 미상).
 
 ## 진행 중 프로젝트
 - [[lampas-harness]] — Claude Agent SDK 웹 하네스(맥미니 launchd 데몬, 원격은 Tailscale 권장). Auto 모델 4단계(easy~extreme/Fable 5) → [[model-selection]] — 판정 1순위 Haiku 4.5(API)는 **`ANTHROPIC_API_KEY` 크레딧 잔액 0으로 계속 실패 중**, [[rapid-mlx]] 로컬 LLM이 실질 판정 경로. `apps/wiki`(위키 브라우징 뷰어)·`apps/browser`(AI 조작 Chromium, WebContentsView) 신설 완료. 기본 과금은 Claude Code 구독(OAuth), API 종량 아님 → [[sdk-claude-code-vs-api-billing]].

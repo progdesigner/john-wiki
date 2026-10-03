@@ -2830,3 +2830,18 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   index.md(세션·엔티티 3곳 한줄요약 갱신).
 - 모순 없음 — 기존 09-13/09-19/09-25 Edit 기록, 09-21/09-24 Atlas·Dalar 기록과 상충하지 않고
   시간순으로 자연스럽게 이어짐.
+
+## [2026-10-03] ingest | Mac mini lampas-system 동기화 조사 요청 (source: 5edec616-d0f3-49c7-851f-1be315944395.md)
+- 신규 세션 페이지 [[2026-10-03-mac-mini-lampas-system-동기화조사-요청]] 작성. `Tool: codex`,
+  `lampas-system`, 2026-10-03T09:56Z 시작. [[progdesigner]]가 Mac mini의 저장소를 읽기전용 조사
+  후 커밋·푸시·**MacBook Pro 동기화**를 요청했으나, 어시스턴트가 착수 응답만 남긴 채 조사 결과
+  없이 "아직도 안되나?"에서 소스가 끝남 — 실제 git 상태·동시 에이전트 충돌 여부는 미확인으로 남김.
+- 시스템 프롬프트 `AGENTS.md`가 기존 09-13/14·09-21·09-26 구조 스냅샷을 재확인 + AI 모델 env var
+  기본값(`GEMINI_IMAGE_MODEL`/`GEMINI_TEXT_MODEL`/`GEMINI_VIDEO_MODEL`/`GROK_MODEL`/
+  `GENERATE_IMAGE_MODULE`/`ATLASCLOUD_TEXT_MODEL`)·Atlas Cloud `imageModel` 라우팅표를 처음
+  구체적으로 노출 → [[lampas-studio]]에 신규 절 추가.
+- 갱신: [[progdesigner]](MacBook Pro 기기 첫 등장, 역할 미상) · [[lampas-studio]](AI 모델
+  env var·라우팅표 절) · AI_CONTEXT.md(사용자 기기 목록에 MacBook Pro 추가) · index.md(세션·
+  엔티티 2곳 한줄요약 갱신).
+- 모순 없음 — 기존 09-26/09-21/09-13 `AGENTS.md` 구조 기록과 상충하지 않고 재확인·세부 보강만 함.
+  단 이 세션 자체의 조사 결과(git 상태 등)는 존재하지 않아 "안전한 다음 단계" 판단은 보류 상태로 남음.

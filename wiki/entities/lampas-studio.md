@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding, lampas-web-cs, lampas-web-admin, lampas-web-scenario]
 created: 2026-07-09
-updated: 2026-10-01
+updated: 2026-10-03
 ---
 # lampas-studio (Lampas 이미지 생성 스튜디오)
 
@@ -336,6 +336,30 @@ X·Threads 공식 API 소스 추가) → 배포 → 배치 크기·타임아웃 
   설정, 운동 기록 저장, 모바일 지원. 음악은 참고 영상(유튜브 쇼츠 "1분 플랭크 챌린지") 음원 대신
   **내장 오리지널 비트** 사용(라이선스 미확인 회피). 배포는 기존 `deploy-web.sh` 경로 + `fit.lampas.io`
   전용 CloudFront 신규 생성 + 기존 Lampas 와일드카드 인증서로 HTTPS 적용. → [[2026-09-25-lampas-web-fit-구축-배포]]
+
+### 2026-10-03 재확인 — AI 모델 env var 기본값·Atlas Cloud 라우팅표 (`AGENTS.md`)
+
+Mac mini 세션(조사 자체는 중단됨 → [[2026-10-03-mac-mini-lampas-system-동기화조사-요청]])의 시스템
+프롬프트 `AGENTS.md`가 09-13/14·09-21·09-26 스냅샷과 동일한 구조를 재확인하면서, 기존 페이지에 없던
+더 상세한 AI 모델 설정표를 노출했다:
+
+- **env var 기본값**: `GEMINI_IMAGE_MODEL=gemini-3.1-flash-image-preview`(Gemini 직접 이미지 생성) ·
+  `GEMINI_TEXT_MODEL=gemini-3.5-flash`(텍스트·비전 JSON 분석, 기존 [[atlas-cloud]]·
+  [[lampas-web-trends]] 등에서 이미 관찰된 모델과 일치) · `GEMINI_VIDEO_MODEL=veo-3.1-generate-preview`
+  (Veo 비디오 생성) · `GROK_MODEL=grok-4.5`(채팅·비전 분석) · `GENERATE_IMAGE_MODULE=gemini`(Atlas
+  이미지 생성 시 provider 미지정 폴백: `gemini`→nano-banana, `openai`→gpt-image-2) ·
+  `ATLASCLOUD_TEXT_MODEL=google/gemini-3.1-pro-preview`(문서상 "현재 액터 플로우 미사용"으로 명시).
+- **Atlas Cloud `imageModel` 요청값 → 실제 모델 라우팅**: `openai/gpt-image-2/edit`·`gpt-image-2`→
+  `openai/gpt-image-2(/edit)`, `google/nano-banana-2/edit`·`gemini-*`→`google/nano-banana-2(/edit)`,
+  `xai/grok-imagine-image-quality/edit`→그대로, `alibaba/wan-2.7-pro/image-edit`→WAN(NSFW·이미지
+  편집), 미지정 시 `GENERATE_IMAGE_MODULE` 폴백.
+- **구분 요약(문서 명시)**: Actor Creation 미리보기(Close up·레퍼런스 시트)·Vision 분석
+  (`analyze-reference`)은 Gemini 직접. 스튜디오 합성·Transform·NSFW·포즈/표정 에셋·모션 비디오는
+  Atlas Cloud 경유. 프롬프트 재작성·NSFW 제안·스튜디오 레퍼런스 분석(1차)은 Grok.
+- 이 매핑표는 `AGENTS.md`(설계 의도 문서) 서술이며, 실제 코드 분기가 정확히 일치하는지는 이 세션
+  소스로 검증되지 않았다 — [[lampas-system-ai-call-architecture-audit]]가 이미 지적한 "모듈마다
+  손수 분기, 공유 typing 계층 없음" 현실과는 상충하지 않는다(매핑표가 있어도 구현이 타입드로 강제되는
+  것은 아니다).
 
 ## Jev(TypeSafe) 도입 — 같은 날 세 세션이 서로 다른 결과 (2026-09-20)
 
