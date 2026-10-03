@@ -2845,3 +2845,29 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   엔티티 2곳 한줄요약 갱신).
 - 모순 없음 — 기존 09-26/09-21/09-13 `AGENTS.md` 구조 기록과 상충하지 않고 재확인·세부 보강만 함.
   단 이 세션 자체의 조사 결과(git 상태 등)는 존재하지 않아 "안전한 다음 단계" 판단은 보류 상태로 남음.
+
+## [2026-09-26] ingest | Studio 5도메인 분리 + models 카탈로그 + Package 플랫폼명·유튜브 (source: 985bf073-2083-4959-98c7-b51d49b70ddd.md)
+- 신규 세션 페이지 [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]] 작성.
+  `Tool: claude` 터미널 세션, `lampas-system`, 2026-09-26T06:38:11Z 시작(이 날짜의 다른 ingest된
+  세션들 중 가장 이른 시각). 6개 독립 요청 연속 처리: ① [[lampas-web-music]] iOS Safari 오디오
+  컨트롤 뭉침 → 커스텀 `AudioPlayer.tsx`로 교체, ② [[lampas-studio]] studio.lampas.io를
+  actors/objects/places.lampas.io 3도메인으로 분리(호스트 기반 variant 분기, 기존 CloudFront에
+  별칭만 추가), ③ transforms.lampas.io 5번째 도메인 추가+studio는 Work·Gallery로 축소, ④ 다섯
+  사이트 독립 제품 정체성 부여(액센트색·파비콘·독립 홈화면), ⑤ `models.lampas.io` 일일 자동
+  Atlas 스냅샷 카탈로그 구현, ⑥ [[lampas-web-package]] 채널명 플랫폼 기준 통일+미디어타입별
+  포맷+유튜브 채널 추가. 마지막으로 transforms 배포 라우팅 버그 수정 후 로컬 커밋 34개 전체 푸시.
+- 사고 2건: (a) 도메인 분리 커밋 중 `git add apps/lampas-api`가 동시 세션의 `spot` 모듈 미완성
+  변경을 함께 커밋·배포해 운영 API에 `spot_places` 테이블 없는 오류 루프 발생 → `git reset --soft`+
+  멱등 DDL로 수습, (b) models 카탈로그 배포 중 `AdminGuard`가 필요한 `JwtModule` 미등록으로 운영
+  API 약 5분 기동 장애(0.1.153→0.1.154 복구).
+- 갱신: [[lampas-studio]](5도메인 분리·models 카탈로그 신규 절 2개) · [[lampas-web-music]](AudioPlayer
+  절) · [[lampas-web-package]](플랫폼명·유튜브 절) · [[selective-hunk-commit-shared-file]](경로단위
+  오염이 운영장애로 번진 변형 추가) · AI_CONTEXT.md(lampas-studio 프로젝트 상태 한 줄 추가) ·
+  index.md(세션·엔티티 3곳·스킬 2곳 갱신).
+- 신규 스킬 2개: [[multi-domain-single-build-variant-split]](호스트명 기반 단일빌드 다중도메인
+  분리) · [[nestjs-admin-guard-requires-jwtmodule]](AdminGuard+JwtModule DI 함정, 배포 전 로컬
+  실기동 확인).
+- 모순 없음 — 기존 [[lampas-studio]] 09-21 "models.lampas.io 508개 모델 동기화" 기록(가격 표시
+  소스 통일)과 이번 "일일 자동 스냅샷"(서버 측 저장·배지 표시)은 같은 도메인의 서로 다른 계층
+  변화로 상충하지 않음. [[selective-hunk-commit-shared-file]]의 기존 변형들과도 근본원인(공유
+  워크트리)은 같되 피해 범위(운영 배포까지 번짐)만 새로운 변형으로 추가.

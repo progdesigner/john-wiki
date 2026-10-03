@@ -443,6 +443,62 @@ AI 선별 패널을 추가했다가 곧바로 "UI/UX 복잡" 피드백으로 페
 전체 배포(운영 DB DDL 선적용→API→에이전트→웹 3종)까지 완료. 세션 →
 [[2026-09-18-lampas-clip-intelligence-brand-kit-대량구현]].
 
+## Studio 5도메인 분리 — Actors/Objects/Places/Transforms 독립 사이트화 (2026-09-26 세션)
+
+같은 날 세 번의 연속 요청으로 `studio.lampas.io` 하나였던 사이트가 5개 독립 도메인으로 쪼개졌다.
+한 번의 `lampas-web-studio` **빌드**가 호스트명으로 역할을 나누는 구조 — 신규 순수 로직
+`src/lib/appDomains.js`가 도메인·경로 소유·내비·교차 링크를 정의(vitest 13개).
+
+1. **1차 분리** — `studio.lampas.io`(Work·Gallery·Transform·References), `actors`/`objects`/
+   `places.lampas.io`(각자 엔티티 목록·생성·상세+공용 Gallery·약관) 4도메인. Place는 API 엔티티가
+   Space라 내부 URL `/spaces/*` 유지, `/places/*`는 별칭. Resources 화면·라우트 완전 제거(admin에
+   이미 있어 중복). 다른 도메인 소유 경로로 들어오면 각 템플릿의 catch-all(`CrossAppRedirectPage`)
+   이 올바른 도메인으로 리다이렉트.
+2. **2차 분리** — `transforms.lampas.io` 추가, `studio.lampas.io`는 **Work·Gallery만**으로 축소
+   (Actor/Object/Place/Transform 내비는 전부 외부 링크).
+3. **독립 제품화** — 다섯 사이트가 "다 연결된 사이트 같다"는 피드백으로, 형제 사이트 내비 링크를
+   전부 제거하고 사이트별 워드마크(제품명만, 공통 접두어 없음)·액센트 색(Studio 시안·Actors
+   주황·Objects 보라·Places 초록·Transforms 노랑, `html[data-site]`+CSS 변수로 기존 컴포넌트
+   무수정)·파비콘·제품 우선 타이틀·독립 홈 화면(목록으로 안 튕김)을 부여. 형제 링크는 푸터
+   "Lampas 제품군" 한 줄에만 남김.
+- **인프라**: 신규 CloudFront 배포 없이 기존 studio 배포(`E37EJWEMEOP61X`, 와일드카드 인증서)에
+  호스트 별칭 4개(actors/objects/places/transforms)를 추가 + Route53 CNAME — `deploy-web.sh
+  lampas-web-studio` 한 번으로 다섯 도메인 전부 배포됨. `status.lampas.io`에 네 도메인 등록,
+  동시에 등록 누락으로 API 테스트를 깨뜨리던 `fit.lampas.io`도 함께 등록.
+- **후속 버그**: Transform 생성·수정 화면이 dalar 시절 레거시 경로(`/studio/transforms*`)로 이동하던
+  것을 transforms 분리 이후 처음 노출(studio가 `/studio/:key`를 옛 Work 딥링크로 오해) — 경로
+  4곳 교체 + `/studio/transforms*`→`/transforms*` 정규화 별칭 규칙으로 수정.
+- **동시 세션 사고**: 1차 분리 커밋 중 `git add apps/lampas-api`가 다른 세션이 작업 중이던 `spot`
+  모듈의 미완성 변경을 함께 커밋·배포해 운영 API에 `spot_places` 테이블 없는 스케줄러가 3초마다
+  오류를 내는 루프 발생 — `git reset --soft`로 커밋 분리 + 멱등 DDL 선적용으로 수습. →
+  [[selective-hunk-commit-shared-file]] 새 변형.
+- 검증: 매 단계 vitest(243→246→272개)·빌드·dalar 동기화 드리프트 검사 통과, 다섯 도메인 HTTPS 200
+  확인. API는 분리 작업 동안 대부분 건드리지 않음(동시 진행 중인 spot·packaging 변경과 분리하기
+  위해 의도적으로 재배포 보류).
+- 세션 → [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]] · 스킬 →
+  [[multi-domain-single-build-variant-split]]
+
+## `models.lampas.io` 일일 자동 카탈로그 (2026-09-26 세션)
+
+이전까지 `models.lampas.io`는 매 요청마다 [[atlas-cloud]]를 직접 불러 가격을 표시하는 화면이었는데
+(2026-09-21 "508개 모델 동기화" 기록), 이 세션에서 **서버 측 일일 스냅샷 파이프라인**으로 바뀌었다.
+
+- `lampas-api`에 `ai/model-catalog/` 모듈 신설 — 스케줄러가 30분마다 스냅샷 나이를 확인, 24시간
+  (`MODEL_CATALOG_REFRESH_HOURS`) 경과 시 Atlas 전체 모델 목록+모델별 OpenAPI 스키마를 받아
+  `model_catalog_snapshots` 테이블에 저장(최근 14개 보존). 매핑 규칙은 `sync:atlas-pricing` 스크립트
+  규칙을 TypeScript 순수 함수로 옮긴 것, 50개 미만/직전의 70% 미만이면 Atlas 장애로 보고 거부.
+- `GET /v1/ai/models`가 매 요청 Atlas를 안 부르고 과금 카탈로그 위에 스냅샷을 얹어 응답(신규 모델
+  `source: atlas`, 내려간 모델 `available: false`, 정가 변동 `priceChanged`, `catalogUpdatedAt`).
+  **과금 단가 자체는 바뀌지 않음** — 청구는 여전히 정적 카탈로그 기준.
+- 관리자용 `GET/POST /v1/admin/ai/model-catalog[/refresh]`로 상태 조회·즉시 갱신.
+- 운영 첫 스냅샷에서 신규 14개·내려간 모델 4개 확인, 화면 상단에 최신화 시각·배지 표시.
+- **장애**: 첫 배포(0.1.153) 직후 관리자 컨트롤러의 `AdminGuard`가 필요로 하는 `JwtService`가
+  `AiModule`에 미등록이라 Nest 기동 실패 → PM2 재시작 반복·nginx 404, 약 5분 장애. 유닛테스트·
+  타입체크로는 안 잡히는 런타임 DI 오류. `JwtModule` 등록 + 로컬 실기동 확인 후 재배포(0.1.154)로
+  복구 → 신규 스킬 [[nestjs-admin-guard-requires-jwtmodule]].
+- 테스트: API 27개(매핑·목록합성·서비스)+웹 3개, 전체 API 1,298개 통과.
+- 세션 → [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]]
+
 ## `lampas-web-music`(`music.lampas.io`) — 모델 업그레이드 (2026-09-22 세션)
 
 Lampas 앱 목록에 이름만 있던 음악 생성 앱의 첫 상세 노출. [[atlas-cloud]] 경유 minimax 음악 모델을
@@ -575,7 +631,8 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
   [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]] ·
   [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]] ·
   [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]] ·
-  [[2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃]]
+  [[2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃]] ·
+  [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
@@ -599,4 +656,5 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
   [[full-stack-feature-removal-audit]] · [[admin-guard-precedent-reuse]] ·
   [[tailwind-preflight-img-maxwidth-overrides-inline-scale]] ·
   [[local-asset-fingerprint-s3-backup-recovery]] · [[prod-ddl-before-deploy-with-drift-check]] ·
-  [[signup-domain-abuse-rate-limit-and-reclaim]]
+  [[signup-domain-abuse-rate-limit-and-reclaim]] · [[multi-domain-single-build-variant-split]] ·
+  [[nestjs-admin-guard-requires-jwtmodule]]

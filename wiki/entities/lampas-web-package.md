@@ -1,5 +1,5 @@
 ---
-tags: [entity, app, lampas-studio, sports-clip-pipeline, sns-copy, pulse, prompt-engineering, instagram, dalar, field-templates]
+tags: [entity, app, lampas-studio, sports-clip-pipeline, sns-copy, pulse, prompt-engineering, instagram, dalar, field-templates, youtube, naver-blog, channel-platform]
 created: 2026-09-26
 updated: 2026-09-26
 ---
@@ -74,7 +74,41 @@ updated: 2026-09-26
   `first.lampas.io`(DNS 미연결 확인)와 `first.dalar.ai`(기존 운영 도메인) 중 후자로 확정,
   사용자가 세션 끝에 "`first.lampas.io`는 잘못 말한 것"이라 직접 정정.
 
-### Instagram 채널 연결 API (2026-09-26 세션에서 처음 언급, 미구현 확인)
+### 플랫폼명 통일 + 미디어타입별 포맷 선택 + 유튜브 추가 (2026-09-26 세션)
+
+사용자 요청: "미디어 타입에 따라 다르게 선택할 수 있게, 플랫폼명으로(블로그→네이버 블로그, 인스타
+그램 게시물/릴스 통일), 유튜브 추가 + 업로드 방법 안내". 이 영역은 다른 세션이 동시에 건드리던
+곳이라 미커밋 변경 여부부터 확인 후 작업.
+
+- **채널 이름이 플랫폼 기준으로 바뀜** — 블로그→"네이버 블로그", 인스타그램 게시물/릴스는 둘 다
+  "인스타그램"(형식은 작은 글씨로만 구분). **유튜브 신규 채널 추가**.
+- "게시할 플랫폼" 단계는 네이버 블로그·인스타그램·유튜브 카드 3개. 카드 안 형식 버튼은 추가한
+  자산의 **미디어 타입에 따라 자동 활성화** — 이미지가 있으면 인스타그램 게시물, 영상이 있으면
+  인스타그램 릴스+유튜브 동영상이 열리고, 네이버 블로그는 항상 가능. 자산을 지워 조건이 깨지면
+  해당 형식은 선택에서 자동으로 빠지고 비활성 버튼엔 "영상 자산을 추가하면 선택할 수 있어요" 안내.
+- 유튜브 변형은 제목(100자)·설명·태그 편집기 — 각각 복사·영상 내려받기·"유튜브 스튜디오 열기"
+  버튼(복사·열기는 내보내기 기록으로 남음). AI 생성(compose)도 유튜브용 제목·설명·태그를 만들고,
+  블로그 프롬프트는 네이버 블로그 포스트 기준으로 교체.
+- 서버는 유튜브 채널에 영상 자산이 없으면 400 거부, 변형의 `mediaOrder`엔 영상만 포함. DB 채널
+  enum 2테이블(`channel_variants`, `publish_records`)을 운영·로컬 모두 확장.
+- 규칙은 API `packages/lib/channel-media.ts`·웹 `lib/channel-media.ts` 순수 함수로 분리, 테스트
+  붙임(API 1,318개·웹 11개 통과, 배포 전 로컬 기동 확인). 배포·커밋 `5e6c1ace`·`58b831a9`, 운영
+  API 재시작 없이 정상.
+
+### 유튜브 업로드 — 현재 수동, API 연동 시 쿼터·검수 제약
+지금은 패키지에서 영상을 내려받고 "유튜브 스튜디오 열기"로 수동 업로드(세로 영상 60초 이하는
+자동 Shorts). 인스타그램처럼 버튼 한 번으로 올리려면 **YouTube Data API v3** 연동이 필요하고,
+절차는 ① Google Cloud 콘솔에서 API 활성화+OAuth 클라이언트(웹)+`youtube.upload` 스코프 등록,
+② "유튜브 채널 연결"→Google OAuth→refresh token을 인스타그램 계정처럼 `ChannelAccount`(provider
+YOUTUBE)에 저장, ③ 게시 시점 access token 갱신→`videos.insert` resumable upload(snippet에 제목·
+설명·태그, status에 공개범위·`publishAt` — 기존 게시 스케줄러에 YOUTUBE 분기 추가하면 예약 게시도
+가능), ④ **제약 2가지** — 기본 쿼터 하루 10,000단위(업로드 1회 1,600단위 → 하루 약 6건, 증설
+신청 가능), Google 앱 검수(OAuth 앱 인증+YouTube API 준수 감사, 보통 1~2주) 통과 전까지 API로
+올린 영상은 비공개 잠금. 구현은 보류 — 인스타그램 연결 코드 구조를 그대로 따르면 되어 작업량은
+크지 않으나 검수 신청은 계정 소유자가 직접 해야 함. 세션 →
+[[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]].
+
+## Instagram 채널 연결 API (2026-09-26 세션에서 처음 언급, 미구현 확인)
 `[[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]]` 세션에서 처음 언급된 엔드포인트 —
 `POST /v1/packaging/channels/instagram/connect`에 Instagram 장기 액세스 토큰을 넣어 채널을 연결하는
 구조로 추정된다(엔드포인트 자체를 이 세션이 조사·구현한 건 아니라 **존재만 확인, 상세 미조사**).
@@ -90,5 +124,6 @@ updated: 2026-09-26
 - 소비처(등록 대상): [[dalar-web-first]] "First" 완성 영상도 이 앱으로 전송해 등록
 - 세션: [[2026-09-20-lampas-package-pulse페르소나-릴스자동작성-톤선택]] ·
   [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] ·
-  [[2026-09-26-package-분야별템플릿-first도메인확정-배포]](분야별 템플릿화, First 실체 재확인)
+  [[2026-09-26-package-분야별템플릿-first도메인확정-배포]](분야별 템플릿화, First 실체 재확인) ·
+  [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]](플랫폼명 통일·유튜브 추가)
 - 스킬: [[persona-prompt-default-override-audit]] · [[selective-hunk-commit-shared-file]]

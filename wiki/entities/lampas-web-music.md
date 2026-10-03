@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, app, music-generation, lampas-studio, minimax, atlas-cloud]
+tags: [entity, project, app, music-generation, lampas-studio, minimax, atlas-cloud, audio-player, ios-safari]
 created: 2026-09-26
 updated: 2026-09-26
 ---
@@ -32,6 +32,18 @@ updated: 2026-09-26
 - `.env.smoke` 부재로 배포 후 스모크 테스트는 건너뜀 — 검증은 운영 API 모델 목록 확인·배포 번들
   직접 확인으로 대체.
 
+## 모바일 재생 UI — 커스텀 `AudioPlayer` (2026-09-26)
+
+트랙 카드마다 브라우저 네이티브 `<audio controls>`를 그대로 썼는데, iOS Safari가 이 컨트롤을 고정
+크기로 그려 카드 안에서 위아래가 잘리고 재생 버튼·시간 표시가 뭉개져 보이는 문제(사용자 스크린샷
+제보). `apps/lampas-web-music/src/components/AudioPlayer.tsx`로 교체 — 재생/일시정지 버튼, 드래그·
+터치로 탐색 가능한 진행 바, 경과/전체 시간, 로딩 스피너, 재생 불가 표시. 앱의 보라 액센트 토큰+
+플랫 버튼 디자인. 트랙 목록·스튜디오 결과 패널 둘 다 이 플레이어를 씀. 시간 표기·진행 비율·탐색
+위치 계산은 순수 함수 `lib/player.ts`로 분리해 vitest 8개 추가. 카드 제목 옆 "게시됨 · music" 배지가
+좁은 화면에서 제목을 밀어내지 않도록 줄바꿈 처리, 생성 시각·레퍼런스 제목도 두 줄로 분리. 배포·
+커밋 `a946335a`(`apps/lampas-agent`의 무관한 env·package.json 변경은 제외). 세션 →
+[[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]].
+
 ## 소비자 — CS 채팅 배경음악 어시스턴트 (신설 후 2026-09-13 제거됨)
 [[lampas-web-cs]]에 한때 `cs-music-assistant.service.ts`가 있어 채팅 메시지의 인텐트를 파싱해
 `MusicService.publish()`를 `source:'CS_CHAT'`으로 호출(`source:'MUSIC_WEB'`과 구분 저장)하던
@@ -47,4 +59,5 @@ CS와 결합이 약해 영향 없이 계속 운영됨. 관리자 화면 패턴(`
 - 자매 앱(소비자, 2026-09-13 소비 경로 제거됨): [[lampas-web-cs]]
 - 외부 의존: [[atlas-cloud]] (minimax 음악 모델 라우팅)
 - 세션: [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] ·
-  [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]]
+  [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]] ·
+  [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]](모바일 플레이어 커스텀 교체)
