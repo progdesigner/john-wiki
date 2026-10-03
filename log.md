@@ -2939,3 +2939,12 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 갱신: [[lampas-studio]](신규 절) · [[dalar]](SoT 패턴 4~9번째 실행 확인, dalar-api 독립 구현
   사례) · [[atlas-cloud]](모션 컨트롤 모델 확장·비율 선택 2개 절) · index.md(세션 1·엔티티 3·스킬 3
   한 줄 반영).
+
+## [2026-09-26] ingest | 하네스 터미널 모바일 키버튼 6개 → 키보드 아이콘 통합 + 최신코드 리베이스 업데이트 (source: c920836c-682e-40e3-8889-f48d12774736.md)
+- `lampas-harness` PTY 웹 터미널 세션(23:00Z). 입력창 ↑·↓·Enter·Shift+Enter·Alt+↑·ESC 6키를
+  헤더 키보드 아이콘 토글+3열 팝오버로 통합(`index.html`·`terminal.css`·`terminal.js`), vite
+  build만으로 반영, 테스트 89/89 통과, 커밋 `f01ae6c`. 이어 원격 최신화 요청에서 파일 2개 additive
+  충돌을 양쪽 유지로 해결([[rebase-local-feature-onto-refactored-remote]] 재사용) → 빌드까지 통과,
+  데몬 재시작 헬스체크 확인 문장에서 소스 종료(결과 미확인).
+- 갱신: [[lampas-harness]](신규 절) · [[rebase-local-feature-onto-refactored-remote]](출처 추가) ·
+  index.md(세션 1·엔티티 1 한 줄 반영).

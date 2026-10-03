@@ -1,7 +1,7 @@
 ---
 tags: [entity, ai-provider, elevenlabs, tts, external]
 created: 2026-08-31
-updated: 2026-09-07
+updated: 2026-09-26
 ---
 # ElevenLabs
 
@@ -31,6 +31,15 @@ ElevenLabs 방식을 무료·경량 대안으로 대체했는지, 병행 중인�
 - `ELEVENLABS_API_KEY`가 하네스 `.env`에 존재. 2026-07-17 평문 노출 사고에 포함 →
   [[secrets-plaintext-exposure-pattern]] · 세션 [[2026-07-17-env읽기-pwa세이프에어리어-여백수정]].
 
+## [[lampas-web-fit]] 운동 코치 음성 (2026-09-26)
+`lampas-system`(=[[lampas-studio]]) 저장소의 `lampas-api` voice 모듈이 쓰는 Atlas 경로로 ElevenLabs
+v3 **'Domi'**(또렷·자신감 있는 여성) 프리셋을 호출, 준비·카운트·전환예고·완료 멘트 15문장을 사전
+녹음해 운동 중 Web Audio 시계에 박 단위로 예약 재생. 숫자 카운트 4단어는 한 박(0.375초) 안에 들어
+가도록 10~35% 재생속도를 올렸다. 완료 시 음악 소스 종료와 동시에 오디오 컨텍스트를 닫아 마지막
+멘트가 잘리던 버그를 "전체 소스 종료 후 닫기"로 수정 → [[web-audio-context-close-after-last-source]].
+영상 속 인물과 더 어울리는 보이스가 필요하면 Bella·Rachel·Elli로 같은 스크립트를 재생성할 수 있도록
+생성 스크립트화됨(보이스 ID만 교체). → [[2026-09-26-fit-서비스-개선]]
+
 ## 관련
 - [[openai]] · [[gemini]] · [[higgsfield]] (외부 AI 도구군)
-- [[toktalk]] · [[lampas-harness]]
+- [[toktalk]] · [[lampas-harness]] · [[lampas-web-fit]] (운동 코치 음성)
