@@ -3,6 +3,7 @@ tags: [ai-context, summary]
 created: 2026-07-12
 updated: 2026-10-03
 ---
+
 # AI_CONTEXT — 핵심 기억 요약
 
 > 하네스가 매 대화 시작 시 이 파일을 시스템 프롬프트에 주입한다. 40줄 이내 유지 (규칙: CLAUDE.md).
@@ -25,6 +26,8 @@ updated: 2026-10-03
 - 위키 회수(recall) 연결: AI_CONTEXT.md 상시 주입 + index.md 능동 조회 + 스킬 카탈로그 + 야간 자동 ingest.
 - `/compact`·백그라운드 memory-ingest의 API 과금 누락 진입점 3곳(`runner.ts`·`compactClaudeSession` 등)은 모두 발견·수정 완료 → [[long-term-memory-architecture]]
 - 배포까지 진행하면 항상 커밋한다 (2026-09-24 확정 규칙).
+- `env/.env.*` 파일은 라이브 키가 들어 있어도 항상 커밋·푸시한다 — [[toktalk]](2026-09-09)·`lampas-system`
+  (2026-09-26) 두 저장소에서 확정된 공통 정책 → [[secrets-plaintext-exposure-pattern]]
 
 ## 업무 맥락
 - CWC 엘레망 광화문 사무실: [[sylvan-korea]] 공간 공동 사용(전대) 동의 절차 진행 중(2026-07 기준), 임대인 측 [[dongwon-building]].

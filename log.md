@@ -2898,3 +2898,25 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 모순 해소: [[lampas-web-spot]]의 "OSM 단일 경로 확정"(2026-09-24/25) vs "카카오 키만 발급, SDK
   교체 미착수"(2026-09-26 카카오 키 세션)가 이 세션으로 해소 — 카카오맵이 최종 채택됨. 단 이 세션과
   카카오 키 발급 세션의 정확한 선후 관계(83초 역전)는 두 소스만으로 확정 불가로 남김.
+
+## [2026-10-03] ingest | music 모델 질문(Grok 4.5 유튜브 분석) + 전체 커밋 푸시 + env 파일 항상 커밋 정책 확정 (source: f16351b8-69b7-481a-9f28-d03a9be618c2.md)
+- 신규 세션 페이지 [[2026-09-26-music모델질문-전체커밋푸시-env파일항상커밋정책]] 작성.
+  `Tool: claude` 세션, `lampas-system`, 2026-09-26T08:40:34Z 시작 — 같은 날 08:32:51Z 카카오 지도
+  키 발급 세션([[2026-09-26-카카오-지도-api-키-발급]]) 8분 뒤, 09:03Z omnara 제거 세션보다 앞선
+  세 왕복짜리 짧은 세션.
+- ① `[[lampas-web-music]]`이 쓰는 모델 질문에 코드 확인으로 답변: 생성은 `minimax/music-3.0`(기존
+  문서화됨), **유튜브 레퍼런스 분석은 `xai/grok-4.5`**(`apps/lampas-web-music/src/lib/analyze.ts:10`)
+  — 이 분석 모델은 위키에 처음 드러남. `[[lampas-web-music]]`·`[[grok]]` 엔티티에 신설 절 추가·
+  "관련" 갱신.
+- ② "지금까지 모든 작업 커밋 후 푸시해줘" 요청에 테스트 통과 확인 후 커밋 3개(`dcdafcdc` studio 빌드
+  복구·`8c14227e` packaging DTO+web-package 딥링크+dalar-web-first 전송링크·`b5d85240` 버전 범프)로
+  push. `apps/lampas-agent/env/.env.local`(`FIXS_AI_API_KEY` 라이브 값, [[toktalk]] `talk-api` 운영
+  키 차용분)은 어시스턴트가 자체 판단으로 제외.
+- ③ 사용자가 "env 폴더의 `.env.*` 파일은 항상 커밋·푸시하게 해줘"라고 명시 지시 → `.gitignore`가
+  이미 `!**/env/.env.*`로 추적 대상을 열어두고 있었음을 재확인(②의 제외는 저장소 규칙이 아니라
+  어시스턴트 개인 판단이었음이 드러남), `env/.env.local`을 커밋 `a9280ddc`로 반영. 이 정책은
+  `[[toktalk]]`에서 2026-09-09에 이미 확정된 동일 정책([[secrets-plaintext-exposure-pattern]] 사례5)
+  이 `lampas-system` 저장소로 확장된 것 — 같은 토픽 페이지에 **사례 8**로 추가.
+- 갱신: [[lampas-web-music]](Grok 4.5 절 신설) · [[grok]](사용처 추가) ·
+  [[lampas-agent]](`FIXS_AI_API_KEY` 커밋 경위 추가) · [[secrets-plaintext-exposure-pattern]](사례8) ·
+  AI_CONTEXT.md(env 항상 커밋 정책을 확정된 결정에 추가) · index.md(세션 1·엔티티 3 한 줄 반영).

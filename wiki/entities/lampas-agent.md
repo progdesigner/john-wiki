@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, sports, video, mac-mini, daemon, lampas-studio]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-03
 ---
 > **2026-09-26 갱신**: Threads 탭은 아래 "Threads 기능 추가→취소" 절 참고 — 2026-09-25 세션이 관찰한
 > Clips·Pulse·Threads·Fixs 4탭 중 Threads는 결국 **전면 제거**되어 v1.0.29 기준 3탭(Clips·Pulse·Fixs)이다.
@@ -238,6 +238,11 @@ Fixs는 오류를 수집해 재귀로 자동 수정하는 기능(위 2026-09-21 
   데몬이 5초마다 미분류 1건씩 처리. 상세 → [[jev-typed-classification]].
 - 파트너 키가 없어(`AGENT_AI_API_KEY` 비어 있음) `FIXS_AI_API_KEY`에 `[[toktalk]]`의 `talk-api` 운영
   키를 임시로 복사해 사용 중 — `platform.lampas.io`에서 Fixs 전용 키 발급 교체가 후속 과제.
+  **2026-09-26 뒤늦게 ingest**: 이 라이브 값이 담긴 `apps/lampas-agent/env/.env.local`은 한 세션에서
+  고지 없이 커밋 제외됐다가, 같은 날 사용자가 "env 폴더의 `.env.*` 파일은 항상 커밋·푸시하게 해줘"라고
+  명시 지시해 커밋 `a9280ddc`로 올라갔다 — `[[toktalk]]`에서 이미 확정된 동일 정책(2026-09-09)이
+  `lampas-system` 저장소로도 확장된 사례. → [[secrets-plaintext-exposure-pattern]] 사례 8 ·
+  [[2026-09-26-music모델질문-전체커밋푸시-env파일항상커밋정책]]
 - 접속: `https://lampas-system.tail0e32ab.ts.net/fixs`.
 
 ## 관련 앱 (같은 저장소, 클립 파이프라인 생태계)
@@ -316,7 +321,8 @@ Fixs 탭 앞에 **Threads 탭**을 추가해 "보관 위키" 데이터를 근거
   [[lb-idle-timeout-keepalive-streaming]] · [[macos-launchd-daemon]] ·
   [[tailscale-funnel-ingress-unregistered-statedir-reset]] · [[dns-propagation-stale-resolver-diagnosis]]
 - 토픽: [[jev-typed-classification]] · [[self-healing-error-pipeline-design]] ·
-  [[lampas-system-ai-call-architecture-audit]]
+  [[lampas-system-ai-call-architecture-audit]] · [[secrets-plaintext-exposure-pattern]](`FIXS_AI_API_KEY`
+  라이브 값이 담긴 env 커밋 경위)
 - 외부 AI 프로바이더: [[gemini]](비전 라벨링, `gemini-3.5-flash` 언급)
 - 연관 저장소: [[john-wiki]] (Threads 데이터 소스로 잠깐 연결됐다가 기능 취소로 분리) · [[toktalk]]
   (`talk-api` 운영 키를 Fixs가 임시로 차용)

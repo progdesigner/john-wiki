@@ -1,7 +1,7 @@
 ---
 tags: [entity, ai-provider, xai, external]
 created: 2026-09-07
-updated: 2026-09-07
+updated: 2026-10-03
 ---
 # Grok (xAI)
 
@@ -17,6 +17,11 @@ updated: 2026-09-07
   자유 텍스트 입력에서 이름·성별·나이·인종·외모 등 여러 필드를 한 번에 추출, 이미 채워진 질문은
   건너뛴다.
 - **이미지 생성** — [[atlas-cloud]] 경유 시 선택 가능한 모델 중 하나(`grok-imagine`).
+- **[[lampas-web-music]] 유튜브 레퍼런스 분석**(2026-09-26 모델 질문 세션에서 처음 확인) —
+  `apps/lampas-web-music/src/lib/analyze.ts:10`가 `xai/grok-4.5`로 유튜브 영상 제목·채널·길이
+  메타데이터만 보고 새 곡 제목·영문 스타일 프롬프트·창작 가사·연주곡 여부를 JSON으로 추출(원곡 가사
+  재현 금지, 파싱 실패 시 1회 재시도 후 수동 입력 폴백). 음악 **생성** 자체는 [[atlas-cloud]] 경유
+  minimax라 Grok과 분리돼 있다. → [[2026-09-26-music모델질문-전체커밋푸시-env파일항상커밋정책]]
 - **[[toktalk]] AI 스택** — OpenAI·DeepSeek·Gemini·ElevenLabs와 함께 AI 계층 목록에 등장(역할
   미상세).
 
@@ -29,4 +34,4 @@ Grok API를 호출한다는 뜻이 **아니고**, 날짜 패턴 필터가 다양
 
 ## 관련
 - [[atlas-cloud]] · [[openai]] · [[gemini]] · [[elevenlabs]] (외부 AI 도구군)
-- [[lampas-studio]] · [[lampas-web-ai]] · [[toktalk]]
+- [[lampas-studio]] · [[lampas-web-ai]] · [[lampas-web-music]] · [[toktalk]]

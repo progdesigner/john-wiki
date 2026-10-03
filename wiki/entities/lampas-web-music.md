@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, app, music-generation, lampas-studio, minimax, atlas-cloud, audio-player, ios-safari]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-03
 ---
 # lampas-web-music (`music.lampas.io`)
 
@@ -32,6 +32,13 @@ updated: 2026-09-26
 - `.env.smoke` 부재로 배포 후 스모크 테스트는 건너뜀 — 검증은 운영 API 모델 목록 확인·배포 번들
   직접 확인으로 대체.
 
+## 유튜브 레퍼런스 분석 — Grok 4.5 (2026-09-26 모델 질문 세션에서 처음 노출)
+`apps/lampas-web-music/src/lib/analyze.ts:10`이 `xai/grok-4.5`를 호출한다. 유튜브 영상의 제목·채널·
+길이 **메타데이터만** 보고 새 곡 제목·영문 스타일 프롬프트·창작 가사·연주곡 여부를 JSON으로 추출 —
+원곡 가사 재현은 프롬프트에서 금지돼 있고, 파싱 실패 시 1회 재시도 후 수동 입력으로 폴백한다. 생성
+모델(위 `MUSIC_MODEL`)과 분석 모델이 분리돼 있다는 점이 이 세션에서 처음 명시적으로 드러났다. →
+[[2026-09-26-music모델질문-전체커밋푸시-env파일항상커밋정책]] · [[grok]]
+
 ## 모바일 재생 UI — 커스텀 `AudioPlayer` (2026-09-26)
 
 트랙 카드마다 브라우저 네이티브 `<audio controls>`를 그대로 썼는데, iOS Safari가 이 컨트롤을 고정
@@ -57,7 +64,8 @@ CS와 결합이 약해 영향 없이 계속 운영됨. 관리자 화면 패턴(`
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
 - 자매 앱: [[lampas-web-tools]] (`music-gen` 툴, 여전히 2.6 — 버전 불일치)
 - 자매 앱(소비자, 2026-09-13 소비 경로 제거됨): [[lampas-web-cs]]
-- 외부 의존: [[atlas-cloud]] (minimax 음악 모델 라우팅)
+- 외부 의존: [[atlas-cloud]] (minimax 음악 모델 라우팅) · [[grok]] (`xai/grok-4.5`, 유튜브 레퍼런스 분석)
 - 세션: [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] ·
   [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]] ·
-  [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]](모바일 플레이어 커스텀 교체)
+  [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]](모바일 플레이어 커스텀 교체) ·
+  [[2026-09-26-music모델질문-전체커밋푸시-env파일항상커밋정책]](Grok 4.5 유튜브 레퍼런스 분석 모델 확인)
