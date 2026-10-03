@@ -3047,3 +3047,16 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 갱신: [[2026-10-03-mac-mini-lampas-system-동기화조사-요청]](해소 포인터 추가) ·
   [[lampas-studio]](AGENTS.md 재확인 절에 완료 세션 연결) · [[lampas-web-spot]] · [[lampas-web-edit]] ·
   index.md(세션 1·엔티티 2·스킬 1 한 줄 반영).
+
+## [2026-10-03] ingest | lampas-agent 플레이리스트 구독 재구축 — Codex 작업 파악 (source: 90de1d06-274d-48d6-85ba-4c0e38112b0f.md)
+- `Tool: claude` 세션(10:32:39Z=19:32 KST, `lampas-system`). 19:12 KST부터 실행 중이던 Codex 세션이
+  [[lampas-agent]]에 유튜브 플레이리스트 구독 자동 수집(1시간 폴링·감시/처리 분리·네이티브
+  FFmpeg 전환·SQLite 체크포인트 무인복구 6단계 계획) 재구축을 착수했음을 교차 확인 — 진행은
+  1단계(공유 ingest 로직 추출)만 미커밋. 계획 md 문서는 어디에도 없음(Codex 대화 로그에만 존재).
+- 어시스턴트는 Codex가 같은 워킹트리를 **지금도 편집 중**임을 이유로 조사 외에 어떤 파일도
+  건드리지 않고, Codex 중단 또는 역할 분담을 권고만 함 — [[readonly-recon-before-shared-repo-write]]
+  절차의 더 보수적인 변형(활성 세션 확인 시 재승인도 기다리지 않고 조사에서 즉시 멈춤).
+- 신규 세션: [[2026-10-03-lampas-agent-플레이리스트구독재구축-codex작업파악]].
+- 갱신: [[lampas-agent]](재구축 계획·진행상태 절 추가) ·
+  [[readonly-recon-before-shared-repo-write]](활성 세션 변형 절 추가) ·
+  index.md(세션 1·엔티티 1·스킬 1 한 줄 반영).
