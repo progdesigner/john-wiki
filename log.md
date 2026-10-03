@@ -2998,3 +2998,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 갱신: [[lampas-web-edit]](12개 신규 절 추가, 버전 0.1.46→0.1.57) ·
   [[local-asset-fingerprint-s3-backup-recovery]](단일 백업 소스 실패 시 영구 "파일 없음" 함정 절
   추가) · index.md(세션 1·엔티티 1·스킬 2 한 줄 반영).
+
+## [2026-10-03] ingest | 블루리본·식신·타베로그 맛집 수집, Spot 확장 (source: 86a6b4d5-f9f9-4e6f-ae39-c4d3e53b5fa2.md)
+- `lampas-system`의 `codex` 하네스 세션(2026-09-26T02:38Z~10-02, 멀티데이). [[lampas-web-spot]]
+  맛집 원시 데이터 수집: 블루리본(Spot 738→824→856, 15초 간격으로 429/흰화면 회피) → 식신(평점
+  4.0↑ 송파·종로, 주소만→주소+지도 장소 ID로 중복판정 교정, Spot 995) → 남양주시 +14 → 타베로그
+  도쿄(평점 3.5↑, 해외 주소·Google 지도 길찾기 신설) +6 → Spot 1,021 → 긴자 숙소 인근 바 +4.
+- 사용자가 Google 서비스 계정 private key(elevino 프로젝트)를 채팅에 평문 붙여넣음 → 인증 거부로
+  미사용, `lampas-crawler`로 교체 → [[secrets-plaintext-exposure-pattern]] 9번째 사례, 이 위키 raw
+  사본에서 레닥트(원본 무수정).
+- ⚠️ **모순 명시**: [[lampas-web-spot]]의 "08:31Z 재구축 세션이 수집 데이터 표기를 전면 제거,
+  주소기반 AI 생성으로 재편"이라는 기존 기록과 달리, 이 세션은 그 이후에도 수집 파이프라인을 계속
+  운영했다 — 양쪽 소스·시점을 엔티티 페이지에 병기.
+- 신규 스킬: [[list-site-scrape-rate-limit-dedupe-sync]] (평점 사이트 목록 수집·중복제거·동기화 절차).
+- 신규 세션: [[2026-09-26-블루리본-식신-타베로그-맛집수집-spot확장]].
+- 갱신: [[lampas-web-spot]](재구축 이후 수집 지속 모순 절 추가) ·
+  [[secrets-plaintext-exposure-pattern]](9번째 사례) · AI_CONTEXT.md(Spot 해외 확장 반영) ·
+  index.md(세션 1·엔티티 1·토픽 1·스킬 1 한 줄 반영).

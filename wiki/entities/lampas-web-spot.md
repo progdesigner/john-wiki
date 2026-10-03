@@ -1,5 +1,5 @@
 ---
-tags: [entity, project, product, lampas-studio, map, openstreetmap, kakao, naver, geocoding, spot, jev, admin]
+tags: [entity, project, product, lampas-studio, map, openstreetmap, kakao, naver, google-maps, geocoding, spot, jev, admin, scraping, international]
 created: 2026-09-26
 updated: 2026-10-03
 ---
@@ -95,6 +95,25 @@ updated: 2026-10-03
 - 상세·버그 2건(Gemini thinking 토큰 JSON 절단, `.env.local` 운영 번들 유입)·UX 반복은 세션 페이지
   참고 → [[2026-09-26-spot-주소기반재구축-카카오맵전환-네이버보강-채팅검색]].
 
+## ⚠️ 모순 — "수집 데이터 표기 전면 제거" 이후에도 수집 파이프라인은 계속 운영됨 (2026-10-03 ingest)
+위 "2026-09-26 재구축" 절은 08:31:28Z 세션을 근거로 "블루리본·다이닝코드 표기 전면 제거"·"주소만
+넣으면 AI가 새로 쓰는 서비스로 재편"을 최신 상태로 적어 두었다. 그런데 **같은 날 02:38Z부터
+시작해 10-02까지 이어진 별도 세션**([[2026-09-26-블루리본-식신-타베로그-맛집수집-spot확장]])은
+그 재편 이후에도 블루리본→식신→타베로그로 소스를 바꿔가며 "이름+주소+평점 수집 → 중복 제거 →
+Google 시트 append → Spot에 신규분만 추가"를 계속 반복했다:
+- 블루리본: 시트 657→743, Spot 738→824→**856**(15초 간격 스크래핑으로 429/흰화면 회피).
+- 식신(평점 4.0↑, 송파·종로): Spot **995**까지 증가. 중복 판정 기준이 "같은 주소면 제외"에서
+  "주소+지도 장소 ID까지 봐서 동일 매장만 제외"로 교정됨(과잉 제외됐던 10곳 복원).
+- 남양주시 +14, 도쿄/타베로그(평점 3.5↑) +6 → Spot **1,021**, 긴자 숙소 인근 바 +4.
+- **해외 주소 지원 신설**: 해외 장소는 Google 지도로 길찾기·장소 정보 연결(국내는 네이버·카카오
+  유지), 소개는 한국어로 작성하되 영문 주소도 등록 가능.
+
+재편 세션이 말한 "구 데이터 856곳을 자동 보강 중"의 그 856이 이 세션의 블루리본 최종 수치와
+일치한다 — **추정상 두 파이프라인은 공존**: 이 세션이 원시 후보(이름+주소)를 계속 공급하고,
+재편 세션이 만든 Jev+비전 LLM+글쓰기 LLM 파이프라인이 각 신규 행의 공개용 소개를 자동 생성하는
+후속 단계로 보인다. 다만 이는 소스 교차 추정이며, **공개 화면에 블루리본/식신/타베로그 출처 표기가
+실제로 전혀 없는지**는 코드로 재확인되지 않았다 — 다음 코드 조사 시 확인 필요.
+
 ## Threads 홍보 + 메타(OG) 이미지 적용 (2026-09-27)
 `spot.lampas.io` Threads 홍보 문구 작성("이번 주말에 어디서 먹지" 공감형 도입 + 지도·즐겨찾기
 기능 소개) 직후, [[lampas-web-fit]]이 이미 갖춘 4:3 OG 공유 이미지 패턴을 그대로 가져와 Spot용
@@ -113,7 +132,9 @@ OG·Twitter 메타 태그 연결·배포. 1차 배포 보고 후 사용자가 "�
   [[2026-09-26-spot-주소기반재구축-카카오맵전환-네이버보강-채팅검색]](카카오맵 전환·서비스 성격
   전환·Jev 채팅검색 신설, 최신 상태) ·
   [[2026-09-27-fit-spot-threads홍보문구-spot메타이미지적용]](Threads 문구·Fit 패턴을 가져온 OG
-  이미지 적용)
+  이미지 적용) ·
+  [[2026-09-26-블루리본-식신-타베로그-맛집수집-spot확장]](02:38Z~10-02, 블루리본·식신·타베로그
+  원시 수집 파이프라인 — 위 "재편" 세션과의 모순 참고)
 - 스킬: [[nominatim-batch-geocode-progressive-rollout]] ·
   [[gemini-thinking-tokens-eat-maxtokens-budget]] · [[vite-build-env-precedence-local-leaks-into-prod]] ·
-  [[social-share-preview-cache-bust-query-param]]
+  [[social-share-preview-cache-bust-query-param]] · [[list-site-scrape-rate-limit-dedupe-sync]]
