@@ -2871,3 +2871,30 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   소스 통일)과 이번 "일일 자동 스냅샷"(서버 측 저장·배지 표시)은 같은 도메인의 서로 다른 계층
   변화로 상충하지 않음. [[selective-hunk-commit-shared-file]]의 기존 변형들과도 근본원인(공유
   워크트리)은 같되 피해 범위(운영 배포까지 번짐)만 새로운 변형으로 추가.
+
+## [2026-10-03] ingest | spot.lampas.io 주소기반재구축 + 카카오맵전환 + 네이버보강 + Jev채팅검색 (source: 1a029355-bdad-415d-bca6-6ff0be5264f8.md)
+- 신규 세션 페이지 [[2026-09-26-spot-주소기반재구축-카카오맵전환-네이버보강-채팅검색]] 작성.
+  `Tool: claude` 터미널 세션, `lampas-system`, 2026-09-26T08:31:28Z 시작 — [[2026-09-26-카카오-지도-api-키-발급]]
+  세션(08:32:51Z 시작)보다 83초 앞서 시작된 짝 세션으로 추정(첫 사용자 메시지에 이미 카카오 키 표가
+  붙여넣기돼 있음). [[lampas-web-spot]]을 "수집 데이터(블루리본/다이닝코드) 전시"에서 "주소만 넣으면
+  카카오 REST+Jev+비전 LLM+글쓰기 LLM이 맛집 데이터를 완전히 새로 생성하는 서비스"로 전면 재구축하고
+  운영 배포까지 마쳤다. 세부: ① lampas-api 신규 `spot` 모듈(테이블 `spot_places`) — 카카오 좌표·장소
+  매칭→Jev 텍스트 필터→비전 LLM 이미지 판정(최대 6장)→LLM 소개 글 생성 파이프라인, ② `admin.lampas.io/spot`
+  관리 모듈 신설, ③ 지도 프로바이더를 2026-09-24/25 "OpenStreetMap 확정"에서 **카카오맵 Web SDK로
+  뒤집어 전환**, ④ 공개 spot 웹에 주소 직접 추가 기능 + 네이버 검색 API 보강(키 미설정으로 비활성)
+  + spot 웹 자체 관리자 모드(비밀번호 로그인) 신설, ⑤ 신고 플로우 역전(자가 복원 제거, 복원은 관리자
+  전용), ⑥ "흔적 제거" 지시로 ★ 등급·`legacyId` 전부 제거(해시 `ref`로 교체), ⑦ Jev 기반 자연어
+  채팅검색(`POST /v1/spot/search`, 지역·상황 규칙 파싱+Jev 적합도 4단계 판정) 신설, ⑧ 지도 UX 4회
+  반복 개선(핀 숫자 제거→길찾기/장소 팝업+주소복사→클러스터 목록 패널→선택 강조, 스크린샷 피드백 기반).
+- 버그 2건 발견·수정, 각각 신규 스킬로 추출: [[gemini-thinking-tokens-eat-maxtokens-budget]]
+  (Gemini 사고 토큰이 maxTokens를 잠식해 JSON 절단) · [[vite-build-env-precedence-local-leaks-into-prod]]
+  (`.env.local`의 `VITE_API_URL=localhost`가 운영 번들에 유입). 다른 세션의 packaging 미완성 변경이
+  API 배포에 섞인 사고는 이후 턴부터 별도 클린 워크트리 배포로 전환해 수습 — [[selective-hunk-commit-shared-file]]
+  기존 패턴과 동일 계열.
+- 갱신: [[lampas-web-spot]](지도 프로바이더 모순 해소·"2026-09-26 재구축" 절 신설·기존 데이터/지도/기능
+  절에 대체됨 표시) · [[lampas-studio]](재구축 사실 한 줄 추가) · [[lampas-web-admin]](`/spot` 모듈 절
+  신설) · [[jev-typed-classification]](콘텐츠 필터링+채팅검색 사용처 #6 추가) · AI_CONTEXT.md
+  (lampas-studio 모순 2건→1건으로 갱신) · index.md(세션 1·엔티티 3·토픽 1·스킬 2 반영).
+- 모순 해소: [[lampas-web-spot]]의 "OSM 단일 경로 확정"(2026-09-24/25) vs "카카오 키만 발급, SDK
+  교체 미착수"(2026-09-26 카카오 키 세션)가 이 세션으로 해소 — 카카오맵이 최종 채택됨. 단 이 세션과
+  카카오 키 발급 세션의 정확한 선후 관계(83초 역전)는 두 소스만으로 확정 불가로 남김.
