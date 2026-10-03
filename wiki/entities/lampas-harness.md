@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, tool, claude-agent-sdk, typescript, electron, browser]
 created: 2026-07-07
-updated: 2026-09-26
+updated: 2026-09-27
 ---
 
 # lampas-harness
@@ -545,7 +545,8 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   [[2026-09-14-하네스터미널-스크롤드래그복사-모델즉시전환-정지버튼-tailscale재연결]] ·
   [[2026-09-20-하네스터미널-jev검색연동-질문선택ui-보관세션종료-파일첨부]] ·
   [[2026-09-25-lampas-web-fit-구축-배포]] · [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] ·
-  [[2026-09-26-lampas-browser-구축-harness이전]]
+  [[2026-09-26-lampas-browser-구축-harness이전]] ·
+  [[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]]
 - 개발 대상 제품: [[lampas-studio]] — 이 하네스로 `[[lampas]]`가 개발·배포하는 이미지 생성 제품.
 - 연동 대상 장기기억: [[john-wiki]] (memory provider는 제안 단계, `apps/wiki` 사람용 브라우저는
   2026-09-26 구현·검증 완료).
@@ -908,6 +909,26 @@ Claude Agent SDK 기반 웹 하네스. `[[progdesigner]]`의 맥미니에서 데
   `.env` 추적 해제 커밋 때문에 맥북에서 pull 시 로컬 `.env`가 삭제될 수 있어 사전 백업 필요.
 - → [[self-hosted-agent-server-ops]] 함정 4(dist 빌드 누락)에 "다른 개발 머신의 빌드 산출물 미동기화"
   변종으로 추가.
+
+## 신규 서브앱 — `branding.html` (위키 기반 Threads 글 생성, 2026-09-26~27)
+
+`[[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]`에서 `[[lampas-agent]]` 쪽 "위키 기반
+Threads 글 생성" 기능이 전면 취소된 뒤, **같은 목표의 기능이 이 하네스 자체에 독립적으로
+재구현**됐다 — 위 "브랜딩 페이지"로 뭉뚱그려 커밋됐던 기능의 상세. → 세션:
+[[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]]
+
+- **위치**: `apps/web/public/branding.html` 추정 — 설정(⚙) → **"위키" 버튼 바로 아래 "브랜딩"
+  버튼**으로 연결.
+- **기능**: `[[john-wiki]]` 문서 선택(근거 확인 가능) → 말투·형식(단일 글 / 3편 연속 글) 선택 →
+  `[[rapid-mlx]]` 로컬 AI 모델(Qwen3.5 추론형)로 Threads 글 초안 생성 → 편집 → 글자 수(500자 기준)
+  **참고 표시**(초과해도 결과는 항상 표시) → 복사 → Threads 작성창 연결.
+- **버그 2종 연쇄 수정**:
+  1. 로컬 추론형 모델이 사고 과정으로 출력 예산을 먼저 소진해 본문을 못 쓰던 문제 — 추론 출력을
+     꺼서 해결. Gemini에서 이미 관찰된 동일 패턴의 재현 → [[gemini-thinking-tokens-eat-maxtokens-budget]].
+  2. 그 직후 도입한 **엄격한 JSON 스키마 검증이 오히려 정상 생성된 본문을 거부**하던 더 근본적인
+     버그 — `note` 필드 누락·`posts` 타입 불일치만으로 쓸 수 있는 결과를 버리고 있었음. 본문을
+     일반 텍스트로 받아 그대로 표시하는 방식으로 완화 → [[strict-json-schema-rejects-usable-llm-output]].
+- 상세·타임라인: [[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]]
 
 ## 재확인된 함정 (2026-07-08~09 세션)
 - **"Stream closed"** — 파일 수정 도구 권한 승인 채널이 세션 중 끊겨 편집 불가(2회). 사용자 재전송/재시작으로 복구.

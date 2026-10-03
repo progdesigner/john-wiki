@@ -57,9 +57,15 @@ updated: 2026-09-26
 - 1차 오해(sports-wiki vs john-wiki)는 "위키"라는 말이 이 생태계에 최소 두 개(스포츠 클립 위키, 이
   저장소) 존재해서 벌어졌다. `[[lampas-agent]]` 엔티티의 이름 충돌 경고와 같은 계열의 용어 충돌.
 
+## 후속 — 같은 아이디어가 lampas-harness 자체에서 재등장
+여기서 취소된 "위키 기반 Threads 글 생성"과 거의 같은 목표의 기능이, `apps/wiki` 이전 직후(또는
+같은 날 늦게) **이 하네스의 `branding.html`**로 독립적으로 재구현됐다 — 두 사건의 직접적 승계
+관계는 소스상 확정 불가. → [[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]]
+
 ## 관련
 - [[lampas-agent]] — Threads 기능 추가 후 전면 제거(v1.0.26→v1.0.29)
-- [[lampas-harness]] — `apps/wiki`(wiki.html) 신설, 설정 > 위키 버튼
+- [[lampas-harness]] — `apps/wiki`(wiki.html) 신설, 설정 > 위키 버튼; 이후 `branding.html`도 같은 자리에 추가
 - [[john-wiki]] — 처음으로 사람용 브라우징 UI의 데이터 소스가 됨
 - [[long-term-memory-architecture]] · [[wiki-memory-provider-integration]] — 조회(recall) 경로 비교
 - [[full-stack-feature-removal-audit]] · [[self-hosted-agent-server-ops]]
+- [[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]] — Threads 글 생성 기능의 재등장

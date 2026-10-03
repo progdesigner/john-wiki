@@ -32,8 +32,19 @@ launchd가 **즉시 옛 plist 설정 그대로 되살린다.** 따라서 실행 
 - 로그: `logs/rapidmlx.out.log`, `logs/rapidmlx.err.log`
 - **35B 모델 로드에 5분 가까이** 걸리니 포트 오픈 폴링은 여유 있게.
 
+## 콘텐츠 생성 용도로 확장 — `branding.html` (2026-09-26~27)
+
+기존 용도(Auto 난이도 판정)에 이어 **생성형 용도**로도 쓰이기 시작했다 — `[[lampas-harness]]`의
+`branding.html`(위키 기반 Threads 글 생성)이 이 서버의 `qwen3.5-35b`(추론형)를 호출해 게시물 초안을
+쓴다. 추론형 모델 특성상 **사고 과정이 출력 토큰 예산을 먼저 소진해 본문을 못 쓰는 문제**가 처음
+드러나 "추론 출력 끄기"로 수정됨 → [[gemini-thinking-tokens-eat-maxtokens-budget]] (Gemini에서
+먼저 관찰된 패턴의 로컬 모델 재현) · 세션: [[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]]
+
 ## 관련
-- 호스트·소유자: [[progdesigner]] / 소비자: [[lampas-harness]] ([[model-selection]])
-- 스킬: [[local-llm-rapidmlx-install]] · [[macos-launchd-daemon]] · [[detach-long-job-nohup]]
+- 호스트·소유자: [[progdesigner]] / 소비자: [[lampas-harness]] ([[model-selection]] 판정 ·
+  `branding.html` 콘텐츠 생성)
+- 스킬: [[local-llm-rapidmlx-install]] · [[macos-launchd-daemon]] · [[detach-long-job-nohup]] ·
+  [[gemini-thinking-tokens-eat-maxtokens-budget]]
 - 토픽: [[local-llm-on-apple-silicon]]
-- 세션: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-13-람파스-누적운영기억-이관]]
+- 세션: [[2026-07-08-스케줄러-로컬llm-사용영역페르소나]] · [[2026-07-13-람파스-누적운영기억-이관]] ·
+  [[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]]

@@ -57,9 +57,18 @@ LLM이 작성·유지하고 사람은 소스를 공급·질문한다.
 - **미확인**: 세션 종료 시점에 하네스 서버 재시작(반영)이 실행 중인 터미널 세션 보호를 위해 대기
   중이었음 — 실제 프로덕션에 이 기능이 반영됐는지는 다음 확인 필요.
 
+## 콘텐츠 생성 소비 경로 — `lampas-harness branding.html` (2026-09-26~27)
+
+`apps/wiki`(사람용 브라우징, 방법 D)와는 또 다른 소비 방식: 이 위키 문서를 **원재료로 삼아 파생
+콘텐츠(Threads SNS 글)를 생성**하는 기능이 `[[lampas-harness]]`에 추가됨. 사람이 위키를 읽는 게
+아니라, **로컬 LLM([[rapid-mlx]])이 위키 문서를 근거로 새 글을 쓰는** 경로라 "방법 D(읽기 브라우징)"
+와는 구분되는 별도 소비 유형 — 잠정적으로 "방법 E: LLM 기반 파생 콘텐츠 생성"으로 분류할 만하다.
+→ [[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]]
+
 ## 관련
 - 소유자·사서 소스: [[progdesigner]]
-- 연동 대상 하네스: [[lampas-harness]] (`apps/wiki` 사람용 브라우저 + memory provider 제안)
+- 연동 대상 하네스: [[lampas-harness]] (`apps/wiki` 사람용 브라우저 + `branding.html` 콘텐츠 생성 + memory provider 제안)
 - 토픽: [[long-term-memory-architecture]]
 - 스킬: [[wiki-memory-provider-integration]]
-- 세션: [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]]
+- 세션: [[2026-09-26-threads기능제거-llm위키탐색기-apps-wiki-이전]] ·
+  [[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]]

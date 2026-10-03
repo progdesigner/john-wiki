@@ -1,15 +1,18 @@
 ---
 name: gemini-thinking-tokens-eat-maxtokens-budget
-description: Gemini 모델이 JSON을 자주 깨뜨리거나 응답이 중간에 끊길 때 — 사고(thinking) 토큰이 maxTokens 예산을 먼저 잠식하는지 확인·수정하는 절차
+description: 추론/사고(thinking/reasoning) 지원 모델(Gemini·로컬 Qwen 등)이 JSON을 자주 깨뜨리거나 본문을 못 쓸 때 — 사고 토큰이 출력 예산을 먼저 잠식하는지 확인·수정하는 절차
 created: 2026-10-03
-tags: [gemini, llm, json-parsing, token-budget, bugfix, lampas-web-spot]
+updated: 2026-09-26
+tags: [gemini, local-llm, llm, json-parsing, token-budget, bugfix, lampas-web-spot, lampas-harness]
 ---
-# Gemini 사고 토큰이 maxTokens를 잠식해 JSON이 잘리는 함정
+# 사고(thinking/reasoning) 토큰이 출력 예산을 잠식해 본문이 잘리거나 안 나오는 함정
 
 ## 언제 쓰는가
-Gemini(특히 `gemini-3.5-flash` 등 thinking 지원 모델)를 호출해 JSON 구조화 응답을 받는 기능에서
-**JSON 파싱 실패/검증 거부가 간헐적으로, 특히 응답이 길어질수록 더 자주** 일어날 때. 프롬프트나
-스키마를 고쳐도 재발하면 이 함정을 의심한다.
+Gemini(특히 `gemini-3.5-flash` 등 thinking 지원 모델)나 **로컬 추론형 모델(예: Qwen3.5 계열,
+[[rapid-mlx]] 경유)**을 호출해 구조화 응답(JSON)이나 긴 본문을 받는 기능에서 **파싱 실패/검증
+거부/본문 누락이 간헐적으로, 특히 응답이 길어질수록 더 자주** 일어날 때. 프롬프트나 스키마를
+고쳐도 재발하면 이 함정을 의심한다. 공급자를 가리지 않는다 — 원인은 "사고 과정이 출력 토큰 예산을
+나눠 쓴다"는 아키텍처 공통점이지, 특정 벤더의 버그가 아니다.
 
 ## 원인
 Gemini의 "사고(thinking)" 과정이 내부적으로 토큰을 소비하는데, 이 토큰이 **별도 예산이 아니라
@@ -36,6 +39,10 @@ JSON 파서가 그대로 실패한다. 증상은 "모델이 가끔 이상한 JSO
 3. API가 thinking 토큰 예산을 별도로 분리 설정할 수 있는 옵션을 제공한다면(모델/SDK 버전에 따라
    다름) 그쪽으로 사고 토큰 상한을 직접 캡하는 방법도 고려할 수 있으나, 가장 간단하고 검증된
    수정은 `maxTokens` 상향이다.
+4. **추론 출력을 통째로 끌 수 있으면 그게 가장 확실하다** — 로컬 서버/모델이 "추론(reasoning) 모드
+   끄기" 옵션을 제공하면(예: [[rapid-mlx]] 경유 Qwen3.5), maxTokens를 올리는 대신 이 옵션으로 사고
+   과정 자체를 생략시켜 출력 예산이 전부 본문에 쓰이게 하는 것도 유효한 해법이다 — API가 사고
+   토큰을 분리 설정할 수 없을 때(1·3번이 막혀 있을 때) 특히 유용.
 
 ## 주의사항 / 함정
 - 이 문제는 "프롬프트를 더 명확히 하면 고쳐진다"는 직관과 달리 **토큰 예산 구조**의 문제라,
@@ -46,3 +53,13 @@ JSON 파서가 그대로 실패한다. 증상은 "모델이 가끔 이상한 JSO
 
 ## 출처: [[2026-09-26-spot-주소기반재구축-카카오맵전환-네이버보강-채팅검색]]
 ([[lampas-web-spot]] writer·이미지 판정 응답이 JSON 검증에 자주 실패하던 문제)
+
+## 재현(별개 공급자): 로컬 추론형 모델(Qwen)
+[[2026-09-26-브랜딩-threads콘텐츠생성-로컬llm-json검증버그수정]]([[lampas-harness]] `branding.html`
+— 위키 기반 Threads 글 생성 기능)에서 **로컬 Qwen3.5(추론형, [[rapid-mlx]] 경유)** 모델이 게시물
+본문을 쓰기 전 사고 과정으로 출력 예산을 소진해 응답을 못 만드는 동일 증상이 나타났다. 이번엔
+`maxTokens` 상향이 아니라 **추론 출력 자체를 끄는** 방식(위 수정 4번)으로 해결 — Gemini 사례와
+원인은 같지만 수정 방법은 공급자가 제공하는 옵션에 따라 다를 수 있음을 보여주는 사례. 같은 세션에서
+**검증 로직이 너무 엄격해 정상 생성된 본문까지 거부**하는 별개의 2차 함정이 이어졌다 — 그쪽은
+→ [[strict-json-schema-rejects-usable-llm-output]]로 분리 기록(원인이 토큰 예산이 아니라 검증
+엄격도라 서로 다른 스킬로 유지).

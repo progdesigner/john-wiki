@@ -2920,3 +2920,5 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 갱신: [[lampas-web-music]](Grok 4.5 절 신설) · [[grok]](사용처 추가) ·
   [[lampas-agent]](`FIXS_AI_API_KEY` 커밋 경위 추가) · [[secrets-plaintext-exposure-pattern]](사례8) ·
   AI_CONTEXT.md(env 항상 커밋 정책을 확정된 결정에 추가) · index.md(세션 1·엔티티 3 한 줄 반영).
+
+## [2026-09-26] ingest | 브랜딩(위키 기반 Threads 글 생성) 구축 + 로컬 LLM JSON 검증 버그 2라운드 수정 (source: b3a3466a-58e4-4fe0-b485-1acd9a7c5f85.md)
