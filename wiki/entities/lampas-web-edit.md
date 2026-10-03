@@ -372,6 +372,10 @@ Contain으로 들어가는지"가 여전히 구분 안 된다는 재지적 — *
 복구해도 기존 클립의 위치·트림·자막은 그대로 유지, 복구된 파일은 새로고침 후에도 남음. 원본 URL과
 서버 백업이 모두 없는 순수 로컬 반입 파일은 복구 불가 — "직접 다시 연결해야 한다"는 안내 메시지로
 구분.
+- **커밋·푸시 확인(2026-10-03, 별도 Mac mini 세션)**: 이 기능이 커밋 `a7004021`("Edit 누락 원본
+  복구")로 커밋되고 `origin/main`에 푸시됨 — 동시에 위 "에디터 타임라인 텍스트 트랙…" 절이 "미푸시"로
+  남겨둔 커밋 `1223e67f`도 같은 푸시에 함께 올라가 해소됨. 테스트 636개(Edit 단독)·674개(전체) 통과 →
+  [[2026-10-03-mac-mini-lampas-system-동기화-조사완료-spot-edit-커밋푸시]].
 
 ## 배포 방식
 S3 업로드 + CloudFront 무효화(정적 SPA), API는 PM2. 배포 전 매번 `web-edit` 타입체크+전체
@@ -391,7 +395,9 @@ S3 업로드 + CloudFront 무효화(정적 SPA), API는 PM2. 배포 전 매번 `
   [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]](mp3 사운드·에셋 단위
   원본 교체·템플릿 트랙 추가삭제·에디터 텍스트 트랙 이동삭제 버그 수정) ·
   [[2026-10-01-edit-템플릿구조편집-가이드이미지-오디오크로스페이드-파일복구]](템플릿 구조 편집
-  화면 신설부터 "파일 없음" 복구 확장까지 0.1.46→0.1.57 연속 개발)
+  화면 신설부터 "파일 없음" 복구 확장까지 0.1.46→0.1.57 연속 개발) ·
+  [[2026-10-03-mac-mini-lampas-system-동기화-조사완료-spot-edit-커밋푸시]](위 0.1.57 작업분 커밋
+  `a7004021` 확인·푸시)
 - 스킬: [[template-image-slot-fingerprint-vs-url]] · [[proxy-body-limit-413-appears-as-network-error]] ·
   [[selective-hunk-commit-shared-file]] · [[tailwind-preflight-img-maxwidth-overrides-inline-scale]] ·
   [[local-asset-fingerprint-s3-backup-recovery]] · [[prod-ddl-before-deploy-with-drift-check]] ·

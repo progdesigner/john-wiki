@@ -349,9 +349,14 @@ X·Threads 공식 API 소스 추가) → 배포 → 배치 크기·타임아웃 
 
 ### 2026-10-03 재확인 — AI 모델 env var 기본값·Atlas Cloud 라우팅표 (`AGENTS.md`)
 
-Mac mini 세션(조사 자체는 중단됨 → [[2026-10-03-mac-mini-lampas-system-동기화조사-요청]])의 시스템
-프롬프트 `AGENTS.md`가 09-13/14·09-21·09-26 스냅샷과 동일한 구조를 재확인하면서, 기존 페이지에 없던
-더 상세한 AI 모델 설정표를 노출했다:
+Mac mini 세션(조사 자체는 중단됨 → [[2026-10-03-mac-mini-lampas-system-동기화조사-요청]], 8분 뒤
+다른 세션이 끝까지 완료 → [[2026-10-03-mac-mini-lampas-system-동기화-조사완료-spot-edit-커밋푸시]])의
+시스템 프롬프트 `AGENTS.md`가 09-13/14·09-21·09-26 스냅샷과 동일한 구조를 재확인하면서, 기존 페이지에
+없던 더 상세한 AI 모델 설정표를 노출했다. 완료된 세션 쪽에서는 이 저장소에 동시 cwd로 붙은 다른
+에이전트 프로세스가 **Codex 5개 + Claude 1개**임을 처음으로 수치화했고([[selective-hunk-commit-shared-file]]
+패턴의 추가 관측), 미커밋 30개를 Spot API/웹·Edit 두 커밋(`43eafbb4`·`a7004021`)으로 분리해 기존
+미푸시 커밋(`1223e67f`)과 함께 push까지 완료했다 — 상세는 [[lampas-web-spot]]·[[lampas-web-edit]]
+갱신 절 참고.
 
 - **env var 기본값**: `GEMINI_IMAGE_MODEL=gemini-3.1-flash-image-preview`(Gemini 직접 이미지 생성) ·
   `GEMINI_TEXT_MODEL=gemini-3.5-flash`(텍스트·비전 JSON 분석, 기존 [[atlas-cloud]]·

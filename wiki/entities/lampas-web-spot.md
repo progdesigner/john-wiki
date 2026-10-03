@@ -107,6 +107,11 @@ Google 시트 append → Spot에 신규분만 추가"를 계속 반복했다:
 - 남양주시 +14, 도쿄/타베로그(평점 3.5↑) +6 → Spot **1,021**, 긴자 숙소 인근 바 +4.
 - **해외 주소 지원 신설**: 해외 장소는 Google 지도로 길찾기·장소 정보 연결(국내는 네이버·카카오
   유지), 소개는 한국어로 작성하되 영문 주소도 등록 가능.
+- **커밋·푸시 확인(2026-10-03, 별도 Mac mini 세션)**: 이 해외 확장분(국가코드·세계좌표·해외 주소
+  검색 API 12파일 + 지도·Google 지도 링크·도쿄 6곳·긴자 바 4곳 JSON 데이터 웹 10파일)이 커밋
+  `43eafbb4`("Spot 해외 장소 지원·데이터")로 커밋되고 `origin/main`에 푸시됨 — 그 전까지는 이
+  작업분이 실제로 커밋됐는지 미확인이었다. 테스트 API 23개·웹 15개 통과 →
+  [[2026-10-03-mac-mini-lampas-system-동기화-조사완료-spot-edit-커밋푸시]].
 
 재편 세션이 말한 "구 데이터 856곳을 자동 보강 중"의 그 856이 이 세션의 블루리본 최종 수치와
 일치한다 — **추정상 두 파이프라인은 공존**: 이 세션이 원시 후보(이름+주소)를 계속 공급하고,
@@ -134,7 +139,9 @@ OG·Twitter 메타 태그 연결·배포. 1차 배포 보고 후 사용자가 "�
   [[2026-09-27-fit-spot-threads홍보문구-spot메타이미지적용]](Threads 문구·Fit 패턴을 가져온 OG
   이미지 적용) ·
   [[2026-09-26-블루리본-식신-타베로그-맛집수집-spot확장]](02:38Z~10-02, 블루리본·식신·타베로그
-  원시 수집 파이프라인 — 위 "재편" 세션과의 모순 참고)
+  원시 수집 파이프라인 — 위 "재편" 세션과의 모순 참고) ·
+  [[2026-10-03-mac-mini-lampas-system-동기화-조사완료-spot-edit-커밋푸시]](해외 확장분 커밋
+  `43eafbb4` 확인·푸시)
 - 스킬: [[nominatim-batch-geocode-progressive-rollout]] ·
   [[gemini-thinking-tokens-eat-maxtokens-budget]] · [[vite-build-env-precedence-local-leaks-into-prod]] ·
   [[social-share-preview-cache-bust-query-param]] · [[list-site-scrape-rate-limit-dedupe-sync]]

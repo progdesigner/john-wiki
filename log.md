@@ -3030,3 +3030,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 - 갱신: [[toktalk]](2026-09-27 절을 13:03Z/13:25Z 두 세션으로 분리·순서 명시) ·
   [[episode-beat-play-system]](선택지 구조 전환·흥분도-음성 연동 절 추가) ·
   index.md(세션 1·스킬 1 한 줄 반영).
+
+## [2026-10-03] ingest | Mac mini lampas-system 동기화 조사완료, Spot 해외확장·Edit 파일복구 커밋푸시 (source: 72935844-4b5d-4620-8893-d72b99c2b427.md)
+- `lampas-system`의 `codex` 세션(10:04:36Z 시작) — 8분 전 중단된 동일 요청 세션
+  ([[2026-10-03-mac-mini-lampas-system-동기화조사-요청]])을 다른 rollout ID로 재시도해 끝까지
+  완료. **1단계**: 읽기전용 조사로 기기·git 상태(HEAD `1223e67f`, ahead/behind 1/0)·미커밋 30개를
+  Spot API(12)·Spot 웹(10)·Edit(8) 3그룹으로 분류, 동시 cwd 프로세스 **Codex 5개+Claude 1개**를
+  처음으로 수치화해 보고. **2단계**: 사용자가 "모두 커밋 후 푸시해줘"로 재승인한 뒤에야 쓰기 전환 —
+  테스트 674개 통과, Spot(`43eafbb4`)·Edit(`a7004021`) 두 커밋+기존 미푸시 HEAD(`1223e67f`)까지
+  함께 push.
+- [[lampas-web-spot]]의 해외(도쿄·긴자) 확장분, [[lampas-web-edit]]의 "파일 없음" 복구(0.1.57)
+  작업분이 각각 이 세션의 커밋으로 실제 커밋·푸시됐음을 확인 — 두 엔티티 페이지의 열린 질문 해소.
+  MacBook Pro 동기화(원 요청의 마지막 단계)는 이 소스에 등장하지 않아 미완료로 남음.
+- 신규 세션: [[2026-10-03-mac-mini-lampas-system-동기화-조사완료-spot-edit-커밋푸시]].
+- 신규 스킬: [[readonly-recon-before-shared-repo-write]] (공유 저장소 쓰기 전 읽기전용 조사 2단계 절차).
+- 갱신: [[2026-10-03-mac-mini-lampas-system-동기화조사-요청]](해소 포인터 추가) ·
+  [[lampas-studio]](AGENTS.md 재확인 절에 완료 세션 연결) · [[lampas-web-spot]] · [[lampas-web-edit]] ·
+  index.md(세션 1·엔티티 2·스킬 1 한 줄 반영).
