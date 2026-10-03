@@ -2922,3 +2922,20 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   AI_CONTEXT.md(env 항상 커밋 정책을 확정된 결정에 추가) · index.md(세션 1·엔티티 3 한 줄 반영).
 
 ## [2026-09-26] ingest | 브랜딩(위키 기반 Threads 글 생성) 구축 + 로컬 LLM JSON 검증 버그 2라운드 수정 (source: b3a3466a-58e4-4fe0-b485-1acd9a7c5f85.md)
+
+## [2026-10-03] ingest | Studio 개선 — 워크스페이스 Actor 선택·모션 모델 확장·이미지 URL 버그·비율 확장 (source: 22835f1c-c613-405c-b92c-edb2aa88524a.md)
+- `lampas-system`(`Tool: claude`, 2026-09-26 09:46Z 시작) 9라운드 장시간 세션 ingest. [[dalar]] SoT
+  동기화(`dalar-web-app`→`pnpm sync:studio`→`lampas-web-studio`) 패턴이 세션 내내 반복 실행됨.
+- 주요 내용: ① 워크스페이스 간 Actor 선택 허용(범위 셀렉트 신설), ② 모션 촬영 모델 2→6종(Kling
+  v3.0·Wan 2.2 Animate Move/Mix 신규), ③ Seedance reference-to-video를 모션 촬영에 통합("동작
+  참고 재생성"으로 Kling과 특성 다름을 설명), ④ 영상 생성 실패 근본원인 규명 — URL 문자열이 base64
+  전용 필드로 잘못 디코딩되는 버그(모션 촬영 전체·Kling 포함 영향), ⑤ 갤러리 저장 버튼으로 URL
+  확보 기능 통합, ⑥ 모션·동영상편집 노드 비율 선택 추가(Seedance만 비율 지원, 편집은 Wan 2.7 외
+  서버 ffmpeg 센터크롭), ⑦ 레퍼런스 라이브러리 저장 404 버그(URL 형태 id의 경로 파라미터 프록시
+  정규화 충돌) 수정, ⑧ "갤러리에 샷이 안 보인다" 스코프 필터링 구조 진단(1번 기능의 부작용),
+  ⑨ 모션 촬영 Actor 비종속화, ⑩ 이미지 노드 비율 3종→10종 확장.
+- 신규 스킬 3개: [[url-vs-base64-field-ambiguity]] · [[url-shaped-id-as-rest-path-param]] ·
+  [[scope-filtered-list-hides-cross-scope-items]].
+- 갱신: [[lampas-studio]](신규 절) · [[dalar]](SoT 패턴 4~9번째 실행 확인, dalar-api 독립 구현
+  사례) · [[atlas-cloud]](모션 컨트롤 모델 확장·비율 선택 2개 절) · index.md(세션 1·엔티티 3·스킬 3
+  한 줄 반영).

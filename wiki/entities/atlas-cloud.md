@@ -1,7 +1,7 @@
 ---
-tags: [entity, ai-provider, image-generation, video-generation, external, wan, qwen, seedance, model-catalog, lampas-web-scenario, lampas-web-edit, video-edit, dalar]
+tags: [entity, ai-provider, image-generation, video-generation, external, wan, qwen, seedance, model-catalog, lampas-web-scenario, lampas-web-edit, video-edit, dalar, motion-video, aspect-ratio]
 created: 2026-09-07
-updated: 2026-10-03
+updated: 2026-10-03 (ingest: 모션 컨트롤 모델 확장·비율 선택)
 ---
 
 # Atlas Cloud
@@ -93,6 +93,46 @@ Video Edit·FLUX 3 Edit Video)을 추가.
   (edit.lampas.io, 자막·트랙 편집 앱)과는 별개 — 같은 세션에서 함께 다뤄져 혼동하기 쉽다. 상세 →
   [[dalar]] · 세션 → [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]]
 
+## 모션 컨트롤(이미지+레퍼런스 영상→동작 이식) 모델 2종 → 6종 + 비율·Actor 비종속화 (2026-09-26 세션)
+
+[[lampas-studio]] Node Studio "모션 촬영" 노드가 Atlas에서 가능한 모델 전부로 확장됨.
+
+| 모델 | 크레딧 | 비고 |
+|---|---|---|
+| Kling v2.6 Pro/Std | 112/70 cr/초 | 기존 |
+| Kling v3.0 Pro/Std | 168/126 cr/초 | 신규 |
+| Wan 2.2 Animate Move | 120 cr/초 | 이미지 인물에 영상 움직임 이식 |
+| Wan 2.2 Animate Mix | 180 cr/초 | 영상 속 인물을 이미지 인물로 교체 |
+| Seedance 2.0/2.0 Mini/2.0 Fast/2.5 reference-to-video | 초당 과금(2.0 Mini 56cr 등) | 후속 요청으로 통합, 아래 설명 |
+
+- **Seedance엔 전용 motion-control 엔드포인트가 없다** — `reference-to-video`가
+  `reference_images`+`reference_videos`(+`reference_audios`)를 함께 받아 "동작을 참고한 재생성"을
+  하는 방식(2.0 계열 영상 3개·합계 15초, 2.5는 영상 10개·합계 30초). Kling처럼 프레임 단위로 동작을
+  그대로 옮기는 게 아니라 프롬프트(`@Image1`이 `@Video1`의 동작을 수행)로 유도하는 재생성이라 **프레임
+  정합·정체성 유지 보장이 없음** — Kling/Wan과 결과 특성이 다르다는 점을 사용자에게 명시.
+- **비율 파라미터를 받는 모션 모델은 Seedance(`ratio`)뿐** — Kling·Wan은 레퍼런스 영상 비율을 그대로
+  따른다. Seedance 선택 시에만 비율 셀렉트(원본·9:16·16:9·1:1·4:3·3:4·21:9) 노출.
+- **Actor 비종속화**: 기존엔 액터 전용 API만 있어 레퍼런스 이미지·액터 없는 샷 연결 시 막혔는데,
+  동영상 편집과 같은 내구 잡 방식의 `POST /v1/videos/motion`(lampas-api)·predictionId 방식(dalar-api)을
+  신설해 Actor 없이도 모션 촬영 가능.
+- **영상 생성 실패의 근본 원인**(Seedance만의 문제가 아니었음) — URL 문자열을 base64 전용 필드에
+  그대로 실어 보내 69바이트 쓰레기 PNG로 디코딩되는 버그가 전 모델(Kling 포함)에 영향 →
+  [[url-vs-base64-field-ambiguity]].
+- `dalar-web-app`을 먼저 고치고 `pnpm sync:studio`로 반영 — [[dalar]] SoT 패턴 추가 실행 확인.
+- 세션 → [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]]
+
+## 이미지/영상 편집 노드 — 비율 선택 확장 (2026-09-26 세션, 위 모션 컨트롤과 같은 날 후속)
+
+- **동영상 편집**: 편집 모델 중 비율 파라미터를 직접 받는 건 **Wan 2.7 Video Edit**뿐(세 번째
+  모델로 추가) — 나머지(xAI Imagine Edit·Gemini Omni Flash Edit)는 서버가 `ffmpeg-static`으로
+  소스를 목표 비율로 센터 크롭한 뒤 편집(`iw/ih` 비율 필터, 짝수 크기 보정, 720×1280 클립 기준
+  1:1→720×720·16:9→720×404 검증 완료). 소스는 URL 다운로드(200MB 상한) 또는 data URL.
+- **이미지 노드**(샷·레퍼런스 이미지·갤러리): 1:1/2:3/3:2 세 칸 토글 → 이미지 생성 API가 받는
+  **10종 전부**(세로 9:16·2:3·3:4·4:5, 정사각 1:1, 가로 5:4·4:3·3:2·16:9·21:9)로 확장, 공용
+  `AspectRatioPicker` 셀렉트로 통일. 영상 촬영 노드에 연결 시엔 영상 API 허용 비율
+  (1:1·16:9·9:16·4:3·3:4·3:2·2:3)만 전달되고 4:5·5:4·21:9는 영상 노드가 자체 비율로 대체.
+- 세션 → [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]]
+
 ## 텍스트 LLM 라우팅 — `[[lampas-web-trends]]` 제목 키워드 유추 (2026-09-19 세션)
 
 이미지·영상·음악 외에 **순수 텍스트 생성(LLM 추론)도 Atlas Cloud를 경유**한다는 첫 확인 사례.
@@ -134,5 +174,6 @@ Grok 4.5** — 여러 벤더를 한 목록에서 고를 수 있음이 드러남.
   [[2026-09-22-music-lampas-io-minimax3.0-업그레이드-배포]] · [[2026-09-19-lampas-trends-고도화]] ·
   [[2026-09-13-시나리오-영상생성-오디오모델-길이슬라이더-카메라고정]] ·
   [[2026-09-07-톡톡-2.0-재구축-사만다-도입]] ·
-  [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]](영상 편집 모델 3→8종)
-- 스킬: [[parallel-survey-before-feature-gap-analysis]]
+  [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]](영상 편집 모델 3→8종) ·
+  [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]](모션 컨트롤 2→6종·비율 확장)
+- 스킬: [[parallel-survey-before-feature-gap-analysis]] · [[url-vs-base64-field-ambiguity]]

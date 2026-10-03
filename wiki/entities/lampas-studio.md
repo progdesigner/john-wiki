@@ -1,7 +1,7 @@
 ---
-tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding, lampas-web-cs, lampas-web-admin, lampas-web-scenario]
+tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding, lampas-web-cs, lampas-web-admin, lampas-web-scenario, motion-video, aspect-ratio, workspace-scope]
 created: 2026-07-09
-updated: 2026-10-03
+updated: 2026-10-03 (ingest: Studio 개선 — 워크스페이스 Actor 선택·모션 모델 확장·이미지 URL 버그·비율 확장)
 ---
 # lampas-studio (Lampas 이미지 생성 스튜디오)
 
@@ -600,6 +600,44 @@ Lampas 9앱 목록에 이름만 있던 두 앱(`lampas-web-cs`, `lampas-web-admi
 `pnpm analytics:catalog:sync` 재동기화 커맨드(사람 입력 열 보존)를 추가했다. 상세 →
 [[ga-event-catalog-sheet]] · 세션 → [[2026-09-29-분석사이트구축-ga4퍼널-이벤트카탈로그]].
 
+## Node Studio 대형 개선 세션 — 워크스페이스 Actor 선택·모션 모델 확장·이미지 URL 버그·비율 확장 (2026-09-26, 9라운드 장시간 세션)
+
+같은 날(09-26) [[dalar]] SoT 동기화 패턴(`dalar-web-app` 수정 → `pnpm sync:studio` →
+`lampas-web-studio` 반영)을 네 차례~아홉 차례 연속 실행한 가장 긴 단일 세션. 사용자가 이미지 8장을
+첨부하며 매번 다른 Node Studio 문제를 지적했고, 각각 조사→구현→네 앱(`lampas-web-studio`·
+`dalar-web-app`·`lampas-api`·`dalar-api`) 배포→커밋으로 마무리됐다.
+
+- **워크스페이스 간 Actor 선택 불가**(`a6cf3b16`) — Work 화면이 `ScopeSwitcher`를 숨겨 다른
+  워크스페이스 Actor를 고를 길이 없던 것을, 선택 다이얼로그 헤더에 "범위" 셀렉트(Draft+내
+  워크스페이스)를 넣어 해결. 다른 워크스페이스 선택 시 노드 데이터 스냅샷으로 표시 유지.
+- **모션 촬영 모델 2종→6종**(`e0544eb7`/`1c9c9e66`) — Kling v3.0 Pro/Std 신규, Wan 2.2 Animate
+  Move/Mix 신규(요청 본문이 `image`/`video`/`mode`만이라 별도 순수 모듈 `motion-control-body.ts`로
+  분리). 이어 Seedance에 "전용 motion-control 엔드포인트는 없지만 `reference-to-video`가 동작
+  참고 재생성으로 비슷한 효과"를 설명 후 사용자 요청으로 Seedance 2.0/2.0 Mini/2.0 Fast/2.5까지 통합.
+- **영상 생성 실패 근본 원인**: 스튜디오 엔진이 https URL인 `previewSrc`를 변환 없이 그대로 돌려주는데,
+  모션 촬영 실행부가 이를 base64 전용 필드 `imageData`에 담아 보내 서버가 무조건 디코딩 → 92자 URL
+  문자열이 69바이트 쓰레기 PNG로 둔갑해 Atlas(ByteDance TOS)가 거부. **모션 촬영 전체의 버그**였고
+  Kling도 동일하게 영향받았다(이 경로로 과거 성공한 잡은 4월 1건뿐). 서버·엔진 양쪽에 URL/data URL
+  판별 방어 추가, 레퍼런스 영상 길이 사전 검사(모델별 최소 길이)도 함께 도입. → [[url-vs-base64-field-ambiguity]]
+- **갤러리 저장 버튼 통합**(`01d8e394`/`6c0796d0`) — 별도 "URL 만들기" 버튼 대신 기존 갤러리 저장
+  버튼이 그 역할을 하도록 통합(`ensureShotImageUrl` 액션 신설, 버튼·모션 촬영 공유).
+- **모션 컨트롤·동영상 편집 노드에 비율 선택 추가**(`df0d1e6a`/`2fa7f98d`, `eede790c`/`11c242a7`) —
+  Seedance만 `ratio` 파라미터를 받아 선택 가능(Kling·Wan은 레퍼런스 비율 그대로), 영상 편집은
+  Wan 2.7만 모델이 직접 받고 나머지는 서버 `ffmpeg-static` 센터 크롭으로 대응.
+- **레퍼런스 라이브러리 업로드 저장 안 되는 버그**(`675f7e04`/`1c677f1a`) — id가 `u:https://…` 형태라
+  경로 파라미터로 보내면 프록시가 `%2F`/`//`를 정규화해 404 — id를 본문으로 받는
+  `POST .../upsert`/`.../remove` 신설로 해결. → [[url-shaped-id-as-rest-path-param]]
+- **"샷이 갤러리에 없다" 조사**(코드 변경 없음) — 갤러리가 "현재 스코프 액터"만 모으는 구조 때문,
+  이번 세션 1번 기능(교차 워크스페이스 Actor 선택)이 처음 만들어낸 스코프 불일치 사례. →
+  [[scope-filtered-list-hides-cross-scope-items]]
+- **모션 촬영을 Actor 없이 동작하도록 확장**(`3130445a`/`0fc64b3f`) — 액터 비종속
+  `POST /v1/videos/motion`(lampas-api)·predictionId 방식(dalar-api) 신설, 완료물은 `actorKey`
+  유무로 액터 에셋/스튜디오 갤러리에 자동 분기 저장.
+- **이미지 노드 비율 1:1/2:3/3:2 세 칸 → 10종**(`747efe9f`/`d2c4552c`) — 공용 `AspectRatioPicker`로
+  통일, 이미지 생성 API가 받는 10종(9:16·2:3·3:4·4:5·1:1·5:4·4:3·3:2·16:9·21:9) 전부 노출, 노드 폭도
+  비율 비례.
+- 세션 → [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]]
+
 ## PostHog 분석 도입 — 36개 웹 공통 계측 (2026-09-29 세션)
 
 [[dalar-web-first]] 결제 퍼널 분석 요청을 계기로 [[posthog]](`us.posthog.com`, 프로젝트 `636309`)가
@@ -639,7 +677,8 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
   [[2026-09-13-lampas-edit-이미지트랙-텍스트효과-원본백업-구현]] ·
   [[2026-09-24-voice레퍼런스오디오-소프트삭제-카피페르소나모델선택]] ·
   [[2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃]] ·
-  [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]]
+  [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]] ·
+  [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]]
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·
@@ -664,4 +703,5 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
   [[tailwind-preflight-img-maxwidth-overrides-inline-scale]] ·
   [[local-asset-fingerprint-s3-backup-recovery]] · [[prod-ddl-before-deploy-with-drift-check]] ·
   [[signup-domain-abuse-rate-limit-and-reclaim]] · [[multi-domain-single-build-variant-split]] ·
-  [[nestjs-admin-guard-requires-jwtmodule]]
+  [[nestjs-admin-guard-requires-jwtmodule]] · [[url-vs-base64-field-ambiguity]] ·
+  [[url-shaped-id-as-rest-path-param]] · [[scope-filtered-list-hides-cross-scope-items]]

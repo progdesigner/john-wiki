@@ -1,7 +1,7 @@
 ---
-tags: [entity, project, product, monorepo, stub, instagram, atlas-cloud, video-edit]
+tags: [entity, project, product, monorepo, stub, instagram, atlas-cloud, video-edit, motion-video, sync-studio]
 created: 2026-09-26
-updated: 2026-10-03
+updated: 2026-10-03 (ingest: Studio 개선 세션, dalar-api 독립 구현 사례)
 ---
 # Dalar
 
@@ -75,6 +75,17 @@ updated: 2026-10-03
 존재. 상세 → [[atlas-cloud]] "영상 편집 모델 레지스트리" 절 · 세션 →
 [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]].
 
+## SoT 관계 네 번째~아홉 번째 실행 확인 — Node Studio 대형 개선 세션 (2026-09-26)
+
+[[lampas-studio]]의 워크스페이스 Actor 선택·모션 모델 확장·이미지 URL 버그 수정·비율 확장 등
+9라운드 요청을 처리한 긴 세션에서, "`dalar-web-app`을 먼저 고치고 `pnpm sync:studio`로
+`lampas-web-studio`에 반영" 패턴이 **요청마다 반복** 실행됨(2026-09-24 Seedance 2.0 Mini,
+2026-09-26 영상 편집 모델 8종에 이어 — 이 세션 안에서만 최소 5~6회 추가 반복). `dalar-api`도 매번
+`lampas-api`와 같은 기능을 predictionId 기반으로 구현해 함께 배포됐다 — Dalar가 단순히 UI만
+동기화받는 게 아니라 **API 레벨에서도 Lampas와 동등한 기능을 독립 구현·운영**하고 있음을 보여주는
+첫 명확한 사례(기존엔 Node Studio UI 동기화만 확인됐었음). 상세 → [[lampas-studio]] "Node Studio
+대형 개선 세션" 절 · 세션 → [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]].
+
 ## 열린 질문
 - Dalar가 `[[lampas-studio]]`와 같은 회사/제품군인지, 별도 브랜드인지 이름만으로는 판단 불가.
 - ~~`lampas-web-studio`가 Dalar에서 단방향 동기화만 받는지, 자체 변경분도 있는지 미확인.~~ →
@@ -97,7 +108,8 @@ Instagram 앱 ID `4664045167163943`)를 만들어 `instagram_business_content_pu
   [[2026-09-20-lampas-first-장면가격체계-샘플영상-초대코드]] ·
   [[2026-09-20-jev-typesafe-어댑터-dalar의도분류-sportswiki게이트-구현]] ·
   [[2026-09-26-ai-dalar-인스타그램-토큰발급-메타앱생성]] ·
-  [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]]
+  [[2026-09-26-edit-mp3사운드-원본교체-동영상편집모델확장-템플릿트랙편집]] ·
+  [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]]
 - 저장소: [[lampas-studio]] (같은 모노레포 `lampas-system` 안에 공존)
 - 앱: [[dalar-web-first]]("First" AI 돌잔치 영상 서비스, `first.dalar.ai`)
 - 토픽: [[jev-typed-classification]] · [[lampas-system-ai-call-architecture-audit]]
