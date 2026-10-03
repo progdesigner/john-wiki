@@ -1,7 +1,7 @@
 ---
 tags: [entity, project, product, image-generation, nestjs, react, instagram, space, product-insights, lampas-web-fit, dalar, lampas-browser, lampas-web-music, atlas-cloud, wan, video-generation, lampas-web-www, logo, branding, lampas-web-cs, lampas-web-admin, lampas-web-scenario, motion-video, aspect-ratio, workspace-scope]
 created: 2026-07-09
-updated: 2026-10-03 (ingest: Studio 개선 — 워크스페이스 Actor 선택·모션 모델 확장·이미지 URL 버그·비율 확장)
+updated: 2026-10-03 (ingest: lampas-system 구독배포확정·copy모델업그레이드·이중자막 대량기능개선)
 ---
 # lampas-studio (Lampas 이미지 생성 스튜디오)
 
@@ -672,21 +672,36 @@ Toss 내부 미니앱 3개는 이번 적용 범위 밖. 설정 전 PostHog Googl
 수신은 미검증(서버 승인 성공 기준 설계만 완료). 상세 → [[posthog]] · 세션 →
 [[2026-09-29-posthog-구축-연동]].
 
-## 포토부스 Transform 크레딧 중복 소진 — 원인 수정 + 과거 환불 (2026-10-03 세션, 배포 미확인)
+## 포토부스 Transform 크레딧 중복 소진 — 원인 수정 + 과거 환불 (2026-10-03 세션, 배포·커밋 완결)
 
 포토부스 앱(`lampas-app-photobooth`)이 생성 1회당 "AI 사진 생성" 50크레딧을 직접 선차감한 뒤, 같은
 요청이 호출하는 서버의 `POST /transforms/:key/run`이 모델 단가(nano-banana 80, gpt-image-2 10)를 한
 번 더 차감하고 있던 중복 과금 버그를 발견·수정했다. 수정은 포토부스 앱 세션 토큰으로 들어온 요청만
 서버 쪽 모델 단가 차감을 건너뛰도록 판정 로직을 `apps/lampas-api/src/modules/credits/lib/app-credit-session.ts`로
 분리(일반 로그인 사용자의 Transform 실행 과금은 그대로 유지, 이미지뿐 아니라 영상·이미지→영상
-Transform에도 동일 적용), 테스트·타입체크 통과했으나 **세션 종료 시점까지 미배포·미커밋** —
-배포 전까지는 포토부스 생성마다 중복 차감이 계속된다. 과거 중복분은 운영 DB에 즉시 반영: 토스
-포토부스 사용자 60명·255건·총 13,610크레딧(2026-07-23~세션 당일) 환불, 같은 사용자의 두 차감을
-30분 이내 1:1로 매칭 → 사용자별 조정(ADJUSTMENT) 원장 기록, 재실행해 추가 대상 0건 확인(idempotent),
-짝이 없는 1건(사용자 10008, 8월 3일 80크레딧)은 환불 제외. 환불 스크립트:
-`apps/lampas-api/scripts/refund-photobooth-transform-double-charge.js`. 다음 lampas-system 세션에서
-배포·추가 환불 완료 여부 재확인 필요 → 세션 [[2026-10-03-포토부스-transform-크레딧중복소진-환불]],
-스킬 [[app-session-flat-fee-vs-server-metered-double-charge]](신규 추출).
+Transform에도 동일 적용), 테스트·타입체크 통과. 과거 중복분은 운영 DB에 즉시 반영: 토스 포토부스
+사용자 60명·255건·총 13,610크레딧(2026-07-23~세션 당일) 환불, 같은 사용자의 두 차감을 30분 이내
+1:1로 매칭 → 사용자별 조정(ADJUSTMENT) 원장 기록, 재실행해 추가 대상 0건 확인(idempotent), 짝이
+없는 1건(사용자 10008, 8월 3일 80크레딧)은 환불 제외. 환불 스크립트:
+`apps/lampas-api/scripts/refund-photobooth-transform-double-charge.js`.
+
+**배포·커밋 완결(같은 날 후속 세션)**: 수정 코드는 **세션 종료 시점까지 미배포·미커밋**으로 열려
+있었으나, 바로 같은 날 다른 세션([[lampas-agent]] 플레이리스트 구독 작업)이 "작업 트리 확인+배포"를
+한 명령으로 이어 실행하다가 이 **미커밋 수정이 운영 0.1.171에 사고로 함께 배포됨** — 되돌리면 중복
+과금이 재발하므로 그대로 둠. git 커밋은 그보다 더 뒤, 같은 세션 끝의 "모든 코드 커밋해줘" 요청에서
+별도 커밋 `0f375722`로 완료·푸시됨(작업 트리 완전히 해소). **단 환불 스크립트가 배포 시점까지 새로
+쌓인 중복분에 대해 재실행됐는지는 여전히 미확인.** → 세션
+[[2026-10-03-포토부스-transform-크레딧중복소진-환불]](최초 발견·수정) ·
+[[2026-10-03-lampas-system-구독배포확정-copy모델업그레이드-이중자막-대량기능개선]](사고 배포·커밋
+완결), 스킬 [[app-session-flat-fee-vs-server-metered-double-charge]].
+
+## 가입 무료 크레딧 제거 + lampas-agent 플레이리스트 구독 정식 배포 (2026-10-03, 같은 세션)
+구글·이메일·토스 가입 시 지급되던 무료 크레딧(실제 1000, 기존 문서상 2000은 오기)이 전부
+제거되고 **잔액 0으로 가입**하도록 운영 API 배포(커밋 `8ba42a0e`, 이미 지급된 크레딧은 유지). 같은
+세션에서 [[lampas-agent]]의 유튜브 플레이리스트 구독 자동 수집이 Codex 핸드오프를 이어받아 **정식
+배포**(agent 1.0.30, 커밋 `766a52e8`)까지 완료 — 완전 무인화를 위한 운영 API Key 인증 확장은
+"비용이 올라간다"는 이유로 사용자가 거부, 로그인 토큰(7일 갱신) 방식을 그대로 유지하기로 확정.
+상세 → [[lampas-agent]] 해당 절, 세션 → [[2026-10-03-lampas-system-구독배포확정-copy모델업그레이드-이중자막-대량기능개선]].
 
 ## 관련
 - 세션: [[2026-09-28-google-analytics-설정-first전용퍼널]](GA4 전사 적용·First 퍼널 구성 원본,
@@ -716,7 +731,10 @@ Transform에도 동일 적용), 테스트·타입체크 통과했으나 **세션
   [[2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃]] ·
   [[2026-09-26-studio5도메인분리-models카탈로그-packaging플랫폼-유튜브]] ·
   [[2026-09-26-studio개선-액터워크스페이스-모션모델확장-url버그-비율확장]] ·
-  [[2026-10-03-포토부스-transform-크레딧중복소진-환불]]
+  [[2026-10-03-포토부스-transform-크레딧중복소진-환불]] ·
+  [[2026-10-03-lampas-system-구독배포확정-copy모델업그레이드-이중자막-대량기능개선]](구독 배포
+  확정·가입크레딧 제거·포토부스 수정 사고배포 해소·clips 진단·copy 모델업그레이드·reels plans
+  재편·edit 이중자막)
 - 토픽: [[lampas-actor-object-space-positioning]] · [[jev-typed-classification]] ·
   [[lampas-system-ai-call-architecture-audit]] · [[lampas-clip-intelligence]]
 - 세션(추가): [[2026-09-20-jev-활용처-추천-lampas-system]] ·

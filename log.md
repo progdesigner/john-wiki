@@ -3122,3 +3122,33 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   추가) · index.md(세션 1·엔티티 1·스킬 1 반영).
 - 미해결: 배포·배포 시점까지 추가 쌓인 중복분 재환불 완료 여부는 이 소스만으로 확인 불가 — 다음
   lampas-system 세션에서 재확인 필요.
+
+## [2026-10-03] ingest | lampas-system 전반 개선: 구독 배포 확정, clips 진단, copy 모델 업그레이드, 이중 자막 (source: 72b4ba6b-1bc6-43d3-b4ef-fff46bd8f60d.md)
+- 원본: `raw/conversations/2026-10-03-lampas-system-구독배포확정-copy모델업그레이드-이중자막-대량기능개선.md`.
+- 신규 세션: [[2026-10-03-lampas-system-구독배포확정-copy모델업그레이드-이중자막-대량기능개선]] —
+  [[cli-tool-handoff-via-transcript-file]](핸드오프 기능) 실사용 1호. Codex 유튜브 재생목록 구독
+  계획을 이어받아 정식 배포(agent 1.0.30, `766a52e8`), API Key 인증 확장은 비용 우려로 거부해
+  로그인토큰 유지 확정, 가입 무료크레딧 폐지(`8ba42a0e`). 배포 중 다른 세션(포토부스 중복과금
+  수정)의 미커밋 변경이 사고로 함께 운영 배포됐다가 세션 끝 "전체 커밋" 요청에서 별도 커밋
+  `0f375722`로 완전히 커밋·푸시 — [[app-session-flat-fee-vs-server-metered-double-charge]]의
+  "배포 여부 미확인" 질문이 완결됨(환불 재실행 여부만 여전히 미확인). clips.lampas.io 가시성·점수
+  불일치 6+2원인 진단 후 3건 수정(`f5d8b727`). copy.lampas.io 모델 업그레이드(GPT 6.1 Sol·Opus
+  5.5)+여러 페르소나 동시생성+채점 타임아웃 수정(배치 10→2개×5묶음, `055b6304`→`a6f70492`→
+  `1af6902c`) — 이 실패 패턴을 [[llm-batch-inference-timeout-tuning]] 재사용 사례로 편입.
+  reels.lampas.io `/plans` 소스필터 신설+페르소나선택 단계 완전 제거(`9abb0d9f`·`991fc048`,
+  분야별 페르소나 칩은 단명). edit.lampas.io 템플릿 삭제확인·이중 자막(한글+영문, 발화언어 아래
+  체크박스) 설계~구현(13커밋 `c74437d7`)·세로정렬 아이콘화·템플릿 덮어쓰기. 뷰티/여행 분야 신설,
+  "피부"→"스킨케어" 리네임.
+- 갱신: [[lampas-agent]](플레이리스트 구독 배포·검증 완료 절 신설, 가입크레딧 제거·하네스
+  작업삭제·분야확장 추가) · [[lampas-web-clips]](클립 가시성 진단·수정 절 신설) ·
+  [[lampas-web-copy]](모델 업그레이드·멀티페르소나·채점 타임아웃·미리보기 위치·스킨케어 리네임
+  5개 절 신설) · [[lampas-web-reels]](`/plans` 재편 2건+분야별 페르소나 단명 절 신설) ·
+  [[lampas-web-edit]](템플릿 삭제확인·이중자막·세로정렬 아이콘화·템플릿 덮어쓰기 4개 절 신설) ·
+  [[lampas-studio]](포토부스 수정 배포·커밋 완결 절 갱신 + 가입크레딧 제거 절 신설) ·
+  AI_CONTEXT.md(포토부스 해소·구독배포 한 줄 갱신, 줄 수 불변) · index.md(세션 1·엔티티 6·스킬 3
+  반영) · log.md(이 항목).
+- 스킬 보강: [[app-session-flat-fee-vs-server-metered-double-charge]](배포·커밋 별개 사건 추적
+  원칙 추가) · [[llm-batch-inference-timeout-tuning]](재사용 사례 2 — 생각 토큰도 배치크기 계산에
+  포함해야 함) · [[cli-tool-handoff-via-transcript-file]](실사용 1호 확인).
+- 미해결: 24시간 연속 운영 검증, 환불 스크립트 재실행 여부, 계주팀 영상 2개 카테고리 미정, 훅
+  순위 미계산 클립 40개.
