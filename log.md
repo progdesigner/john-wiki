@@ -3086,3 +3086,21 @@ append-only. 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
   구분 — 저쪽은 로그인 세션, 이쪽은 대화 맥락 이전).
 - 갱신: [[lampas-harness]](신규 절 추가) · [[cross-subdomain-session-handoff]](혼동 주의 절 추가) ·
   AI_CONTEXT.md(lampas-harness 상태 한 줄 추가) · index.md(세션 1·엔티티 1·스킬 1 반영).
+
+## [2026-10-03] ingest | admin 대납 영상생성 + First 대리결제 구현 (source: 6367631a-1a32-4045-b8b6-702faa0b08a7.md)
+- `Tool: claude` 세션(10:50:23Z 시작, `lampas-system`) — 두 "관리자가 대신 처리" 기능을 연달아
+  구현·운영 배포·커밋·푸시. ① "admin에서 대신 결제해서 영상 생성" 요청을 [[lampas-web-admin]]
+  `/jobs`에 **대납**(플랫폼이 Atlas 비용 부담, 사용자 크레딧·원장 무관, 커밋 `6d3dfe8c`)으로 구현.
+  ② 곧바로 이어진 "크레딧이 있는 경우에만 결제 처리" 요청을 [[dalar-web-first]] 주문 상세에
+  **대리결제**(주문자 본인 크레딧 차감, 원장 기록, 잔액 조건부, 커밋 `2fa984f5`)로 반대 방향 구현.
+  두 기능 모두 실제 결제/생성 호출은 Atlas 비용 우려로 눌러보지 않고 401 가드+유닛테스트까지만
+  검증. 세션 종료 시 어시스턴트가 직접 두 가지를 제기: (1) 기능 1이 사실 First 요청을 lampas
+  admin으로 잘못 해석한 것일 가능성(제거 필요 여부 미확인), (2) First는 과거 "컨펌 후 배포" 예외가
+  있었다는데 이번엔 직전의 전역 "마무리 후 배포" 지시를 그대로 적용해 컨펌 없이 배포(출처 미상
+  자기보고, AI_CONTEXT.md 전역 규칙과 상충 가능성).
+- 신규 세션: [[2026-10-03-admin대납영상생성-first대리결제-구현]].
+- 신규 스킬: [[admin-initiated-payment-two-patterns]] — "관리자가 대신 ~"류 요청은 대납(플랫폼
+  부담·원장 미기록)과 대리결제(본인 크레딧 차감·원장 기록·잔액 조건부)로 정반대 두 패턴이 있어
+  구현 전 비용 주체를 반드시 확인.
+- 갱신: [[lampas-web-admin]](`/jobs` 대납 생성 절 추가) · [[dalar-web-first]](관리자 대리결제 절
+  추가) · AI_CONTEXT.md(lampas-studio 상태 한 줄 추가) · index.md(세션 1·엔티티 2·스킬 1 반영).

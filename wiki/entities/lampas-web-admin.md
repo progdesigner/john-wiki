@@ -1,7 +1,7 @@
 ---
-tags: [entity, project, app, lampas-studio, admin, react, jwt, admin-guard, signup-abuse, credit, layout]
+tags: [entity, project, app, lampas-studio, admin, react, jwt, admin-guard, signup-abuse, credit, layout, admin-proxy-payment]
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-03
 ---
 # lampas-web-admin (`admin.lampas.io`)
 
@@ -74,6 +74,21 @@ updated: 2026-09-26
 이전엔 신고자 본인이 개인 화면에서 복원할 수 있었다. 상세 → [[lampas-web-spot]] ·
 [[2026-09-26-spot-주소기반재구축-카카오맵전환-네이버보강-채팅검색]].
 
+## `/jobs` — 관리자 대납 영상 생성 (2026-10-03, 커밋 `6d3dfe8c`)
+"admin에서 대신 결제해서 영상 생성을 시도할 수 있게 해줘" 요청을 **플랫폼이 Atlas 비용을
+부담하고 사용자 크레딧은 건드리지 않는 방식("대납")**으로 구현. `/jobs` 상단에 모델·길이·
+프롬프트·이미지URL·추가 파라미터(JSON) 입력 폼 + "대납 생성" 버튼(초당 단가 모델은 예상
+크레딧 표시), `userId`(선택, 비우면 결과 URL만 job에 남음), 실패 job에서 폼을 채워주는 "대납
+재시도" 버튼. API `POST /v1/admin/ai/generate-video {userId?, request}`. **크레딧 원장·사용
+기록(파트너 수익 집계)에는 전혀 남지 않고** job 목록에 source `ADMIN`으로만 표시, 대납 금액은
+job metadata에만 저장(생성 직후 안내 문구에만 노출). 검증은 유닛 테스트+401 가드 확인까지만,
+실제 영상 생성은 Atlas 비용 우려로 시도하지 않음. **세션 종료 시 해석 오류 가능성 제기됨** —
+같은 세션에서 바로 이어진 다음 요청이 실제로는 [[dalar-web-first]] 주문 결제였던 것을 보면,
+이 기능 자체도 First 쪽 요청을 lampas admin으로 잘못 해석해 만든 것일 수 있다는 의심을
+어시스턴트가 직접 제기(제거 필요 여부 미확인 상태로 세션 종료). 일반화된 패턴 비교 →
+[[admin-initiated-payment-two-patterns]]. 세션 →
+[[2026-10-03-admin대납영상생성-first대리결제-구현]].
+
 ## 관련
 - 상위 제품: [[lampas-studio]] (저장소 `lampas-system`)
 - 이미 통합된 도메인(선례): [[lampas-web-music]](`admin-music.controller.ts`, `AdminGuard`)
@@ -81,6 +96,8 @@ updated: 2026-09-26
 - 2026-09-26 추가 모듈: [[lampas-web-spot]](`/spot`, 별도 세션)
 - 세션: [[2026-09-13-cs-기능수정-음악위젯제거-어드민조회신설]] ·
   [[2026-09-26-람파스-가입도메인필터-크레딧회수-대시보드-레이아웃]] ·
-  [[2026-09-26-spot-주소기반재구축-카카오맵전환-네이버보강-채팅검색]]
+  [[2026-09-26-spot-주소기반재구축-카카오맵전환-네이버보강-채팅검색]] ·
+  [[2026-10-03-admin대납영상생성-first대리결제-구현]](`/jobs` 대납 생성)
 - 스킬: [[admin-guard-precedent-reuse]] · [[signup-domain-abuse-rate-limit-and-reclaim]] ·
-  [[credit-ledger-balance-pattern]]
+  [[credit-ledger-balance-pattern]] · [[admin-initiated-payment-two-patterns]](대납 vs 대리결제,
+  2026-10-03 신설)
